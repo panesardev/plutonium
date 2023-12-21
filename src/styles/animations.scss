@@ -1,0 +1,75 @@
+.modal-in {
+  animation: modal-in 300ms cubic-bezier(.21,.64,.45,1.02);
+  transform: translateY(0%);
+}
+
+@keyframes modal-in {
+  from {
+    transform: translateY(3%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+.modal-out {
+  animation: modal-out 300ms cubic-bezier(.21,.64,.45,1.02);
+  transform: translateY(3%);
+  opacity: 0;
+}
+
+@keyframes modal-out {
+  from {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(3%);
+    opacity: 0;
+  }
+}
+
+.modal-overlay-in {
+  animation: modal-overlay-in 300ms;
+  opacity: 1;
+}
+
+@keyframes modal-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-overlay-out {
+  animation: modal-overlay-out 600ms;
+  opacity: 0;
+}
+
+@keyframes modal-overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+section {
+  animation: routeIn 300ms cubic-bezier(.21,.64,.45,1.02);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes routeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

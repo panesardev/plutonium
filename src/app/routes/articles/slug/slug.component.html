@@ -1,0 +1,79 @@
+@if (article(); as article) {
+  <!-- metatags -->
+  <article itemscope itemtype="http://schema.org/Article">
+    <meta name="title" [content]="article.title">
+    <meta name="description" [content]="article.description">
+    <meta name="author-name" [content]="article.authorName">
+    <meta name="author-image" [content]="article.authorImage">
+    <meta name="author-link" [content]="article.authorLink">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" [content]="article.url">
+    <meta property="og:title" [content]="article.title">
+    <meta property="og:description" [content]="article.description">
+    <meta property="og:image" [content]="article.coverUrl">
+    <!-- Twitter -->  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" [content]="article.title">
+    <meta name="twitter:text:title" [content]="article.title">
+    <meta name="twitter:description" [content]="article.description">
+    <meta name="twitter:image" [content]="article.coverUrl">
+    <meta name="twitter:url" [content]="article.url">
+
+    <section>
+      <div class="px-4 md:px-8">
+        <h1 class="page-heading">{{ article.title }}</h1>
+        
+        <div class="bg-neutral w-fit mx-auto mb-10 p-3 md:p-4 rounded-full custom-shadow">
+          <app-hashtag-list [hashtags]="article.hashtags"/>
+        </div>
+        
+        <p class="text-xl md:text-center mb-7">{{ article.description }}</p>
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-center gap-4 md:gap-5 mb-7">
+          <div class="flex items-center gap-3 md:gap-4">
+            <img [ngSrc]="article.authorImage" class="rounded-full w-8" fallbackImage="assets/img/user.png" alt="user" height="30" width="30">
+            <span>By <a target="_blank" rel="noopener" rel="noreferrer" [href]="article.authorLink">{{ article.authorName }}</a></span>
+          </div>
+          <div class="hidden md:block select-none">•</div>
+          <div>Posted on {{ article.createdAt }}</div>
+          <div class="hidden md:block select-none">•</div>
+          <div class="inline-block">
+            <a class="underline" [href]="article.source" target="_blank">source</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="grid md:grid-cols-[300px_1fr] md:gap-10 max-w-7xl mx-auto">
+        <div class="relative md:sticky md:top-32 h-min">
+          <div class="mb-6">
+            <app-save-button [slug]="article.slug"/>
+          </div>
+          <!-- table of contents -->
+          <div class="bg-neutral custom-shadow md:rounded-md p-5 md:p-7 w-full select-none">
+            <h1 class="text-primary text-2xl pb-2 mb-3 border-b-2 border-slate-100">Contents</h1>
+            @for (toc of tocs(); track toc.id) {
+              <div>
+                <a class="block rounded-sm py-2 hover:border-l-4 hover:rounded-sm hover:pl-3 hover:bg-slate-100 border-l-primary transition-spacing"
+                  (click)="scroll(toc.id)">
+                  {{ toc.text }}
+                </a>
+              </div>
+            }
+          </div>
+        </div>
+        <div class="min-w-0">
+          <img class="mb-10 md:rounded-md" [ngSrc]="article.coverUrl" priority="true" alt="article_cover" height="90" width="60">
+          <div class="px-4 md:px-8">
+            <app-render-markdown [markdown]="article.markdown" (tableOfContents)="tocs.set($event)"/>
+          </div>
+        </div>
+      </div>
+    </section>  
+  </article>
+}
+@else {
+  <div class="h-96">
+    <app-loading />
+  </div>
+}

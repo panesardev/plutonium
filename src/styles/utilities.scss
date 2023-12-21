@@ -1,0 +1,32 @@
+.custom-shadow {
+  box-shadow: 0 0 25px var(--shadow);
+}
+
+.max-width {
+  max-width: var(--max-width);
+}
+
+.page-heading {
+  @apply mt-5 mb-12 capitalize font-bold text-center text-4xl md:text-5xl text-primary select-none;
+  font-family: 'Lobster', sans-serif;
+}
+
+.hover-dim {
+  @apply transition-opacity;
+
+  &:hover {
+    opacity: .9;
+  }
+}
+
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  // border: 1px solid green;
+  -webkit-text-fill-color: hsl(186, 70%, 27%);
+  -webkit-box-shadow: 0 0 25px var(--shadow);
+  transition: background-color 5000s ease-in-out 0s;
+}
+

@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './icons.scss';
+@import './utilities.scss';
+@import './components.scss';
+@import './prism.scss';
+@import './animations.scss';
+
+:root {
+  --shadow: #155f750c;
+  --max-width: 1920px;
+}
+  
+* {
+  outline: none;
+  box-sizing: border-box;
+}
+
+body {
+  @apply bg-base-200 text-slate-900;
+  font-family: 'Raleway', sans-serif;
+}
+
+h1, h2, p, div {
+  @apply selection:bg-primary selection:text-neutral;
+}
+
+header, button, img, svg {
+  user-select: none;
+}
+
+img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  @apply text-primary cursor-pointer;
+}
+
+/// fonts ///
+@font-face {
+  font-family: 'Aquire';
+  src: url('/assets/fonts/Aquire.otf');
+}
+
+.brand {
+  font-family: 'Aquire', sans-serif;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-secondary;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary;
+}

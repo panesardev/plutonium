@@ -1,0 +1,12 @@
+@if (view(); as view) {
+  <section class="px-4 md:px-8">
+    <app-featured-article [article]="view.featured"/>
+
+    <h1 class="page-heading">Articles</h1>
+
+    <app-article-list [articles]="view.articles"/>
+  </section>
+}
+@else {
+  <app-loading />
+}

@@ -1,9 +1,24 @@
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
-
-import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
+import { PreloadAllModules, provideRouter, withComponentInputBinding, withInMemoryScrolling, withPreloading } from '@angular/router';
+import { routes } from './app.routes';
+import { provideFirebase } from './providers/firebase.provider';
+import { provideMarkdown } from './providers/markdown.provider';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration()]
+  providers: [
+    provideRouter(
+      routes,
+      withPreloading(PreloadAllModules),
+      withComponentInputBinding(),
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'enabled',
+      }),
+    ),
+    provideHttpClient(withFetch()),
+    provideClientHydration(),
+    provideFirebase(),
+    provideMarkdown(),
+  ],
 };
