@@ -2,66 +2,48 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import frontmatter from 'front-matter';
 import { Observable, map, zip } from "rxjs";
-import { constants } from "../app.constants";
 import { Article } from "../interfaces/article";
-import { PlatformService } from "./platform.service";
+import { environment } from "../../environments/environment";
+import { SLUGS, FEATURED_ARTICLE_SLUG } from '../app.constants';
 
 @Injectable({ providedIn: 'root' })
 export class ArticleService {
 
-  private platform = inject(PlatformService);
   private http = inject(HttpClient);
   
-  // bfbrhjvhjer vhjw hjrw
-  private fetchMarkdown(slug: string): Observable<string> {
-    return this.http.get(`${this.platform.baseUrl}/content/${slug}/index.md`, {
-      responseType: 'text',
-    });
-  }
+  readonly articles$ = zip(SLUGS.map(s => this.findBySlug(s))).pipe(
+    map(articles => sortArticles(articles)),
+  );
+
+  readonly featured$ = this.findBySlug(FEATURED_ARTICLE_SLUG);
+
+  readonly hashtags$ = this.articles$.pipe(
+    // extract hashtags from all articles into a single array
+    map(articles => [].concat(...articles.map(a => a.hashtags))),
+    // remove duplicate and sort hashtags 
+    map(hashtags => Array.from(new Set(hashtags)).sort()),
+  );
 
   findBySlug(slug: string): Observable<Article> {
-    return this.fetchMarkdown(slug).pipe(
+    return this.http.get(`${environment.baseUrl}/content/${slug}/index.md`, {
+      responseType: 'text',
+    }).pipe(
       map(markdown => {
-        const article = mapArticle(markdown);
-        article.coverUrl = this.findCoverUrl(slug);
-        article.url = this.findArticleUrl(slug);
-        return article;
+        const result = frontmatter<Article>(markdown);
+        return {
+          ...result.attributes,
+          markdown: result.body,
+          coverUrl: `${environment.baseUrl}/content/${slug}/img/cover.png`,
+          url: `${environment.baseUrl}/articles/${slug}`,
+        };
       }),
     );
   }
-
-  findAll(): Observable<Article[]> {
-    const list = constants.slugs.map(s => this.findBySlug(s));
-    return zip(list).pipe(
-      map(articles => sortArticles(articles)),
-    );
-  }
-
-  findFeatured(): Observable<Article> {
-    return this.findBySlug(constants.featuredArticleSlug);
-  }
-
+  
   findAllByHashtag(hashtag: string): Observable<Article[]> {
-    return this.findAll().pipe(
+    return this.articles$.pipe(
       map(articles => articles.filter(a => a.hashtags.includes(hashtag))),
     );
-  }
-
-  findAllHashtags(): Observable<string[]> {
-    return this.findAll().pipe(
-      // extract hashtags from all articles into a single array
-      map(articles => [].concat(...articles.map(a => a.hashtags))),
-      // remove duplicate and sort hashtags 
-      map(hashtags => Array.from(new Set(hashtags)).sort()),
-    );
-  }
-
-  private findArticleUrl(slug: string): string {
-    return `${this.platform.baseUrl}/articles/${slug}`; 
-  }
-
-  private findCoverUrl(slug: string): string {
-    return `${this.platform.baseUrl}/content/${slug}/img/cover.png`;
   }
 
 }
@@ -72,10 +54,3 @@ function sortArticles(articles: Article[]): Article[] {
   );
 }
 
-function mapArticle(markdown: string): Article {
-  const result = frontmatter<Article>(markdown);
-  return {
-    ...result.attributes,
-    markdown: result.body,
-  };
-}

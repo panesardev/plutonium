@@ -1,25 +1,25 @@
 @if (article(); as article) {
   <!-- metatags -->
+  <meta name="title" [content]="article.title">
+  <meta name="description" [content]="article.description">
+  <meta name="author-name" [content]="article.authorName">
+  <meta name="author-image" [content]="article.authorImage">
+  <meta name="author-link" [content]="article.authorLink">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" [content]="article.url">
+  <meta property="og:title" [content]="article.title">
+  <meta property="og:description" [content]="article.description">
+  <meta property="og:image" [content]="article.coverUrl">
+  <!-- Twitter -->  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" [content]="article.title">
+  <meta name="twitter:text:title" [content]="article.title">
+  <meta name="twitter:description" [content]="article.description">
+  <meta name="twitter:image" [content]="article.coverUrl">
+  <meta name="twitter:url" [content]="article.url">
+  
   <article itemscope itemtype="http://schema.org/Article">
-    <meta name="title" [content]="article.title">
-    <meta name="description" [content]="article.description">
-    <meta name="author-name" [content]="article.authorName">
-    <meta name="author-image" [content]="article.authorImage">
-    <meta name="author-link" [content]="article.authorLink">
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" [content]="article.url">
-    <meta property="og:title" [content]="article.title">
-    <meta property="og:description" [content]="article.description">
-    <meta property="og:image" [content]="article.coverUrl">
-    <!-- Twitter -->  
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" [content]="article.title">
-    <meta name="twitter:text:title" [content]="article.title">
-    <meta name="twitter:description" [content]="article.description">
-    <meta name="twitter:image" [content]="article.coverUrl">
-    <meta name="twitter:url" [content]="article.url">
-
     <section>
       <div class="px-4 md:px-8">
         <h1 class="page-heading">{{ article.title }}</h1>

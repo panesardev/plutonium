@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { constants } from '../../app.constants';
+import { BRAND } from '../../app.constants';
+import { ModalService } from '../../services/modal.service';
 import { BaseModalComponent } from './base-modal.component';
-import { Modal } from './modal.class';
 
 @Component({
   selector: 'app-nav-modal',
@@ -39,8 +39,10 @@ import { Modal } from './modal.class';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavModalComponent extends Modal {
+export class NavModalComponent {
 
-  brand = constants.brand;
+  readonly modal = inject(ModalService);
+
+  brand = BRAND;
 
 }

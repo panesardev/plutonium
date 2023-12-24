@@ -23,6 +23,6 @@ export default class IndexComponent {
   private articleService = inject(ArticleService);
 
   user = toLazySignal(this.auth.user$);
-  featuredArticle = toLazySignal(this.articleService.findFeatured());
+  featuredArticle = toLazySignal(this.articleService.featured$);
 
 }

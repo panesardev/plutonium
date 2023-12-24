@@ -29,7 +29,7 @@ export default class DashboardComponent {
 
   view = computedFrom({ 
     user: this.auth.user$,
-    articles: this.userService.findSavedArticles(),
+    articles: this.userService.savedArticles$,
   }, { initialValue: null });
 
   openLogoutModal() {

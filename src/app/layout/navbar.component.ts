@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ModalService } from '../services/modal.service';
-import { constants } from '../app.constants';
+import { BRAND } from '../app.constants';
 import { SearchModalComponent } from './modals/search-modal.component';
 import { NavModalComponent } from './modals/nav-modal.component';
 import { NavUserComponent } from '../components/nav-user.component';
@@ -52,7 +52,7 @@ import { NavSearchComponent } from '../components/nav-search.component';
 export class NavbarComponent {
   private modalService = inject(ModalService);
   
-  brand = constants.brand;
+  brand = BRAND;
 
   openSearchModal(): void {
     this.modalService.open(SearchModalComponent);

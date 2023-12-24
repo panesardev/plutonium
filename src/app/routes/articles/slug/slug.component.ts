@@ -1,4 +1,4 @@
-import { NgOptimizedImage } from '@angular/common';
+import { DOCUMENT, NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { injectParams } from 'ngxtension/inject-params';
@@ -9,7 +9,6 @@ import { SaveButtonComponent } from '../../../components/save-button.component';
 import { Toc } from '../../../interfaces/article';
 import { LoadingComponent } from '../../../layout/loading.component';
 import { ArticleService } from '../../../services/article.service';
-import { PlatformService } from '../../../services/platform.service';
 import { FallbackImageDirective } from '../../../utilities/fallback.image.directive';
 
 @Component({
@@ -25,12 +24,12 @@ import { FallbackImageDirective } from '../../../utilities/fallback.image.direct
     RenderMarkdownComponent,
   ],
   templateUrl: './slug.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class SlugComponent {
 
   private articleService = inject(ArticleService);
-  private platform = inject(PlatformService);
+  private document = inject(DOCUMENT);
   private slug = injectParams('slug');
 
   article = toLazySignal(
@@ -40,7 +39,7 @@ export default class SlugComponent {
   tocs = signal<Toc[]>([]);
 
   scroll(id: string): void {
-    this.platform.document.getElementById(id).scrollIntoView({ 
+    this.document.getElementById(id).scrollIntoView({ 
       behavior: 'smooth',
       block: 'center', 
     });

@@ -2,9 +2,9 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PreloadAllModules, provideRouter, withComponentInputBinding, withInMemoryScrolling, withPreloading } from '@angular/router';
+import { provideMarkdown } from 'ngx-markdown';
 import { routes } from './app.routes';
 import { provideFirebase } from './providers/firebase.provider';
-import { provideMarkdown } from './providers/markdown.provider';
 
 export const appConfig: ApplicationConfig = {
   providers: [

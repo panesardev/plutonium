@@ -20,6 +20,8 @@ export default class HashtagsComponent {
 
   private articleService = inject(ArticleService);
 
-  hashtags = toLazySignal(this.articleService.findAllHashtags());
+  hashtags = toLazySignal(
+    this.articleService.hashtags$
+  );
 
 }

@@ -1,5 +1,5 @@
 import { ActivatedRouteSnapshot, ResolveFn } from "@angular/router";
-import { constants } from "../app.constants";
+import { BRAND } from "../app.constants";
 import { ArticleService } from "../services/article.service";
 import { inject } from "@angular/core";
 import { map } from "rxjs";
@@ -17,16 +17,16 @@ export const titleResolver: ResolveFn<string> = (route: ActivatedRouteSnapshot) 
     title = `404 Not Found`;
   }
 
-  return `${title} - ${constants.brand}`;
+  return `${title} - ${BRAND}`;
 }
 
 // resolve title for /hashtags/:hashtag
 export const hashtagTitleResolver: ResolveFn<string> = (route: ActivatedRouteSnapshot) => {
   let hashtag = route.paramMap.get('hashtag');
   // capitalize
-  hashtag = hashtag[0].toUpperCase() + hashtag.slice(1, hashtag.length);
+  hashtag = hashtag.charAt(0).toUpperCase() + hashtag.slice(1);;
 
-  return `${hashtag} - ${constants.brand}`;
+  return `${hashtag} - ${BRAND}`;
 }
 
 // resolve title for /articles/:slug
@@ -34,7 +34,7 @@ export const slugTitleResolver: ResolveFn<string> = (route: ActivatedRouteSnapsh
   const slug = route.paramMap.get('slug');
 
   return inject(ArticleService).findBySlug(slug).pipe(
-    map(article => `${article.title} - ${constants.brand}`),
+    map(article => `${article.title} - ${BRAND}`),
   );
 }
 

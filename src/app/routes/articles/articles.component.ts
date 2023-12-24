@@ -21,8 +21,8 @@ export default class ArticlesComponent {
   private articleService = inject(ArticleService);
 
   view = computedFrom({
-    featured: this.articleService.findFeatured(),
-    articles: this.articleService.findAll(),
+    featured: this.articleService.featured$,
+    articles: this.articleService.articles$,
   }, { initialValue: null });
 
 }

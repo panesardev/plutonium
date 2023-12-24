@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { computedFrom } from 'ngxtension/computed-from';
 import { injectParams } from 'ngxtension/inject-params';
-import { switchMap } from 'rxjs';
+import { toLazySignal } from 'ngxtension/to-lazy-signal';
 import { ArticleListComponent } from '../../../components/article-list.component';
 import { LoadingComponent } from '../../../layout/loading.component';
 import { ArticleService } from '../../../services/article.service';
@@ -20,12 +19,10 @@ export default class HashtagComponent {
 
   private articleService = inject(ArticleService);
 
-  readonly hashtag = injectParams('hashtag');
+  hashtag = injectParams('hashtag');
 
-  articles = computedFrom(
-    [this.hashtag],
-    switchMap(([hashtag]) => this.articleService.findAllByHashtag(hashtag)),
-    { initialValue: null }
+  articles = toLazySignal(
+    this.articleService.findAllByHashtag(this.hashtag()),
   );
   
 }

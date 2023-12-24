@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { ModalService } from '../../services/modal.service';
 import { BaseModalComponent } from './base-modal.component';
-import { Modal } from './modal.class';
 
 @Component({
   selector: 'app-logout-modal',
@@ -22,9 +22,10 @@ import { Modal } from './modal.class';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LogoutModalComponent extends Modal {
+export class LogoutModalComponent {
 
   private auth = inject(AuthService);
+  readonly modal = inject(ModalService);
 
   async logout() {
     await this.auth.logout();
