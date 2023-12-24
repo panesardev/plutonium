@@ -1,5 +1,3 @@
-export type LoginFormState = 'login' | 'sign-up' | 'reset-password';
-
 export interface AuthData extends LoginData, SignUpData, ResetPasswordData {}
 
 export interface LoginData {

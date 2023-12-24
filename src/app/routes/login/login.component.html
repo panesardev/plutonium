@@ -10,7 +10,15 @@
           <span>Logged in as {{ user.displayName }}</span>
         </div>
       }
-      <app-login-form [error]="error()" (onSubmit)="submit($event)" (onHeadingChange)="setHeading($event)"/>
+      @if (error()) {
+        <div class="alert alert-error alert-close" (click)="error.set(null)">
+          <div class="alert-icon text-error">
+            <i class="close-icon"></i>
+          </div>
+          <span>{{ error() }}</span>
+        </div>
+      }
+      <app-login-form (onSubmit)="submit($event)" (onHeadingChange)="this.heading.set($event)"/>
     </div>
     
     <div class="grid content-center"> <!-- divider -->

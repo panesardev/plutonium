@@ -26,10 +26,6 @@ export default class LoginComponent {
   error = signal<string>(null);
   authError = signal<string>(null);
 
-  setHeading(heading: string) {
-    this.heading.set(heading);
-  }
-
   async submit(formData: FormData) {
     try {
       switch (formData.type) {
@@ -44,7 +40,6 @@ export default class LoginComponent {
       this.error.set(e.message);
     }
   }
-
   
   async socialLogin(providerName: OAuthProviderName): Promise<void> {
     await this.auth.socialLogin(providerName)

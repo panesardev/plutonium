@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, computed, effect, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output, computed, effect, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthData } from '../interfaces/auth';
 
@@ -17,15 +17,6 @@ export interface FormData {
   ],
   template: `
     <form (ngSubmit)="submit()" class="grid gap-5">
-      @if (error) {
-        <div class="alert alert-error alert-close" (click)="error = null">
-          <div class="alert-icon text-error">
-            <i class="close-icon"></i>
-          </div>
-          <span>{{ error }}</span>
-        </div>
-      }
-
       @if (formState(); as formState) {
         @if (isSignUpForm()) {
           <div class="input">
@@ -72,7 +63,6 @@ export interface FormData {
 })
 export class LoginFormComponent {
 
-  @Input() error: string = null;
   @Output() onSubmit = new EventEmitter<FormData>();
   @Output() onHeadingChange = new EventEmitter<string>();
 

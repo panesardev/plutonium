@@ -1,7 +1,5 @@
 export const BRAND = 'Plutonium';
 
-export const DESCRIPTION = 'Next generation coding tutorials';
-
 export const SLUGS = [
   'deploy-docker-image-on-heroku',
   'integrating-firebase-into-angular',
