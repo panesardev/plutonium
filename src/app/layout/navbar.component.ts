@@ -5,7 +5,6 @@ import { BRAND } from '../app.constants';
 import { SearchModalComponent } from './modals/search-modal.component';
 import { NavModalComponent } from './modals/nav-modal.component';
 import { NavUserComponent } from '../components/nav-user.component';
-import { NavSearchComponent } from '../components/nav-search.component';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +13,6 @@ import { NavSearchComponent } from '../components/nav-search.component';
     RouterLink,
     RouterLinkActive,
     NavUserComponent,
-    NavSearchComponent,
   ],
   template: `
     <header class="fixed z-10 top-0 w-full h-16 md:h-20 px-4 md:px-6 bg-neutral custom-shadow">
@@ -29,7 +27,10 @@ import { NavSearchComponent } from '../components/nav-search.component';
           <a routerLink="/" class="hidden lg:block brand text-2xl lg:text-3xl">{{ brand }}</a>
         </div>
         <div class="hidden lg:block">
-          <app-nav-search (openSearchModal)="openSearchModal()" />
+          <div (click)="openSearchModal()" 
+            class="bg-base-200 hover:bg-base-300 text-primary w-full px-5 py-2 rounded-full transition-colors cursor-pointer">
+            Search articles
+          </div>
         </div>
         <div class="flex justify-end items-center gap-4 lg:gap-6">
           <div class="hidden lg:flex items-center gap-3">

@@ -3,10 +3,11 @@ import { Auth, authState, createUserWithEmailAndPassword, getAdditionalUserInfo,
 import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { AuthProvider, GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
-import { Observable, map, of, shareReplay, switchMap } from 'rxjs';
+import { map, of, switchMap, tap } from 'rxjs';
 import { LoginData, OAuthProviderName, ResetPasswordData, SignUpData } from '../interfaces/auth';
 import { User, UserData } from '../interfaces/user';
-
+import { createEffect } from 'ngxtension/create-effect';
+ 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
@@ -15,9 +16,14 @@ export class AuthService {
   private router = inject(Router);
 
   readonly user$ = authState(this.auth).pipe(
-    switchMap(user => user ? this.mapUser(user as User) : of(null)),
-    shareReplay(1),
+    switchMap(user => user ? this.getUserDocument$(user as User) : of(null)),
   );
+
+  private getUserDocument$(user: User) {
+    return docData(doc(this.firestore, `users/${user.uid}`)).pipe(
+      map((data: UserData) => ({ ...user, ...data }))
+    );
+  }
 
   async signUp(data: SignUpData): Promise<void> {
     if (!data.displayName || !data.email || !data.password)
@@ -27,7 +33,7 @@ export class AuthService {
     
     await Promise.all([
       updateProfile(credential.user, { displayName: data.displayName }),
-      this.updateUserDoc(credential.user as User)
+      this.createUserDocument$(credential.user as User),
     ]); 
 
     await this.router.navigateByUrl('/dashboard');
@@ -48,33 +54,18 @@ export class AuthService {
     const provider = getProvider(providerName);
     const credential = await signInWithPopup(this.auth, provider);
 
-    if (getAdditionalUserInfo(credential).isNewUser)
-      await this.updateUserDoc(credential.user as User);
+    if (getAdditionalUserInfo(credential).isNewUser) {
+      this.createUserDocument$(credential.user);
+    }
 
     await this.router.navigateByUrl('/dashboard');
     // this.toast.success(`Welcome ${credential.user.displayName}`);
   }
 
-  async updateUserDoc(user: User, data?: UserData): Promise<void> {
-    const payload: UserData = {
-      isPro: false,
-      saved: [],
-    }
-
-    if (data && data.isPro) payload.isPro = data.isPro;
-    if (data && data.saved) payload.saved = data.saved;
-
-    await setDoc(
-      doc(this.firestore, `users/${user.uid}`), 
-      payload, 
-      { merge: true },
-    );
-  }
-
   async resetPassword(data: ResetPasswordData): Promise<void> {
-    if (!data.email) 
+    if (!data.email) {
       throw Error('Email required');
-    
+    }
     await sendPasswordResetEmail(this.auth, data.email);
     // this.toast.success('Password reset email sent');
   }
@@ -84,12 +75,23 @@ export class AuthService {
     await this.router.navigateByUrl('/');
     // this.toast.success('You have been logged out!');
   }
+  
+  private createUserDocument$ = createEffect<User>(
+    tap(user => 
+      setDoc(
+        doc(this.firestore, `users/${user['uid']}`), 
+        { isPro: false, saved: [] },
+      ),
+    ),
+  );
 
-  private mapUser(user: User): Observable<User> {
-    return docData(doc(this.firestore, `users/${user.uid}`)).pipe(
-      map((data: UserData) => ({ ...user, ...data })),
-    );
-  }
+  public updateUserDocument$ = createEffect<UserData>(
+    switchMap(data => 
+      this.user$.pipe(
+        tap(user => setDoc(doc(this.firestore, `users/${user.uid}`), data))
+      ),
+    ),
+  );
 }
 
 function getProvider(providerName: OAuthProviderName): AuthProvider {

@@ -19,12 +19,12 @@ export class UserService {
 
   saveArticle(user: User, slug: string) {
     user.saved.push(slug);
-    this.auth.updateUserDoc(user, { isPro: user.isPro, saved: user.saved });
+    this.auth.updateUserDocument$({ isPro: user.isPro, saved: user.saved });
   }
 
   removeArticle(user: User, slug: string) {
     const saved = user.saved.filter(s => s != slug);
-    this.auth.updateUserDoc(user, { isPro: user.isPro, saved });
+    this.auth.updateUserDocument$({ isPro: user.isPro, saved });
   }
 
 }

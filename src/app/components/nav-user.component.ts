@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
+import { toLazySignal } from 'ngxtension/to-lazy-signal';
 import { AuthService } from '../services/auth.service';
 import { FallbackImageDirective } from '../utilities/fallback.image.directive';
 
@@ -32,6 +32,6 @@ export class NavUserComponent {
 
   private auth = inject(AuthService);
 
-  user = toSignal(this.auth.user$, { initialValue: null });
+  user = toLazySignal(this.auth.user$);
   
 }

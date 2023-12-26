@@ -10,6 +10,7 @@
           <span>Logged in as {{ user.displayName }}</span>
         </div>
       }
+      
       @if (error()) {
         <div class="alert alert-error alert-close" (click)="error.set(null)">
           <div class="alert-icon text-error">
@@ -18,7 +19,51 @@
           <span>{{ error() }}</span>
         </div>
       }
-      <app-login-form (onSubmit)="submit($event)" (onHeadingChange)="this.heading.set($event)"/>
+
+      <form (ngSubmit)="submit()" class="grid gap-5">
+        @if (formState(); as formState) {
+          @if (isSignUpForm()) {
+            <div class="input">
+              <label for="email">Enter full name</label>
+              <input type="text" name="displayName" [(ngModel)]="formState.data.displayName" placeholder="John Wick">
+            </div>
+          }
+
+          <div class="input">
+            <label for="email">Enter email</label>
+            <input type="email" name="email" [(ngModel)]="formState.data.email" placeholder="john.wick@example.com">
+          </div>
+          
+          @if (isLoginForm() || isSignUpForm()) {
+            <div class="input">
+              <label for="email">Enter password</label>
+              <input type="password" name="password" [(ngModel)]="formState.data.password" placeholder="password">
+            </div>
+          }
+
+          <div class="text-center">
+            @if (!isSignUpForm()) {
+              <a (click)="setFormType('SIGN_UP')">Create new Account</a>
+            }
+            @if (isResetPasswordForm()) {
+              <span>&nbsp; • &nbsp;</span>
+            }
+            @if (!isLoginForm()) {
+              <a (click)="setFormType('LOGIN')">Already have an account?</a>
+            }
+            @if (!isResetPasswordForm()) {
+              <span>&nbsp; • &nbsp;</span>
+            }
+            @if (!isResetPasswordForm()) {
+              <a (click)="setFormType('RESET_PASSWORD')">Forgot password?</a>
+            }
+          </div>
+  
+          <button type="submit" class="btn btn-primary">
+            <span>{{ heading() }}</span>
+          </button>
+        }
+      </form>
     </div>
     
     <div class="grid content-center"> <!-- divider -->

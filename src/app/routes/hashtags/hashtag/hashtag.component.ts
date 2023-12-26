@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { injectParams } from 'ngxtension/inject-params';
 import { toLazySignal } from 'ngxtension/to-lazy-signal';
 import { ArticleListComponent } from '../../../components/article-list.component';
-import { LoadingComponent } from '../../../layout/loading.component';
 import { ArticleService } from '../../../services/article.service';
 
 @Component({
@@ -10,7 +9,6 @@ import { ArticleService } from '../../../services/article.service';
   standalone: true,
   imports: [
     ArticleListComponent,
-    LoadingComponent,
   ],
   templateUrl: './hashtag.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -22,7 +20,7 @@ export default class HashtagComponent {
   hashtag = injectParams('hashtag');
 
   articles = toLazySignal(
-    this.articleService.findAllByHashtag(this.hashtag()),
+    this.articleService.findAllByHashtag(this.hashtag())
   );
   
 }

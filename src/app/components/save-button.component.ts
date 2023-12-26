@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, computed, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
+import { toLazySignal } from 'ngxtension/to-lazy-signal';
 
 @Component({
   selector: 'app-save-button',
@@ -38,7 +38,7 @@ export class SaveButtonComponent {
 
   @Input({ required: true }) slug: string;
 
-  user = toSignal(this.auth.user$, { initialValue: null });
+  user = toLazySignal(this.auth.user$);
   
   isArticleSaved = computed(() => {
     return this.user().saved.includes(this.slug);

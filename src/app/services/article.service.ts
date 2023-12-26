@@ -24,10 +24,14 @@ export class ArticleService {
     map(hashtags => Array.from(new Set(hashtags)).sort()),
   );
 
-  findBySlug(slug: string): Observable<Article> {
+  private fetchMarkdown(slug: string): Observable<string> {
     return this.http.get(`${environment.baseUrl}/content/${slug}/index.md`, {
       responseType: 'text',
-    }).pipe(
+    });
+  }
+
+  findBySlug(slug: string): Observable<Article> {
+    return this.fetchMarkdown(slug).pipe(
       map(markdown => {
         const result = frontmatter<Article>(markdown);
         return {

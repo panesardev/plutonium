@@ -10,7 +10,7 @@ import { Toc } from '../interfaces/article';
   ],
   template: `
     <div #ref>
-      <markdown class="markdown">{{ markdown }}</markdown>
+      <markdown class="markdown" [data]="markdown" />
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -19,9 +19,9 @@ export class RenderMarkdownComponent {
 
   private cdr = inject(ChangeDetectorRef);
 
+  @ViewChild('ref') ref: ElementRef<HTMLDivElement>;
   @Input() markdown: string;
   @Output() tableOfContents = new EventEmitter<Toc[]>();
-  @ViewChild('ref') ref: ElementRef<HTMLDivElement>;
 
   ngAfterViewInit(): void {
     if (this.ref) {
