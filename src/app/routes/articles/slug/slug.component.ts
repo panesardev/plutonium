@@ -1,18 +1,15 @@
 import { DOCUMENT, NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input as RouteInput, inject, signal } from '@angular/core';
-import { ActivatedRouteSnapshot, ResolveFn, RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { injectParams } from 'ngxtension/inject-params';
+import { toLazySignal } from 'ngxtension/to-lazy-signal';
 import { HashtagListComponent } from '../../../components/hashtag-list.component';
 import { RenderMarkdownComponent } from '../../../components/render-markdown.component';
 import { SaveButtonComponent } from '../../../components/save-button.component';
-import { Article, Toc } from '../../../interfaces/article';
+import { Toc } from '../../../interfaces/article';
 import { LoadingComponent } from '../../../layout/loading.component';
 import { ArticleService } from '../../../services/article.service';
 import { FallbackImageDirective } from '../../../utilities/fallback.image.directive';
-
-export const prefetchArticleBySlug: ResolveFn<Article> = (route: ActivatedRouteSnapshot) => {
-  const slug = route.paramMap.get('slug');
-  return inject(ArticleService).findBySlug(slug);
-}
 
 @Component({
   selector: 'app-slug',
@@ -31,9 +28,13 @@ export const prefetchArticleBySlug: ResolveFn<Article> = (route: ActivatedRouteS
 })
 export default class SlugComponent {
 
+  private articleService = inject(ArticleService);
   private document = inject(DOCUMENT);
+  private slug = injectParams('slug');
 
-  @RouteInput() article: Article;
+  article = toLazySignal(
+    this.articleService.findBySlug(this.slug())
+  );
 
   tableOfContents = signal<Toc[]>(null);
 

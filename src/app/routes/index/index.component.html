@@ -1,7 +1,12 @@
 <section>
-  <div class="px-4 md:px-8 mb-12">
-    <app-featured-article/>
-  </div>
+  @if (featuredArticle(); as article) {
+    <div class="px-4 md:px-8 mb-12">
+      <app-featured-article [article]="article"/>
+    </div>
+  }
+  @else {
+    <app-loading />
+  }
 
   @if (user(); as user) {
     <div class="bg-neutral max-w-md mx-auto p-6 md:p-8 md:rounded-md">
