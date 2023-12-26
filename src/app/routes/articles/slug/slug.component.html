@@ -1,4 +1,4 @@
-@if (article(); as article) {
+@if (article) {
   <!-- metatags -->
   <meta name="title" [content]="article.title">
   <meta name="description" [content]="article.description">
@@ -44,17 +44,17 @@
         </div>
       </div>
       
-      <div class="grid md:grid-cols-[300px_1fr] md:gap-10 max-w-7xl mx-auto">
-        <div class="relative md:sticky md:top-32 h-min">
+      <div class="grid md:grid-cols-[300px_1fr] md:gap-10 max-w-6xl mx-auto">
+        <div class="relative md:sticky md:top-28 h-min">
           <div class="mb-6">
             <app-save-button [slug]="article.slug"/>
           </div>
           <!-- table of contents -->
           <div class="bg-neutral custom-shadow md:rounded-md p-5 md:p-7 w-full select-none">
             <h1 class="text-primary text-2xl pb-2 mb-3 border-b-2 border-slate-100">Contents</h1>
-            @for (toc of tocs(); track toc.id) {
+            @for (toc of tableOfContents(); track toc.id) {
               <div>
-                <a class="block rounded-sm py-2 hover:border-l-4 hover:rounded-sm hover:pl-3 hover:bg-slate-100 border-l-primary transition-spacing"
+                <a class="block rounded-md py-2 hover:pl-4 hover:bg-base-200 transition-spacing"
                   (click)="scroll(toc.id)">
                   {{ toc.text }}
                 </a>
@@ -63,9 +63,9 @@
           </div>
         </div>
         <div class="min-w-0">
-          <img class="mb-10 md:rounded-md" [ngSrc]="article.coverUrl" priority="true" alt="article_cover" height="90" width="60">
-          <div class="px-4 md:px-8">
-            <app-render-markdown [markdown]="article.markdown" (tableOfContents)="tocs.set($event)"/>
+          <img class="mb-10 md:rounded-md" [ngSrc]="article.coverUrl" priority alt="article_cover" height="90" width="60  ">
+          <div class="px-4 md:px-0">
+            <app-render-markdown [markdown]="article.markdown" (tableOfContents)="tableOfContents.set($event)"/>
           </div>
         </div>
       </div>

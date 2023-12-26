@@ -1,9 +1,15 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input as RouteInput } from '@angular/core';
 import { computedFrom } from 'ngxtension/computed-from';
 import { ArticleListComponent } from '../../components/article-list.component';
 import { FeaturedArticleComponent } from '../../components/featured-article.component';
 import { LoadingComponent } from '../../layout/loading.component';
 import { ArticleService } from '../../services/article.service';
+import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
+import { Article } from '../../interfaces/article';
+
+export const prefetchArticles: ResolveFn<Article[]> = (route: ActivatedRouteSnapshot) => {
+  return inject(ArticleService).articles$;
+}
 
 @Component({
   selector: 'app-articles',
@@ -18,11 +24,6 @@ import { ArticleService } from '../../services/article.service';
 })
 export default class ArticlesComponent {
 
-  private articleService = inject(ArticleService);
-
-  view = computedFrom({
-    featured: this.articleService.featured$,
-    articles: this.articleService.articles$,
-  }, { initialValue: null });
+  @RouteInput() articles: Article[];
 
 }

@@ -1,9 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input as RouteInput } from '@angular/core';
+import { ActivatedRouteSnapshot, ResolveFn, RouterLink } from '@angular/router';
 import { HashtagListComponent } from '../../components/hashtag-list.component';
 import { LoadingComponent } from '../../layout/loading.component';
-import { RouterLink } from '@angular/router';
 import { ArticleService } from '../../services/article.service';
-import { toLazySignal } from 'ngxtension/to-lazy-signal';
+
+export const prefetchHashtags: ResolveFn<string[]> = (route: ActivatedRouteSnapshot) => {
+  return inject(ArticleService).hashtags$;
+}
 
 @Component({
   selector: 'app-hashtags',
@@ -18,10 +21,6 @@ import { toLazySignal } from 'ngxtension/to-lazy-signal';
 })
 export default class HashtagsComponent {
 
-  private articleService = inject(ArticleService);
-
-  hashtags = toLazySignal(
-    this.articleService.hashtags$
-  );
+  @RouteInput() hashtags: string[];
 
 }

@@ -1,4 +1,4 @@
-@if (hashtags()) {
+@if (hashtags) {
   <section class="px-4 md:px-8">
     <h1 class="page-heading">Hashtags</h1>
     <p class="md:text-xl text-center mb-10">
@@ -6,7 +6,7 @@
     </p>
 
     <div class="max-w-2xl mx-auto bg-neutral rounded-xl p-4 md:p-10">
-      <app-hashtag-list [hashtags]="hashtags()"/>
+      <app-hashtag-list [hashtags]="hashtags"/>
     </div>
   </section>
 }
