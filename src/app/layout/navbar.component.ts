@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ModalService } from '../services/modal.service';
-import { BRAND } from '../app.constants';
 import { SearchModalComponent } from './modals/search-modal.component';
 import { NavModalComponent } from './modals/nav-modal.component';
 import { NavUserComponent } from '../components/nav-user.component';
@@ -24,7 +23,7 @@ import { NavUserComponent } from '../components/nav-user.component';
           <div class="block lg:hidden" (click)="openSearchModal()">
             <i class="search-icon"></i>
           </div>
-          <a routerLink="/" class="hidden lg:block brand text-2xl lg:text-3xl">{{ brand }}</a>
+          <a routerLink="/" class="hidden lg:block brand text-2xl lg:text-3xl">Plutonium</a>
         </div>
         <div class="hidden lg:block">
           <div (click)="openSearchModal()" 
@@ -51,10 +50,9 @@ import { NavUserComponent } from '../components/nav-user.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarComponent {
+  
   private modalService = inject(ModalService);
   
-  brand = BRAND;
-
   openSearchModal(): void {
     this.modalService.open(SearchModalComponent);
   }

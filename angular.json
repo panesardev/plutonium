@@ -52,7 +52,7 @@
             "server": "src/main.server.ts",
             "prerender": {
               "discoverRoutes": false,
-              "routesFile": "src/assets/routes.txt"
+              "routesFile": "routes.txt"
             },
             "ssr": {
               "entry": "server.ts"

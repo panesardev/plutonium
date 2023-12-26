@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { BRAND } from '../../app.constants';
 import { ModalService } from '../../services/modal.service';
 import { BaseModalComponent } from './base-modal.component';
 
@@ -17,7 +16,7 @@ import { BaseModalComponent } from './base-modal.component';
       <button class="btn btn-sm btn-error float-right" (click)="modal.close()">
         <i class="close-icon"></i>
       </button>
-      <h1 class="brand text-2xl text-primary mb-4" >{{ brand }}</h1>
+      <h1 class="brand text-2xl text-primary mb-4">Plutonium</h1>
 
       <div class="border-b-[.1rem] border-slate-200 mb-4"></div>
 
@@ -42,7 +41,5 @@ import { BaseModalComponent } from './base-modal.component';
 export class NavModalComponent {
 
   readonly modal = inject(ModalService);
-
-  brand = BRAND;
 
 }
