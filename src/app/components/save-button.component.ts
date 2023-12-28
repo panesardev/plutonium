@@ -40,9 +40,7 @@ export class SaveButtonComponent {
 
   user = toLazySignal(this.auth.user$);
   
-  isArticleSaved = computed(() => {
-    return this.user().saved.includes(this.slug);
-  });
+  isArticleSaved = computed(() => this.user().saved.includes(this.slug));
   
   saveArticle() {
     this.userService.saveArticle(this.user(), this.slug);

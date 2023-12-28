@@ -20,6 +20,9 @@ import { FallbackImageDirective } from '../../utilities/fallback.image.directive
   ],
   templateUrl: './dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    ngSkipHydration: 'true',
+  },
 })
 export default class DashboardComponent {
 

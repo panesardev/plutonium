@@ -3,10 +3,10 @@ import { Auth, authState, createUserWithEmailAndPassword, getAdditionalUserInfo,
 import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { AuthProvider, GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import { createEffect } from 'ngxtension/create-effect';
 import { map, of, switchMap, tap } from 'rxjs';
 import { LoginData, OAuthProviderName, ResetPasswordData, SignUpData } from '../interfaces/auth';
 import { User, UserData } from '../interfaces/user';
-import { createEffect } from 'ngxtension/create-effect';
  
 @Injectable({ providedIn: 'root' })
 export class AuthService {

@@ -25,6 +25,4 @@
 /hashtags/heroku
 /hashtags/docker
 
-/login
-
 /not-found
