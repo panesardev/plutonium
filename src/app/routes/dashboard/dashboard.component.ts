@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { computedFrom } from 'ngxtension/computed-from';
 import { ArticleListComponent } from '../../components/article-list.component';
 import { LoadingComponent } from '../../layout/loading.component';
 import { LogoutModalComponent } from '../../layout/modals/logout-modal.component';
@@ -8,6 +7,8 @@ import { AuthService } from '../../services/auth.service';
 import { ModalService } from '../../services/modal.service';
 import { UserService } from '../../services/user.service';
 import { FallbackImageDirective } from '../../utilities/fallback.image.directive';
+import { toLazySignal } from 'ngxtension/to-lazy-signal';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,12 +18,10 @@ import { FallbackImageDirective } from '../../utilities/fallback.image.directive
     LoadingComponent,
     RouterLink,
     FallbackImageDirective,
+    AsyncPipe,
   ],
   templateUrl: './dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    ngSkipHydration: 'true',
-  },
 })
 export default class DashboardComponent {
 
@@ -30,10 +29,8 @@ export default class DashboardComponent {
   private userService = inject(UserService);
   private modalService = inject(ModalService);
 
-  view = computedFrom({ 
-    user: this.auth.user$,
-    articles: this.userService.savedArticles$,
-  }, { initialValue: null });
+  user$ = this.auth.user$;
+  savedArticles$ = this.userService.savedArticles$;
 
   openLogoutModal() {
     this.modalService.open(LogoutModalComponent);

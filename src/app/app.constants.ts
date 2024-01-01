@@ -1,4 +1,4 @@
-export const BRAND = 'Plutonium';
+export const FEATURED_ARTICLE_SLUG = 'integrating-firebase-into-angular';
 
 export const SLUGS = [
   'deploy-docker-image-on-heroku',
@@ -10,8 +10,6 @@ export const SLUGS = [
   'using-typescript-with-express',
   'deploy-angular-universal-to-vercel'
 ];
-
-export const FEATURED_ARTICLE_SLUG = 'integrating-firebase-into-angular';
 
 export const SOCIAL = {
   instagram: 'https://www.instagram.com/panesarpbx8/',

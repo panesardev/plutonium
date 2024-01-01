@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import IndexComponent from './routes/index/index.component';
 import { hashtagTitleResolver, slugTitleResolver, titleResolver } from './utilities/title.resolver';
+import { authGuard } from './utilities/auth.guard';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,7 @@ export const routes: Routes = [
     path: 'dashboard',
     loadComponent: () => import('./routes/dashboard/dashboard.component'),
     title: titleResolver,
+    canActivate: [authGuard],
   },
   {
     path: 'articles',

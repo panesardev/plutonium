@@ -1,5 +1,4 @@
 import { ActivatedRouteSnapshot, ResolveFn } from "@angular/router";
-import { BRAND } from "../app.constants";
 import { ArticleService } from "../services/article.service";
 import { inject } from "@angular/core";
 import { map } from "rxjs";
@@ -17,7 +16,7 @@ export const titleResolver: ResolveFn<string> = (route: ActivatedRouteSnapshot) 
     title = `404 Not Found`;
   }
 
-  return `${title} - ${BRAND}`;
+  return `${title} - Plutonium`;
 }
 
 // resolve title for /hashtags/:hashtag
@@ -26,7 +25,7 @@ export const hashtagTitleResolver: ResolveFn<string> = (route: ActivatedRouteSna
   // capitalize
   hashtag = hashtag.charAt(0).toUpperCase() + hashtag.slice(1);;
 
-  return `${hashtag} - ${BRAND}`;
+  return `${hashtag} - Plutonium`;
 }
 
 // resolve title for /articles/:slug
@@ -34,7 +33,7 @@ export const slugTitleResolver: ResolveFn<string> = (route: ActivatedRouteSnapsh
   const slug = route.paramMap.get('slug');
 
   return inject(ArticleService).findBySlug(slug).pipe(
-    map(article => `${article.title} - ${BRAND}`),
+    map(article => `${article.title} - Plutonium`),
   );
 }
 

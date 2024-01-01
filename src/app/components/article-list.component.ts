@@ -3,6 +3,8 @@ import { RouterLink } from '@angular/router';
 import { Article } from '../interfaces/article';
 import { HashtagListComponent } from './hashtag-list.component';
 
+// md:grid-cols-[repeat(auto-fit,minmax(250px,350px))]
+
 @Component({
   selector: 'app-article-list',
   standalone: true,
@@ -11,7 +13,7 @@ import { HashtagListComponent } from './hashtag-list.component';
     HashtagListComponent,
   ],
   template: `
-    <div class="grid md:grid-cols-[repeat(auto-fit,minmax(250px,350px))] justify-center gap-6 md:gap-10 mx-auto max-w-7xl">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 justify-center gap-6 md:gap-10 mx-auto max-w-5xl">
       @for (article of articles; track article.slug) {
         <div class="grid justify-between rounded-lg h-fit gap-4 md:gap-5 bg-neutral">
           <a routerLink="/articles/{{ article.slug }}">

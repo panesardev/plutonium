@@ -2,27 +2,32 @@ import { ChangeDetectionStrategy, Component, Input, computed, inject } from '@an
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
-import { toLazySignal } from 'ngxtension/to-lazy-signal';
+import { User } from '../interfaces/user';
+import { map } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-save-button',
   standalone: true,
   imports: [
     RouterLink,
+    AsyncPipe,
   ],
   template: `
     <div class="flex justify-center">
-      @if (user() && isArticleSaved()) {
-        <button class="btn btn-error rounded md:w-full" (click)="removeArticle()">
-          Remove saved 
-        </button>
-      } 
-      @if (user() && !isArticleSaved()) {
-        <button class="btn btn-primary rounded md:w-full" (click)="saveArticle()">
-          Save Article
-        </button>
+      @if (user$ | async; as user) {
+        @if (isArticleSaved$ | async) {
+          <button class="btn btn-error rounded md:w-full" (click)="removeArticle(user)">
+            Remove saved 
+          </button>
+        }
+        @else {
+          <button class="btn btn-primary rounded md:w-full" (click)="saveArticle(user)">
+            Save Article
+          </button>
+        }
       }
-      @if (!user()) {
+      @else {
         <button class="btn btn-primary rounded md:w-full" routerLink="/login">
           Login to save
         </button>
@@ -38,16 +43,18 @@ export class SaveButtonComponent {
 
   @Input({ required: true }) slug: string;
 
-  user = toLazySignal(this.auth.user$);
+  user$ = this.auth.user$;
   
-  isArticleSaved = computed(() => this.user().saved.includes(this.slug));
+  isArticleSaved$ = this.user$.pipe(
+    map(user => user.saved.includes(this.slug)),
+  );
   
-  saveArticle() {
-    this.userService.saveArticle(this.user(), this.slug);
+  saveArticle(user: User) {
+    this.userService.saveArticle(user, this.slug);
   }
 
-  removeArticle() {
-    this.userService.removeArticle(this.user(), this.slug);
+  removeArticle(user: User) {
+    this.userService.removeArticle(user, this.slug);
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ApplicationRef, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ModalComponent } from './layout/modals/modal.component';
 import { ModalService } from './services/modal.service';
@@ -30,5 +30,11 @@ import { FooterComponent } from './layout/footer.component';
 export class AppComponent {
 
   readonly modal = inject(ModalService);
+
+  constructor() {
+    const appRef = inject(ApplicationRef);
+
+    appRef.isStable.subscribe(isStable => console.log(`Stable: ${isStable}`));
+  }
 
 }

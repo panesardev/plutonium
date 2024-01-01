@@ -42,7 +42,15 @@ import { NavUserComponent } from '../components/nav-user.component';
               Hashtags
             </a>
           </div>
-          <app-nav-user />
+          @defer {
+            <app-nav-user />
+          }  
+          @placeholder { 
+            <button class="btn btn-sm btn-primary text-md" routerLink="/login">Login</button>
+          }
+          @error {
+            <p>!ERROR</p>
+          }
         </div>
       </nav>
     </header>

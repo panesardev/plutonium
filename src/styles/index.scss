@@ -42,7 +42,7 @@ a {
   @apply text-primary cursor-pointer;
 }
 
-/// fonts ///
+// fonts
 @font-face {
   font-family: 'Aquire';
   src: url('/assets/fonts/Aquire.otf');
@@ -54,6 +54,14 @@ a {
   &:hover {
     text-decoration: none;
   }
+}
+
+.aquire {
+  font-family: 'Aquire', sans-serif;
+}
+
+.lobster {
+  font-family: 'Lobster', sans-serif;
 }
 
 

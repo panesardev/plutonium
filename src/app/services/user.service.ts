@@ -17,14 +17,20 @@ export class UserService {
     catchError(() => of([])),
   );
 
-  saveArticle(user: User, slug: string) {
+  async saveArticle(user: User, slug: string) {
     user.saved.push(slug);
-    this.auth.updateUserDocument$({ isPro: user.isPro, saved: user.saved });
+    await this.auth.setUser(
+      user, 
+      { isPro: user.isPro, saved: user.saved },
+    );
   }
 
-  removeArticle(user: User, slug: string) {
+  async removeArticle(user: User, slug: string) {
     const saved = user.saved.filter(s => s != slug);
-    this.auth.updateUserDocument$({ isPro: user.isPro, saved });
+    await this.auth.setUser(
+      user, 
+      { isPro: user.isPro, saved },
+    );
   }
 
 }

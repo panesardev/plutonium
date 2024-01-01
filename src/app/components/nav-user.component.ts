@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { toLazySignal } from 'ngxtension/to-lazy-signal';
 import { AuthService } from '../services/auth.service';
 import { FallbackImageDirective } from '../utilities/fallback.image.directive';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-nav-user',
@@ -10,9 +10,10 @@ import { FallbackImageDirective } from '../utilities/fallback.image.directive';
   imports: [
     FallbackImageDirective,
     RouterLink,
+    AsyncPipe,
   ],
   template: `
-    @if (user(); as user) {
+    @if (user$ | async; as user) {
       <a routerLink="/dashboard">
         <img class="rounded-full w-8 md:w-10" 
           [src]="user.photoURL" 
@@ -32,6 +33,6 @@ export class NavUserComponent {
 
   private auth = inject(AuthService);
 
-  user = toLazySignal(this.auth.user$);
+  user$ = this.auth.user$;
   
 }

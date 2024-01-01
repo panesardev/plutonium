@@ -3,8 +3,7 @@ import { Auth, authState, createUserWithEmailAndPassword, getAdditionalUserInfo,
 import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { AuthProvider, GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
-import { createEffect } from 'ngxtension/create-effect';
-import { map, of, switchMap, tap } from 'rxjs';
+import { Observable, map, of, switchMap } from 'rxjs';
 import { LoginData, OAuthProviderName, ResetPasswordData, SignUpData } from '../interfaces/auth';
 import { User, UserData } from '../interfaces/user';
  
@@ -16,24 +15,18 @@ export class AuthService {
   private router = inject(Router);
 
   readonly user$ = authState(this.auth).pipe(
-    switchMap(user => user ? this.getUserDocument$(user as User) : of(null)),
+    switchMap(user => user ? this.getUser$(user as User) : of(null)),
   );
 
-  private getUserDocument$(user: User) {
-    return docData(doc(this.firestore, `users/${user.uid}`)).pipe(
-      map((data: UserData) => ({ ...user, ...data }))
-    );
-  }
-
   async signUp(data: SignUpData): Promise<void> {
-    if (!data.displayName || !data.email || !data.password)
+    if (!data.displayName || !data.email || !data.password) {
       throw Error('Insufficient information');
-    
+    }
     const credential = await createUserWithEmailAndPassword(this.auth, data.email, data.password);
     
     await Promise.all([
       updateProfile(credential.user, { displayName: data.displayName }),
-      this.createUserDocument$(credential.user as User),
+      this.setUser(credential.user),
     ]); 
 
     await this.router.navigateByUrl('/dashboard');
@@ -41,9 +34,9 @@ export class AuthService {
   }
 
   async login(data: LoginData): Promise<void> {
-    if (!data.email || !data.password) 
+    if (!data.email || !data.password) {
       throw Error('Invalid credentials');
-    
+    }
     await signInWithEmailAndPassword(this.auth, data.email, data.password);
 
     await this.router.navigateByUrl('/dashboard');
@@ -55,7 +48,7 @@ export class AuthService {
     const credential = await signInWithPopup(this.auth, provider);
 
     if (getAdditionalUserInfo(credential).isNewUser) {
-      this.createUserDocument$(credential.user);
+      this.setUser(credential.user);
     }
 
     await this.router.navigateByUrl('/dashboard');
@@ -76,22 +69,18 @@ export class AuthService {
     // this.toast.success('You have been logged out!');
   }
   
-  private createUserDocument$ = createEffect<User>(
-    tap(user => 
-      setDoc(
-        doc(this.firestore, `users/${user['uid']}`), 
-        { isPro: false, saved: [] },
-      ),
-    ),
-  );
+  async setUser(user: User, data?: UserData): Promise<void> {
+    await setDoc(
+      doc(this.firestore, `users/${user.uid}`), 
+      data ? { ...data } : { isPro: false, saved: [] },
+    );
+  }
 
-  public updateUserDocument$ = createEffect<UserData>(
-    switchMap(data => 
-      this.user$.pipe(
-        tap(user => setDoc(doc(this.firestore, `users/${user.uid}`), data))
-      ),
-    ),
-  );
+  getUser$(user: User): Observable<User> {
+    return docData(doc(this.firestore, `users/${user.uid}`)).pipe(
+      map((data: UserData) => ({ ...user, ...data }))
+    );
+  }
 }
 
 function getProvider(providerName: OAuthProviderName): AuthProvider {

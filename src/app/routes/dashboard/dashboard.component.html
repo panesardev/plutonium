@@ -1,9 +1,10 @@
 <section>
   <h1 class="page-heading">Dashboard</h1>
-  @if (view(); as view) {
-    <div class="grid md:grid-cols-[350px_1fr] gap-8 max-w-7xl mx-auto">
-      @if (view.user; as user) {
-        <div class="relative md:sticky md:top-32 h-min bg-neutral grid gap-4 md:gap-6 p-6 md:p-8 md:rounded-md select-none">
+
+  @defer {
+    <div class="grid lg:grid-cols-[1fr_3fr] gap-8 max-w-7xl mx-auto">
+      @if (user$ | async; as user) {
+        <div class="relative lg:sticky lg:top-32 h-min bg-neutral grid gap-4 lg:gap-6 p-6 lg:p-8 lg:rounded-md select-none">
           <img [src]="user.photoURL" alt="user" fallbackImage="/assets/img/user.png" class="rounded-full w-20">
           <div>
             <h1 class="text-2xl text-primary font-bold mb-1">{{ user.displayName }}</h1>
@@ -17,28 +18,34 @@
           </div>
         </div>
       }
-      @if (view.articles; as articles) {
+      
+      @if (savedArticles$ | async; as articles) {
         @if (articles.length) {
-          <div class="grid gap-4 md:gap-8 md:bg-neutral p-4 md:p-8 rounded-md">
-            <h1 class="font-bold text-xl md:text-2xl text-primary flex gap-4 items-center select-none">
-              <span>Saved Articles</span>
-              <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"></path></svg>
-            </h1>
-            <div>
-              <app-article-list [articles]="articles"/>
+          <div class="grid gap-4 lg:gap-8 lg:bg-neutral p-4 md:p-8 rounded-md">
+            <h1 class="lobster text-2xl lg:text-3xl text-center text-primary select-none">Saved Articles</h1>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10">
+              @for (article of articles; track article.slug) {
+                <div class="grid justify-between rounded-lg h-fit gap-4 md:gap-5 bg-neutral md:bg-none">
+                  <a routerLink="/articles/{{ article.slug }}">
+                    <img [src]="article.coverUrl" [loading]="'lazy'" class="rounded-lg" [alt]="article.title" width="100" height="50">
+                  </a>
+                  <div class="px-4 lg:px-0 pb-4 md:pb-6">
+                    <h1 class="text-xl text-primary font-bold mb-2">{{ article.title }}</h1>
+                    <p class="mb-4">{{ article.description }}</p>
+                    <button class="btn btn-primary w-full" routerLink="/articles/{{ article.slug }}">Read more</button>
+                  </div>
+                </div>
+              }
             </div>
           </div>
         } 
         @else {
-          <div class="bg-neutral p-4 md:p-8 rounded-lg">
+          <div class="bg-neutral p-4 lg:p-8 rounded-lg">
             <p class="text-lg mb-2">You have no saved articles yet!</p>
             <a routerLink="/articles" class="underline">See some articles</a>
           </div>
         }
       }
     </div>
-  }
-  @else {
-    <app-loading />
   }
 </section>

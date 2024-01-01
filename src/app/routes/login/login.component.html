@@ -4,11 +4,13 @@
   <div class="grid gap-10 lg:gap-12 md:grid-cols-[1fr_50px_1fr]">
 
     <div class="grid gap-5 lg:w-96 md:ml-auto">
-      @if (user(); as user) {
-        <div class="alert alert-primary cursor-pointer hover-dim" routerLink="/dashboard">
-          <img [src]="user.photoURL" alt="user" class="rounded-full w-8 h-8" fallbackImage="/assets/img/user.png">
-          <span>Logged in as {{ user.displayName }}</span>
-        </div>
+      @defer {
+        @if (user(); as user) {
+          <div class="alert alert-primary cursor-pointer hover-dim" routerLink="/dashboard">
+            <img [src]="user.photoURL" alt="user" class="rounded-full w-8 h-8" fallbackImage="/assets/img/user.png">
+            <span>Logged in as {{ user.displayName }}</span>
+          </div>
+        }
       }
       
       @if (error()) {
