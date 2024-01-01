@@ -15,7 +15,7 @@ export class AuthService {
   private router = inject(Router);
 
   readonly user$ = authState(this.auth).pipe(
-    switchMap(user => user ? this.getUser$(user as User) : of(null)),
+    switchMap(user => user ? this.getUser(user as User) : of(null)),
   );
 
   async signUp(data: SignUpData): Promise<void> {
@@ -48,7 +48,7 @@ export class AuthService {
     const credential = await signInWithPopup(this.auth, provider);
 
     if (getAdditionalUserInfo(credential).isNewUser) {
-      this.setUser(credential.user);
+      await this.setUser(credential.user);
     }
 
     await this.router.navigateByUrl('/dashboard');
@@ -76,7 +76,7 @@ export class AuthService {
     );
   }
 
-  getUser$(user: User): Observable<User> {
+  getUser(user: User): Observable<User> {
     return docData(doc(this.firestore, `users/${user.uid}`)).pipe(
       map((data: UserData) => ({ ...user, ...data }))
     );

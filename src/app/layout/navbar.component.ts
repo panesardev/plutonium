@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { NavUserComponent } from './deferred/nav-user.component';
 import { ModalService } from '../services/modal.service';
-import { SearchModalComponent } from './modals/search-modal.component';
 import { NavModalComponent } from './modals/nav-modal.component';
-import { NavUserComponent } from '../components/nav-user.component';
+import { SearchModalComponent } from './modals/search-modal.component';
 
 @Component({
   selector: 'app-navbar',

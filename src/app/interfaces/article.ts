@@ -17,3 +17,7 @@ export interface Toc {
   id: string;
   text: string;
 }
+
+export const sortArticles = (articles: Article[]) => articles.sort(
+  (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+);

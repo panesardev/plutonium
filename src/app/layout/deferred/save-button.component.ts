@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { UserService } from '../services/user.service';
-import { User } from '../interfaces/user';
+import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
+import { User } from '../../interfaces/user';
 import { map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 
@@ -49,12 +49,12 @@ export class SaveButtonComponent {
     map(user => user.saved.includes(this.slug)),
   );
   
-  saveArticle(user: User) {
-    this.userService.saveArticle(user, this.slug);
+  async saveArticle(user: User) {
+    await this.userService.saveArticle(user, this.slug);
   }
 
-  removeArticle(user: User) {
-    this.userService.removeArticle(user, this.slug);
+  async removeArticle(user: User) {
+    await this.userService.removeArticle(user, this.slug);
   }
 
 }

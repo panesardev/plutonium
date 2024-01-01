@@ -5,7 +5,7 @@ import { injectParams } from 'ngxtension/inject-params';
 import { toLazySignal } from 'ngxtension/to-lazy-signal';
 import { HashtagListComponent } from '../../../components/hashtag-list.component';
 import { RenderMarkdownComponent } from '../../../components/render-markdown.component';
-import { SaveButtonComponent } from '../../../components/save-button.component';
+import { SaveButtonComponent } from '../../../layout/deferred/save-button.component';
 import { Toc } from '../../../interfaces/article';
 import { LoadingComponent } from '../../../layout/loading.component';
 import { ArticleService } from '../../../services/article.service';

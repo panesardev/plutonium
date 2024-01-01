@@ -1,6 +1,6 @@
 import { ApplicationRef, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ModalComponent } from './layout/modals/modal.component';
+import { ModalComponent } from './layout/modal.component';
 import { ModalService } from './services/modal.service';
 import { NavbarComponent } from './layout/navbar.component';
 import { FooterComponent } from './layout/footer.component';
