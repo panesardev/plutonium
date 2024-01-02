@@ -4,8 +4,8 @@ import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { AuthProvider, GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import { Observable, map, of, switchMap } from 'rxjs';
-import { LoginData, OAuthProviderName, ResetPasswordData, SignUpData } from '../interfaces/auth';
-import { User, UserData } from '../interfaces/user';
+import { LoginData, OAuthProviderName, ResetPasswordData, SignUpData } from '../interfaces/auth.interface';
+import { User, UserData } from '../interfaces/user.interface';
  
 @Injectable({ providedIn: 'root' })
 export class AuthService {

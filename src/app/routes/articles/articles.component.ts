@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { computedFrom } from 'ngxtension/computed-from';
-import { ArticleListComponent } from '../../components/article-list.component';
-import { FeaturedArticleComponent } from '../../components/featured-article.component';
+import { ArticleListComponent } from '../../layout/components/article-list.component';
+import { FeaturedArticleComponent } from '../../layout/components/featured-article.component';
 import { ArticleService } from '../../services/article.service';
 import { AsyncPipe } from '@angular/common';
 

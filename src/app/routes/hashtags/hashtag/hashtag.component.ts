@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { injectParams } from 'ngxtension/inject-params';
-import { ArticleListComponent } from '../../../components/article-list.component';
+import { ArticleListComponent } from '../../../layout/components/article-list.component';
 import { ArticleService } from '../../../services/article.service';
 
 @Component({

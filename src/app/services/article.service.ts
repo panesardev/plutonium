@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import frontmatter from 'front-matter';
 import { Observable, map, zip } from "rxjs";
-import { Article, sortArticles } from "../interfaces/article";
+import { Article, sortArticles } from "../interfaces/article.interface";
 import { environment } from "../../environments/environment";
 import { SLUGS, FEATURED_ARTICLE } from '../app.constants';
 

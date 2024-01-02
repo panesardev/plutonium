@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { Article } from '../interfaces/article';
+import { Article } from '../../interfaces/article.interface';
 import { HashtagListComponent } from './hashtag-list.component';
-import { FallbackImageDirective } from '../utilities/fallback.image.directive';
+import { FallbackImageDirective } from '../../utilities/image.directive';
 
 @Component({
   selector: 'app-featured-article',

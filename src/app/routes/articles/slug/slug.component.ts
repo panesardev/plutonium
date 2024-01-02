@@ -2,12 +2,12 @@ import { AsyncPipe, DOCUMENT, NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { injectParams } from 'ngxtension/inject-params';
-import { HashtagListComponent } from '../../../components/hashtag-list.component';
-import { RenderMarkdownComponent } from '../../../components/render-markdown.component';
-import { Toc } from '../../../interfaces/article';
+import { HashtagListComponent } from '../../../layout/components/hashtag-list.component';
+import { RenderMarkdownComponent } from '../../../layout/components/render-markdown.component';
+import { Toc } from '../../../interfaces/article.interface';
 import { SaveButtonComponent } from '../../../layout/deferred/save-button.component';
 import { ArticleService } from '../../../services/article.service';
-import { FallbackImageDirective } from '../../../utilities/fallback.image.directive';
+import { FallbackImageDirective } from '../../../utilities/image.directive';
 
 @Component({
   selector: 'app-slug',

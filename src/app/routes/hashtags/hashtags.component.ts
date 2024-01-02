@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { HashtagListComponent } from '../../components/hashtag-list.component';
+import { HashtagListComponent } from '../../layout/components/hashtag-list.component';
 import { RouterLink } from '@angular/router';
 import { ArticleService } from '../../services/article.service';
 import { AsyncPipe } from '@angular/common';

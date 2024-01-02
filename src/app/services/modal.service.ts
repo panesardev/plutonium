@@ -1,4 +1,5 @@
 import { Injectable, ViewContainerRef, signal } from '@angular/core';
+import { Modal } from '../interfaces/modal.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {
@@ -10,10 +11,10 @@ export class ModalService {
     this.containerRef = containerRef;
   }
 
-  open(component: any): void {
-    this.isClosed.set(false);
+  open(modal: typeof Modal): void {
     this.containerRef.clear();
-    this.containerRef.createComponent(component);
+    this.containerRef.createComponent(modal);
+    this.isClosed.set(false);
   }
 
   close(): void {

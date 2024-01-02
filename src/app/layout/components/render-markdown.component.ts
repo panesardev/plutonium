@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild, inject } from '@angular/core';
 import { MarkdownComponent } from 'ngx-markdown';
-import { Toc } from '../interfaces/article';
+import { Toc } from '../../interfaces/article.interface';
 
 @Component({
   selector: 'app-render-markdown',

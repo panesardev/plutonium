@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { catchError, map, of, switchMap, zip } from "rxjs";
-import { User } from "../interfaces/user";
+import { User } from "../interfaces/user.interface";
 import { ArticleService } from "./article.service";
 import { AuthService } from "./auth.service";
 

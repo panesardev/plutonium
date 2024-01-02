@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { toLazySignal } from 'ngxtension/to-lazy-signal';
-import { AuthData, OAuthProviderName } from '../../interfaces/auth';
+import { AuthData, OAuthProviderName } from '../../interfaces/auth.interface';
 import { AuthService } from '../../services/auth.service';
-import { FallbackImageDirective } from '../../utilities/fallback.image.directive';
+import { FallbackImageDirective } from '../../utilities/image.directive';
 
 export type FormType = 'LOGIN' | 'SIGN_UP' | 'RESET_PASSWORD' ;
 

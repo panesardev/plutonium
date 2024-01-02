@@ -4,9 +4,9 @@ import { RouterLink } from '@angular/router';
 import { computedFrom } from 'ngxtension/computed-from';
 import { toLazySignal } from 'ngxtension/to-lazy-signal';
 import { map, switchMap } from 'rxjs';
-import { Article } from '../../interfaces/article';
+import { Article } from '../../interfaces/article.interface';
+import { Modal } from '../../interfaces/modal.interface';
 import { ArticleService } from '../../services/article.service';
-import { ModalService } from '../../services/modal.service';
 import { BaseModalComponent } from './base-modal.component';
 
 @Component({
@@ -47,11 +47,10 @@ import { BaseModalComponent } from './base-modal.component';
   `,
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class SearchModalComponent {
+export class SearchModalComponent extends Modal {
 
   private articleService = inject(ArticleService);
   private fb = inject(FormBuilder);
-  readonly modal = inject(ModalService);
 
   searchForm = this.fb.group({ search: '' });
 
