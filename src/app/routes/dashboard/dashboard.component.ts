@@ -1,21 +1,18 @@
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ArticleListComponent } from '../../components/article-list.component';
-import { LoadingComponent } from '../../layout/loading.component';
 import { LogoutModalComponent } from '../../layout/modals/logout-modal.component';
 import { AuthService } from '../../services/auth.service';
 import { ModalService } from '../../services/modal.service';
 import { UserService } from '../../services/user.service';
 import { FallbackImageDirective } from '../../utilities/fallback.image.directive';
-import { toLazySignal } from 'ngxtension/to-lazy-signal';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     ArticleListComponent,
-    LoadingComponent,
     RouterLink,
     FallbackImageDirective,
     AsyncPipe,

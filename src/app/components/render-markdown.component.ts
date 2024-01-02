@@ -5,11 +5,9 @@ import { Toc } from '../interfaces/article';
 @Component({
   selector: 'app-render-markdown',
   standalone: true,
-  imports: [
-    MarkdownComponent,
-  ],
+  imports: [MarkdownComponent],
   template: `
-    <div #ref>
+    <div #container>
       <markdown class="markdown" [data]="markdown" />
     </div>
   `,
@@ -19,22 +17,24 @@ export class RenderMarkdownComponent {
 
   private cdr = inject(ChangeDetectorRef);
 
-  @ViewChild('ref') ref: ElementRef<HTMLDivElement>;
+  @ViewChild('container') container: ElementRef<HTMLDivElement>;
   @Input() markdown: string;
   @Output() tableOfContents = new EventEmitter<Toc[]>();
 
   ngAfterViewInit(): void {
-    if (this.ref) {
-      const h2s = this.ref.nativeElement.getElementsByTagName('h2');
+    if (this.container) {
+      const headings = this.container.nativeElement.getElementsByTagName('h2');
       // fix: expression has changed after view was checked
       setTimeout(() => {
-        let tocs: Toc[] = [];
-        for (let i = 0; i < h2s.length; i++) {
-          h2s[i].id = slugify(h2s[i].innerText);
-          tocs.push({ id: h2s[i].id, text: h2s[i].innerText });
+        let tableOfContents: Toc[] = [];
+        for (let i = 0; i < headings.length; i++) {
+          headings.item(i).id = slugify(headings.item(i).innerText);
+          tableOfContents.push({ 
+            id: headings.item(i).id, 
+            text: headings.item(i).innerText 
+          });
         }
-        this.tableOfContents.emit(tocs);
-
+        this.tableOfContents.emit(tableOfContents);
         this.cdr.detectChanges();
       }, 0);
     }

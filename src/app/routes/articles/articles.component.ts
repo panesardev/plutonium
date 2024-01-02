@@ -2,16 +2,16 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { computedFrom } from 'ngxtension/computed-from';
 import { ArticleListComponent } from '../../components/article-list.component';
 import { FeaturedArticleComponent } from '../../components/featured-article.component';
-import { LoadingComponent } from '../../layout/loading.component';
 import { ArticleService } from '../../services/article.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-articles',
   standalone: true,
   imports: [
     ArticleListComponent,
+    AsyncPipe,
     FeaturedArticleComponent,
-    LoadingComponent,
   ],
   templateUrl: './articles.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -20,9 +20,7 @@ export default class ArticlesComponent {
 
   private articleService = inject(ArticleService);
 
-  view = computedFrom({
-    featured: this.articleService.featured$,
-    articles: this.articleService.articles$,
-  }, { initialValue: null });
+  featured$ = this.articleService.featured$;
+  articles$ = this.articleService.articles$;
 
 }

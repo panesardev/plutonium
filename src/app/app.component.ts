@@ -32,9 +32,7 @@ export class AppComponent {
   readonly modal = inject(ModalService);
 
   constructor() {
-    const appRef = inject(ApplicationRef);
-
-    appRef.isStable.subscribe(isStable => console.log(`Stable: ${isStable}`));
+    // inject(ApplicationRef).isStable.subscribe(isStable => console.log(`Stable: ${isStable}`));
   }
 
 }

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toLazySignal } from 'ngxtension/to-lazy-signal';
 import { FeaturedArticleComponent } from '../../components/featured-article.component';
-import { LoadingComponent } from '../../layout/loading.component';
 import { ArticleService } from '../../services/article.service';
 import { AuthService } from '../../services/auth.service';
 import { RouterLink } from '@angular/router';
@@ -11,7 +10,6 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [
     FeaturedArticleComponent,
-    LoadingComponent,
     RouterLink,
   ],
   templateUrl: './index.component.html',
