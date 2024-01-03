@@ -8,7 +8,7 @@ import { Toc } from '../../interfaces/article.interface';
   imports: [MarkdownComponent],
   template: `
     <div #container>
-      <markdown class="markdown" [data]="markdown" />
+      <markdown class="markdown" [data]="markdown"/>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
