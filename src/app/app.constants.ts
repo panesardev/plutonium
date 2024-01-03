@@ -1,4 +1,4 @@
-export const FEATURED_ARTICLE = 'integrating-firebase-into-angular';
+export const FEATURED_SLUG = 'integrating-firebase-into-angular';
 
 export const SLUGS = [
   'deploy-docker-image-on-heroku',

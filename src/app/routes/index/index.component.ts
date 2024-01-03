@@ -22,6 +22,6 @@ export default class IndexComponent {
   private articleService = inject(ArticleService);
 
   user$ = this.auth.user$;
-  featuredArticle$ = this.articleService.featured$;
+  featured$ = this.articleService.featured$;
 
 }

@@ -4,7 +4,7 @@ import frontmatter from 'front-matter';
 import { Observable, map, zip } from "rxjs";
 import { Article, sortArticles } from "../interfaces/article.interface";
 import { environment } from "../../environments/environment";
-import { SLUGS, FEATURED_ARTICLE } from '../app.constants';
+import { SLUGS, FEATURED_SLUG } from '../app.constants';
 
 @Injectable({ providedIn: 'root' })
 export class ArticleService {
@@ -13,7 +13,7 @@ export class ArticleService {
   
   readonly articles$ = zip(SLUGS.map(s => this.findBySlug(s))).pipe(map(sortArticles));
 
-  readonly featured$ = this.findBySlug(FEATURED_ARTICLE);
+  readonly featured$ = this.findBySlug(FEATURED_SLUG);
 
   readonly hashtags$ = this.articles$.pipe(
     // extract hashtags from all articles into a single array

@@ -1,7 +1,11 @@
 <section class="px-4 md:px-8">
-  <app-featured-article [article]="featured$ | async"/>
+  @if (featured$ | async; as article) {
+    <app-featured-article [article]="article"/>
+  }
 
   <h1 class="page-heading">Articles</h1>
-
-  <app-article-list [articles]="articles$ | async"/>
+  
+  @if (articles$ | async; as articles) {
+    <app-article-list [articles]="articles"/>
+  }
 </section>
