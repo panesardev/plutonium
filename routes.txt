@@ -26,3 +26,7 @@
 /hashtags/docker
 
 /not-found
+
+/login
+
+/dashboard

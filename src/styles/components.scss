@@ -71,21 +71,6 @@
   }
 }
 
-.divider {
-  @apply flex items-center text-primary select-none;
-  margin: 1em -1em;
-
-  &:before,
-  &:after {
-    content: "";
-    flex: 1;
-    box-shadow: 0 1px 0 var(--shadow); // Chrome
-    // border-bottom: 0.5px solid black; // Safari
-    height: 1px;
-    margin: 0 1em;
-  }
-}
-
 .markdown {
   min-width: 0;
 
