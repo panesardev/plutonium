@@ -15,15 +15,13 @@ import { FooterComponent } from './layout/footer.component';
     FooterComponent,
   ],
   template: `
-    <div class="{{ modal.isClosed() ? '' : 'blur-lg' }}">
-      <app-navbar />
-      <main class="max-width mx-auto">
-        <div class="pt-24 md:pt-28 pb-16"> <!-- fix navbar layout shift on modal open -->
-          <router-outlet />
-        </div>
-      </main>
-      <app-footer />
-    </div>
+    <app-navbar />
+    <main class="max-width mx-auto">
+      <div class="pt-24 md:pt-28 pb-16"> <!-- fix navbar layout shift on modal open -->
+        <router-outlet />
+      </div>
+    </main>
+    <app-footer />
     <app-modal />
   `,
 })
