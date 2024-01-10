@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Modal } from '../../interfaces/modal.interface';
+import { Modal } from '../../types/modal.class';
 import { BaseModalComponent } from './base-modal.component';
 
 @Component({

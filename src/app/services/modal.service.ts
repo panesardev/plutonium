@@ -1,5 +1,5 @@
 import { Injectable, ViewContainerRef, signal } from '@angular/core';
-import { Modal } from '../interfaces/modal.interface';
+import { Modal } from '../types/modal.class';
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {

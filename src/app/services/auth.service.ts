@@ -2,10 +2,10 @@ import { Injectable, inject } from '@angular/core';
 import { Auth, authState, createUserWithEmailAndPassword, getAdditionalUserInfo, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from '@angular/fire/auth';
 import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { AuthProvider, GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import { Observable, map, of, switchMap } from 'rxjs';
-import { LoginData, OAuthProviderName, ResetPasswordData, SignUpData } from '../interfaces/auth.interface';
-import { User, UserData } from '../interfaces/user.interface';
+import { Credentials, OAuthProviderName } from '../types/auth.interface';
+import { User, UserData } from '../types/user.interface';
+import { getAuthProvider } from '../utilities/functions';
  
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -18,14 +18,14 @@ export class AuthService {
     switchMap(user => user ? this.getUser(user as User) : of(null)),
   );
 
-  async signUp(data: SignUpData): Promise<void> {
-    if (!data.displayName || !data.email || !data.password) {
+  async signUp({ email, password, displayName }: Credentials): Promise<void> {
+    if (!displayName || !email || !password) {
       throw Error('Insufficient information');
     }
-    const credential = await createUserWithEmailAndPassword(this.auth, data.email, data.password);
+    const credential = await createUserWithEmailAndPassword(this.auth, email, password);
     
     await Promise.all([
-      updateProfile(credential.user, { displayName: data.displayName }),
+      updateProfile(credential.user, { displayName }),
       this.setUser(credential.user),
     ]); 
 
@@ -33,18 +33,18 @@ export class AuthService {
     // this.toast.success(`Welcome ${credential.user.displayName}`);
   }
 
-  async login(data: LoginData): Promise<void> {
-    if (!data.email || !data.password) {
+  async login({ email, password }: Credentials): Promise<void> {
+    if (!email || !password) {
       throw Error('Invalid credentials');
     }
-    await signInWithEmailAndPassword(this.auth, data.email, data.password);
+    await signInWithEmailAndPassword(this.auth, email, password);
 
     await this.router.navigateByUrl('/dashboard');
     // this.toast.success(`Welcome ${credential.user.displayName}`);
   }
 
   async socialLogin(providerName: OAuthProviderName): Promise<void> {
-    const provider = getProvider(providerName);
+    const provider = getAuthProvider(providerName);
     const credential = await signInWithPopup(this.auth, provider);
 
     if (getAdditionalUserInfo(credential).isNewUser) {
@@ -55,11 +55,11 @@ export class AuthService {
     // this.toast.success(`Welcome ${credential.user.displayName}`);
   }
 
-  async resetPassword(data: ResetPasswordData): Promise<void> {
-    if (!data.email) {
+  async resetPassword({ email }: Credentials): Promise<void> {
+    if (!email) {
       throw Error('Email required');
     }
-    await sendPasswordResetEmail(this.auth, data.email);
+    await sendPasswordResetEmail(this.auth, email);
     // this.toast.success('Password reset email sent');
   }
 
@@ -80,12 +80,5 @@ export class AuthService {
     return docData(doc(this.firestore, `users/${user.uid}`)).pipe(
       map((data: UserData) => ({ ...user, ...data }))
     );
-  }
-}
-
-function getProvider(providerName: OAuthProviderName): AuthProvider {
-  switch (providerName) {
-    case 'google': return new GoogleAuthProvider();
-    case 'github': return new GithubAuthProvider();
   }
 }

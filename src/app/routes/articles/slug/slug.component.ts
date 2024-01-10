@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { injectParams } from 'ngxtension/inject-params';
 import { HashtagListComponent } from '../../../layout/components/hashtag-list.component';
 import { RenderMarkdownComponent } from '../../../layout/components/render-markdown.component';
-import { Toc } from '../../../interfaces/article.interface';
+import { Toc } from '../../../types/article.interface';
 import { SaveButtonComponent } from '../../../layout/deferred/save-button.component';
 import { ArticleService } from '../../../services/article.service';
 import { FallbackImageDirective } from '../../../utilities/image.directive';

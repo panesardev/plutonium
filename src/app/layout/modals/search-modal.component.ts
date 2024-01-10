@@ -4,8 +4,8 @@ import { RouterLink } from '@angular/router';
 import { computedFrom } from 'ngxtension/computed-from';
 import { toLazySignal } from 'ngxtension/to-lazy-signal';
 import { map, switchMap } from 'rxjs';
-import { Article } from '../../interfaces/article.interface';
-import { Modal } from '../../interfaces/modal.interface';
+import { Article } from '../../types/article.interface';
+import { Modal } from '../../types/modal.class';
 import { ArticleService } from '../../services/article.service';
 import { BaseModalComponent } from './base-modal.component';
 
@@ -50,9 +50,9 @@ import { BaseModalComponent } from './base-modal.component';
 export class SearchModalComponent extends Modal {
 
   private articleService = inject(ArticleService);
-  private fb = inject(FormBuilder);
+  private formBuilder = inject(FormBuilder);
 
-  searchForm = this.fb.group({ search: '' });
+  searchForm = this.formBuilder.group({ search: '' });
 
   query = toLazySignal(
     this.searchForm.valueChanges.pipe(

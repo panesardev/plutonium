@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { BaseModalComponent } from './base-modal.component';
-import { Modal } from '../../interfaces/modal.interface';
+import { Modal } from '../../types/modal.class';
 
 @Component({
   selector: 'app-logout-modal',

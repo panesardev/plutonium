@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { Article } from '../../interfaces/article.interface';
+import { Article } from '../../types/article.interface';
 import { HashtagListComponent } from './hashtag-list.component';
 import { FallbackImageDirective } from '../../utilities/image.directive';
 
@@ -46,5 +46,7 @@ import { FallbackImageDirective } from '../../utilities/image.directive';
 export class FeaturedArticleComponent {
 
   @Input({ required: true }) article: Article;
+
+  // article = input.required();
 
 }

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild, inject } from '@angular/core';
 import { MarkdownComponent } from 'ngx-markdown';
-import { Toc } from '../../interfaces/article.interface';
+import { Toc } from '../../types/article.interface';
+import { slugify } from '../../utilities/functions';
 
 @Component({
   selector: 'app-render-markdown',
@@ -18,7 +19,8 @@ export class RenderMarkdownComponent {
   private cdr = inject(ChangeDetectorRef);
 
   @ViewChild('container') container: ElementRef<HTMLDivElement>;
-  @Input() markdown: string;
+  @Input({ required: true }) markdown: string;
+  // markdown = input.required();
   @Output() tableOfContents = new EventEmitter<Toc[]>();
 
   ngAfterViewInit(): void {
@@ -40,8 +42,4 @@ export class RenderMarkdownComponent {
     }
   }
 
-}
-
-function slugify(heading: string): string {
-  return heading.toLowerCase().replace(' ', '-');
 }

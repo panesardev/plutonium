@@ -2,23 +2,22 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import frontmatter from 'front-matter';
 import { Observable, map, zip } from "rxjs";
-import { Article, sortArticles } from "../interfaces/article.interface";
+import { sortArticles } from "../utilities/functions";
 import { environment } from "../../environments/environment";
 import { SLUGS, FEATURED_SLUG } from '../app.constants';
+import { Article } from "../types/article.interface";
 
 @Injectable({ providedIn: 'root' })
 export class ArticleService {
 
   private http = inject(HttpClient);
-  
-  readonly articles$ = zip(SLUGS.map(s => this.findBySlug(s))).pipe(map(sortArticles));
-
-  readonly featured$ = this.findBySlug(FEATURED_SLUG);
-
-  readonly hashtags$ = this.articles$.pipe(
+   
+  articles$ = zip(SLUGS.map(s => this.findBySlug(s))).pipe(map(sortArticles));
+  featured$ = this.findBySlug(FEATURED_SLUG);
+  hashtags$ = this.articles$.pipe(
     // extract hashtags from all articles into a single array
     map(articles => [].concat(...articles.map(a => a.hashtags))),
-    // remove duplicate and then sort hashtags 
+    // remove duplicates and then sort hashtags 
     map(hashtags => Array.from(new Set(hashtags)).sort()),
   );
 

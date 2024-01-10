@@ -48,8 +48,8 @@ import { SearchModalComponent } from './modals/search-modal.component';
           @placeholder { 
             <button class="btn btn-sm btn-primary text-md" routerLink="/login">Login</button>
           }
-          @error {
-            <p>!ERROR</p>
+          @error {            
+            <button class="btn btn-sm btn-primary text-md" routerLink="/login">Login</button>
           }
         </div>
       </nav>

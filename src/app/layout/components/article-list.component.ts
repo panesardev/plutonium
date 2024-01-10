@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Article } from '../../interfaces/article.interface';
+import { Article } from '../../types/article.interface';
 import { HashtagListComponent } from './hashtag-list.component';
 
 // md:grid-cols-[repeat(auto-fit,minmax(250px,350px))]
@@ -36,5 +36,7 @@ import { HashtagListComponent } from './hashtag-list.component';
 export class ArticleListComponent {
 
   @Input({ required: true }) articles: Article[];
+
+  // articles = input.required();
 
 }

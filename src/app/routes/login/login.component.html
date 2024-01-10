@@ -23,48 +23,46 @@
       }
 
       <form (ngSubmit)="submit()" class="grid gap-5">
-        @if (formState(); as formState) {
-          @if (isSignUpForm()) {
-            <div class="input">
-              <label for="email">Enter full name</label>
-              <input type="text" name="displayName" [(ngModel)]="formState.data.displayName" placeholder="John Wick">
-            </div>
-          }
-
+        @if (isSignUpForm()) {
           <div class="input">
-            <label for="email">Enter email</label>
-            <input type="email" name="email" [(ngModel)]="formState.data.email" placeholder="john.wick@example.com">
+            <label for="email">Enter full name</label>
+            <input type="text" name="displayName" [(ngModel)]="state().credentials.displayName" placeholder="John Wick">
           </div>
-          
-          @if (isLoginForm() || isSignUpForm()) {
-            <div class="input">
-              <label for="email">Enter password</label>
-              <input type="password" name="password" [(ngModel)]="formState.data.password" placeholder="password">
-            </div>
-          }
-
-          <div class="text-center">
-            @if (!isSignUpForm()) {
-              <a (click)="setFormType('SIGN_UP')">Create new Account</a>
-            }
-            @if (isResetPasswordForm()) {
-              <span>&nbsp; • &nbsp;</span>
-            }
-            @if (!isLoginForm()) {
-              <a (click)="setFormType('LOGIN')">Already have an account?</a>
-            }
-            @if (!isResetPasswordForm()) {
-              <span>&nbsp; • &nbsp;</span>
-            }
-            @if (!isResetPasswordForm()) {
-              <a (click)="setFormType('RESET_PASSWORD')">Forgot password?</a>
-            }
-          </div>
-  
-          <button type="submit" class="btn btn-primary">
-            <span>{{ heading() }}</span>
-          </button>
         }
+
+        <div class="input">
+          <label for="email">Enter email</label>
+          <input type="email" name="email" [(ngModel)]="state().credentials.email" placeholder="john.wick@example.com">
+        </div>
+        
+        @if (isLoginForm() || isSignUpForm()) {
+          <div class="input">
+            <label for="email">Enter password</label>
+            <input type="password" name="password" [(ngModel)]="state().credentials.password" placeholder="password">
+          </div>
+        }
+
+        <div class="text-center">
+          @if (!isSignUpForm()) {
+            <a (click)="setFormType('SIGN_UP')">Create new Account</a>
+          }
+          @if (isResetPasswordForm()) {
+            <span>&nbsp; • &nbsp;</span>
+          }
+          @if (!isLoginForm()) {
+            <a (click)="setFormType('LOGIN')">Already have an account?</a>
+          }
+          @if (!isResetPasswordForm()) {
+            <span>&nbsp; • &nbsp;</span>
+          }
+          @if (!isResetPasswordForm()) {
+            <a (click)="setFormType('RESET_PASSWORD')">Forgot password?</a>
+          }
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          <span>{{ heading() }}</span>
+        </button>
       </form>
     </div>
     

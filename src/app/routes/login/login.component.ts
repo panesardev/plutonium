@@ -2,16 +2,9 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { toLazySignal } from 'ngxtension/to-lazy-signal';
-import { AuthData, OAuthProviderName } from '../../interfaces/auth.interface';
+import { LoginFormState, LoginFormType, OAuthProviderName } from '../../types/auth.interface';
 import { AuthService } from '../../services/auth.service';
 import { FallbackImageDirective } from '../../utilities/image.directive';
-
-export type FormType = 'LOGIN' | 'SIGN_UP' | 'RESET_PASSWORD' ;
-
-export interface FormData {
-  data: AuthData;
-  type: FormType;
-}
 
 @Component({
   selector: 'app-login',
@@ -32,32 +25,36 @@ export default class LoginComponent {
   error = signal<string>(null);
   authError = signal<string>(null);
   
-  formState = signal<FormData>({
+  state = signal<LoginFormState>({
     type: 'LOGIN',
-    data: {
+    credentials: {
       email: '',
       password: '',
       displayName: ''
     },
   });
   
-  isLoginForm = computed(() => this.formState().type === 'LOGIN');
-  isSignUpForm = computed(() => this.formState().type === 'SIGN_UP');
-  isResetPasswordForm = computed(() => this.formState().type === 'RESET_PASSWORD');
+  isLoginForm = computed(() => this.state().type === 'LOGIN');
+  isSignUpForm = computed(() => this.state().type === 'SIGN_UP');
+  isResetPasswordForm = computed(() => this.state().type === 'RESET_PASSWORD');
+  
   heading = computed(() => {
-    return this.formState().type === 'RESET_PASSWORD' ? 'Reset password' :
-      this.formState().type === 'SIGN_UP' ? 'Create new account' : 
-      this.formState().type === 'LOGIN' ? 'Login' : null;
+    return this.state().type === 'RESET_PASSWORD' ? 'Reset password' :
+      this.state().type === 'SIGN_UP' ? 'Create new account' : 
+      this.state().type === 'LOGIN' ? 'Login' : null;
   });
 
   async submit() {
     try {
-      switch (this.formState().type) {
-        case 'LOGIN': await this.auth.login(this.formState().data);
+      switch (this.state().type) {
+        case 'LOGIN': 
+          await this.auth.login(this.state().credentials);
           break;
-        case 'SIGN_UP': await this.auth.signUp(this.formState().data);
+        case 'SIGN_UP': 
+          await this.auth.signUp(this.state().credentials);
           break;
-        case 'RESET_PASSWORD': await this.auth.resetPassword(this.formState().data);
+        case 'RESET_PASSWORD': 
+          await this.auth.resetPassword(this.state().credentials);
           break;
       }
     } catch (e) {
@@ -66,12 +63,11 @@ export default class LoginComponent {
   }
   
   async socialLogin(providerName: OAuthProviderName): Promise<void> {
-    await this.auth.socialLogin(providerName)
-      .catch(e => this.authError.set(e.message));
+    await this.auth.socialLogin(providerName).catch(e => this.authError.set(e.message));
   }
 
-  setFormType(type: FormType) {
-    this.formState.update(value => {
+  setFormType(type: LoginFormType) {
+    this.state.update(value => {
       return { ...value, type };
     });
   }
