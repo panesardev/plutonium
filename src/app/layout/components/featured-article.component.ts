@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Article } from '../../types/article.interface';
@@ -47,6 +47,6 @@ export class FeaturedArticleComponent {
 
   @Input({ required: true }) article: Article;
 
-  // article = input.required();
+  // article = input.required<Article>();
 
 }

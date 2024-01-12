@@ -2,10 +2,9 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import frontmatter from 'front-matter';
 import { Observable, map, zip } from "rxjs";
-import { sortArticles } from "../utilities/functions";
 import { environment } from "../../environments/environment";
 import { SLUGS, FEATURED_SLUG } from '../app.constants';
-import { Article } from "../types/article.interface";
+import { Article, sortArticles } from "../types/article.interface";
 
 @Injectable({ providedIn: 'root' })
 export class ArticleService {

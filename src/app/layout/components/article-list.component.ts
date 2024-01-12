@@ -37,6 +37,6 @@ export class ArticleListComponent {
 
   @Input({ required: true }) articles: Article[];
 
-  // articles = input.required();
+  // articles = input.required<Article[]>();
 
 }

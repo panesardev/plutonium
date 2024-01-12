@@ -20,6 +20,6 @@ export class HashtagListComponent {
 
   @Input({ required: true }) hashtags: string[];
 
-  // hashtags = input.required();
+  // hashtags = input.required<string[]>();
 
 }

@@ -75,10 +75,8 @@
           </div>
         </div>
         <div class="min-w-0">
-          <img class="mb-10 md:rounded-md" [ngSrc]="article.coverUrl" priority alt="article_cover" height="90" width="60  ">
-          <div class="px-4 md:px-0">
-            <app-render-markdown [markdown]="article.markdown" (tableOfContents)="tableOfContents.set($event)"/>
-          </div>
+          <img class="mb-10 md:rounded-md" ngSrc="/content/{{ article.slug }}/img/cover_800x450.webp" priority alt="article_cover" width="800" height="450">
+          <app-render-markdown [markdown]="article.markdown" (tableOfContents)="tableOfContents.set($event)"/>
         </div>
       </div>
     </section>  

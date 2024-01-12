@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
@@ -42,6 +42,7 @@ export class SaveButtonComponent {
   private userService = inject(UserService);
 
   @Input({ required: true }) slug: string;
+  // slug = input.required<string>();
 
   user$ = this.auth.user$;
   

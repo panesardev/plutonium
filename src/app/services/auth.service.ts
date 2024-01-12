@@ -3,9 +3,8 @@ import { Auth, authState, createUserWithEmailAndPassword, getAdditionalUserInfo,
 import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable, map, of, switchMap } from 'rxjs';
-import { Credentials, OAuthProviderName } from '../types/auth.interface';
+import { Credentials, OAuthProviderName, getAuthProvider } from '../types/auth.interface';
 import { User, UserData } from '../types/user.interface';
-import { getAuthProvider } from '../utilities/functions';
  
 @Injectable({ providedIn: 'root' })
 export class AuthService {
