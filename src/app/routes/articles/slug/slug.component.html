@@ -65,10 +65,10 @@
               <h1 class="text-primary text-2xl pb-2 mb-3 border-b-2 border-slate-100">Contents</h1>
               @for (toc of tableOfContents(); track toc.id) {
                 <div>
-                  <a class="block rounded-md py-2 hover:pl-4 hover:bg-base-200 transition-spacing"
+                  <span class="block rounded-md py-2 hover:pl-4 hover:bg-base-200 text-primary cursor-pointer transition-spacing"
                     (click)="scroll(toc.id)">
                     {{ toc.text }}
-                  </a>
+                  </span> 
                 </div>
               }
             </div>
