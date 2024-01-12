@@ -5,6 +5,6 @@ import { inject as injectAnalytics } from '@vercel/analytics';
 import { injectSpeedInsights } from '@vercel/speed-insights';
 
 injectAnalytics({ mode: 'auto' });
-injectSpeedInsights({ debug: false });
+injectSpeedInsights({ debug: true });
 
 bootstrapApplication(AppComponent, appConfig);

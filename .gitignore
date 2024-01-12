@@ -37,7 +37,6 @@ yarn-error.log
 testem.log
 /typings
 todo.md
-process-images.js
 
 # System files
 .DS_Store

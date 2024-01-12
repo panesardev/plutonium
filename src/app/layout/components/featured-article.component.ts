@@ -20,7 +20,7 @@ import { FallbackImageDirective } from '../../utilities/image.directive';
         <span>Featured</span>
       </h1>
       <div class="grid md:grid-cols-[400px_1fr] gap-5 md:gap-8 mb-10">
-        <img ngSrc="/content/{{ article.slug }}/img/cover_800x450.webp" class="rounded-lg" alt="cover" height="450" width="800" priority>
+        <img ngSrc="/content/{{ article.slug }}/img/cover_800x450.webp" class="rounded-lg" alt="cover" width="800" height="450" priority>
         <div class="flex flex-col justify-between">
           <div>
             <h1 class="font-bold text-2xl md:text-3xl text-primary mb-5">{{ article.title }}</h1>

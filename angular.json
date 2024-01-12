@@ -36,7 +36,7 @@
             "assets": [
               "src/content",
               "src/assets",
-              "src/robots.txt"
+              "src/assets/robots.txt"
             ],
             "styles": [
               "src/styles/index.scss"
