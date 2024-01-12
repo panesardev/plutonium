@@ -21,11 +21,11 @@ const sizes = [
 ];
 
 async function main() {
-  await removeWebps();
-  await generateWebps();
+  await remove();
+  await generate();
 }
 
-async function generateWebps() {
+async function generate() {
   for (const path of paths) {
     for (const { width, height } of sizes) {
       const selectPath = `${path}/cover.png`;
@@ -35,11 +35,13 @@ async function generateWebps() {
         .resize({ width, height })
         .webp({ lossless: true })
         .toFile(exportPath);
+      
+      console.log(`Image generated: ${exportPath}`);
     }
   }
 }
 
-async function removeWebps() {
+async function remove() {
   for (const path of paths) {
     for (const size of sizes) {
       const removeImagePath = `${path}/cover_${size.width}x${size.height}.webp`;
