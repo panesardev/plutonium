@@ -4,7 +4,7 @@
   "scripts": {
     "start": "node dist/application/server/server.mjs",
     "dev": "ng serve",
-    "build": "ng build",
+    "build": "yarn process-images && ng build",
     "process-images": "node scripts/process-images.js",
     "git": "git add . && git commit -m refactor"
   },
