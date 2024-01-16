@@ -27,7 +27,7 @@
     "front-matter": "^4.0.2",
     "marked": "9.0.0",
     "ngx-markdown": "^17.1.1",
-    "ngxtension": "^1.7.0",
+    "ngxtension": "^1.9.9",
     "prismjs": "^1.29.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
