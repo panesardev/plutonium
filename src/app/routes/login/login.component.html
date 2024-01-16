@@ -6,7 +6,7 @@
     <div class="grid gap-5 lg:w-96 md:ml-auto">
       @defer {
         @if (user(); as user) {
-          <div class="alert alert-primary cursor-pointer hover-dim" routerLink="/dashboard">
+          <div class="flex items-center gap-4 px-4 py-4 rounded-full select-none bg-primary text-base-100 cursor-pointer hover-dim" routerLink="/dashboard">
             <img [src]="user.photoURL" alt="user" class="rounded-full w-8 h-8" fallbackImage="/assets/img/user.png">
             <span>Logged in as {{ user.displayName }}</span>
           </div>
@@ -14,8 +14,8 @@
       }
       
       @if (error()) {
-        <div class="alert alert-error alert-close" (click)="error.set(null)">
-          <div class="alert-icon text-error">
+        <div class="flex items-center gap-4 px-4 py-4 rounded-full select-none bg-error text-base-100 cursor-pointer" (click)="error.set(null)">
+          <div class="flex justify-center items-center bg-base-100 w-10 h-8 rounded-full text-error">
             <i class="close-icon"></i>
           </div>
           <span>{{ error() }}</span>
@@ -24,21 +24,21 @@
 
       <form (ngSubmit)="submit()" class="grid gap-5">
         @if (isSignUpForm()) {
-          <div class="input">
-            <label for="email">Enter full name</label>
-            <input type="text" name="displayName" [(ngModel)]="state().credentials.displayName" placeholder="John Wick">
+          <div class="grid gap-3">
+            <label class="select-none" for="email">Enter full name</label>
+            <input class="custom-shadow px-5 py-3 rounded placeholder:text-primary placeholder:opacity-50 placeholder:select-none" type="text" name="displayName" [(ngModel)]="state().credentials.displayName" placeholder="John Wick">
           </div>
         }
 
-        <div class="input">
-          <label for="email">Enter email</label>
-          <input type="email" name="email" [(ngModel)]="state().credentials.email" placeholder="john.wick@example.com">
+        <div class="grid gap-3">
+          <label class="select-none" for="email">Enter email</label>
+          <input class="custom-shadow px-5 py-3 rounded placeholder:text-primary placeholder:opacity-50 placeholder:select-none" type="email" name="email" [(ngModel)]="state().credentials.email" placeholder="john.wick@example.com">
         </div>
         
         @if (isLoginForm() || isSignUpForm()) {
-          <div class="input">
-            <label for="email">Enter password</label>
-            <input type="password" name="password" [(ngModel)]="state().credentials.password" placeholder="password">
+          <div class="grid gap-3">
+            <label class="select-none" for="email">Enter password</label>
+            <input class="custom-shadow px-5 py-3 rounded placeholder:text-primary placeholder:opacity-50 placeholder:select-none" type="password" name="password" [(ngModel)]="state().credentials.password" placeholder="password">
           </div>
         }
 
@@ -78,8 +78,8 @@
           
         @if (authError()) {
           <div (click)="authError.set(null)">
-            <div class="alert alert-error alert-close">
-              <div class="alert-icon text-error">
+            <div class="flex items-center gap-4 px-4 py-4 rounded-full select-none bg-error text-base-100 cursor-pointer">
+              <div class="flex justify-center items-center bg-base-100 w-10 h-8 rounded-full text-error">
                 <i class="close-icon"></i>
               </div>
               <span>{{ authError() }}</span>

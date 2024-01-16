@@ -1,5 +1,3 @@
-export const FEATURED_SLUG = 'integrating-firebase-into-angular';
-
 export const SLUGS = [
   'deploy-docker-image-on-heroku',
   'integrating-firebase-into-angular',
@@ -8,8 +6,10 @@ export const SLUGS = [
   'simplified-http-services-with-typescript',
   'using-rxjs-with-react',
   'using-typescript-with-express',
-  'deploy-angular-universal-to-vercel'
+  'deploy-angular-universal-to-vercel',
 ];
+
+export const FEATURED_SLUG = SLUGS[1];
 
 export const SOCIAL = {
   instagram: 'https://www.instagram.com/panesarpbx8/',

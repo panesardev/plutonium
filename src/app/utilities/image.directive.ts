@@ -5,13 +5,13 @@ import { Directive, ElementRef, HostListener, Input, inject } from "@angular/cor
   standalone: true,
 })
 export class FallbackImageDirective {
-  private element = inject(ElementRef);
+  private hostRef = inject(ElementRef);
 
   @Input({ required: true }) fallbackImage: string;
 
   @HostListener('error')
   onError() {
-    this.element.nativeElement.src = this.fallbackImage;
+    this.hostRef.nativeElement.src = this.fallbackImage;
   }
 }
 

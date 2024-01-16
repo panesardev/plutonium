@@ -19,11 +19,10 @@
 }
 
 body {
-  @apply bg-base-200 text-slate-900;
   font-family: 'Raleway', sans-serif;
 }
 
-h1, h2, p, div {
+h1, h2, p, div, input {
   @apply selection:bg-primary selection:text-neutral;
 }
 

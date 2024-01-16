@@ -1,8 +1,6 @@
 .btn {
   @apply flex gap-4 justify-center items-center px-8 py-3 rounded-full transition-opacity;
 
-  // box-shadow: 0 0 25px var(--shadow);
-
   &:hover {
     @apply opacity-90;
   }
@@ -30,44 +28,6 @@
   
   &-error {
     @apply bg-error text-base-100;
-  }
-}
-
-.alert {
-  @apply flex items-center gap-4 px-4 py-4 rounded-full select-none;
-
-  &-close {
-    @apply cursor-pointer;
-  }
-
-  &-icon {
-    @apply flex justify-center items-center bg-base-100 w-10 h-8 rounded-full;
-  }
-
-  &-primary {
-    @apply bg-primary text-base-100;
-  }
-
-  &-error {
-    @apply bg-error text-base-100;
-  }
-}
-
-.input {
-  @apply grid gap-3;
-
-  label {
-    @apply select-none;
-  } 
-  
-  input {
-    @apply px-5 py-3 rounded;
-
-    box-shadow: 0 0 25px var(--shadow);
-    
-    &::placeholder {
-      @apply text-primary opacity-50 select-none;
-    }
   }
 }
 
