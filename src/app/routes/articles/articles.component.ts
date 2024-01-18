@@ -1,8 +1,9 @@
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { computedFrom } from 'ngxtension/computed-from';
 import { ArticleListComponent } from '../../layout/components/article-list.component';
 import { FeaturedArticleComponent } from '../../layout/components/featured-article.component';
 import { ArticleService } from '../../services/article.service';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-articles',
@@ -19,7 +20,9 @@ export default class ArticlesComponent {
 
   private articleService = inject(ArticleService);
 
-  featured$ = this.articleService.featured$;
-  articles$ = this.articleService.articles$;
+  view = computedFrom({
+    articles: this.articleService.articles$,
+    featured: this.articleService.featured$,
+  }, { initialValue: null });
 
 }
