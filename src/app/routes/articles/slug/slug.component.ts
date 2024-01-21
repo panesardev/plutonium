@@ -1,6 +1,7 @@
-import { AsyncPipe, DOCUMENT, NgOptimizedImage } from '@angular/common';
+import { DOCUMENT, NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { computedAsync } from 'ngxtension/computed-async';
 import { injectParams } from 'ngxtension/inject-params';
 import { HashtagListComponent } from '../../../layout/components/hashtag-list.component';
 import { RenderMarkdownComponent } from '../../../layout/components/render-markdown.component';
@@ -13,7 +14,6 @@ import { FallbackImageDirective } from '../../../utilities/image.directive';
   selector: 'app-slug',
   standalone: true,
   imports: [
-    AsyncPipe,
     FallbackImageDirective,
     HashtagListComponent,
     NgOptimizedImage,
@@ -30,8 +30,10 @@ export default class SlugComponent {
   private document = inject(DOCUMENT);
   private slug = injectParams('slug');
 
-  article$ = this.articleService.findBySlug(this.slug());
-
+  article = computedAsync(() => 
+    this.articleService.findBySlug(this.slug())
+  );
+  
   tableOfContents = signal<Toc[]>([]);
 
   scroll(id: string): void {

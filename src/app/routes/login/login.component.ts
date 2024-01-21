@@ -63,7 +63,11 @@ export default class LoginComponent {
   }
   
   async socialLogin(providerName: OAuthProviderName): Promise<void> {
-    await this.auth.socialLogin(providerName).catch(e => this.authError.set(e.message));
+    try {
+      await this.auth.socialLogin(providerName);
+    } catch (e) {
+      this.authError.set(e.message);
+    }
   }
 
   setFormType(type: LoginFormType) {

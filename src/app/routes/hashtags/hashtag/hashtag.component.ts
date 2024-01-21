@@ -1,5 +1,5 @@
-import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { computedAsync } from 'ngxtension/computed-async';
 import { injectParams } from 'ngxtension/inject-params';
 import { ArticleListComponent } from '../../../layout/components/article-list.component';
 import { ArticleService } from '../../../services/article.service';
@@ -9,7 +9,6 @@ import { ArticleService } from '../../../services/article.service';
   standalone: true,
   imports: [
     ArticleListComponent,
-    AsyncPipe,
   ],
   templateUrl: './hashtag.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -17,17 +16,10 @@ import { ArticleService } from '../../../services/article.service';
 export default class HashtagComponent {
 
   private articleService = inject(ArticleService);
-
   hashtag = injectParams('hashtag');
 
-  // articles = computedFrom(
-  //   [this.hashtag],
-  //   pipe(
-  //     switchMap(([ hashtag ]) => this.articleService.findAllByHashtag(hashtag)),
-  //     startWith([]),
-  //   ),
-  // );
-
-  articles$ = this.articleService.findAllByHashtag(this.hashtag());
+  articles = computedAsync(() => 
+    this.articleService.findAllByHashtag(this.hashtag())
+  );
 
 }

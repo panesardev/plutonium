@@ -1,7 +1,7 @@
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
-import { PreloadAllModules, provideRouter, withInMemoryScrolling, withPreloading } from '@angular/router';
+import { PreloadAllModules, provideRouter, withComponentInputBinding, withInMemoryScrolling, withPreloading } from '@angular/router';
 import { provideMarkdown } from 'ngx-markdown';
 import { routes } from './app.routes';
 import { provideFirebase } from './providers/firebase.provider';
@@ -11,6 +11,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withPreloading(PreloadAllModules),
+      withComponentInputBinding(),
       withInMemoryScrolling({
         scrollPositionRestoration: 'enabled',
       }),
@@ -19,5 +20,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideFirebase(),
     provideMarkdown(),
+    // ɵprovideZonelessChangeDetection(),
   ],
 };

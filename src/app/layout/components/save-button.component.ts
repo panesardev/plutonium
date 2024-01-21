@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
@@ -41,21 +41,20 @@ export class SaveButtonComponent {
   private auth = inject(AuthService);
   private userService = inject(UserService);
 
-  @Input({ required: true }) slug: string;
-  // slug = input.required<string>();
+  slug = input.required<string>();
 
   user$ = this.auth.user$;
   
   isArticleSaved$ = this.user$.pipe(
-    map(user => user.saved.includes(this.slug)),
+    map(user => user.saved.includes(this.slug())),
   );
   
   async saveArticle(user: User) {
-    await this.userService.saveArticle(user, this.slug);
+    await this.userService.saveArticle(user, this.slug());
   }
 
   async removeArticle(user: User) {
-    await this.userService.removeArticle(user, this.slug);
+    await this.userService.removeArticle(user, this.slug());
   }
 
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, Input, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, input } from '@angular/core';
 import { ModalService } from '../../services/modal.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { ModalService } from '../../services/modal.service';
   template: `
     <div class="{{ modal.isClosed() ? 'modal-overlay-out' : 'modal-overlay-in' }} fixed inset-0 z-[100] bg-[#d8f8f5df]"></div>
     <div class="{{ modal.isClosed() ? 'modal-out' : 'modal-in' }} fixed z-[101] inset-0 px-6 md:px-8 pt-9 md:pt-12">
-      <div class="bg-neutral rounded-lg p-6 md:p-8 mx-auto custom-shadow {{ width ? width : 'w-full' }} {{ height ? height : 'h-auto' }}">
+      <div class="bg-neutral rounded-lg p-6 md:p-8 mx-auto custom-shadow {{ width() ? width() : 'w-full' }} {{ height() ? height() : 'h-auto' }}">
         <ng-content />
       </div>
     </div>
@@ -19,8 +19,8 @@ export class BaseModalComponent {
   private cdr = inject(ChangeDetectorRef);
   readonly modal = inject(ModalService);
 
-  @Input() width: string;
-  @Input() height: string;
+  width = input<string>();
+  height = input<string>();
 
   constructor() {
     const listener = (e: any) => e.code === 'Escape' && this.modal.close();

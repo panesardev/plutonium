@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Output, ViewChild, inject, input } from '@angular/core';
 import { MarkdownComponent } from 'ngx-markdown';
 import { Toc, slugify } from '../../types/article.interface';
 
@@ -8,7 +8,7 @@ import { Toc, slugify } from '../../types/article.interface';
   imports: [MarkdownComponent],
   template: `
     <div #container>
-      <markdown class="markdown" [data]="markdown"/>
+      <markdown class="markdown" [data]="markdown()"/>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -18,8 +18,7 @@ export class RenderMarkdownComponent {
   private cdr = inject(ChangeDetectorRef);
 
   @ViewChild('container') container: ElementRef<HTMLDivElement>;
-  @Input({ required: true }) markdown: string;
-  // markdown = input.required<string>();
+  markdown = input.required<string>();
   @Output() tableOfContents = new EventEmitter<Toc[]>();
 
   ngAfterViewInit(): void {

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Article } from '../../types/article.interface';
 import { HashtagListComponent } from './hashtag-list.component';
@@ -16,7 +16,7 @@ import { NgOptimizedImage } from '@angular/common';
   ],
   template: `
     <div class="grid md:grid-cols-2 lg:grid-cols-3 justify-center gap-6 md:gap-10 mx-auto max-w-5xl">
-      @for (article of articles; track article.slug) {
+      @for (article of articles(); track article.slug) {
         <div class="grid justify-between rounded-lg h-fit gap-4 md:gap-5 bg-neutral">
           <a routerLink="/articles/{{ article.slug }}">
             <img ngSrc="/content/{{ article.slug }}/img/cover_400x225.webp" [loading]="'lazy'" class="rounded-lg" [alt]="article.title" width="400" height="225">
@@ -37,8 +37,6 @@ import { NgOptimizedImage } from '@angular/common';
 })
 export class ArticleListComponent {
 
-  @Input({ required: true }) articles: Article[];
-
-  // articles = input.required<Article[]>();
+  articles = input.required<Article[]>();
 
 }

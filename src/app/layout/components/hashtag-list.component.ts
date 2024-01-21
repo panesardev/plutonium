@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -7,7 +7,7 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink],
   template: `
     <div class="flex justify-center gap-4 flex-wrap">
-      @for (hashtag of hashtags; track hashtag) {
+      @for (hashtag of hashtags(); track hashtag) {
         <button routerLink="/hashtags/{{ hashtag }}"class="btn btn-secondary btn-sm">
           {{ hashtag }}
         </button>
@@ -18,8 +18,6 @@ import { RouterLink } from '@angular/router';
 })
 export class HashtagListComponent {
 
-  @Input({ required: true }) hashtags: string[];
-
-  // hashtags = input.required<string[]>();
+  hashtags = input.required<string[]>();
 
 }

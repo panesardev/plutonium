@@ -26,19 +26,22 @@
         @if (isSignUpForm()) {
           <div class="grid gap-3">
             <label class="select-none" for="email">Enter full name</label>
-            <input class="custom-shadow px-5 py-3 rounded placeholder:text-primary placeholder:opacity-50 placeholder:select-none" type="text" name="displayName" [(ngModel)]="state().credentials.displayName" placeholder="John Wick">
+            <input type="text" name="displayName" [(ngModel)]="state().credentials.displayName" placeholder="John Wick" 
+              class="custom-shadow px-5 py-3 rounded placeholder:text-primary placeholder:opacity-50 placeholder:select-none">
           </div>
         }
 
         <div class="grid gap-3">
           <label class="select-none" for="email">Enter email</label>
-          <input class="custom-shadow px-5 py-3 rounded placeholder:text-primary placeholder:opacity-50 placeholder:select-none" type="email" name="email" [(ngModel)]="state().credentials.email" placeholder="john.wick@example.com">
+          <input type="email" name="email" [(ngModel)]="state().credentials.email" placeholder="john.wick@example.com"
+            class="custom-shadow px-5 py-3 rounded placeholder:text-primary placeholder:opacity-50 placeholder:select-none">
         </div>
         
         @if (isLoginForm() || isSignUpForm()) {
           <div class="grid gap-3">
             <label class="select-none" for="email">Enter password</label>
-            <input class="custom-shadow px-5 py-3 rounded placeholder:text-primary placeholder:opacity-50 placeholder:select-none" type="password" name="password" [(ngModel)]="state().credentials.password" placeholder="password">
+            <input type="password" name="password" [(ngModel)]="state().credentials.password" placeholder="password"
+              class="custom-shadow px-5 py-3 rounded placeholder:text-primary placeholder:opacity-50 placeholder:select-none">
           </div>
         }
 
