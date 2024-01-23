@@ -5,7 +5,7 @@
     "start": "node dist/application/server/server.mjs",
     "dev": "ng serve",
     "build": "ng build",
-    "process-images": "node scripts/process-images.js",
+    "process-images": "node process-images.js",
     "git": "git add . && git commit -m refactor",
     "deploy": "yarn process-images && git push origin master"
   },
