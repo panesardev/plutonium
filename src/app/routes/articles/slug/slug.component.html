@@ -50,13 +50,10 @@
             @defer {
               <app-save-button [slug]="slug()"/>
             }
-            @placeholder (minimum 300ms) { 
-              <div class="flex justify-center">
-                <div class="loading scale-75"></div>
-              </div>
-            }
-            @error {
-              <p>!ERROR</p>
+            @placeholder { 
+              <button class="btn btn-primary rounded md:w-full" routerLink="/login">
+                Login to save
+              </button>
             }
           </div>
           <div class="relative md:sticky md:top-28 h-min">
@@ -72,6 +69,11 @@
                     </span> 
                   </div>
                 }
+              </div>
+            }
+            @placeholder {
+              <div class="flex justify-center">
+                <div class="loading"></div>
               </div>
             }
           </div>
