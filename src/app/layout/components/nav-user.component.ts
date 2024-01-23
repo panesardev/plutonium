@@ -8,12 +8,12 @@ import { AsyncPipe } from '@angular/common';
   selector: 'app-nav-user',
   standalone: true,
   imports: [
+    AsyncPipe,
     FallbackImageDirective,
     RouterLink,
-    AsyncPipe,
   ],
   template: `
-    @if (user$ | async; as user) {
+    @if (auth.user$ | async; as user) {
       <a routerLink="/dashboard">
         <img class="rounded-full w-8 md:w-10" 
           [src]="user.photoURL" 
@@ -31,8 +31,6 @@ import { AsyncPipe } from '@angular/common';
 })
 export class NavUserComponent {
 
-  private auth = inject(AuthService);
+  readonly auth = inject(AuthService);
 
-  user$ = this.auth.user$;
-  
 }

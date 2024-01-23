@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { computedAsync } from 'ngxtension/computed-async';
 import { HashtagListComponent } from '../../layout/components/hashtag-list.component';
-import { ArticleService } from '../../services/article.service';
+import { ContentService } from '../../services/content.service';
 
 @Component({
   selector: 'app-hashtags',
@@ -16,8 +16,8 @@ import { ArticleService } from '../../services/article.service';
 })
 export default class HashtagsComponent {
 
-  private articleService = inject(ArticleService);
+  private content = inject(ContentService);
 
-  hashtags = computedAsync(() => this.articleService.hashtags$);
+  hashtags = computedAsync(() => this.content.hashtags$);
 
 }

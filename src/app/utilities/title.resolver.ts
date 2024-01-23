@@ -1,7 +1,7 @@
 import { ActivatedRouteSnapshot, ResolveFn } from "@angular/router";
-import { ArticleService } from "../services/article.service";
 import { inject } from "@angular/core";
 import { map } from "rxjs";
+import { ContentService } from "../services/content.service";
 
 // resolve title for /hashtags/:hashtag
 export const hashtagTitleResolver: ResolveFn<string> = (route: ActivatedRouteSnapshot) => {
@@ -14,7 +14,7 @@ export const hashtagTitleResolver: ResolveFn<string> = (route: ActivatedRouteSna
 // resolve title for /articles/:slug
 export const slugTitleResolver: ResolveFn<string> = (route: ActivatedRouteSnapshot) => {
   const slug = route.paramMap.get('slug');
-  return inject(ArticleService).findBySlug(slug).pipe(
+  return inject(ContentService).findBySlug(slug).pipe(
     map(article => `${article.title} - Plutonium`),
   );
 }

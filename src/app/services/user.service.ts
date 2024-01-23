@@ -1,18 +1,18 @@
 import { Injectable, inject } from "@angular/core";
 import { catchError, map, of, switchMap, zip } from "rxjs";
 import { User } from "../types/user.interface";
-import { ArticleService } from "./article.service";
 import { AuthService } from "./auth.service";
+import { ContentService } from "./content.service";
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
   private auth = inject(AuthService);
-  private articleService = inject(ArticleService);
+  private content = inject(ContentService);
 
   savedArticles$ = this.auth.user$.pipe(
     map(user => user.saved),
-    map(slugs => slugs.map(slug => this.articleService.findBySlug(slug))),
+    map(slugs => slugs.map(slug => this.content.findBySlug(slug))),
     switchMap(list => list.length ? zip(list) : of([])),
     catchError(() => of([])),
   );

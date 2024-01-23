@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { computedAsync } from 'ngxtension/computed-async';
 import { FeaturedArticleComponent } from '../../layout/components/featured-article.component';
-import { ArticleService } from '../../services/article.service';
 import { AuthService } from '../../services/auth.service';
+import { ContentService } from '../../services/content.service';
 
 @Component({
   selector: 'app-index',
@@ -18,9 +18,9 @@ import { AuthService } from '../../services/auth.service';
 export default class IndexComponent {
 
   private auth = inject(AuthService);
-  private articleService = inject(ArticleService);
+  private content = inject(ContentService);
 
   user = computedAsync(() => this.auth.user$);
-  featured = computedAsync(() => this.articleService.featured$);
+  featured = computedAsync(() => this.content.featured$);
 
 }

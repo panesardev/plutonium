@@ -7,12 +7,14 @@ import { SLUGS, FEATURED_SLUG } from '../app.constants';
 import { Article, sortArticles } from "../types/article.interface";
 
 @Injectable({ providedIn: 'root' })
-export class ArticleService {
+export class ContentService {
 
   private http = inject(HttpClient);
    
   articles$ = zip(SLUGS.map(s => this.findBySlug(s))).pipe(map(sortArticles));
+
   featured$ = this.findBySlug(FEATURED_SLUG);
+  
   hashtags$ = this.articles$.pipe(
     // extract hashtags from all articles into a single array
     map(articles => [].concat(...articles.map(a => a.hashtags))),

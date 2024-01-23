@@ -1,8 +1,9 @@
 <section>
   <div class="px-4 md:px-8 mb-12">
-    <app-featured-article [article]="featured()"/>
+    @if (featured(); as featured) {
+      <app-featured-article [article]="featured"/>
+    }
   </div>
-
 
   @defer {
     @if (user(); as user) {

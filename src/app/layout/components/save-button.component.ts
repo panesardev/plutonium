@@ -15,7 +15,7 @@ import { AsyncPipe } from '@angular/common';
   ],
   template: `
     <div class="flex justify-center">
-      @if (user$ | async; as user) {
+      @if (auth.user$ | async; as user) {
         @if (isArticleSaved$ | async) {
           <button class="btn btn-error rounded md:w-full" (click)="removeArticle(user)">
             Remove saved 
@@ -38,14 +38,12 @@ import { AsyncPipe } from '@angular/common';
 })
 export class SaveButtonComponent {
 
-  private auth = inject(AuthService);
-  private userService = inject(UserService);
+  readonly auth = inject(AuthService);
+  readonly userService = inject(UserService);
 
   slug = input.required<string>();
 
-  user$ = this.auth.user$;
-  
-  isArticleSaved$ = this.user$.pipe(
+  isArticleSaved$ = this.auth.user$.pipe(
     map(user => user.saved.includes(this.slug())),
   );
   

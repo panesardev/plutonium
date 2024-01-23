@@ -44,7 +44,7 @@
         </div>
       </div>
       
-      <div class="grid md:grid-cols-[300px_1fr] md:gap-10 max-w-6xl mx-auto px-4 md:px-8">
+      <div class="grid md:grid-cols-[300px_1fr] md:gap-10 max-w-6xl mx-auto md:px-8">
         <div>
           <div class="mb-8">
             @defer (on viewport; prefetch on idle) {
@@ -61,22 +61,26 @@
           </div>
           <div class="relative md:sticky md:top-28 h-min">
             <!-- table of contents -->
-            <div class="bg-neutral custom-shadow md:rounded-md p-5 md:p-7 w-full select-none">
-              <h1 class="text-primary text-2xl pb-2 mb-3 border-b-2 border-slate-100">Contents</h1>
-              @for (toc of tableOfContents(); track toc.id) {
-                <div>
-                  <span class="block rounded-md py-2 hover:pl-4 hover:bg-base-200 text-primary cursor-pointer transition-spacing"
-                    (click)="scroll(toc.id)">
-                    {{ toc.text }}
-                  </span> 
-                </div>
-              }
-            </div>
+            @defer {
+              <div class="bg-neutral custom-shadow md:rounded-md p-5 md:p-7 w-full select-none">
+                <h1 class="text-primary text-2xl pb-2 mb-3 border-b-2 border-slate-100">Contents</h1>
+                @for (toc of tableOfContents(); track toc.id) {
+                  <div>
+                    <span class="block rounded-md py-2 hover:pl-4 hover:bg-base-200 text-primary cursor-pointer transition-spacing"
+                      (click)="scroll(toc.id)">
+                      {{ toc.text }}
+                    </span> 
+                  </div>
+                }
+              </div>
+            }
           </div>
         </div>
         <div class="min-w-0">
           <img class="mb-10 md:rounded-md" ngSrc="/content/{{ article.slug }}/img/cover_800x450.webp" priority alt="article_cover" width="800" height="450">
-          <app-render-markdown [markdown]="article.markdown" (tableOfContents)="tableOfContents.set($event)"/>
+          <div class="px-4 md:px-0" #markdown>
+            <markdown class="markdown" [data]="article.markdown"/>
+          </div>
         </div>
       </div>
     </section>  

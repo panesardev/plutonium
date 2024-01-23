@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { computedAsync } from 'ngxtension/computed-async';
-import { injectParams } from 'ngxtension/inject-params';
 import { ArticleListComponent } from '../../../layout/components/article-list.component';
-import { ArticleService } from '../../../services/article.service';
+import { ContentService } from '../../../services/content.service';
 
 @Component({
   selector: 'app-hashtag',
@@ -14,12 +13,9 @@ import { ArticleService } from '../../../services/article.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class HashtagComponent {
+  private content = inject(ContentService);
 
-  private articleService = inject(ArticleService);
-  hashtag = injectParams('hashtag');
-
-  articles = computedAsync(() => 
-    this.articleService.findAllByHashtag(this.hashtag())
-  );
+  hashtag = input.required<string>();
+  articles = computedAsync(() => this.content.findAllByHashtag(this.hashtag()));
 
 }
