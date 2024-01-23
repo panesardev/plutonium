@@ -19,7 +19,7 @@ import { NgOptimizedImage } from '@angular/common';
       @for (article of articles(); track article.slug) {
         <div class="grid justify-between rounded-lg h-fit gap-4 md:gap-5 bg-neutral">
           <a routerLink="/articles/{{ article.slug }}">
-            <img ngSrc="/content/{{ article.slug }}/img/cover_400x225.webp" priority class="rounded-lg" [alt]="article.title" width="400" height="225">
+            <img ngSrc="/content/{{ article.slug }}/img/cover_400x225.webp" class="rounded-lg" [alt]="article.title" width="400" height="225">
           </a>
           <div class="px-4 md:px-6 pb-4 md:pb-6">
             <h1 class="text-xl text-primary font-bold mb-2">{{ article.title }}</h1>

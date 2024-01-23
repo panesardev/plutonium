@@ -1,4 +1,4 @@
-@if (view(); as view) {
+@if (view$ | async; as view) {
   <section class="px-4 md:px-8">
     <app-featured-article [article]="view.featured"/>
     

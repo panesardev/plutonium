@@ -1,5 +1,5 @@
 <section>
-  @if (view(); as view) {
+  @if (view$ | async; as view) {
     <h1 class="page-heading">Dashboard</h1>
     <div class="grid md:grid-cols-[1fr_3fr] gap-8 md:px-8 max-w-7xl mx-auto">
       @if (view.user; as user) {

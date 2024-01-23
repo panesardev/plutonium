@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import frontmatter from 'front-matter';
-import { Observable, map, zip } from "rxjs";
+import { Observable, map, take, zip } from "rxjs";
 import { environment } from "../../environments/environment";
 import { SLUGS, FEATURED_SLUG } from '../app.constants';
 import { Article, sortArticles } from "../types/article.interface";
@@ -10,7 +10,9 @@ import { Article, sortArticles } from "../types/article.interface";
 export class ContentService {
   private http = inject(HttpClient);
    
-  articles$ = zip(SLUGS.map(s => this.findBySlug(s))).pipe(map(sortArticles));
+  articles$ = zip(SLUGS.map(s => this.findBySlug(s))).pipe(
+    map(articles => sortArticles(articles)),
+  );
 
   featured$ = this.findBySlug(FEATURED_SLUG);
   
@@ -29,6 +31,7 @@ export class ContentService {
 
   findBySlug(slug: string): Observable<Article> {
     return this.fetchMarkdown(slug).pipe(
+      take(1),
       map(markdown => {
         const result = frontmatter<Article>(markdown);
         return {
