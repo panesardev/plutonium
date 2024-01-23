@@ -5,6 +5,6 @@
   </p>
 
   <div class="max-w-2xl mx-auto bg-neutral rounded-xl p-4 md:p-10">
-    <app-hashtag-list [hashtags]="hashtags()"/>
+    <app-hashtag-list [hashtags]="content.hashtags$ | async"/>
   </div>
 </section>

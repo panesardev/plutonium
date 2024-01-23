@@ -15,7 +15,7 @@ import { AsyncPipe } from '@angular/common';
   ],
   template: `
     <div class="flex justify-center">
-      @if (auth.user$ | async; as user) {
+      @if (user$ | async; as user) {
         @if (isArticleSaved$ | async) {
           <button class="btn btn-error rounded md:w-full" (click)="removeArticle(user)">
             Remove saved 
@@ -37,13 +37,13 @@ import { AsyncPipe } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SaveButtonComponent {
-
-  readonly auth = inject(AuthService);
-  readonly userService = inject(UserService);
+  private auth = inject(AuthService);
+  private userService = inject(UserService);
 
   slug = input.required<string>();
 
-  isArticleSaved$ = this.auth.user$.pipe(
+  user$ = this.auth.user$;
+  isArticleSaved$ = this.user$.pipe(
     map(user => user.saved.includes(this.slug())),
   );
   

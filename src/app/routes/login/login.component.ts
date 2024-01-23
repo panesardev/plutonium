@@ -2,37 +2,26 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { toLazySignal } from 'ngxtension/to-lazy-signal';
-import { LoginFormState, LoginFormType, OAuthProviderName } from '../../types/auth.interface';
 import { AuthService } from '../../services/auth.service';
-import { FallbackImageDirective } from '../../utilities/image.directive';
+import { LoginFormState, LoginFormType, OAuthProviderName, initialState } from '../../types/auth.interface';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     RouterLink,
-    FallbackImageDirective,
     FormsModule,
   ],
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class LoginComponent {
-
   private auth = inject(AuthService);
 
   user = toLazySignal(this.auth.user$);
+  state = signal<LoginFormState>(initialState);
   error = signal<string>(null);
   authError = signal<string>(null);
-  
-  state = signal<LoginFormState>({
-    type: 'LOGIN',
-    credentials: {
-      email: '',
-      password: '',
-      displayName: ''
-    },
-  });
   
   isLoginForm = computed(() => this.state().type === 'LOGIN');
   isSignUpForm = computed(() => this.state().type === 'SIGN_UP');

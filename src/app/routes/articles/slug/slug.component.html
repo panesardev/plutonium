@@ -47,8 +47,8 @@
       <div class="grid md:grid-cols-[300px_1fr] md:gap-10 max-w-6xl mx-auto md:px-8">
         <div>
           <div class="mb-8">
-            @defer (on viewport; prefetch on idle) {
-              <app-save-button [slug]="article.slug"/>
+            @defer {
+              <app-save-button [slug]="slug()"/>
             }
             @placeholder (minimum 300ms) { 
               <div class="flex justify-center">

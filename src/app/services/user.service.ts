@@ -6,11 +6,10 @@ import { ContentService } from "./content.service";
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-
   private auth = inject(AuthService);
   private content = inject(ContentService);
 
-  savedArticles$ = this.auth.user$.pipe(
+  articles$ = this.auth.user$.pipe(
     map(user => user.saved),
     map(slugs => slugs.map(slug => this.content.findBySlug(slug))),
     switchMap(list => list.length ? zip(list) : of([])),

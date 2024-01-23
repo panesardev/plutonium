@@ -8,7 +8,6 @@ import { User, UserData } from '../types/user.interface';
  
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-
   private auth = inject(Auth);
   private firestore = inject(Firestore);
   private router = inject(Router);

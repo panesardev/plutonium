@@ -10,14 +10,13 @@ import { ModalService } from '../services/modal.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalComponent {
-
-  private modalService = inject(ModalService);
+  private modal = inject(ModalService);
 
   @ViewChild('container', { read: ViewContainerRef }) 
   containerRef: ViewContainerRef;
 
   ngAfterViewInit(): void {
-    this.modalService.setContainerRef(this.containerRef);
+    this.modal.setContainerRef(this.containerRef);
   }
 
 }

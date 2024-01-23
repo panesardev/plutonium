@@ -58,14 +58,13 @@ import { SearchModalComponent } from './modals/search-modal.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarComponent {
-  
-  private modalService = inject(ModalService);
+  private modal = inject(ModalService);
   
   openSearchModal(): void {
-    this.modalService.open(SearchModalComponent);
+    this.modal.open(SearchModalComponent);
   }
 
   openNavModal(): void {
-    this.modalService.open(NavModalComponent);
+    this.modal.open(NavModalComponent);
   }
 }

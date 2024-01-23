@@ -1,6 +1,6 @@
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { computedAsync } from 'ngxtension/computed-async';
 import { FeaturedArticleComponent } from '../../layout/components/featured-article.component';
 import { AuthService } from '../../services/auth.service';
 import { ContentService } from '../../services/content.service';
@@ -9,6 +9,7 @@ import { ContentService } from '../../services/content.service';
   selector: 'app-index',
   standalone: true,
   imports: [
+    AsyncPipe,
     FeaturedArticleComponent,
     RouterLink,
   ],
@@ -16,11 +17,6 @@ import { ContentService } from '../../services/content.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class IndexComponent {
-
-  private auth = inject(AuthService);
-  private content = inject(ContentService);
-
-  user = computedAsync(() => this.auth.user$);
-  featured = computedAsync(() => this.content.featured$);
-
+  readonly auth = inject(AuthService);
+  readonly content = inject(ContentService);
 }

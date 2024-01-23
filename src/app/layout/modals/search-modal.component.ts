@@ -49,7 +49,6 @@ import { BaseModalComponent } from './base-modal.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchModalComponent extends Modal {
-
   private content = inject(ContentService);
 
   searchControl = new FormControl('');

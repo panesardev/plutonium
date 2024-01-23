@@ -16,15 +16,14 @@ import { UserService } from '../../services/user.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class DashboardComponent {
-
   private auth = inject(AuthService);
   private userService = inject(UserService);
   private modalService = inject(ModalService);
 
-  view = computedFrom({
+  readonly view = computedFrom({
     user: this.auth.user$,
-    savedArticles: this.userService.savedArticles$,
-  }, { initialValue: {} as any });
+    articles: this.userService.articles$,
+  }, { initialValue: null });
 
   openLogoutModal() {
     this.modalService.open(LogoutModalComponent);

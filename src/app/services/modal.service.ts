@@ -3,7 +3,6 @@ import { Modal } from '../types/modal.class';
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {
-
   private containerRef: ViewContainerRef;
   readonly isClosed = signal(true);
 

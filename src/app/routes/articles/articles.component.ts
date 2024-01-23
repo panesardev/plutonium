@@ -15,10 +15,9 @@ import { ContentService } from '../../services/content.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class ArticlesComponent {
-
   private content = inject(ContentService);
 
-  view = computedFrom({
+  readonly view = computedFrom({
     articles: this.content.articles$,
     featured: this.content.featured$,
   }, { initialValue: null });

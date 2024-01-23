@@ -30,7 +30,5 @@ import { AsyncPipe } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavUserComponent {
-
   readonly auth = inject(AuthService);
-
 }

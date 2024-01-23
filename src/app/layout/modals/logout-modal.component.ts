@@ -23,7 +23,6 @@ import { Modal } from '../../types/modal.class';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogoutModalComponent extends Modal {
-
   private auth = inject(AuthService);
 
   async logout() {

@@ -11,6 +11,15 @@ export interface LoginFormState {
   type: LoginFormType;
 }
 
+export const initialState: LoginFormState = {
+  type: 'LOGIN',
+  credentials: {
+    displayName: '',
+    email: '',
+    password: '',
+  },
+};
+
 export type LoginFormType = 'LOGIN' | 'SIGN_UP' | 'RESET_PASSWORD' ;
 
 export type OAuthProviderName = 'google' | 'github';

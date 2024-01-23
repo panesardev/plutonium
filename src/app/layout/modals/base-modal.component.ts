@@ -15,7 +15,6 @@ import { ModalService } from '../../services/modal.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BaseModalComponent {
-
   private cdr = inject(ChangeDetectorRef);
   readonly modal = inject(ModalService);
 

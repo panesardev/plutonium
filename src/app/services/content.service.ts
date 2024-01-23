@@ -8,7 +8,6 @@ import { Article, sortArticles } from "../types/article.interface";
 
 @Injectable({ providedIn: 'root' })
 export class ContentService {
-
   private http = inject(HttpClient);
    
   articles$ = zip(SLUGS.map(s => this.findBySlug(s))).pipe(map(sortArticles));

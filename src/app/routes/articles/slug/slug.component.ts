@@ -30,22 +30,24 @@ export default class SlugComponent {
   @ViewChild('markdown') markdownRef: ElementRef<HTMLDivElement>;
 
   slug = input.required<string>();
-  article = computedAsync(() => this.content.findBySlug(this.slug()));
+  article = computedAsync(() => 
+    this.content.findBySlug(this.slug()),
+  );
   tableOfContents = signal<Toc[]>([]);
 
   constructor() {
     afterRender(() => {
       if (this.markdownRef) {
         const headings = this.markdownRef.nativeElement.getElementsByTagName('h2');
-        let tableOfContents: Toc[] = [];
+        const list: Toc[] = [];
         for (let i = 0; i < headings.length; i++) {
           headings.item(i).id = slugify(headings.item(i).innerText);
-          tableOfContents.push({ 
+          list.push({ 
             id: headings.item(i).id, 
-            text: headings.item(i).innerText 
+            text: headings.item(i).innerText,
           });
         }
-        this.tableOfContents.set(tableOfContents);
+        this.tableOfContents.set(list);
       }
     });
   }

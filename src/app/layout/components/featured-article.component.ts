@@ -44,7 +44,5 @@ import { FallbackImageDirective } from '../../utilities/image.directive';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FeaturedArticleComponent {
-
   article = input.required<Article>();
-
 }
