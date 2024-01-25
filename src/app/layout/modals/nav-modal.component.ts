@@ -12,7 +12,7 @@ import { BaseModalComponent } from './base-modal.component';
     RouterLinkActive,
   ],
   template: `
-    <app-base-modal width="max-w-4xl">
+    <app-base-modal classes="max-w-4xl">
       <button class="btn btn-sm btn-error float-right" (click)="modal.close()">
         <i class="close-icon"></i>
       </button>

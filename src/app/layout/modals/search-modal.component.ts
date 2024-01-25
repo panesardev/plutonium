@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { map, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs';
 import { ContentService } from '../../services/content.service';
 import { Article } from '../../types/article.interface';
 import { Modal } from '../../types/modal.class';
@@ -18,7 +18,7 @@ import { BaseModalComponent } from './base-modal.component';
     RouterLink,
   ],
   template: `
-    <app-base-modal width="max-w-4xl">
+    <app-base-modal classes="max-w-4xl">
       <button class="btn btn-sm btn-error float-right" (click)="modal.close()">
         <i class="close-icon"></i>
       </button> 
@@ -53,7 +53,10 @@ export class SearchModalComponent extends Modal {
 
   searchControl = new FormControl('');
 
-  search$ = this.searchControl.valueChanges;
+  search$ = this.searchControl.valueChanges.pipe(
+    debounceTime(300),
+    distinctUntilChanged(),
+  );
 
   articles$ = this.search$.pipe(
     switchMap(search => 
@@ -65,9 +68,14 @@ export class SearchModalComponent extends Modal {
   
 }
 
+// function searchFn(search: string, article: Article): boolean {
+//   if (search === '') return false;
+//   return article.title.includes(search) ||
+//     article.description.includes(search) ||
+//     article.hashtags.includes(search);
+// }
+
 function searchFn(search: string, article: Article): boolean {
-  if (search === '') return false;
-  return article.title.includes(search) ||
-    article.description.includes(search) ||
-    article.hashtags.includes(search);
+  const searchIn = ['title', 'description', 'hashtags'];
+  return searchIn.some(key => article[key].includes(search));
 }

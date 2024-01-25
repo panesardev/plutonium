@@ -47,7 +47,8 @@ export default class SlugComponent {
             text: headings.item(i).innerText,
           });
         }
-        this.tableOfContents.set(list);
+        // fix expression has changed after it was checked
+        setTimeout(() => this.tableOfContents.set(list), 0);
       }
     });
   }
@@ -60,3 +61,4 @@ export default class SlugComponent {
   }
   
 }
+

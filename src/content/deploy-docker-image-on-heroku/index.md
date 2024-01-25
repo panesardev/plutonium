@@ -15,9 +15,9 @@ authorLink: https://panesarpbx8.vercel.app
 
 The most important file for docker image that defines instructions how to deploy an application. For this tutorial, I will be using a Angular project but this method can be applied to pretty much any node.js application. First create a `Dockerfile` in root directory of the project.
 
-{{< highlight css >}}
+```css
 $ touch Dockerfile
-{{</ highlight >}}
+```
 
 ## Dockerfile instructions
 

@@ -10,7 +10,7 @@ import { Modal } from '../../types/modal.class';
     BaseModalComponent,
   ],
   template: `
-    <app-base-modal width="w-full md:w-[400px]">
+    <app-base-modal classes="w-full md:w-[400px]">
       <h1 class="font-bold text-center text-2xl text-error mb-4">Are you sure?</h1>
       <p class="text-lg text-center mb-6">You will be logged out!</p>
 
