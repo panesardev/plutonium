@@ -68,14 +68,11 @@ export class SearchModalComponent extends Modal {
   
 }
 
-// function searchFn(search: string, article: Article): boolean {
-//   if (search === '') return false;
-//   return article.title.includes(search) ||
-//     article.description.includes(search) ||
-//     article.hashtags.includes(search);
-// }
-
-function searchFn(search: string, article: Article): boolean {
-  const searchIn = ['title', 'description', 'hashtags'];
-  return searchIn.some(key => article[key].includes(search));
+function searchFn(text: string, article: Article): boolean {
+  const searchIn = [
+    article.title,
+    article.description,
+    article.hashtags,
+  ];
+  return searchIn.some(value => value.includes(text));
 }

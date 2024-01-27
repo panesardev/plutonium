@@ -19,9 +19,9 @@ export interface Toc {
 }
 
 export function sortArticles(articles: Article[]) {
-  return articles.sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-  );
+  return articles.sort((a, b) => {
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  });
 }
 
 export function slugify(heading: string) {

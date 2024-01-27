@@ -28,5 +28,3 @@
 /not-found
 
 /login
-
-/dashboard

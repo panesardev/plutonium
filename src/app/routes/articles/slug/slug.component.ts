@@ -30,9 +30,9 @@ export default class SlugComponent {
   @ViewChild('markdown') markdownRef: ElementRef<HTMLDivElement>;
 
   slug = input.required<string>();
-  article = computedAsync(() => 
-    this.content.findBySlug(this.slug()),
-  );
+
+  article = computedAsync(() => this.content.findBySlug(this.slug()));
+  
   tableOfContents = signal<Toc[]>([]);
 
   constructor() {
