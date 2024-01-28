@@ -1,12 +1,12 @@
 <section>
   <div class="px-4 md:px-8 mb-12">
-    @if (content.featured$ | async; as article) {
+    @if (featured(); as article) {
       <app-featured-article [article]="article"/>
     }
   </div>
 
   @defer {
-    @if (auth.user$ | async; as user) {
+    @if (user(); as user) {
       <div class="bg-neutral max-w-md mx-auto p-6 md:p-8 md:rounded-md custom-shadow">
         <h1 class="font-bold text-center text-2xl flex gap-2 mb-4">
           <span>Welcome</span>
