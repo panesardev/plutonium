@@ -4,7 +4,7 @@ import frontmatter from 'front-matter';
 import { Observable, map, take, zip } from "rxjs";
 import { environment } from "../../environments/environment";
 import { SLUGS, FEATURED_SLUG } from '../app.constants';
-import { Article, sortArticles } from "../types/article.interface";
+import { Article, Toc, sortArticles } from "../types/article.interface";
 
 @Injectable({ providedIn: 'root' })
 export class ContentService {
@@ -42,6 +42,10 @@ export class ContentService {
         };
       }),
     );
+  }
+
+  findTableOfContents(markdown: string) {
+    markdown.split('\n').forEach(console.log);
   }
 
   findAllByHashtag(hashtag: string): Observable<Article[]> {

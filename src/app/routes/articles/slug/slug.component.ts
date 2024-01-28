@@ -35,6 +35,10 @@ export default class SlugComponent {
   
   tableOfContents = signal<Toc[]>([]);
 
+  ngOnInit() {
+    this.content.findTableOfContents(this.article().markdown);
+  }
+
   constructor() {
     afterRender(() => {
       if (this.markdownRef) {
