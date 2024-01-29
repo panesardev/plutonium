@@ -6,6 +6,8 @@ export interface Credentials {
   password?: string;
 }
 
+export type LoginFormType = 'LOGIN' | 'SIGN_UP' | 'RESET_PASSWORD' ;
+
 export interface LoginFormState {
   credentials: Credentials;
   type: LoginFormType;
@@ -19,8 +21,6 @@ export const initialState: LoginFormState = {
     password: '',
   },
 };
-
-export type LoginFormType = 'LOGIN' | 'SIGN_UP' | 'RESET_PASSWORD' ;
 
 export type OAuthProviderName = 'google' | 'github';
 

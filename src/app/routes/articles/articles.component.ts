@@ -1,8 +1,23 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { computedFrom } from 'ngxtension/computed-from';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { ResolveFn } from '@angular/router';
 import { ArticleListComponent } from '../../layout/components/article-list.component';
 import { FeaturedArticleComponent } from '../../layout/components/featured-article.component';
 import { ContentService } from '../../services/content.service';
+import { Article } from '../../types/article.interface';
+import { view } from '../../utilities/view.operator';
+
+interface ArticlesView {
+  articles: Article[];
+  featured: Article;
+}
+
+export const articlesViewResolver: ResolveFn<ArticlesView> = () => {
+  const content = inject(ContentService);
+  return view<ArticlesView>({
+    articles: content.articles$,
+    featured: content.featured$,
+  });
+}
 
 @Component({
   selector: 'app-articles',
@@ -15,11 +30,5 @@ import { ContentService } from '../../services/content.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class ArticlesComponent {
-  private content = inject(ContentService);
-
-  view = computedFrom({
-    articles: this.content.articles$,
-    featured: this.content.featured$,
-  }, { initialValue: null });
-
+  view = input.required<ArticlesView>();
 }

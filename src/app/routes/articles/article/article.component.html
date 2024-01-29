@@ -1,4 +1,4 @@
-@if (article(); as article) {
+@if (view().article; as article) {
   <!-- metatags -->
   <meta name="title" [content]="article.title">
   <meta name="description" [content]="article.description">
@@ -44,11 +44,11 @@
         </div>
       </div>
       
-      <div class="grid md:grid-cols-[300px_1fr] md:gap-10 max-w-6xl mx-auto md:px-8">
+      <div class="grid md:grid-cols-[300px_1fr] md:gap-10 max-w-7xl mx-auto md:px-8">
         <div>
           <div class="mb-8">
             @defer {
-              <app-save-button [slug]="slug()"/>
+              <app-save-button [slug]="article.slug"/>
             }
             @placeholder { 
               <button class="btn btn-primary rounded md:w-full" routerLink="/login">

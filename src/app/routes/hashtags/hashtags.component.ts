@@ -1,7 +1,17 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { ResolveFn } from '@angular/router';
 import { HashtagListComponent } from '../../layout/components/hashtag-list.component';
 import { ContentService } from '../../services/content.service';
-import { computedAsync } from 'ngxtension/computed-async';
+import { view } from '../../utilities/view.operator';
+
+interface HashtagsView {
+  hashtags: string[];
+}
+
+export const hashtagsViewResolver: ResolveFn<HashtagsView> = () => {
+  const content = inject(ContentService);
+  return view({ hashtags: content.hashtags$ });
+}
 
 @Component({
   selector: 'app-hashtags',
@@ -13,7 +23,5 @@ import { computedAsync } from 'ngxtension/computed-async';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class HashtagsComponent {
-  private content = inject(ContentService);
-
-  hashtags = computedAsync(() => this.content.hashtags$);
+  view = input.required<HashtagsView>();
 }

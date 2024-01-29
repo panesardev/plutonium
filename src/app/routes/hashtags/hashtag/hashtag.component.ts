@@ -2,6 +2,24 @@ import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core
 import { computedAsync } from 'ngxtension/computed-async';
 import { ArticleListComponent } from '../../../layout/components/article-list.component';
 import { ContentService } from '../../../services/content.service';
+import { view } from '../../../utilities/view.operator';
+import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
+import { Article } from '../../../types/article.interface';
+import { of } from 'rxjs';
+
+interface HashtagView {
+  hashtag: string;
+  articles: Article[];
+}
+
+export const hashtagViewResolver: ResolveFn<HashtagView> = (route: ActivatedRouteSnapshot) => {
+  const content = inject(ContentService);
+  const hashtag = route.paramMap.get('hashtag');
+  return view<HashtagView>({ 
+    hashtag: of(hashtag),
+    articles: content.findAllByHashtag(hashtag),
+  });
+}
 
 @Component({
   selector: 'app-hashtag',
@@ -13,12 +31,5 @@ import { ContentService } from '../../../services/content.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class HashtagComponent {
-  private content = inject(ContentService);
-
-  hashtag = input.required<string>();
-  
-  articles = computedAsync(() => 
-    this.content.findAllByHashtag(this.hashtag()),
-  );
-
+  view = input.required<HashtagView>();
 }

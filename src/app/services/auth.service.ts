@@ -4,7 +4,7 @@ import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable, map, of, switchMap } from 'rxjs';
 import { Credentials, OAuthProviderName, getAuthProvider } from '../types/auth.interface';
-import { User, UserData } from '../types/user.interface';
+import { User, UserData, newUserData } from '../types/user.interface';
  
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -24,8 +24,8 @@ export class AuthService {
     
     await Promise.all([
       updateProfile(credential.user, { displayName }),
-      this.setUser(credential.user),
-    ]); 
+      this.setUser(credential.user, newUserData),
+    ]);
 
     await this.router.navigateByUrl('/dashboard');
     // this.toast.success(`Welcome ${credential.user.displayName}`);
@@ -46,7 +46,7 @@ export class AuthService {
     const credential = await signInWithPopup(this.auth, provider);
 
     if (getAdditionalUserInfo(credential).isNewUser) {
-      await this.setUser(credential.user);
+      await this.setUser(credential.user, newUserData);
     }
 
     await this.router.navigateByUrl('/dashboard');
@@ -67,11 +67,8 @@ export class AuthService {
     // this.toast.success('You have been logged out!');
   }
   
-  async setUser(user: User, data?: UserData): Promise<void> {
-    await setDoc(
-      doc(this.firestore, `users/${user.uid}`), 
-      data ? { ...data } : { isPro: false, saved: [] },
-    );
+  async setUser(user: User, data: UserData): Promise<void> {
+    await setDoc(doc(this.firestore, `users/${user.uid}`), data);
   }
 
   getUser(user: User): Observable<User> {

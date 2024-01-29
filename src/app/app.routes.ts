@@ -1,22 +1,35 @@
 import { Routes } from '@angular/router';
-import IndexComponent from './routes/index/index.component';
-import { hashtagTitleResolver, slugTitleResolver } from './utilities/title.resolver';
+import IndexComponent, { indexViewResolver } from './routes/index/index.component';
+import { hashtagTitleResolver, articleTitleResolver } from './utilities/title.resolver';
+import { articleViewResolver } from './routes/articles/article/article.component';
+import { articlesViewResolver } from './routes/articles/articles.component';
+import { hashtagViewResolver } from './routes/hashtags/hashtag/hashtag.component';
+import { hashtagsViewResolver } from './routes/hashtags/hashtags.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: IndexComponent,
     title: 'Home - Plutonium',
+    resolve: {
+      view: indexViewResolver,
+    }
   },
   {
     path: 'articles',
     loadComponent: () => import('./routes/articles/articles.component'),
     title: 'Articles - Plutonium',
+    resolve: {
+      view: articlesViewResolver,
+    }
   },
   {
     path: 'articles/:slug',
-    loadComponent: () => import('./routes/articles/slug/slug.component'),
-    title: slugTitleResolver,
+    loadComponent: () => import('./routes/articles/article/article.component'),
+    title: articleTitleResolver,
+    resolve: {
+      view: articleViewResolver,
+    }
   },
   {
     path: 'dashboard',
@@ -27,11 +40,17 @@ export const routes: Routes = [
     path: 'hashtags',
     loadComponent: () => import('./routes/hashtags/hashtags.component'),
     title: 'Hashtags - Plutonium',
+    resolve: {
+      view: hashtagsViewResolver,
+    }
   },
   {
     path: 'hashtags/:hashtag',
     loadComponent: () => import('./routes/hashtags/hashtag/hashtag.component'),
     title: hashtagTitleResolver,
+    resolve: {
+      view: hashtagViewResolver,
+    }
   },
   {
     path: 'login',

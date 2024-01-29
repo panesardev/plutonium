@@ -6,3 +6,8 @@ export interface UserData {
   saved?: string[];
   isPro?: boolean;
 }
+
+export const newUserData: UserData = {
+  isPro: false,
+  saved: [],
+}
