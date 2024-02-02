@@ -13,9 +13,6 @@
           "changeDetection": "OnPush",
           "style": "scss",
           "skipTests": true
-        },
-        "@schematics/angular:service": {
-          "skipTests": true
         }
       },
       "root": "",
@@ -46,7 +43,9 @@
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-typescript.min.js"
             ],
-            "allowedCommonJsDependencies": ["*"],
+            "allowedCommonJsDependencies": [
+              "front-matter"
+            ],
             "server": "src/main.server.ts",
             "prerender": {
               "discoverRoutes": false,
