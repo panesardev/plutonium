@@ -4088,9 +4088,9 @@ ejs@^3.1.7:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.648:
-  version "1.4.654"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.654.tgz#65dc3cd96f8d2f8d7197492509cc9726782d6919"
-  integrity sha512-hjfFa+Vj4WGLRVTlCQa+IivBkpcp+boGxMQfusOC/me5Y5NfU4wX7wyw+K9p8Cw4tl0BVIZGH2n7y/jMc3w4pg==
+  version "1.4.655"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.655.tgz#112410db0d7f9c2b4ed8baa3b1b548522a6f89d4"
+  integrity sha512-2yszojF7vIZ68adIOvzV4bku8OZad9w5H9xF3ZAMZjPuOjBarlflUkjN6DggdV+L71WZuKUfKUhov/34+G5QHg==
 
 elkjs@^0.9.0:
   version "0.9.1"
@@ -6114,10 +6114,10 @@ ngx-markdown@^17.1.1:
     mermaid "^10.6.0"
     prismjs "^1.28.0"
 
-ngxtension@^1.12.0:
-  version "1.12.0"
-  resolved "https://registry.yarnpkg.com/ngxtension/-/ngxtension-1.12.0.tgz#90f9a142e976cf1fbd207d78c27c8e4d87300dd2"
-  integrity sha512-zcipEnzFV7BRhqFOFR5cFL4RXaR1L32+F4fZJ+IK07LpqoIwk5A4oXV433r3XhDh1q8FykKzGnhlE5FdmGDsSA==
+ngxtension@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ngxtension/-/ngxtension-2.0.0.tgz#a3d1995acefe6d2a1143d45bd4cb881c923f2f07"
+  integrity sha512-S/MJ2rifemopwmq4rexfWmxnURGZeBxUwivG6ymbLusHsfHuQo821RzMl+fmJwMr4Yt5nLwUsralM7Vipd7/nQ==
   dependencies:
     "@nx/devkit" "^17.0.0"
     nx "^17.0.0"

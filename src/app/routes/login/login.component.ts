@@ -1,9 +1,25 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { toLazySignal } from 'ngxtension/to-lazy-signal';
+import { computedAsync } from 'ngxtension/computed-async';
 import { AuthService } from '../../services/auth.service';
-import { LoginFormState, LoginFormType, OAuthProviderName, initialState } from '../../types/auth.interface';
+import { Credentials, OAuthProviderName } from '../../types/auth.interface';
+
+export type LoginFormType = 'LOGIN' | 'SIGN_UP' | 'RESET_PASSWORD' ;
+
+export interface LoginFormState {
+  credentials: Credentials;
+  type: LoginFormType;
+}
+
+export const initialState: LoginFormState = {
+  type: 'LOGIN',
+  credentials: {
+    displayName: '',
+    email: '',
+    password: '',
+  },
+};
 
 @Component({
   selector: 'app-login',
@@ -18,7 +34,8 @@ import { LoginFormState, LoginFormType, OAuthProviderName, initialState } from '
 export default class LoginComponent {
   private auth = inject(AuthService);
 
-  user = toLazySignal(this.auth.user$);
+  user = computedAsync(() => this.auth.user$);
+  
   state = signal<LoginFormState>(initialState);
   error = signal<string>(null);
   authError = signal<string>(null);
@@ -33,7 +50,7 @@ export default class LoginComponent {
       this.state().type === 'LOGIN' ? 'Login' : null;
   });
 
-  async submit() {
+  async submit(): Promise<void> {
     try {
       switch (this.state().type) {
         case 'LOGIN': 
@@ -59,7 +76,7 @@ export default class LoginComponent {
     }
   }
 
-  setFormType(type: LoginFormType) {
+  setFormType(type: LoginFormType): void {
     this.state.update(value => {
       return { ...value, type };
     });
