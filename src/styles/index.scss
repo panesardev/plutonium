@@ -2,28 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './icons.scss';
-@import './utilities.scss';
-@import './components.scss';
-@import './prism.scss';
 @import './animations.scss';
-
-:root {
-  --shadow: #155f750c;
-  --max-width: 1920px;
-}
-  
-* {
-  outline: none;
-  box-sizing: border-box;
-}
+@import './components.scss';
+@import './icons.scss';
+@import './prism.scss';
 
 body {
   font-family: 'Raleway', sans-serif;
-}
-
-h1, h2, p, div, input {
-  @apply selection:bg-primary selection:text-neutral;
 }
 
 header, button, img, svg {
@@ -39,6 +24,27 @@ img {
 
 a {
   @apply text-primary cursor-pointer;
+}
+
+.custom-shadow {
+  box-shadow: 0 0 25px #155f750c;
+}
+
+.max-width {
+  max-width: 1920px;
+}
+
+.page-heading {
+  @apply mt-5 mb-12 capitalize font-bold text-center text-4xl md:text-5xl text-primary select-none;
+  font-family: 'Lobster', sans-serif;
+}
+
+.hover-dim {
+  @apply transition-opacity;
+
+  &:hover {
+    opacity: .9;
+  }
 }
 
 // fonts
@@ -63,24 +69,18 @@ a {
   font-family: 'Lobster', sans-serif;
 }
 
-
 /* width */
 ::-webkit-scrollbar {
-  width: 2px;
-  height: 2px;
+  width: 0;
+  height: 0;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  @apply bg-secondary;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary;
+/* Change Autocomplete styles in Chrome */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  // border: 1px solid green;
+  -webkit-text-fill-color: hsl(186, 70%, 27%);
+  -webkit-box-shadow: 0 0 25px var(--shadow);
+  transition: background-color 5000s ease-in-out 0s;
 }

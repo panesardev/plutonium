@@ -2,15 +2,14 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import frontmatter from 'front-matter';
 import { Observable, map, take, zip } from "rxjs";
-import { environment } from "../../environments/environment";
-import { SLUGS, FEATURED_SLUG } from '../app.constants';
+import { SLUGS, FEATURED_SLUG, DOMAIN } from '../app.constants';
 import { Article, sortArticles } from "../types/article.interface";
 
 @Injectable({ providedIn: 'root' })
 export class ContentService {
   private http = inject(HttpClient);
    
-  articles$ = zip(SLUGS.map(s => this.findBySlug(s))).pipe(
+  articles$ = zip(SLUGS.map(slug => this.findBySlug(slug))).pipe(
     map(articles => sortArticles(articles)),
   );
 
@@ -24,7 +23,7 @@ export class ContentService {
   );
 
   private fetchContent(slug: string): Observable<string> {
-    return this.http.get(`${environment.baseUrl}/content/${slug}/index.md`, {
+    return this.http.get(`/content/${slug}/index.md`, {
       responseType: 'text',
     });
   }
@@ -37,19 +36,17 @@ export class ContentService {
         return {
           ...output.attributes,
           markdown: output.body,
-          coverUrl: `${environment.baseUrl}/content/${slug}/img/cover.png`,
-          url: `${environment.baseUrl}/articles/${slug}`,
+          coverUrl: `/content/${slug}/img/cover.png`,
+          url: `${DOMAIN}/articles/${slug}`,
         };
       }),
     );
   }
 
-  findAllByHashtag(hashtag: string): Observable<Article[]> {
+  findByHashtag(hashtag: string): Observable<Article[]> {
     return this.articles$.pipe(
       map(articles => articles.filter(a => a.hashtags.includes(hashtag))),
     );
   }
 
 }
-
-

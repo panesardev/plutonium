@@ -1,10 +1,37 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { computedFrom } from 'ngxtension/computed-from';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { CanActivateFn, ResolveFn, RouterLink } from '@angular/router';
+import { map, tap } from 'rxjs';
+import { LoginModalComponent } from '../../layout/modals/login-modal.component';
 import { LogoutModalComponent } from '../../layout/modals/logout-modal.component';
 import { AuthService } from '../../services/auth.service';
 import { ModalService } from '../../services/modal.service';
 import { UserService } from '../../services/user.service';
+import { Article } from '../../types/article.interface';
+import { User } from '../../types/user.interface';
+import { view } from '../../utilities/view.operator';
+
+interface DashboardView {
+  user: User;
+  articles: Article[];
+}
+
+export const dashboardGuard: CanActivateFn = () => {
+  const auth = inject(AuthService);
+  const modal = inject(ModalService);
+  return auth.user$.pipe(
+    map(user => !!user),
+    tap(isLoggedIn => !isLoggedIn && modal.open(LoginModalComponent)),
+  );
+}
+
+export const dashboardViewResolver: ResolveFn<DashboardView> = () => {
+  const auth = inject(AuthService);
+  const userService = inject(UserService);
+  return view<DashboardView>({
+    user: auth.user$,
+    articles: userService.articles$,
+  });
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -16,17 +43,12 @@ import { UserService } from '../../services/user.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class DashboardComponent {
-  private auth = inject(AuthService);
-  private userService = inject(UserService);
-  private modalService = inject(ModalService);
+  private modal = inject(ModalService);
 
-  view = computedFrom({
-    user: this.auth.user$,
-    articles: this.userService.articles$,
-  }, { initialValue: null });
+  view = input.required<DashboardView>();
 
   openLogoutModal() {
-    this.modalService.open(LogoutModalComponent);
+    this.modal.open(LogoutModalComponent);
   }
 
   openProModal() {

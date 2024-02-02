@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { computedAsync } from 'ngxtension/computed-async';
 import { ArticleListComponent } from '../../../layout/components/article-list.component';
 import { ContentService } from '../../../services/content.service';
 import { view } from '../../../utilities/view.operator';
@@ -17,7 +16,7 @@ export const hashtagViewResolver: ResolveFn<HashtagView> = (route: ActivatedRout
   const hashtag = route.paramMap.get('hashtag');
   return view<HashtagView>({ 
     hashtag: of(hashtag),
-    articles: content.findAllByHashtag(hashtag),
+    articles: content.findByHashtag(hashtag),
   });
 }
 

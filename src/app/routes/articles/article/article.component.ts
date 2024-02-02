@@ -16,7 +16,7 @@ interface ArticleView {
 export const articleViewResolver: ResolveFn<ArticleView> = (route: ActivatedRouteSnapshot) => {
   const content = inject(ContentService);
   const slug = route.paramMap.get('slug');
-  return view({ article: content.findBySlug(slug) });
+  return view<ArticleView>({ article: content.findBySlug(slug) });
 }
 
 @Component({

@@ -10,7 +10,7 @@ interface HashtagsView {
 
 export const hashtagsViewResolver: ResolveFn<HashtagsView> = () => {
   const content = inject(ContentService);
-  return view({ hashtags: content.hashtags$ });
+  return view<HashtagsView>({ hashtags: content.hashtags$ });
 }
 
 @Component({

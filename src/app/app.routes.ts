@@ -5,6 +5,7 @@ import { articleViewResolver } from './routes/articles/article/article.component
 import { articlesViewResolver } from './routes/articles/articles.component';
 import { hashtagViewResolver } from './routes/hashtags/hashtag/hashtag.component';
 import { hashtagsViewResolver } from './routes/hashtags/hashtags.component';
+import { dashboardGuard, dashboardViewResolver } from './routes/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -35,6 +36,10 @@ export const routes: Routes = [
     path: 'dashboard',
     loadComponent: () => import('./routes/dashboard/dashboard.component'),
     title: 'Dashboard - Plutonium',
+    canActivate: [dashboardGuard],
+    resolve: {
+      view: dashboardViewResolver,
+    }
   },
   {
     path: 'hashtags',

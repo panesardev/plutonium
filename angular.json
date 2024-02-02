@@ -47,7 +47,10 @@
               "node_modules/prismjs/components/prism-typescript.min.js"
             ],
             "allowedCommonJsDependencies": [
-              "front-matter"
+              "front-matter",
+              "@grpc/proto-loader",
+              "@grpc/grpc-js",
+              "undici"
             ],
             "server": "src/main.server.ts",
             "prerender": {
@@ -78,13 +81,7 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
-                }
-              ]
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"

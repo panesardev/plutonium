@@ -1,4 +1,4 @@
-import { AuthProvider, GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
 export interface Credentials {
   displayName?: string;
@@ -24,8 +24,8 @@ export const initialState: LoginFormState = {
 
 export type OAuthProviderName = 'google' | 'github';
 
-export function getAuthProvider(providerName: OAuthProviderName): AuthProvider {
-  switch (providerName) {
+export const getAuthProvider = (name: OAuthProviderName) => {
+  switch (name) {
     case 'google': return new GoogleAuthProvider();
     case 'github': return new GithubAuthProvider();
   }

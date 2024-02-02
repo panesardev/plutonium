@@ -18,12 +18,12 @@ export interface Toc {
   text: string;
 }
 
-export function sortArticles(articles: Article[]): Article[] {
+export const sortArticles = (articles: Article[]) => {
   return articles.sort((a, b) => {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 }
 
-export function slugify(heading: string): string {
-  return heading.toLowerCase().replaceAll(' ', '-');
+export const slugify = (input: string) => {
+  return input.toLowerCase().replaceAll(' ', '-');
 }

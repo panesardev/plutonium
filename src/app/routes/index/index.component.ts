@@ -13,7 +13,7 @@ interface IndexView {
 
 export const indexViewResolver: ResolveFn<IndexView> = () => {
   const content = inject(ContentService);
-  return view({ featured: content.featured$ });
+  return view<IndexView>({ featured: content.featured$ });
 }
 
 @Component({
