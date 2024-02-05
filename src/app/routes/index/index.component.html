@@ -6,15 +6,36 @@
   
     @defer {
       @if (user(); as user) {
-        <div class="bg-neutral max-w-md mx-auto p-6 md:p-8 md:rounded-md custom-shadow">
+        <div class="bg-neutral max-w-md mx-auto p-6 md:p-8 mb-12 md:rounded-md custom-shadow">
           <h1 class="font-bold text-center text-2xl flex gap-2 mb-4">
-            <span>Welcome</span>
+            <span>Hello</span>
             <span class="text-primary">{{ user.displayName }}</span>
           </h1>
           <p class="mb-4">See your saved articles</p>
           <button class="btn btn-secondary" routerLink="/dashboard">Go to dashboard</button>
         </div>
+      } 
+      @else {
+        <ng-container [ngTemplateOutlet]="userPlaceholder"/>
       }
     }
+    @placeholder { 
+      <ng-container [ngTemplateOutlet]="userPlaceholder"/>
+    }
+    <ng-template #userPlaceholder>
+      <div class="bg-neutral max-w-md mx-auto p-6 md:p-8 mb-12 md:rounded-md custom-shadow">
+        <h1 class="font-bold text-center text-2xl flex gap-2 mb-4">
+          <span>Hello</span>
+          <span class="text-primary">User</span>
+        </h1>
+        <p class="mb-4">You can save some articles!</p>
+        <button class="btn btn-secondary" routerLink="/dashboard">Login to continue</button>
+      </div>
+    </ng-template>
+
+    <div class="px-4 md:px-8 mb-12">
+      <app-article-list [articles]="view.recent"/>
+    </div>
   </section> 
 }
+

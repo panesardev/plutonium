@@ -8,14 +8,12 @@ import { view } from '../../utilities/view.operator';
 
 interface ArticlesView {
   articles: Article[];
-  featured: Article;
 }
 
 export const articlesViewResolver: ResolveFn<ArticlesView> = () => {
   const content = inject(ContentService);
   return view<ArticlesView>({
     articles: content.articles$,
-    featured: content.featured$,
   });
 }
 
@@ -24,7 +22,6 @@ export const articlesViewResolver: ResolveFn<ArticlesView> = () => {
   standalone: true,
   imports: [
     ArticleListComponent,
-    FeaturedArticleComponent,
   ],
   templateUrl: './articles.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

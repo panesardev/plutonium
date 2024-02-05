@@ -43,6 +43,12 @@ export class ContentService {
     );
   }
 
+  findRecent(count: number): Observable<Article[]> {
+    return this.articles$.pipe(
+      map(articles => articles.slice(0, count)),
+    );
+  }
+
   findByHashtag(hashtag: string): Observable<Article[]> {
     return this.articles$.pipe(
       map(articles => articles.filter(a => a.hashtags.includes(hashtag))),
