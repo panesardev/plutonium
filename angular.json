@@ -43,9 +43,7 @@
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-typescript.min.js"
             ],
-            "allowedCommonJsDependencies": [
-              "front-matter"
-            ],
+            "allowedCommonJsDependencies": ["*"],
             "server": "src/main.server.ts",
             "prerender": {
               "discoverRoutes": false,
