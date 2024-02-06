@@ -23,7 +23,7 @@ import { SearchModalComponent } from './modals/search-modal.component';
           <div class="block lg:hidden" (click)="openSearchModal()">
             <i class="search-icon"></i>
           </div>
-          <a routerLink="/" class="hidden lg:block brand text-2xl lg:text-3xl">Plutonium</a>
+          <a routerLink="/" class="hidden lg:block brand text-2xl lg:text-3xl">Plutox</a>
         </div>
         <div class="hidden lg:block">
           <div (click)="openSearchModal()" 
@@ -33,12 +33,10 @@ import { SearchModalComponent } from './modals/search-modal.component';
         </div>
         <div class="flex justify-end items-center gap-4 lg:gap-6">
           <div class="hidden lg:flex items-center gap-3">
-            <a routerLink="/articles" routerLinkActive="bg-base-200" 
-              class="px-4 py-1 rounded-full">
+            <a routerLink="/articles" routerLinkActive="bg-base-200" class="px-4 py-1 rounded-full">
               Articles
             </a>
-            <a routerLink="/hashtags" routerLinkActive="bg-base-200"
-              class="px-4 py-1 rounded-full">
+            <a routerLink="/hashtags" routerLinkActive="bg-base-200" class="px-4 py-1 rounded-full">
               Hashtags
             </a>
           </div>
@@ -46,10 +44,7 @@ import { SearchModalComponent } from './modals/search-modal.component';
             <app-nav-user />
           }  
           @placeholder { 
-            <button class="btn btn-sm btn-primary text-md" routerLink="/login">Login</button>
-          }
-          @error {            
-            <button class="btn btn-sm btn-primary text-md" routerLink="/login">Login</button>
+            <button class="btn btn-sm bg-primary text-base-100 text-md" routerLink="/login">Login</button>
           }
         </div>
       </nav>

@@ -10,10 +10,10 @@
             <p class="text-md">{{ user.email }}</p>
           </div>
           <div class="grid grid-cols-2 gap-4">
-            <button class="btn" [class]="user.isPro ? 'btn-primary' : 'btn-secondary'" (click)="openProModal()">
+            <button class="btn" [class]="user.isPro ? 'bg-primary text-base-100' : 'bg-secondary text-primary'" (click)="openProModal()">
               <span>{{ user.isPro ? 'PRO' : 'Basic' }}</span>
             </button>
-            <button class="btn btn-error" (click)="openLogoutModal()">Logout</button>
+            <button class="btn bg-error text-base-100" (click)="openLogoutModal()">Logout</button>
           </div>
         </div>
       }
@@ -30,7 +30,7 @@
                   <div class="px-4 md:px-0 pb-4 md:pb-6">
                     <h1 class="text-xl text-primary font-bold mb-2">{{ article.title }}</h1>
                     <p class="mb-4">{{ article.description }}</p>
-                    <button class="btn btn-primary w-full md:w-fit" routerLink="/articles/{{ article.slug }}">Read more</button>
+                    <button class="btn bg-primary text-base-100 w-full md:w-fit" routerLink="/articles/{{ article.slug }}">Read more</button>
                   </div>
                 </div>
               }

@@ -18,11 +18,11 @@ import { RouterLink } from '@angular/router';
           <span class="text-primary">{{ user.displayName }}</span>
         </h1>
         <p class="mb-4">See your saved articles</p>
-        <button class="btn btn-secondary" routerLink="/dashboard">Go to dashboard</button>
+        <button class="btn bg-secondary text-primary" routerLink="/dashboard">Go to dashboard</button>
       </div>
     }
     @else {
-      <ng-content/>
+      <ng-content />
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

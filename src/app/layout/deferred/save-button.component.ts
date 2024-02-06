@@ -17,18 +17,18 @@ import { AsyncPipe } from '@angular/common';
     <div class="flex justify-center">
       @if (user$ | async; as user) {
         @if (isArticleSaved$ | async) {
-          <button class="btn btn-error rounded md:w-full" (click)="removeArticle(user)">
+          <button class="btn bg-error text-base-100 md:w-full" (click)="removeArticle(user)">
             Remove saved 
           </button>
         }
         @else {
-          <button class="btn btn-primary rounded md:w-full" (click)="saveArticle(user)">
+          <button class="btn bg-primary text-base-100 md:w-full" (click)="saveArticle(user)">
             Save Article
           </button>
         }
       }
       @else {
-        <button class="btn btn-primary rounded md:w-full" routerLink="/login">
+        <button class="btn bg-primary text-base-100 md:w-full" routerLink="/login">
           Login to save
         </button>
       }

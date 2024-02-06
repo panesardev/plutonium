@@ -30,7 +30,7 @@ import { FallbackImageDirective } from '../../utilities/image.directive';
               <span>By <a target="_blank" rel="noopener" rel="noreferrer" [href]="article().authorLink">{{ article().authorName }}</a></span>
             </div>
             <div class="flex items-center gap-6 bg-neutral rounded-lg md:rounded-full mb-5 p-4 custom-shadow">
-              <button class="btn btn-primary w-full md:w-fit" routerLink="/articles/{{ article().slug }}">
+              <button class="btn bg-primary text-base-100 w-full md:w-fit" routerLink="/articles/{{ article().slug }}">
                 <span>Read more</span>
                 <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"></path></svg>
               </button>

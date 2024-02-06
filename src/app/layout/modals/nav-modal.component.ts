@@ -13,7 +13,7 @@ import { BaseModalComponent } from './base-modal.component';
   ],
   template: `
     <app-base-modal classes="max-w-4xl">
-      <button class="btn btn-sm btn-error float-right" (click)="modal.close()">
+      <button class="btn btn-sm bg-error text-base-100 float-right" (click)="modal.close()">
         <i class="close-icon"></i>
       </button>
       <h1 class="brand text-2xl text-primary mb-4">Plutonium</h1>

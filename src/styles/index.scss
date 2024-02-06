@@ -3,9 +3,7 @@
 @tailwind utilities;
 
 @import './animations.scss';
-@import './components.scss';
 @import './icons.scss';
-@import './prism.scss';
 
 body {
   font-family: 'Raleway', sans-serif;
@@ -27,7 +25,8 @@ img {
 }
 
 a {
-  @apply text-primary cursor-pointer;
+  @apply text-primary;
+  cursor: pointer;
 }
 
 .custom-shadow {
@@ -43,13 +42,53 @@ a {
   font-family: 'Lobster', sans-serif;
 }
 
-.hover-dim {
-  @apply transition-opacity;
+.btn {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  transition: opacity 200ms ease;
+  padding: 0.75rem 2rem;
 
   &:hover {
-    opacity: .9;
+    opacity: 0.9;
+  }
+
+  &-sm {
+    padding: 0.25rem 1rem;
   }
 }
+
+.markdown {
+  min-width: 0;
+
+  h2 {
+    @apply text-primary font-bold text-3xl mb-6 capitalize;
+  }
+  
+  p {
+    @apply text-lg mb-6;
+  }
+  
+  img {
+    width: 100%;
+    height: auto;
+  }
+  
+  pre {
+    @apply bg-neutral rounded-lg p-4 md:p-7 mb-12;
+    max-width: 100%;
+    position: relative;
+    overflow: auto;
+    box-shadow: 0 0 25px var(--shadow);
+  }
+  
+  code {
+    font-family: 'Fira Code', sans-serif;
+  }    
+}
+
 
 // fonts
 @font-face {
@@ -85,6 +124,6 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
   // border: 1px solid green;
   -webkit-text-fill-color: hsl(186, 70%, 27%);
-  -webkit-box-shadow: 0 0 25px var(--shadow);
+  box-shadow: 0 0 25px #155f7506;
   transition: background-color 5000s ease-in-out 0s;
 }

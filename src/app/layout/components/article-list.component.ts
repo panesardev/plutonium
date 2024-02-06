@@ -27,7 +27,7 @@ import { NgOptimizedImage } from '@angular/common';
             <div class="inline-block mb-5">
               <app-hashtag-list [hashtags]="article.hashtags"></app-hashtag-list>
             </div>
-            <button class="btn btn-primary w-full" routerLink="/articles/{{ article.slug }}">Read more</button>
+            <button class="btn bg-primary text-base-100 w-full" routerLink="/articles/{{ article.slug }}">Read more</button>
           </div>
         </div>
       }

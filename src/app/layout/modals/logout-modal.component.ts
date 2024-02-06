@@ -15,8 +15,8 @@ import { Modal } from '../../types/modal.class';
       <p class="text-lg text-center mb-6">You will be logged out!</p>
 
       <div class="grid content-center gap-4">
-        <button class="btn btn-error" (click)="logout()">Logout</button>
-        <button class="btn btn-secondary" (click)="modal.close()">Cancel</button>
+        <button class="btn bg-error text-base-100" (click)="logout()">Logout</button>
+        <button class="btn bg-secondary text-primary" (click)="modal.close()">Cancel</button>
       </div>
     </app-base-modal>
   `,
