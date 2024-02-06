@@ -23,7 +23,7 @@ import { SearchModalComponent } from './modals/search-modal.component';
           <div class="block lg:hidden" (click)="openSearchModal()">
             <i class="search-icon"></i>
           </div>
-          <a routerLink="/" class="hidden lg:block brand text-2xl lg:text-3xl">Plutox</a>
+          <a routerLink="/" class="hidden lg:block brand text-2xl lg:text-3xl">Plutonium</a>
         </div>
         <div class="hidden lg:block">
           <div (click)="openSearchModal()" 

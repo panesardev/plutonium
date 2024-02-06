@@ -1,4 +1,4 @@
-export const DOMAIN = 'https://plutonium-dev.vercel.app';
+export const DOMAIN = 'https://plutoniumx.vercel.app';
 
 export const FIREBASE_CONFIG = { 
   apiKey: "AIzaSyAhtPk6Z8cs3-pODGzi06ntNstJJhUghWo",
