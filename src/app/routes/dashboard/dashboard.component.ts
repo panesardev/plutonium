@@ -6,7 +6,7 @@ import { ModalService } from '../../services/modal.service';
 import { UserService } from '../../services/user.service';
 import { Article } from '../../types/article.interface';
 import { User } from '../../types/user.interface';
-import { view } from '../../utilities/view.operator';
+import { combineLatestObject } from '../../utilities/custom.operators';
 
 interface DashboardView {
   user: User;
@@ -16,7 +16,7 @@ interface DashboardView {
 export const dashboardViewResolver: ResolveFn<DashboardView> = () => {
   const auth = inject(AuthService);
   const userService = inject(UserService);
-  return view<DashboardView>({
+  return combineLatestObject({
     user: auth.user$,
     articles: userService.articles$,
   });

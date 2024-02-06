@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core
 import { ResolveFn } from '@angular/router';
 import { HashtagListComponent } from '../../layout/components/hashtag-list.component';
 import { ContentService } from '../../services/content.service';
-import { view } from '../../utilities/view.operator';
+import { combineLatestObject } from '../../utilities/custom.operators';
 
 interface HashtagsView {
   hashtags: string[];
@@ -10,7 +10,9 @@ interface HashtagsView {
 
 export const hashtagsViewResolver: ResolveFn<HashtagsView> = () => {
   const content = inject(ContentService);
-  return view<HashtagsView>({ hashtags: content.hashtags$ });
+  return combineLatestObject({ 
+    hashtags: content.hashtags$ 
+  });
 }
 
 @Component({

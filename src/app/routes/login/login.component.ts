@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { computedAsync } from 'ngxtension/computed-async';
 import { AuthService } from '../../services/auth.service';
 import { Credentials, OAuthProviderName } from '../../types/auth.interface';
 
@@ -34,7 +34,7 @@ export const initialState: LoginFormState = {
 export default class LoginComponent {
   private auth = inject(AuthService);
 
-  user = computedAsync(() => this.auth.user$);
+  user = toSignal(this.auth.user$);
   
   state = signal<LoginFormState>(initialState);
   error = signal<string>(null);

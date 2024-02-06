@@ -1,13 +1,12 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { ResolveFn, RouterLink } from '@angular/router';
-import { computedAsync } from 'ngxtension/computed-async';
+import { ArticleListComponent } from '../../layout/components/article-list.component';
 import { FeaturedArticleComponent } from '../../layout/components/featured-article.component';
-import { AuthService } from '../../services/auth.service';
+import { HomeUserCardComponent } from '../../layout/deferred/home-user-card.component';
 import { ContentService } from '../../services/content.service';
 import { Article } from '../../types/article.interface';
-import { view } from '../../utilities/view.operator';
-import { ArticleListComponent } from '../../layout/components/article-list.component';
-import { NgTemplateOutlet } from '@angular/common';
+import { combineLatestObject } from '../../utilities/custom.operators';
 
 interface IndexView {
   featured: Article;
@@ -16,7 +15,7 @@ interface IndexView {
 
 export const indexViewResolver: ResolveFn<IndexView> = () => {
   const content = inject(ContentService);
-  return view<IndexView>({ 
+  return combineLatestObject({ 
     featured: content.featured$,
     recent: content.findRecent(3),
   });
@@ -26,18 +25,15 @@ export const indexViewResolver: ResolveFn<IndexView> = () => {
   selector: 'app-index',
   standalone: true,
   imports: [
-    NgTemplateOutlet,
-    FeaturedArticleComponent,
     ArticleListComponent,
+    FeaturedArticleComponent,
+    HomeUserCardComponent,
+    NgTemplateOutlet,
     RouterLink,
   ],
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class IndexComponent {
-  private auth = inject(AuthService);
-
   view = input.required<IndexView>();
-
-  user = computedAsync(() => this.auth.user$);
 }

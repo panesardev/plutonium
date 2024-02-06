@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
+import { of } from 'rxjs';
 import { ArticleListComponent } from '../../../layout/components/article-list.component';
 import { ContentService } from '../../../services/content.service';
-import { view } from '../../../utilities/view.operator';
-import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
 import { Article } from '../../../types/article.interface';
-import { of } from 'rxjs';
+import { combineLatestObject } from '../../../utilities/custom.operators';
 
 interface HashtagView {
   hashtag: string;
@@ -14,7 +14,7 @@ interface HashtagView {
 export const hashtagViewResolver: ResolveFn<HashtagView> = (route: ActivatedRouteSnapshot) => {
   const content = inject(ContentService);
   const hashtag = route.paramMap.get('hashtag');
-  return view<HashtagView>({ 
+  return combineLatestObject({ 
     hashtag: of(hashtag),
     articles: content.findByHashtag(hashtag),
   });

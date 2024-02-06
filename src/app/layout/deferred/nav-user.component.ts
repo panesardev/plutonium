@@ -1,18 +1,19 @@
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FallbackImageDirective } from '../../utilities/image.directive';
-import { computedAsync } from 'ngxtension/computed-async';
 
 @Component({
   selector: 'app-nav-user',
   standalone: true,
   imports: [
+    AsyncPipe,
     FallbackImageDirective,
     RouterLink,
   ],
   template: `
-    @if (user(); as user) {
+    @if (auth.user$ | async; as user) {
       <a routerLink="/dashboard">
         <img class="rounded-full w-8 md:w-10" 
           [src]="user.photoURL" 
@@ -29,7 +30,5 @@ import { computedAsync } from 'ngxtension/computed-async';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavUserComponent {
-  private auth = inject(AuthService);
-
-  user = computedAsync(() => this.auth.user$);
+  readonly auth = inject(AuthService);
 }

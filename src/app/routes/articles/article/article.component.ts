@@ -3,11 +3,11 @@ import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, afterRender,
 import { ActivatedRouteSnapshot, ResolveFn, RouterLink } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
 import { HashtagListComponent } from '../../../layout/components/hashtag-list.component';
-import { SaveButtonComponent } from '../../../layout/components/save-button.component';
+import { SaveButtonComponent } from '../../../layout/deferred/save-button.component';
 import { ContentService } from '../../../services/content.service';
 import { Article, Toc, slugify } from '../../../types/article.interface';
 import { FallbackImageDirective } from '../../../utilities/image.directive';
-import { view } from '../../../utilities/view.operator';
+import { combineLatestObject } from '../../../utilities/custom.operators';
 
 interface ArticleView {
   article: Article;
@@ -16,7 +16,9 @@ interface ArticleView {
 export const articleViewResolver: ResolveFn<ArticleView> = (route: ActivatedRouteSnapshot) => {
   const content = inject(ContentService);
   const slug = route.paramMap.get('slug');
-  return view<ArticleView>({ article: content.findBySlug(slug) });
+  return combineLatestObject({ 
+    article: content.findBySlug(slug) 
+  });
 }
 
 @Component({

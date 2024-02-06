@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { ResolveFn } from '@angular/router';
 import { ArticleListComponent } from '../../layout/components/article-list.component';
-import { FeaturedArticleComponent } from '../../layout/components/featured-article.component';
 import { ContentService } from '../../services/content.service';
 import { Article } from '../../types/article.interface';
-import { view } from '../../utilities/view.operator';
+import { combineLatestObject } from '../../utilities/custom.operators';
 
 interface ArticlesView {
   articles: Article[];
@@ -12,7 +11,7 @@ interface ArticlesView {
 
 export const articlesViewResolver: ResolveFn<ArticlesView> = () => {
   const content = inject(ContentService);
-  return view<ArticlesView>({
+  return combineLatestObject({
     articles: content.articles$,
   });
 }
