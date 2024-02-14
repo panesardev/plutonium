@@ -1,5 +1,5 @@
 import { DOCUMENT, NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, afterRender, inject, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, afterRender, effect, inject, input, signal, viewChild } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterLink } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
 import { HashtagListComponent } from '../../../layout/components/hashtag-list.component';
@@ -38,27 +38,23 @@ export const articleViewResolver: ResolveFn<ArticleView> = (route: ActivatedRout
 export default class ArticleComponent {
   private document = inject(DOCUMENT);
 
-  @ViewChild('markdown') markdownRef: ElementRef<HTMLDivElement>;
-
   view = input.required<ArticleView>();
-  
+  markdownRef = viewChild.required<ElementRef>('markdown');
   tableOfContents = signal<Toc[]>([]);
 
   afterRenderRef = afterRender(() => {
-    if (this.markdownRef) {
-      const headings = this.markdownRef.nativeElement.getElementsByTagName('h2');
-      const list: Toc[] = [];
-      
-      for (let i = 0; i < headings.length; i++) {
-        headings.item(i).id = slugify(headings.item(i).innerText);
-        list.push({ 
-          id: headings.item(i).id, 
-          text: headings.item(i).innerText,
-        });
-      }
-      // fix expression has changed after it was checked
-      setTimeout(() => this.tableOfContents.set(list), 0);
+    const headings = this.markdownRef().nativeElement.getElementsByTagName('h2');
+    const list: Toc[] = [];
+    
+    for (let i = 0; i < headings.length; i++) {
+      headings.item(i).id = slugify(headings.item(i).innerText);
+      list.push({ 
+        id: headings.item(i).id, 
+        text: headings.item(i).innerText,
+      });
     }
+    // fix expression has changed after it was checked
+    setTimeout(() => this.tableOfContents.set(list), 0);
   });
 
   scroll(id: string): void {
