@@ -1,5 +1,7 @@
 export const DOMAIN = 'https://plutoniumx.vercel.app';
 
+export const BRAND = 'Plutonium';
+
 export const FIREBASE_CONFIG = { 
   apiKey: "AIzaSyAhtPk6Z8cs3-pODGzi06ntNstJJhUghWo",
   authDomain: "plutonium-dev.firebaseapp.com",

@@ -17,7 +17,7 @@ import { AsyncPipe } from '@angular/common';
     <div class="flex justify-center">
       @if (user$ | async; as user) {
         @if (isArticleSaved$ | async) {
-          <button class="btn bg-error text-base-100 md:w-full" (click)="removeArticle(user)">
+          <button class="btn bg-red-500 text-base-100 md:w-full" (click)="removeArticle(user)">
             Remove saved 
           </button>
         }

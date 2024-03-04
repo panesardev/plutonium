@@ -14,8 +14,8 @@
       }
       
       @if (error()) {
-        <div class="flex items-center gap-4 px-4 py-4 rounded-full select-none bg-error text-base-100 cursor-pointer" (click)="error.set(null)">
-          <div class="flex justify-center items-center bg-base-100 w-10 h-8 rounded-full text-error">
+        <div class="flex items-center gap-4 px-4 py-4 rounded-full select-none bg-red-500 text-base-100 cursor-pointer" (click)="error.set(null)">
+          <div class="flex justify-center items-center bg-base-100 w-10 h-8 rounded-full text-red-500">
             <i class="close-icon"></i>
           </div>
           <span>{{ error() }}</span>
@@ -81,8 +81,8 @@
           
         @if (authError()) {
           <div (click)="authError.set(null)">
-            <div class="flex items-center gap-4 px-4 py-4 rounded-full select-none bg-error text-base-100 cursor-pointer">
-              <div class="flex justify-center items-center bg-base-100 w-10 h-8 rounded-full text-error">
+            <div class="flex items-center gap-4 px-4 py-4 rounded-full select-none bg-red-500 text-base-100 cursor-pointer">
+              <div class="flex justify-center items-center bg-base-100 w-10 h-8 rounded-full text-red-500">
                 <i class="close-icon"></i>
               </div>
               <span>{{ authError() }}</span>

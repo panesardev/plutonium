@@ -7,6 +7,7 @@ import { UserService } from '../../services/user.service';
 import { Article } from '../../types/article.interface';
 import { User } from '../../types/user.interface';
 import { combineLatestObject } from '../../utilities/custom.operators';
+import { ArticleListComponent } from '../../layout/components/article-list.component';
 
 interface DashboardView {
   user: User;
@@ -27,6 +28,7 @@ export const dashboardViewResolver: ResolveFn<DashboardView> = () => {
   standalone: true,
   imports: [
     RouterLink,
+    ArticleListComponent,
   ],
   templateUrl: './dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

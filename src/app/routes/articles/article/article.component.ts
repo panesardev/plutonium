@@ -17,7 +17,7 @@ export const articleViewResolver: ResolveFn<ArticleView> = (route: ActivatedRout
   const content = inject(ContentService);
   const slug = route.paramMap.get('slug');
   return combineLatestObject({ 
-    article: content.findBySlug(slug) 
+    article: content.findBySlug(slug),
   });
 }
 

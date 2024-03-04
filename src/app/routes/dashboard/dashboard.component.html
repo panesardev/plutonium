@@ -1,7 +1,7 @@
 @if (view(); as view) {
   <section>
     <h1 class="heading">Dashboard</h1>
-    <div class="grid md:grid-cols-[1fr_3fr] gap-8 md:px-8 max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-[1fr_3fr] gap-8 md:px-8">
       @if (view.user; as user) {
         <div class="relative md:sticky md:top-32 h-min bg-neutral grid gap-4 md:gap-6 p-6 md:p-8 md:rounded-md select-none">
           <img [src]="user.photoURL" alt="user" fallbackImage="/assets/img/user.png" class="rounded-full w-20">
@@ -13,28 +13,18 @@
             <button class="btn" [class]="user.isPro ? 'bg-primary text-base-100' : 'bg-secondary text-primary'" (click)="openProModal()">
               <span>{{ user.isPro ? 'PRO' : 'Basic' }}</span>
             </button>
-            <button class="btn bg-error text-base-100" (click)="openLogoutModal()">Logout</button>
+            <button class="btn bg-red-500 text-base-100" (click)="openLogoutModal()">Logout</button>
           </div>
         </div>
       }
       @if (view.articles; as articles) {
         @if (articles.length) {
-          <div class="grid gap-4 md:gap-8 md:bg-neutral p-4 md:p-8 rounded-md">
-            <h1 class="font-bold text-2xl md:text-3xl text-center md:text-left text-primary select-none">Saved Articles</h1>
-            <div class="grid gap-4 md:gap-10">
-              @for (article of articles; track article.slug) {
-                <div class="grid md:grid-cols-[300px_1fr] md:h-40 rounded-md gap-4 md:gap-6 bg-neutral">
-                  <div routerLink="/articles/{{ article.slug }}">
-                    <img src="/content/{{ article.slug }}/img/cover_400x225.webp" class="rounded-md" [alt]="article.title">
-                  </div>
-                  <div class="px-4 md:px-0 pb-4 md:pb-6">
-                    <h1 class="text-xl text-primary font-bold mb-2">{{ article.title }}</h1>
-                    <p class="mb-4">{{ article.description }}</p>
-                    <button class="btn bg-primary text-base-100 w-full md:w-fit" routerLink="/articles/{{ article.slug }}">Read more</button>
-                  </div>
-                </div>
-              }
+          <div class="grid gap-6 md:gap-8 px-4 md:px-0">
+            <div>
+              <h1 class="font-bold text-2xl text-center md:text-left text-primary select-none mb-2">Saved Articles</h1>
+              <div class="w-full border-[1px] border-primary opacity-20 rounded-full"></div>
             </div>
+            <app-article-list [articles]="articles"/>
           </div>
         } 
         @else {

@@ -10,9 +10,8 @@ export class UserService {
   private content = inject(ContentService);
 
   articles$ = this.auth.user$.pipe(
-    map(user => user.saved),
-    map(slugs => slugs.map(slug => this.content.findBySlug(slug))),
-    switchMap(list => list.length ? zip(list) : of([])),
+    map(user => user.saved.map(slug => this.content.findBySlug(slug))),
+    switchMap(list => list.length && zip(list)),
     catchError(() => of([])),
   );
 

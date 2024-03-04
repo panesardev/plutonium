@@ -70,11 +70,21 @@ a {
   min-width: 0;
 
   h2 {
-    @apply text-primary font-bold text-3xl mb-6 capitalize;
+    color: theme('colors.primary');
+    font-weight: bold;
+    // text-3xl
+    font-size: 1.875rem/* 30px */;
+    line-height: 2.25rem/* 36px */;
+
+    margin-bottom: 1.5rem;
+    text-transform: capitalize;
   }
   
   p {
-    @apply text-lg mb-6;
+    margin-bottom: 1.5rem;
+    // text-lg
+    font-size: 1.125rem/* 18px */;
+    line-height: 1.75rem/* 28px */;
   }
   
   img {
@@ -83,11 +93,14 @@ a {
   }
   
   pre {
-    @apply bg-neutral rounded-lg p-4 md:p-7 mb-12;
+    @apply md:p-7 mb-12;
     max-width: 100%;
     position: relative;
     overflow: auto;
-    box-shadow: 0 0 25px var(--shadow);
+    padding: 1rem;
+    border-radius: 0.5rem/* 8px */;
+    background-color: theme('colors.neutral');
+    box-shadow: 0 0 25px #155f7506;
   }
   
   code {

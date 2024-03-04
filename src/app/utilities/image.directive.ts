@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input, inject } from "@angular/core";
+import { Directive, ElementRef, HostListener, inject, input } from "@angular/core";
 
 @Directive({
   selector: 'img[fallbackImage]',
@@ -7,11 +7,11 @@ import { Directive, ElementRef, HostListener, Input, inject } from "@angular/cor
 export class FallbackImageDirective {
   private hostRef = inject(ElementRef);
 
-  @Input({ required: true }) fallbackImage: string;
+  fallbackImage = input<string>();
 
   @HostListener('error')
   onError() {
-    this.hostRef.nativeElement.src = this.fallbackImage;
+    this.hostRef.nativeElement.src = this.fallbackImage();
   }
 }
 

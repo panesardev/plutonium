@@ -15,7 +15,7 @@ import { RouterLink } from '@angular/router';
         <a routerLink="/login">Login</a>
         <a routerLink="/articles">Articles</a>
       </div>
-      <p class="text-center">Developed by <a target="_blank" rel="noopener" rel="noreferrer" href="https://panesarpbx8.vercel.app">Sukhpreet Singh</a></p>
+      <p class="text-center">Developed by <a target="_blank" rel="noopener" rel="noreferrer" href="https://panesar.dev">Sukhpreet Singh</a></p>
     </footer>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

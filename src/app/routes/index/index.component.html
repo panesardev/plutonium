@@ -25,7 +25,9 @@
 
     <div class="px-4 md:px-8 mb-12">
       <h1 class="heading">Recent articles</h1>
-      <app-article-list [articles]="view.recent"/>
+      <div class="max-w-[70rem] mx-auto">
+        <app-article-list [articles]="view.recent"/>
+      </div>
     </div>
   </section> 
 }

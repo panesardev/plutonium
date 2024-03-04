@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Modal } from '../../types/modal.class';
 import { BaseModalComponent } from './base-modal.component';
+import { BRAND } from '../../app.constants';
 
 @Component({
   selector: 'app-nav-modal',
@@ -13,10 +14,10 @@ import { BaseModalComponent } from './base-modal.component';
   ],
   template: `
     <app-base-modal classes="max-w-4xl">
-      <button class="btn btn-sm bg-error text-base-100 float-right" (click)="modal.close()">
+      <button class="btn btn-sm bg-red-500 text-base-100 float-right" (click)="modal.close()">
         <i class="close-icon"></i>
       </button>
-      <h1 class="brand text-2xl text-primary mb-4">Plutonium</h1>
+      <h1 class="brand text-2xl text-primary mb-4">{{ brand }}</h1>
 
       <div class="border-b-[.1rem] border-slate-200 mb-4"></div>
 
@@ -38,4 +39,6 @@ import { BaseModalComponent } from './base-modal.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavModalComponent extends Modal {}
+export class NavModalComponent extends Modal {
+  brand = BRAND;
+}

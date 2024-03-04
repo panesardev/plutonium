@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs';
@@ -19,7 +19,7 @@ import { BaseModalComponent } from './base-modal.component';
   ],
   template: `
     <app-base-modal classes="max-w-4xl">
-      <button class="btn btn-sm bg-error text-base-100 float-right" (click)="modal.close()">
+      <button class="btn btn-sm bg-red-500 text-base-100 float-right" (click)="modal.close()">
         <i class="close-icon"></i>
       </button>
 
@@ -49,6 +49,7 @@ import { BaseModalComponent } from './base-modal.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchModalComponent extends Modal {
+  private cdr = inject(ChangeDetectorRef);
   private content = inject(ContentService);
 
   searchControl = new FormControl('');
@@ -65,6 +66,8 @@ export class SearchModalComponent extends Modal {
       ),
     ),
   );
+
+  cd = setTimeout(() => this.cdr.detectChanges());
   
 }
 

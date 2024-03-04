@@ -4,6 +4,7 @@ import { NavUserComponent } from './deferred/nav-user.component';
 import { ModalService } from '../services/modal.service';
 import { NavModalComponent } from './modals/nav-modal.component';
 import { SearchModalComponent } from './modals/search-modal.component';
+import { BRAND } from '../app.constants';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +24,7 @@ import { SearchModalComponent } from './modals/search-modal.component';
           <div class="block lg:hidden" (click)="openSearchModal()">
             <i class="search-icon"></i>
           </div>
-          <a routerLink="/" class="hidden lg:block brand text-2xl lg:text-3xl">Plutonium</a>
+          <a routerLink="/" class="hidden lg:block brand text-2xl lg:text-3xl">{{ brand }}</a>
         </div>
         <div class="hidden lg:block">
           <div (click)="openSearchModal()" 
@@ -55,6 +56,8 @@ import { SearchModalComponent } from './modals/search-modal.component';
 export class NavbarComponent {
   private modal = inject(ModalService);
   
+  brand = BRAND;
+
   openSearchModal(): void {
     this.modal.open(SearchModalComponent);
   }

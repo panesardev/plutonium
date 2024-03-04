@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Auth, authState, createUserWithEmailAndPassword, getAdditionalUserInfo, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from '@angular/fire/auth';
 import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { Observable, map, of, switchMap } from 'rxjs';
+import { Observable, map, of, switchMap, tap } from 'rxjs';
 import { Credentials, OAuthProviderName, getAuthProvider } from '../types/auth.interface';
 import { User, UserData, newUserData } from '../types/user.interface';
  
@@ -14,6 +14,11 @@ export class AuthService {
 
   readonly user$ = authState(this.auth).pipe(
     switchMap(user => user ? this.getUser(user as User) : of(null)),
+  );
+
+  readonly isAuthenticated$ = this.user$.pipe(
+    map(user => !!user),
+    tap(exists => !exists && this.router.navigateByUrl('/login')),
   );
 
   async signUp({ email, password, displayName }: Credentials): Promise<void> {
