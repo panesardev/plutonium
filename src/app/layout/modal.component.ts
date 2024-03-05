@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewContainerRef, inject, viewChild } from '@angular/core';
 import { ModalService } from '../services/modal.service';
 
 @Component({
@@ -12,11 +12,10 @@ import { ModalService } from '../services/modal.service';
 export class ModalComponent {
   private modal = inject(ModalService);
 
-  @ViewChild('container', { read: ViewContainerRef }) 
-  containerRef: ViewContainerRef;
+  containerRef = viewChild('container', { read: ViewContainerRef });
 
   ngAfterViewInit(): void {
-    this.modal.setContainerRef(this.containerRef);
+    this.modal.setContainerRef(this.containerRef());
   }
 
 }
