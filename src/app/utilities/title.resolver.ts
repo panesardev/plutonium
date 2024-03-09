@@ -12,8 +12,8 @@ export const titleResolver: ResolveFn<string> = (route: ActivatedRouteSnapshot) 
   if (path) {
     title = path[0].toUpperCase() + path.slice(1, path.length);
   }
-  if (path === '**') {
-    title = `404 Not Found`;
+  if (path === '404') {
+    title = 'Page Not Found';
   }
 
   return `${title} - ${BRAND}`;
