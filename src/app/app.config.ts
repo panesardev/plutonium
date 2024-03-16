@@ -1,5 +1,5 @@
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, EnvironmentProviders, importProvidersFrom } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
@@ -21,11 +21,15 @@ export const appConfig: ApplicationConfig = {
     ),
     provideClientHydration(),
     provideHttpClient(withFetch()),
-    importProvidersFrom(
-      provideFirebaseApp(() => initializeApp(FIREBASE_CONFIG)),
-      provideFirestore(() => getFirestore()),
-      provideAuth(() => getAuth()),
-    ),
+    provideFirebase(),
     provideMarkdown(),
   ],
 };
+
+function provideFirebase(): EnvironmentProviders {
+  return importProvidersFrom(
+    provideFirebaseApp(() => initializeApp(FIREBASE_CONFIG)),
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
+  );
+}
