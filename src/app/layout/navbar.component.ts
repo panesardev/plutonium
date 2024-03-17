@@ -45,7 +45,7 @@ import { BRAND } from '../app.constants';
             <app-nav-user />
           }  
           @placeholder { 
-            <button class="btn btn-sm bg-primary text-base-100 text-md" routerLink="/login">Login</button>
+            <button class="btn sm bg-primary text-base-100 text-md" routerLink="/login">Login</button>
           }
         </div>
       </nav>

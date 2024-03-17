@@ -1,0 +1,11 @@
+@layer components {
+  .btn {
+    @apply flex justify-center items-center gap-3 py-2.5 px-8 rounded-full transition-opacity;
+  }
+  .btn.sm {
+    @apply py-1 px-4;
+  }
+  .btn:hover {
+    @apply opacity-90;
+  }
+}

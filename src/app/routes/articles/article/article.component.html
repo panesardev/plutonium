@@ -51,7 +51,7 @@
               <app-save-button [slug]="article.slug"/>
             }
             @placeholder { 
-              <button class="btn bg-primary text-base-100 rounded md:w-full" routerLink="/login">
+              <button class="btn bg-primary text-base-100 md:w-full" routerLink="/login">
                 Login to save
               </button>
             }
@@ -63,7 +63,7 @@
                 <h1 class="text-primary text-2xl pb-2 mb-3 border-b-2 border-slate-100">Contents</h1>
                 @for (toc of tableOfContents(); track toc.id) {
                   <div>
-                    <span class="block rounded-md py-2 hover:pl-4 hover:bg-base-200 text-primary cursor-pointer transition-spacing duration-300"
+                    <span class="block rounded-md py-2 hover:pl-4 hover:bg-base-200 hover:text-primary cursor-pointer transition-spacing duration-200"
                       (click)="scroll(toc.id)">
                       {{ toc.text }}
                     </span> 

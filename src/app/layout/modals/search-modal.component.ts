@@ -18,30 +18,27 @@ import { BaseModalComponent } from './base-modal.component';
     RouterLink,
   ],
   template: `
-    <app-base-modal classes="max-w-4xl">
-      <button class="btn btn-sm bg-red-500 text-base-100 float-right" (click)="modal.close()">
-        <i class="close-icon"></i>
-      </button>
+    <app-base-modal heading="Search articles" classes="max-w-2xl">
+      <div class="grid gap-2 mb-4">
+        <label>enter title</label>
+        <input type="text" name="search" [formControl]="textControl" placeholder="type here" autocomplete="off"
+          class="border-2 border-slate-200 placeholder:text-slate-600 w-full px-4 py-2 rounded">
+      </div>
 
-      <h1 class="font-bold text-2xl text-primary mb-6">Search articles</h1>
-
-      <input type="text" name="search" [formControl]="searchControl" placeholder="start typing" autocomplete="off"
-        class="bg-base-200 text-primary text-lg placeholder:text-slate-600 w-full px-5 py-2 mb-4 rounded-full">
-
-      @if (search$ | async; as search) {
-        <p class="text-sm lg:text-md text-center mb-4">Displaying results for "{{ search }}"</p>
+      @if (text$ | async; as text) {
+        <p class="text-center mb-4">Displaying results for "{{ text }}"</p>
       }
       
       <div class="h-96 overflow-y-scroll">
         @for (article of articles$ | async; track article.slug) {
-          <div routerLink="/articles/{{ article.slug }}" (click)="modal.close()"
-            class="bg-slate-100 hover:bg-base-300 px-4 py-3 mb-2 rounded-md cursor-pointer">
-            <p class="font-bold text-primary text-md mb-2">{{ article.title }}</p>
-            <p class="text-sm">{{ article.description }}</p>
+          <div [routerLink]="['articles', article.slug]" (click)="modal.close()"
+            class="bg-slate-100 hover:bg-base-300 px-4 md:px-6 py-3 md:py-4 mb-2 rounded cursor-pointer">
+            <p class="font-bold text-primary text-lg">{{ article.title }}</p>
+            <p>{{ article.description }}</p>
           </div>
         }
         @empty {
-          <p class="text-center text-primary text-xl mb-6">Empty list!</p>
+          <p class="text-center mb-4">Empty list!</p>
         }
       </div>
     </app-base-modal>
@@ -49,33 +46,30 @@ import { BaseModalComponent } from './base-modal.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchModalComponent extends Modal {
-  private cdr = inject(ChangeDetectorRef);
   private content = inject(ContentService);
 
-  searchControl = new FormControl('');
+  textControl = new FormControl('');
 
-  search$ = this.searchControl.valueChanges.pipe(
+  text$ = this.textControl.valueChanges.pipe(
     debounceTime(300),
     distinctUntilChanged(),
+    map(text => text.toLowerCase()),
   );
 
-  articles$ = this.search$.pipe(
-    switchMap(search => 
+  articles$ = this.text$.pipe(
+    switchMap(text => 
       this.content.articles$.pipe(
-        map(articles => articles.filter(a => searchFn(search, a))),
+        map(articles => articles.filter(a => searchFn(text, a))),
       ),
     ),
   );
-
-  cd = setTimeout(() => this.cdr.detectChanges());
-  
 }
 
 function searchFn(text: string, article: Article): boolean {
   const searchIn = [
-    article.title,
-    article.description,
-    article.hashtags,
+    article.title.toLowerCase(),
+    article.description.toLowerCase(),
+    ...article.hashtags,
   ];
   return searchIn.some(value => value.includes(text));
 }

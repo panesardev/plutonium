@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
   template: `
     <div class="flex justify-center gap-4 flex-wrap">
       @for (hashtag of hashtags(); track hashtag) {
-        <button routerLink="/hashtags/{{ hashtag }}" class="btn btn-sm bg-secondary text-primary">
+        <button routerLink="/hashtags/{{ hashtag }}" class="btn sm bg-secondary text-primary">
           {{ hashtag }}
         </button>
       }

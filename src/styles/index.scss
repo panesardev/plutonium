@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 @import './animations.scss';
+@import './components.scss';
 @import './icons.scss';
 
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 header, button, img {
@@ -48,22 +49,8 @@ a {
   font-family: 'Lobster', sans-serif;
 }
 
-.btn {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100px;
-  transition: opacity 200ms ease;
-  padding: 0.75rem 2rem;
-
-  &:hover {
-    opacity: 0.9;
-  }
-
-  &-sm {
-    padding: 0.25rem 1rem;
-  }
+.transition-blur {
+  transition: filter 200ms ease-in-out;
 }
 
 .markdown {

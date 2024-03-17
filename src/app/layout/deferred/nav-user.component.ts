@@ -24,7 +24,7 @@ import { FallbackImageDirective } from '../../utilities/image.directive';
       </a>
     }
     @else {
-      <button class="btn btn-sm bg-primary text-base-100 text-md" routerLink="/login">Login</button>
+      <button class="btn sm bg-primary text-base-100 text-md" routerLink="/login">Login</button>
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

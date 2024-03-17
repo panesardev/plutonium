@@ -10,13 +10,13 @@ import { Modal } from '../../types/modal.class';
     BaseModalComponent,
   ],
   template: `
-    <app-base-modal classes="w-full md:w-[400px]">
-      <h1 class="font-bold text-center text-2xl text-red-500 mb-4">Are you sure?</h1>
-      <p class="text-lg text-center mb-6">You will be logged out!</p>
-
-      <div class="grid content-center gap-4">
-        <button class="btn bg-red-500 text-base-100" (click)="logout()">Logout</button>
-        <button class="btn bg-secondary text-primary" (click)="modal.close()">Cancel</button>
+    <app-base-modal heading="Logout" classes="max-w-md">
+      <h1 class="font-bold text-xl mb-2">Are you sure?</h1>
+      <p class="mb-8">You will be logged out!</p>
+      
+      <div class="grid grid-cols-2 justify-center items-center gap-6">
+        <button class="btn bg-slate-100" (click)="modal.close()">Cancel</button>
+        <button class="btn bg-red-500 text-red-50" (click)="logout()">Logout</button>
       </div>
     </app-base-modal>
   `,
