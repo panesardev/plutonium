@@ -45,9 +45,9 @@ export default class LoginComponent {
   isResetPasswordForm = computed(() => this.state().type === 'RESET_PASSWORD');
   
   heading = computed(() => {
-    return this.state().type === 'RESET_PASSWORD' ? 'Reset password' :
-      this.state().type === 'SIGN_UP' ? 'Create new account' : 
-      this.state().type === 'LOGIN' ? 'Login' : null;
+    return this.isResetPasswordForm ? 'Reset password' :
+      this.isSignUpForm ? 'Create new account' : 
+      this.isLoginForm ? 'Login' : null;
   });
 
   async submit(): Promise<void> {

@@ -15,7 +15,7 @@ import { ModalService } from './services/modal.service';
     FooterComponent,
   ],
   template: `
-    <div class="{{ modal.isClosed() ? 'blur-none' : 'blur-sm' }} transition-blur">
+    <div class="{{ modal.isClosed() ? 'blur-none' : 'blur-md' }} transition-blur">
       <app-navbar />
       <main class="max-width mx-auto">
         <div class="pt-24 md:pt-28 pb-16"> <!-- fix navbar layout shift on modal open -->

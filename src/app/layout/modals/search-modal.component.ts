@@ -57,7 +57,7 @@ export class SearchModalComponent extends Modal {
   );
 
   articles$ = this.text$.pipe(
-    switchMap(text => 
+    switchMap(text =>
       this.content.articles$.pipe(
         map(articles => articles.filter(a => searchFn(text, a))),
       ),
