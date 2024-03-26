@@ -10,7 +10,7 @@ import { SaveButtonComponent } from '../../../layout/deferred/save-button.compon
 import { ContentService } from '../../../services/content.service';
 import { ModalService } from '../../../services/modal.service';
 import { Article, slugify, Toc } from '../../../types/article.interface';
-import { FallbackImageDirective } from '../../../utilities/fallback-image.directive';
+import { FallbackImageDirective } from '../../../utilities/fallback.image.directive';
 
 export const ArticleResolver: ResolveFn<Article> = (route: ActivatedRouteSnapshot) => {
   const slug = route.paramMap.get('slug');

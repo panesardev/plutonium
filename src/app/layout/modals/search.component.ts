@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs';
 import { ContentService } from '../../services/content.service';
 import { Modal } from '../../types/modal.class';
-import { BaseModalComponent } from './base-modal.component';
+import { BaseModalComponent } from './base.modal.component';
 
 @Component({
   selector: 'app-search',

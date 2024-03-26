@@ -3,7 +3,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Article } from '../../types/article.interface';
 import { HashtagListComponent } from './hashtag-list.component';
-import { FallbackImageDirective } from '../../utilities/fallback-image.directive';
+import { FallbackImageDirective } from '../../utilities/fallback.image.directive';
 
 @Component({
   selector: 'app-featured-article',

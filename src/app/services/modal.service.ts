@@ -1,11 +1,6 @@
 import { Injectable, ViewContainerRef, signal } from '@angular/core';
 import { Modal } from '../types/modal.class';
 
-export interface ModalInput {
-  name: string;
-  value: unknown;
-};
-
 @Injectable({ providedIn: 'root' })
 export class ModalService {
   private container: ViewContainerRef;
@@ -16,27 +11,20 @@ export class ModalService {
     this.container = container;
   }
 
-  open(modal: typeof Modal, inputs?: ModalInput[]): void {
+  open(modal: typeof Modal): void {
     this.container.clear();
-    const component = this.container.createComponent(modal);
-    if (inputs) {
-      inputs.forEach(input => component.setInput(input.name, input.value));
-    }
+    this.container.createComponent(modal);
     this.isOpen.set(true);
   }
 
-  async openLazy(load: () => Promise<typeof Modal>, inputs?: ModalInput[]) {
-    const modal = await load();
+  async openLazy(modal: () => Promise<typeof Modal>) {
     this.container.clear();
-    const component = this.container.createComponent(modal);
-    if (inputs) {
-      inputs.forEach(input => component.setInput(input.name, input.value));
-    }
+    this.container.createComponent(await modal());
     this.isOpen.set(true);
   }
 
   close(): void {
     setTimeout(() => this.container.clear(), 300);
     this.isOpen.set(false);
-  }  
+  }
 }

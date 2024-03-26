@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { FallbackImageDirective } from '../../utilities/fallback-image.directive';
+import { FallbackImageDirective } from '../../utilities/fallback.image.directive';
 import { LoginComponent } from '../modals/login.component';
 import { ModalService } from '../../services/modal.service';
 

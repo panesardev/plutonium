@@ -5,7 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { AuthData } from '../../types/auth.interface';
 import { Modal } from '../../types/modal.class';
 import { AuthFormComponent } from '../components/auth-form.component';
-import { BaseModalComponent } from './base-modal.component';
+import { BaseModalComponent } from './base.modal.component';
 
 @Component({
   selector: 'app-login',
