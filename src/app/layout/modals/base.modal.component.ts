@@ -7,13 +7,11 @@ import { Modal } from '../../types/modal.class';
   template: `
     <div class="{{ modal.isOpen() ? 'modal-overlay-open' : 'modal-overlay-close' }} fixed inset-0 z-[100] bg-[#132a3483]"></div>
     <div class="{{ modal.isOpen() ? 'modal-open' : 'modal-close' }} fixed z-[101] inset-0 px-3 md:px-10 py-10 select-none">
-      <div class="bg-white rounded p-6 md:p-8 mx-auto {{ classes() }}">
-        @if (heading()) {
-          <div class="flex justify-between items-center gap-6 pb-2 mb-4 border-b-2 border-slate-100">
-            <h1 class="font-bold text-lg">{{ heading() }}</h1>
-            <button class="float-right text-red-500 hover:underline" (click)="modal.close()">Close</button>
-          </div>
-        }
+      <div class="bg-neutral rounded p-6 md:p-8 mx-auto {{ classes() }}">
+        <div class="flex justify-between items-center border-b-2 border-slate-100 gap-6 pb-2 mb-4">
+          <h1 class="font-bold text-lg">{{ heading() }}</h1>
+          <button class="float-right text-red-500 hover:underline" (click)="modal.close()">Close</button>
+        </div>
         <ng-content/>
       </div>
     </div>
@@ -21,6 +19,6 @@ import { Modal } from '../../types/modal.class';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BaseModalComponent extends Modal {
-  classes = input<string>();
   heading = input.required<string>();
+  classes = input<string>();
 }

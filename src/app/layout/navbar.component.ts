@@ -15,7 +15,7 @@ import { BRAND } from '../app.constants';
     NavUserComponent,
   ],
   template: `
-  <header class="h-16 md:h-20 px-4 lg:px-8 backdrop-filter backdrop-blur-lg bg-opacity-90 bg-neutral">
+  <header class="h-16 md:h-20 px-4 lg:px-8 backdrop-filter backdrop-blur-lg bg-opacity-90 bg-neutral/90">
     <nav class="h-full max-width flex lg:grid lg:grid-cols-3 justify-between items-center gap-4 lg:gap-6 mx-auto">
       <div class="flex justify-start items-center gap-7">
         <div class="block lg:hidden" (click)="openNav()">
@@ -37,10 +37,10 @@ import { BRAND } from '../app.constants';
           <a routerLink="/hashtags" routerLinkActive="bg-base-200" class="text-primary px-4 py-1 rounded-full">Hashtags</a>
         </div>
         @defer {
-          <app-nav-user/>
+          <app-nav-user (onLogin)="openLogin()"/>
         }
         @placeholder { 
-          <button class="btn sm primary rounded-full" (click)="openLogin()">Login</button>
+          <button class="btn sm primary" (click)="openLogin()">Login</button>
         }
       </div>
     </nav>

@@ -31,7 +31,7 @@ import { BaseModalComponent } from './base.modal.component';
         @for (article of articles$ | async; track article.slug) {
           <div [routerLink]="['articles', article.slug]" (click)="modal.close()"
             class="bg-slate-100 hover:bg-base-300 px-4 md:px-6 py-3 md:py-4 mb-2 rounded cursor-pointer">
-            <p class="font-bold text-primary text-lg">{{ article.title }}</p>
+            <p class="font-bold text-lg text-primary">{{ article.title }}</p>
             <p>{{ article.description }}</p>
           </div>
         }

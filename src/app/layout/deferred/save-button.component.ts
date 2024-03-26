@@ -53,5 +53,4 @@ export class SaveButtonComponent {
   async removeArticle() {
     await this.userService.removeArticle(this.slug());
   }
-
 }
