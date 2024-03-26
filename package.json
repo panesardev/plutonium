@@ -1,6 +1,12 @@
 {
   "name": "application",
+  "description": "Reactivity Focused Coding Tutorials",
   "version": "1.0.0",
+  "author": {
+    "name": "Sukhpreet Singh",
+    "email": "panesar.pb08@gmail.com",
+    "url": "https://panesar.dev"
+  },
   "scripts": {
     "start": "node dist/application/server/server.mjs",
     "dev": "ng serve --host 0.0.0.0",
@@ -40,5 +46,11 @@
     "postcss": "^8.4.32",
     "tailwindcss": "^3.4.0",
     "typescript": "~5.2.2"
-  }
+  },
+  "keywords": [
+    "angular",
+    "firebase",
+    "tailwind",
+    "markdown"
+  ]
 }
