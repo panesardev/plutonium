@@ -25,6 +25,7 @@ export class FooterComponent {
   private modal = inject(ModalService);
 
   openLogin() {
-    this.modal.openLazy(() => import('./modals/login.component').then(c => c.LoginComponent));
+    const modalFn = () => import('./modals/login.component').then(c => c.LoginComponent); 
+    this.modal.openLazy(modalFn);
   }
 }

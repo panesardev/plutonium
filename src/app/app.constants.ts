@@ -26,8 +26,8 @@ export const SLUGS = [
 export const FEATURED_SLUG = SLUGS[1];
 
 export const SOCIAL = {
-  instagram: 'https://www.instagram.com/panesarpbx8/',
-  github: 'https://github.com/panesarpbx8/plutonium',
+  instagram: 'https://www.instagram.com/panesardev/',
+  github: 'https://github.com/panesardev/plutonium',
   youtube: 'https://www.youtube.com/channel/UC5-cUtWK5_P3UoV4qfB6SCg',
-  twitter: 'https://twitter.com/panesarpbx8',
+  twitter: 'https://twitter.com/panesardev',
 };
