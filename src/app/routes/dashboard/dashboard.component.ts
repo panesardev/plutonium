@@ -1,11 +1,11 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { combineLatest } from 'rxjs';
 import { ArticleListComponent } from '../../layout/components/article-list.component';
 import { AuthService } from '../../services/auth.service';
 import { ModalService } from '../../services/modal.service';
 import { UserService } from '../../services/user.service';
-import { combineLatestObject } from '../../utilities/rxjs.operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,17 +23,14 @@ export default class DashboardComponent {
   private userService = inject(UserService);
   private modal = inject(ModalService);
 
-  view$ = combineLatestObject({
+  view$ = combineLatest({
     user: this.auth.user$,
     articles: this.userService.getArticles(),
   });
 
-  parseDate(milliseconds: number) {
-    return new Date(milliseconds).toDateString();
-  }
-
   openLogout() {
-    this.modal.openLazy(() => import('../../layout/modals/logout.component').then(c => c.LogoutComponent));
+    const fn = () => import('../../layout/modals/logout.component').then(c => c.LogoutComponent); 
+    this.modal.openLazy(fn);
   }
 
 }

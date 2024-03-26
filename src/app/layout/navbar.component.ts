@@ -54,13 +54,13 @@ export class NavbarComponent {
   brand = BRAND;
   
   openLogout() {
-    const modalFn = () => import('./modals/logout.component').then(c => c.LogoutComponent); 
-    this.modal.openLazy(modalFn);
+    const fn = () => import('./modals/logout.component').then(c => c.LogoutComponent); 
+    this.modal.openLazy(fn);
   }
 
   openLogin() {
-    const modalFn = () => import('./modals/login.component').then(c => c.LoginComponent); 
-    this.modal.openLazy(modalFn);
+    const fn = () => import('./modals/login.component').then(c => c.LoginComponent); 
+    this.modal.openLazy(fn);
   }
 
   openSearch() {
