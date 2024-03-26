@@ -1,3 +1,6 @@
+import frontmatter from 'front-matter';
+import { DOMAIN } from '../app.constants';
+
 export interface Article {
   title: string;
   description: string;
@@ -18,12 +21,31 @@ export interface Toc {
   text: string;
 }
 
-export const sortArticles = (articles: Article[]) => {
-  return articles.sort((a, b) => {
-    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-  });
+export function createArticle(content: string, slug: string): Article {
+  const output = frontmatter<Article>(content);
+  return {
+    ...output.attributes,
+    markdown: output.body,
+    coverUrl: `/content/${slug}/img/cover.png`,
+    url: `${DOMAIN}/articles/${slug}`,
+  };
 }
 
-export const slugify = (input: string) => {
+export function search(text: string, article: Article) {
+  const searchIn = [
+    article.title,
+    article.description,
+    ...article.hashtags,
+  ];
+  return searchIn.some(v => v.includes(text));
+}
+
+export function sortArticles(articles: Article[]) {
+  return articles.sort((a, b) =>
+    new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  );
+}
+
+export function slugify(input: string) {
   return input.toLowerCase().replaceAll(' ', '-');
 }

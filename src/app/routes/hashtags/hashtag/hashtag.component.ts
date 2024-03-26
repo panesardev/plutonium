@@ -1,23 +1,19 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
-import { of } from 'rxjs';
+import { tap } from 'rxjs';
+import { BRAND } from '../../../app.constants';
 import { ArticleListComponent } from '../../../layout/components/article-list.component';
 import { ContentService } from '../../../services/content.service';
 import { Article } from '../../../types/article.interface';
-import { combineLatestObject } from '../../../utilities/custom.operators';
 
-interface HashtagView {
-  hashtag: string;
-  articles: Article[];
-}
-
-export const hashtagViewResolver: ResolveFn<HashtagView> = (route: ActivatedRouteSnapshot) => {
-  const content = inject(ContentService);
+export const HashtagResolver: ResolveFn<Article[]> = (route: ActivatedRouteSnapshot) => {
   const hashtag = route.paramMap.get('hashtag');
-  return combineLatestObject({ 
-    hashtag: of(hashtag),
-    articles: content.findByHashtag(hashtag),
-  });
+  const content = inject(ContentService);
+  const title = inject(Title);
+  return content.findByHashtag(hashtag).pipe(
+    tap(hashtag => title.setTitle(`${hashtag} - ${BRAND}`)),
+  );
 }
 
 @Component({
@@ -30,5 +26,6 @@ export const hashtagViewResolver: ResolveFn<HashtagView> = (route: ActivatedRout
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class HashtagComponent {
-  view = input.required<HashtagView>();
+  hashtag = input.required<string>();
+  articles = input.required<Article[]>();
 }

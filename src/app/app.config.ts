@@ -1,13 +1,10 @@
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { ApplicationConfig, EnvironmentProviders, importProvidersFrom } from '@angular/core';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { ApplicationConfig } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PreloadAllModules, provideRouter, withComponentInputBinding, withInMemoryScrolling, withPreloading } from '@angular/router';
-import { provideMarkdown } from 'ngx-markdown';
-import { FIREBASE_CONFIG } from './app.constants';
 import { routes } from './app.routes';
+import { provideFirebase } from './providers/firebase.provider';
+import { provideMarkdown } from 'ngx-markdown';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,18 +15,10 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({
         scrollPositionRestoration: 'enabled',
       }),
-    ),
+    ), 
     provideClientHydration(),
     provideHttpClient(withFetch()),
     provideFirebase(),
     provideMarkdown(),
   ],
 };
-
-function provideFirebase(): EnvironmentProviders {
-  return importProvidersFrom(
-    provideFirebaseApp(() => initializeApp(FIREBASE_CONFIG)),
-    provideFirestore(() => getFirestore()),
-    provideAuth(() => getAuth()),
-  );
-}

@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NavUserComponent } from './deferred/nav-user.component';
 import { ModalService } from '../services/modal.service';
-import { NavModalComponent } from './modals/nav-modal.component';
-import { SearchModalComponent } from './modals/search-modal.component';
+import { NavComponent } from './modals/nav.component';
+import { SearchComponent } from './modals/search.component';
 import { BRAND } from '../app.constants';
 
 @Component({
@@ -15,54 +15,57 @@ import { BRAND } from '../app.constants';
     NavUserComponent,
   ],
   template: `
-    <header class="fixed z-10 top-0 w-full h-16 md:h-20 px-4 md:px-6 bg-neutral custom-shadow">
-      <nav class="h-full max-width flex lg:grid lg:grid-cols-3 justify-between items-center gap-4 lg:gap-6 mx-auto">
-        <div class="flex justify-start items-center gap-6">
-          <div class="block lg:hidden" (click)="openNavModal()">
-            <i class="menu-icon"></i>
-          </div>
-          <div class="block lg:hidden" (click)="openSearchModal()">
-            <i class="search-icon"></i>
-          </div>
-          <a routerLink="/" class="hidden lg:block brand text-2xl lg:text-3xl">{{ brand }}</a>
+  <header class="h-16 md:h-20 px-4 lg:px-8 backdrop-filter backdrop-blur-lg bg-opacity-90 bg-neutral">
+    <nav class="h-full max-width flex lg:grid lg:grid-cols-3 justify-between items-center gap-4 lg:gap-6 mx-auto">
+      <div class="flex justify-start items-center gap-7">
+        <div class="block lg:hidden" (click)="openNav()">
+          <i class="menu-icon"></i>
         </div>
-        <div class="hidden lg:block">
-          <div (click)="openSearchModal()" 
-            class="bg-base-200 hover:bg-base-300 text-primary w-full px-5 py-2 rounded-full transition-colors cursor-pointer">
-            Search articles
-          </div>
+        <div class="block lg:hidden" (click)="openSearch()">
+          <i class="search-icon"></i>
         </div>
-        <div class="flex justify-end items-center gap-4 lg:gap-6">
-          <div class="hidden lg:flex items-center gap-3">
-            <a routerLink="/articles" routerLinkActive="bg-base-200" class="px-4 py-1 rounded-full">
-              Articles
-            </a>
-            <a routerLink="/hashtags" routerLinkActive="bg-base-200" class="px-4 py-1 rounded-full">
-              Hashtags
-            </a>
-          </div>
-          @defer {
-            <app-nav-user />
-          }  
-          @placeholder { 
-            <button class="btn sm bg-primary text-base-100 text-md" routerLink="/login">Login</button>
-          }
+        <a routerLink="/" class="hidden lg:block inter-tight text-gradient bg-gradient-to-br from-primary to-teal-500 text-primary text-2xl lg:text-3xl">{{ brand }}</a>
+      </div>
+      <div class="hidden lg:block">
+        <div (click)="openSearch()" class="bg-base-200 hover:bg-base-300 text-primary w-full px-5 py-2 rounded-full transition-colors cursor-pointer">
+          <span>Search articles</span>
         </div>
-      </nav>
-    </header>
+      </div>
+      <div class="flex justify-end items-center gap-4 lg:gap-6">
+        <div class="hidden lg:flex items-center gap-3">
+          <a routerLink="/articles" routerLinkActive="bg-base-200" class="text-primary px-4 py-1 rounded-full">Articles</a>
+          <a routerLink="/hashtags" routerLinkActive="bg-base-200" class="text-primary px-4 py-1 rounded-full">Hashtags</a>
+        </div>
+        @defer {
+          <app-nav-user/>
+        }
+        @placeholder { 
+          <button class="btn sm primary rounded-full" (click)="openLogin()">Login</button>
+        }
+      </div>
+    </nav>
+  </header>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarComponent {
   private modal = inject(ModalService);
-  
-  brand = BRAND;
 
-  openSearchModal(): void {
-    this.modal.open(SearchModalComponent);
+  brand = BRAND;
+  
+  openLogout() {
+    this.modal.openLazy(() => import('./modals/logout.component').then(c => c.LogoutComponent));
   }
 
-  openNavModal(): void {
-    this.modal.open(NavModalComponent);
+  openLogin() {
+    this.modal.openLazy(() => import('./modals/login.component').then(c => c.LoginComponent));
+  }
+
+  openSearch() {
+    this.modal.open(SearchComponent);
+  }
+
+  openNav() {
+    this.modal.open(NavComponent);
   }
 }

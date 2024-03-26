@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ModalService } from '../services/modal.service';
 
 @Component({
   selector: 'app-footer',
@@ -8,16 +9,22 @@ import { RouterLink } from '@angular/router';
     RouterLink,
   ],
   template: `
-    <footer class="mb-20">
+    <footer class="grid place-content-center h-96">
       <div class="flex gap-4 md:gap-6 items-center justify-center mb-6">
-        <a routerLink="/">Home</a>
-        <a routerLink="/about">About</a>
-        <a routerLink="/login">Login</a>
-        <a routerLink="/articles">Articles</a>
+        <a class="text-primary hover:underline" routerLink="/">Home</a>
+        <a class="text-primary hover:underline" routerLink="/about">About</a>
+        <a class="text-primary hover:underline cursor-pointer" (click)="openLogin()">Login</a>
+        <a class="text-primary hover:underline" routerLink="/articles">Articles</a>
       </div>
-      <p class="text-center">Developed by <a target="_blank" rel="noopener" rel="noreferrer" href="https://panesar.dev">Sukhpreet Singh</a></p>
+      <p class="text-center">Developed by <a class="text-blue-500 hover:underline" target="_blank" rel="noopener" rel="noreferrer" href="https://panesar.dev">Sukhpreet Singh</a></p>
     </footer>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FooterComponent {}
+export class FooterComponent {
+  private modal = inject(ModalService);
+
+  openLogin() {
+    this.modal.openLazy(() => import('./modals/login.component').then(c => c.LoginComponent));
+  }
+}

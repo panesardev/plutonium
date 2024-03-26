@@ -7,11 +7,10 @@ import { Directive, ElementRef, HostListener, inject, input } from "@angular/cor
 export class FallbackImageDirective {
   private hostRef = inject(ElementRef);
 
-  fallbackImage = input<string>();
+  fallbackImage = input.required<string>();
 
   @HostListener('error')
   onError() {
     this.hostRef.nativeElement.src = this.fallbackImage();
   }
 }
-

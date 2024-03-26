@@ -1,30 +1,26 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { ResolveFn } from '@angular/router';
-import { ArticleListComponent } from '../../layout/components/article-list.component';
-import { ContentService } from '../../services/content.service';
+import { AsyncPipe } from '@angular/common';
 import { Article } from '../../types/article.interface';
-import { combineLatestObject } from '../../utilities/custom.operators';
+import { ArticleListComponent } from '../../layout/components/article-list.component';
+import { ResolveFn } from '@angular/router';
+import { ContentService } from '../../services/content.service';
 
-interface ArticlesView {
-  articles: Article[];
-}
-
-export const articlesViewResolver: ResolveFn<ArticlesView> = () => {
+export const ArticlesResolver: ResolveFn<Article[]> = () => {
   const content = inject(ContentService);
-  return combineLatestObject({
-    articles: content.articles$,
-  });
+  return content.getArticles();
 }
 
 @Component({
   selector: 'app-articles',
   standalone: true,
   imports: [
+    AsyncPipe,
     ArticleListComponent,
   ],
   templateUrl: './articles.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class ArticlesComponent {
-  view = input.required<ArticlesView>();
+
+  articles = input.required<Article[]>();
 }

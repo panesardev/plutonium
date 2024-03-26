@@ -1,34 +1,31 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
+import { map } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
-import { User } from '../../types/user.interface';
-import { map } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-save-button',
   standalone: true,
   imports: [
-    RouterLink,
     AsyncPipe,
   ],
   template: `
     <div class="flex justify-center">
       @if (user$ | async; as user) {
         @if (isArticleSaved$ | async) {
-          <button class="btn bg-red-500 text-base-100 md:w-full" (click)="removeArticle(user)">
-            Remove saved 
+          <button class="btn red md:w-full" (click)="removeArticle()">
+            Remove saved
           </button>
         }
         @else {
-          <button class="btn bg-primary text-base-100 md:w-full" (click)="saveArticle(user)">
+          <button class="btn primary md:w-full" (click)="saveArticle()">
             Save Article
           </button>
         }
       }
       @else {
-        <button class="btn bg-primary text-base-100 md:w-full" routerLink="/login">
+        <button class="btn primary md:w-full" (click)="onLogin.emit()">
           Login to save
         </button>
       }
@@ -41,18 +38,20 @@ export class SaveButtonComponent {
   private userService = inject(UserService);
 
   slug = input.required<string>();
+  onLogin = output<void>();
 
   user$ = this.auth.user$;
+
   isArticleSaved$ = this.user$.pipe(
-    map(user => user.saved.includes(this.slug())),
+    map(user => user.slugs.includes(this.slug())),
   );
   
-  async saveArticle(user: User) {
-    await this.userService.saveArticle(user, this.slug());
+  async saveArticle() {
+    await this.userService.saveArticle(this.slug());
   }
 
-  async removeArticle(user: User) {
-    await this.userService.removeArticle(user, this.slug());
+  async removeArticle() {
+    await this.userService.removeArticle(this.slug());
   }
 
 }

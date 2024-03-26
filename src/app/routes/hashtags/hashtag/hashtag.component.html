@@ -1,9 +1,7 @@
-@if (view(); as view) {
-  <section class="px-4 md:px-8">
-    <h1 class="heading">{{ view.hashtag }}</h1>
-  
-    <div class="max-w-[70rem] mx-auto">
-      <app-article-list [articles]="view.articles"/>
-    </div>
-  </section>  
-}
+<section class="px-4 md:px-8">
+  <h1 class="heading capitalize mb-8 md:mb-12">{{ hashtag() }}</h1>
+
+  <div class="max-w-6xl mx-auto">
+    <app-article-list [articles]="articles()"/>
+  </div>
+</section>  

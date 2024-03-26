@@ -1,32 +1,35 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { FooterComponent } from './layout/footer.component';
 import { ModalComponent } from './layout/modal.component';
 import { NavbarComponent } from './layout/navbar.component';
-import { FooterComponent } from './layout/footer.component';
-import { ModalService } from './services/modal.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
-    ModalComponent,
     NavbarComponent,
     FooterComponent,
+    ModalComponent,
   ],
   template: `
-    <div class="{{ modal.isClosed() ? 'blur-none' : 'blur-md' }} transition-blur">
-      <app-navbar />
-      <main class="max-width mx-auto">
-        <div class="pt-24 md:pt-28 pb-16"> <!-- fix navbar layout shift on modal open -->
-          <router-outlet />
-        </div>
-      </main>
-      <app-footer />
-    </div>
-    <app-modal />
+    <main>
+      <div class="fixed top-0 left-0 right-0 z-10 select-none">
+        <app-navbar/>
+      </div>
+      <div class="max-width mt-24 md:mt-32 mx-auto">
+        <router-outlet/>
+      </div>
+      <div class="select-none">
+        <app-footer/>
+      </div>
+    </main>
+    <app-modal/>
+    <div class="fixed inset-0 z-[-10] bg-gradient-to-b from-transparent to-base-300 from-20%"></div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  readonly modal = inject(ModalService);
+
 }

@@ -1,32 +1,17 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { ResolveFn, RouterLink } from '@angular/router';
-import { LogoutModalComponent } from '../../layout/modals/logout-modal.component';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ArticleListComponent } from '../../layout/components/article-list.component';
 import { AuthService } from '../../services/auth.service';
 import { ModalService } from '../../services/modal.service';
 import { UserService } from '../../services/user.service';
-import { Article } from '../../types/article.interface';
-import { User } from '../../types/user.interface';
-import { combineLatestObject } from '../../utilities/custom.operators';
-import { ArticleListComponent } from '../../layout/components/article-list.component';
-
-interface DashboardView {
-  user: User;
-  articles: Article[];
-}
-
-export const dashboardViewResolver: ResolveFn<DashboardView> = () => {
-  const auth = inject(AuthService);
-  const userService = inject(UserService);
-  return combineLatestObject({
-    user: auth.user$,
-    articles: userService.articles$,
-  });
-}
+import { combineLatestObject } from '../../utilities/rxjs.operators';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
+    AsyncPipe,
     RouterLink,
     ArticleListComponent,
   ],
@@ -34,15 +19,21 @@ export const dashboardViewResolver: ResolveFn<DashboardView> = () => {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class DashboardComponent {
+  private auth = inject(AuthService);
+  private userService = inject(UserService);
   private modal = inject(ModalService);
 
-  view = input.required<DashboardView>();
+  view$ = combineLatestObject({
+    user: this.auth.user$,
+    articles: this.userService.getArticles(),
+  });
 
-  openLogoutModal() {
-    this.modal.open(LogoutModalComponent);
+  parseDate(milliseconds: number) {
+    return new Date(milliseconds).toDateString();
   }
 
-  openProModal() {
-    
+  openLogout() {
+    this.modal.openLazy(() => import('../../layout/modals/logout.component').then(c => c.LogoutComponent));
   }
+
 }

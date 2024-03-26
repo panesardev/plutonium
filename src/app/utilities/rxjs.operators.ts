@@ -9,7 +9,7 @@ export function combineLatestObject<T>(object: InputObject<T>): Observable<T> {
     isObservable(value) ? value : of(value)
   );
   return combineLatest(observables).pipe(
-    map((values) =>
+    map(values =>
       values.reduce((acc, value, index) => {
         acc[entries[index][0]] = value;
         return acc;

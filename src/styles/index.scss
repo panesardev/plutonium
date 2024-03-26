@@ -2,135 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './animations.scss';
 @import './components.scss';
-@import './utilities.scss';
+@import './animations.scss';  
 @import './icons.scss';
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
-header, button, img {
-  user-select: none;
-}
-
-input, button {
-  outline: none;
-}
-
-img {
-  max-width: 100%;
+image {
   width: 100%;
   height: auto;
-  display: block;
 }
 
-a {
-  color: theme('colors.primary');
-}
-
-.custom-shadow {
-  box-shadow: 0 0 25px #155f7506;
-}
-
-.max-width {
-  max-width: 100rem;
-}
-
-.heading {
-  margin-top: 1.25rem;
-  margin-bottom: 3rem;
-  font-weight: bold;
-  font-size: 3rem;
-  text-transform: capitalize;
-  text-align: center;
-  user-select: none;
-  color: theme('colors.primary');
-  font-family: 'Lobster', sans-serif;
-}
-
-.transition-blur {
-  transition: filter 200ms ease-in-out;
-}
-
-.markdown {
-  min-width: 0;
-
-  h2 {
-    color: theme('colors.primary');
-    font-weight: bold;
-    // text-3xl
-    font-size: 1.875rem/* 30px */;
-    line-height: 2.25rem/* 36px */;
-
-    margin-bottom: 1.5rem;
-    text-transform: capitalize;
-  }
-  
-  p {
-    margin-bottom: 1.5rem;
-    // text-lg
-    font-size: 1.125rem/* 18px */;
-    line-height: 1.75rem/* 28px */;
-  }
-  
-  img {
-    width: 100%;
-    height: auto;
-  }
-  
-  pre {
-    @apply md:p-7 mb-12;
-    max-width: 100%;
-    position: relative;
-    overflow: auto;
-    padding: 1rem;
-    border-radius: 0.5rem/* 8px */;
-    background-color: theme('colors.neutral');
-    box-shadow: 0 0 25px #155f7506;
-  }
-  
-  code {
-    font-family: 'Fira Code', sans-serif;
-  }    
-}
-
-
-// fonts
-@font-face {
-  font-family: 'Aquire';
-  src: url('/assets/fonts/Aquire.otf');
-}
-
-.brand {
-  font-family: 'Aquire', sans-serif;
-
-  &:hover {
-    text-decoration: none;
-  }
-}
-
-.aquire {
-  font-family: 'Aquire', sans-serif;
-}
-
-.lobster {
-  font-family: 'Lobster', sans-serif;
+::selection{
+  @apply bg-base-300 text-primary;  
 }
 
 /* width */
 ::-webkit-scrollbar {
-  width: 0;
-  height: 0;
+  width: 4px;
 }
 
-/* Change Autocomplete styles in Chrome */
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus {
-  // border: 1px solid green;
-  -webkit-text-fill-color: theme('colors.primary');
-  box-shadow: 0 0 25px #155f7506;
-  transition: background-color 5000s ease-in-out 0s;
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: theme('colors.slate.300'); 
+  border-radius: 100px;
 }

@@ -1,11 +1,91 @@
 @layer components {
-  .btn {
-    @apply flex justify-center items-center gap-3 py-2.5 px-8 rounded-full transition-opacity;
+  .inter-tight {
+    font-family: "Inter Tight", sans-serif;
   }
+  
+  .heading {
+    @apply inter-tight font-bold bg-gradient-to-br from-primary to-teal-500 text-5xl md:text-6xl lg:text-7xl text-center text-transparent bg-clip-text select-none pb-3;
+  }
+
+  .btn {
+    @apply flex justify-center items-center hover:opacity-90 rounded-full gap-3 py-3 px-8 select-none transition-opacity;
+  }
+  
   .btn.sm {
     @apply py-1 px-4;
   }
-  .btn:hover {
-    @apply opacity-90;
+
+  .btn.primary {
+    @apply bg-primary text-secondary;
+  }
+  
+  .btn.secondary {
+    @apply bg-secondary text-primary;
+  }
+
+  .btn.red {
+    @apply bg-red-500 text-red-50;
+  }
+
+  .input {
+    @apply grid gap-2;
+    input, textarea, select {
+      outline: none;
+      @apply border-[1px] border-slate-300 rounded px-4 py-3;
+    }
+  }
+  
+  .custom-shadow {
+    box-shadow: 0 0 25px #132a3405;
+  }
+  
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .max-width {
+    max-width: 1920px;
+  }
+  
+  .markdown {
+    min-width: 0;
+
+    h2 {
+      color: theme('colors.primary');
+      font-weight: bold;
+      // text-3xl
+      font-size: 1.875rem/* 30px */;
+      line-height: 2.25rem/* 36px */;
+
+      margin-bottom: 1.5rem;
+      text-transform: capitalize;
+    }
+    
+    p {
+      margin-bottom: 1.5rem;
+      // text-lg
+      font-size: 1.125rem/* 18px */;
+      line-height: 1.75rem/* 28px */;
+    }
+    
+    img {
+      width: 100%;
+      height: auto;
+    }
+    
+    pre {
+      @apply p-4 md:p-8 mb-12 rounded;
+      max-width: 100%;
+      position: relative;
+      overflow: auto;
+      background-color: theme('colors.neutral');
+      box-shadow: 0 0 25px #155f7506;
+    }
+    
+    code {
+      font-family: "Roboto Mono", monospace;
+    }    
   }
 }

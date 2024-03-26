@@ -1,82 +1,82 @@
-.modal-in {
-  animation: modal-in 200ms cubic-bezier(.21,.64,.45,1.02);
-  transform: translateY(0%);
-}
-
-@keyframes modal-in {
-  from {
-    transform: translateY(15px);
-  }
-  to {
-    transform: translateY(0%);
-  }
-}
-
-.modal-out {
-  animation: modal-out 200ms cubic-bezier(.21,.64,.45,1.02);
-  transform: translateY(15px);
-  opacity: 0;
-}
-
-@keyframes modal-out {
-  from {
-    transform: translateY(0%);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(15px);
-    opacity: 0;
-  }
-}
-
-.modal-overlay-in {
-  animation: modal-overlay-in 300ms;
-  opacity: 1;
-}
-
-@keyframes modal-overlay-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.modal-overlay-out {
-  animation: modal-overlay-out 450ms;
-  opacity: 0;
-}
-
-@keyframes modal-overlay-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
 section {
-  animation: routeIn 300ms cubic-bezier(.21,.64,.45,1.02);
-  transform: translateY(0);
+  animation: route-in 300ms cubic-bezier(.21,.64,.45,1.02);
+  transform: translateY(0%);
   opacity: 1;
-  min-height: 100vh;
 }
 
-@keyframes routeIn {
+@keyframes route-in {
   from {
-    transform: translateY(30px);
+    transform: translateY(15px);
     opacity: 0;
   }
   30% {
     opacity: 0;
   }
   to {
-    transform: translateY(0);
+    transform: translateY(0%);
     opacity: 1;
   }
 }
+
+.modal-open {
+  animation: modal-open 200ms cubic-bezier(.21,.64,.45,1.02);
+  transform: translateY(0%);
+}
+
+@keyframes modal-open {
+  from {
+    transform: translateY(15px);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+.modal-close {
+  animation: modal-close 200ms cubic-bezier(.21,.64,.45,1.02);
+  transform: translateY(15px);
+  opacity: 0;
+}
+
+@keyframes modal-close {
+  from {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+}
+
+.modal-overlay-open {
+  animation: modal-overlay-open 300ms;
+  opacity: 1;
+}
+
+@keyframes modal-overlay-open {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-overlay-close {
+  animation: modal-overlay-close 450ms;
+  opacity: 0;
+}
+
+@keyframes modal-overlay-close {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 
 // loading
 .loading {

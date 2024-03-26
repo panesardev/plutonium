@@ -2,17 +2,10 @@ import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core
 import { ResolveFn } from '@angular/router';
 import { HashtagListComponent } from '../../layout/components/hashtag-list.component';
 import { ContentService } from '../../services/content.service';
-import { combineLatestObject } from '../../utilities/custom.operators';
 
-interface HashtagsView {
-  hashtags: string[];
-}
-
-export const hashtagsViewResolver: ResolveFn<HashtagsView> = () => {
+export const HashtagsResolver: ResolveFn<string[]> = () => {
   const content = inject(ContentService);
-  return combineLatestObject({ 
-    hashtags: content.hashtags$ 
-  });
+  return content.getHashtags();
 }
 
 @Component({
@@ -25,5 +18,5 @@ export const hashtagsViewResolver: ResolveFn<HashtagsView> = () => {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class HashtagsComponent {
-  view = input.required<HashtagsView>();
+  hashtags = input.required<string[]>();
 }

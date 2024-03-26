@@ -1,24 +1,24 @@
 import { DOCUMENT, NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, afterRender, effect, inject, input, signal, viewChild } from '@angular/core';
+import { afterRender, ChangeDetectionStrategy, Component, ElementRef, inject, input, signal, viewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, ResolveFn, RouterLink } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
+import { tap } from 'rxjs';
+import { BRAND } from '../../../app.constants';
 import { HashtagListComponent } from '../../../layout/components/hashtag-list.component';
 import { SaveButtonComponent } from '../../../layout/deferred/save-button.component';
 import { ContentService } from '../../../services/content.service';
-import { Article, Toc, slugify } from '../../../types/article.interface';
-import { FallbackImageDirective } from '../../../utilities/image.directive';
-import { combineLatestObject } from '../../../utilities/custom.operators';
+import { ModalService } from '../../../services/modal.service';
+import { Article, slugify, Toc } from '../../../types/article.interface';
+import { FallbackImageDirective } from '../../../utilities/fallback-image.directive';
 
-interface ArticleView {
-  article: Article;
-}
-
-export const articleViewResolver: ResolveFn<ArticleView> = (route: ActivatedRouteSnapshot) => {
-  const content = inject(ContentService);
+export const ArticleResolver: ResolveFn<Article> = (route: ActivatedRouteSnapshot) => {
   const slug = route.paramMap.get('slug');
-  return combineLatestObject({ 
-    article: content.findBySlug(slug),
-  });
+  const content = inject(ContentService);
+  const title = inject(Title);
+  return content.findBySlug(slug).pipe(
+    tap(article => title.setTitle(`${article.title} - ${BRAND}`)),
+  );
 }
 
 @Component({
@@ -37,9 +37,11 @@ export const articleViewResolver: ResolveFn<ArticleView> = (route: ActivatedRout
 })
 export default class ArticleComponent {
   private document = inject(DOCUMENT);
+  private modal = inject(ModalService);
 
-  view = input.required<ArticleView>();
+  article = input.required<Article>();
   markdownRef = viewChild.required<ElementRef>('markdown');
+  
   tableOfContents = signal<Toc[]>([]);
 
   afterRenderRef = afterRender(() => {
@@ -64,4 +66,7 @@ export default class ArticleComponent {
     });
   }
 
+  openLogin() {
+    this.modal.openLazy(() => import('../../../layout/modals/login.component').then(c => c.LoginComponent));
+  }
 }

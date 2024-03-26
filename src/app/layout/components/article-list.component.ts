@@ -15,19 +15,19 @@ import { NgOptimizedImage } from '@angular/common';
     NgOptimizedImage,
   ],
   template: `
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 justify-center gap-6 md:gap-8">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 justify-center gap-6 md:gap-8 lg:gap-10">
       @for (article of articles(); track article.slug) {
-        <div class="grid justify-between rounded h-fit gap-4 md:gap-5 bg-neutral">
+        <div class="bg-neutral rounded-lg custom-shadow">
           <a routerLink="/articles/{{ article.slug }}">
-            <img ngSrc="/content/{{ article.slug }}/img/cover_400x225.webp" class="rounded" [alt]="article.title" width="400" height="225">
+            <img ngSrc="/content/{{ article.slug }}/img/cover.png" class="rounded-lg" [alt]="article.title" width="400" height="225">
           </a>
-          <div class="px-4 md:px-6 pb-4 md:pb-6">
-            <h1 class="text-lg text-primary font-bold mb-2">{{ article.title }}</h1>
+          <div class="p-4 md:p-6">
+            <h1 class="text-lg font-bold mb-2">{{ article.title }}</h1>
             <p class="mb-4">{{ article.description }}</p>
-            <div class="inline-block mb-5">
+            <div class="inline-block mb-6">
               <app-hashtag-list [hashtags]="article.hashtags"></app-hashtag-list>
             </div>
-            <button class="btn bg-primary text-base-100 w-full" routerLink="/articles/{{ article.slug }}">Read more</button>
+            <button class="btn primary w-full" routerLink="/articles/{{ article.slug }}">Read more</button>
           </div>
         </div>
       }

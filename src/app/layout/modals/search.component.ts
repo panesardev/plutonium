@@ -1,15 +1,14 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs';
 import { ContentService } from '../../services/content.service';
-import { Article } from '../../types/article.interface';
 import { Modal } from '../../types/modal.class';
 import { BaseModalComponent } from './base-modal.component';
 
 @Component({
-  selector: 'app-search-modal',
+  selector: 'app-search',
   standalone: true,
   imports: [
     AsyncPipe,
@@ -19,10 +18,9 @@ import { BaseModalComponent } from './base-modal.component';
   ],
   template: `
     <app-base-modal heading="Search articles" classes="max-w-2xl">
-      <div class="grid gap-2 mb-4">
-        <label>enter title</label>
-        <input type="text" name="search" [formControl]="textControl" placeholder="type here" autocomplete="off"
-          class="border-2 border-slate-200 placeholder:text-slate-600 w-full px-4 py-2 rounded">
+      <div class="input mb-4">
+        <span>enter title</span>
+        <input type="text" [formControl]="textControl" placeholder="type here" autocomplete="off">
       </div>
 
       @if (text$ | async; as text) {
@@ -45,7 +43,7 @@ import { BaseModalComponent } from './base-modal.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchModalComponent extends Modal {
+export class SearchComponent extends Modal {
   private content = inject(ContentService);
 
   textControl = new FormControl('');
@@ -57,19 +55,6 @@ export class SearchModalComponent extends Modal {
   );
 
   articles$ = this.text$.pipe(
-    switchMap(text =>
-      this.content.articles$.pipe(
-        map(articles => articles.filter(a => searchFn(text, a))),
-      ),
-    ),
+    switchMap(text => this.content.search(text)),
   );
-}
-
-function searchFn(text: string, article: Article): boolean {
-  const searchIn = [
-    article.title.toLowerCase(),
-    article.description.toLowerCase(),
-    ...article.hashtags,
-  ];
-  return searchIn.some(value => value.includes(text));
 }

@@ -1,57 +1,57 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import frontmatter from 'front-matter';
 import { Observable, map, take, zip } from "rxjs";
-import { SLUGS, FEATURED_SLUG, DOMAIN } from '../app.constants';
-import { Article, sortArticles } from "../types/article.interface";
+import { FEATURED_SLUG, SLUGS } from '../app.constants';
+import { Article, createArticle, search, sortArticles } from "../types/article.interface";
 
 @Injectable({ providedIn: 'root' })
 export class ContentService {
   private http = inject(HttpClient);
-   
-  articles$ = zip(SLUGS.map(slug => this.findBySlug(slug))).pipe(
-    map(articles => sortArticles(articles)),
-  );
-
-  featured$ = this.findBySlug(FEATURED_SLUG);
-  
-  hashtags$ = this.articles$.pipe(
-    // extract hashtags from all articles into a single array
-    map(articles => [].concat(...articles.map(a => a.hashtags))),
-    // remove duplicates and then sort hashtags 
-    map(hashtags => Array.from(new Set(hashtags)).sort() as string[]),
-  );
 
   private fetchContent(slug: string): Observable<string> {
     return this.http.get(`/content/${slug}/index.md`, {
       responseType: 'text',
-    });
+    }).pipe(take(1));
   }
 
   findBySlug(slug: string): Observable<Article> {
     return this.fetchContent(slug).pipe(
-      take(1),
-      map(content => {
-        const output = frontmatter<Article>(content);
-        return {
-          ...output.attributes,
-          markdown: output.body,
-          coverUrl: `/content/${slug}/img/cover.png`,
-          url: `${DOMAIN}/articles/${slug}`,
-        };
-      }),
+      map(content => createArticle(content, slug)),
+    );
+  }
+
+  getArticles(): Observable<Article[]> {
+    return zip(SLUGS.map(slug => this.findBySlug(slug))).pipe(
+      map(articles => sortArticles(articles)),
+    );
+  }
+
+  getFeatured(): Observable<Article> {
+    return this.findBySlug(FEATURED_SLUG);
+  }
+
+  getHashtags(): Observable<string[]> {
+    return this.getArticles().pipe(
+      map(articles => [].concat(...articles.map(a => a.hashtags)) as string[]),
+      map(hashtags => Array.from(new Set(hashtags)).sort()),
     );
   }
 
   findRecent(count: number): Observable<Article[]> {
-    return this.articles$.pipe(
+    return this.getArticles().pipe(
       map(articles => articles.slice(0, count)),
     );
   }
 
   findByHashtag(hashtag: string): Observable<Article[]> {
-    return this.articles$.pipe(
+    return this.getArticles().pipe(
       map(articles => articles.filter(a => a.hashtags.includes(hashtag))),
+    );
+  }
+
+  search(text: string): Observable<Article[]> {
+    return this.getArticles().pipe(
+      map(articles => articles.filter(a => search(text, a))),
     );
   }
 

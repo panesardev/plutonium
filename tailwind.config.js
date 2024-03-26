@@ -5,9 +5,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      transitionProperty: {
-        'spacing': 'margin, padding',
-      },
       colors: {
         'base-100': 'hsl(175, 70%, 97%)',
         'base-200': 'hsl(175, 70%, 94%)',

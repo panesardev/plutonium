@@ -1,10 +1,13 @@
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
-export interface Credentials {
+export interface AuthData {
   displayName?: string;
   email?: string;
   password?: string;
+  type?: FormType;
 }
+
+export type FormType = 'LOGIN' | 'CREATE_ACCOUNT' | 'RESET_PASSWORD';
 
 export type OAuthProviderName = 'google' | 'github';
 

@@ -1,4 +1,4 @@
-@if (view().article; as article) {
+@if (article(); as article) {
   <!-- metatags -->
   <meta name="title" [content]="article.title">
   <meta name="description" [content]="article.description">
@@ -21,37 +21,37 @@
   
   <article itemscope itemtype="http://schema.org/Article">
     <section>
-      <div class="px-4 md:px-8">
-        <h1 class="heading">{{ article.title }}</h1>
+      <div class="px-6 md:px-8">
+        <h1 class="heading mb-8 md:mb-12">{{ article.title }}</h1>
         
-        <div class="bg-neutral w-fit mx-auto mb-10 p-3 md:p-4 rounded-full custom-shadow">
+        <div class="bg-neutral w-fit mx-auto mb-10 p-4 rounded-full custom-shadow">
           <app-hashtag-list [hashtags]="article.hashtags"/>
         </div>
         
-        <p class="text-xl md:text-center mb-7">{{ article.description }}</p>
+        <p class="text-lg md:text-center mb-6">{{ article.description }}</p>
         
         <div class="flex flex-col md:flex-row md:items-center justify-center gap-4 md:gap-5 mb-7">
           <div class="flex items-center gap-3 md:gap-4">
-            <img [ngSrc]="article.authorImage" class="rounded-full w-8" fallbackImage="assets/img/user.png" alt="user" height="30" width="30">
+            <img [ngSrc]="article.authorImage" class="rounded-full w-8" fallbackImage="/assets/img/user.png" alt="user" height="30" width="30">
             <span>By <a target="_blank" rel="noopener" rel="noreferrer" [href]="article.authorLink">{{ article.authorName }}</a></span>
           </div>
           <div class="hidden md:block select-none">•</div>
           <div>Posted on {{ article.createdAt }}</div>
           <div class="hidden md:block select-none">•</div>
           <div class="inline-block">
-            <a class="underline" [href]="article.source" target="_blank">source</a>
+            <a class="text-primary underline" [href]="article.source" target="_blank">source</a>
           </div>
         </div>
       </div>
       
-      <div class="grid md:grid-cols-[300px_1fr] md:gap-10 max-w-7xl mx-auto md:px-8">
+      <div class="grid md:grid-cols-[300px_1fr] gap-4 md:gap-8 max-w-7xl mx-auto md:px-8">
         <div>
           <div class="mb-8">
             @defer {
-              <app-save-button [slug]="article.slug"/>
+              <app-save-button [slug]="article.slug" (onLogin)="openLogin()"/>
             }
             @placeholder { 
-              <button class="btn bg-primary text-base-100 md:w-full" routerLink="/login">
+              <button class="btn primary md:w-full mx-auto" (click)="openLogin()">
                 Login to save
               </button>
             }
@@ -59,11 +59,11 @@
           <div class="relative md:sticky md:top-28 h-min">
             <!-- table of contents -->
             @defer {
-              <div class="bg-neutral custom-shadow md:rounded-md p-5 md:p-7 w-full select-none">
-                <h1 class="text-primary text-2xl pb-2 mb-3 border-b-2 border-slate-100">Contents</h1>
+              <div class="bg-neutral rounded select-none p-6">
+                <h1 class="font-bold text-2xl text-primary mb-4">Contents</h1>
                 @for (toc of tableOfContents(); track toc.id) {
                   <div>
-                    <span class="block rounded-md py-2 hover:pl-4 hover:bg-base-200 hover:text-primary cursor-pointer transition-spacing duration-200"
+                    <span class="block hover:bg-base-200 hover:text-primary rounded-md py-2 hover:pl-4 cursor-pointer duration-150"
                       (click)="scroll(toc.id)">
                       {{ toc.text }}
                     </span> 
@@ -78,9 +78,9 @@
             }
           </div>
         </div>
-        <div class="min-w-0">
-          <img class="mb-10 md:rounded-md" ngSrc="/content/{{ article.slug }}/img/cover.png" priority alt="article_cover" width="800" height="450">
-          <div class="px-4 md:px-0" #markdown>
+        <div class="min-w-0 px-4 md:px-0">
+          <img class="mx-auto mb-10 rounded" ngSrc="/content/{{ article.slug }}/img/cover.png" priority alt="article_cover" width="1200" height="675">
+          <div #markdown>
             <markdown class="markdown" [data]="article.markdown"/>
           </div>
         </div>
