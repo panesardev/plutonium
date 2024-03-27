@@ -51,7 +51,7 @@ import { AuthData, FormType } from '../../types/auth.interface';
       </div>
     </form>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthFormComponent {
   onSubmit = output<AuthData>();

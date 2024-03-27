@@ -7,7 +7,7 @@ export interface UserData {
   created: string;
 }
 
-export function newUserData() {
+export function createUserData(): UserData {
   return {
     slugs: [],
     created: new Date().toDateString().slice(3),

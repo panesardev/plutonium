@@ -31,7 +31,7 @@ export function createArticle(content: string, slug: string): Article {
   };
 }
 
-export function search(text: string, article: Article) {
+export function searchArticle(text: string, article: Article) {
   const searchIn = [
     article.title,
     article.description,
@@ -46,6 +46,6 @@ export function sortArticles(articles: Article[]) {
   );
 }
 
-export function slugify(input: string) {
-  return input.toLowerCase().replaceAll(' ', '-');
+export function slugify(text: string) {
+  return text.toLowerCase().replaceAll(' ', '-');
 }

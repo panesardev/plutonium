@@ -17,7 +17,7 @@ import { BaseModalComponent } from './base.modal.component';
     RouterLink,
   ],
   template: `
-    <app-base-modal heading="Search articles" classes="max-w-2xl">
+    <app-base-modal heading="Search articles" width="max-w-2xl">
       <div class="input mb-4">
         <span>enter title</span>
         <input type="text" [formControl]="textControl" placeholder="type here" autocomplete="off">

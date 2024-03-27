@@ -17,7 +17,7 @@ import { BaseModalComponent } from './base.modal.component';
     AsyncPipe,
   ],
   template: `
-    <app-base-modal heading="Authentication" classes="max-w-md">
+    <app-base-modal heading="Authentication">
       @if (user$ | async; as user) {
         <div class="flex items-center gap-3 bg-secondary hover:bg-base-300 text-primary rounded mb-4 px-4 py-3 cursor-pointer" routerLink="/dashboard" (click)="modal.close()">
           <img [src]="user.photoURL" alt="user" class="rounded-full w-8 h-8" fallbackImage="/assets/img/user.png">

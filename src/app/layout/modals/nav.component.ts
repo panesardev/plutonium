@@ -13,7 +13,7 @@ import { BRAND } from '../../app.constants';
     RouterLinkActive,
   ],
   template: `
-    <app-base-modal [heading]="brand" classes="max-w-md">
+    <app-base-modal [heading]="brand">
       <div class="grid gap-2" (click)="modal.close()">
         <div class="text-primary px-5 py-3 rounded" routerLink="/">
           <a>Home</a>

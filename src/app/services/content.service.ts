@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { Observable, map, take, zip } from "rxjs";
 import { FEATURED_SLUG, SLUGS } from '../app.constants';
-import { Article, createArticle, search, sortArticles } from "../types/article.interface";
+import { Article, createArticle, searchArticle, sortArticles } from "../types/article.interface";
 
 @Injectable({ providedIn: 'root' })
 export class ContentService {
@@ -20,6 +20,24 @@ export class ContentService {
     );
   }
 
+  findRecent(count: number): Observable<Article[]> {
+    return this.getArticles().pipe(
+      map(articles => articles.slice(0, count)),
+    );
+  }
+
+  findByHashtag(hashtag: string): Observable<Article[]> {
+    return this.getArticles().pipe(
+      map(articles => articles.filter(a => a.hashtags.includes(hashtag))),
+    );
+  }
+
+  search(text: string): Observable<Article[]> {
+    return this.getArticles().pipe(
+      map(articles => articles.filter(a => searchArticle(text, a))),
+    );
+  }
+  
   getArticles(): Observable<Article[]> {
     return zip(SLUGS.map(slug => this.findBySlug(slug))).pipe(
       map(articles => sortArticles(articles)),
@@ -36,23 +54,4 @@ export class ContentService {
       map(hashtags => Array.from(new Set(hashtags)).sort()),
     );
   }
-
-  findRecent(count: number): Observable<Article[]> {
-    return this.getArticles().pipe(
-      map(articles => articles.slice(0, count)),
-    );
-  }
-
-  findByHashtag(hashtag: string): Observable<Article[]> {
-    return this.getArticles().pipe(
-      map(articles => articles.filter(a => a.hashtags.includes(hashtag))),
-    );
-  }
-
-  search(text: string): Observable<Article[]> {
-    return this.getArticles().pipe(
-      map(articles => articles.filter(a => search(text, a))),
-    );
-  }
-
 }

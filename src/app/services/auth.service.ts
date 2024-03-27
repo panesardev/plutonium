@@ -4,7 +4,7 @@ import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable, map, of, switchMap } from 'rxjs';
 import { AuthData, OAuthProviderName, getAuthProvider } from '../types/auth.interface';
-import { User, UserData, newUserData } from '../types/user.interface';
+import { User, UserData, createUserData } from '../types/user.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -19,7 +19,7 @@ export class AuthService {
           map((data: UserData) => ({ ...user, ...data })),
         ) as Observable<User>;
       }
-      return of(null);
+      else return of(null);
     }),
   );
 
@@ -27,7 +27,7 @@ export class AuthService {
     const credential = await createUserWithEmailAndPassword(this.auth, email, password);
     await Promise.all([
       updateProfile(credential.user, { displayName }), 
-      this.setUser(credential.user.uid, newUserData()),
+      this.setUser(credential.user.uid, createUserData()),
       this.router.navigateByUrl('/dashboard'),
     ]);
   }
@@ -42,7 +42,7 @@ export class AuthService {
     const credential = await signInWithPopup(this.auth, provider);
 
     if (getAdditionalUserInfo(credential).isNewUser)
-      await this.setUser(credential.user.uid, newUserData());
+      await this.setUser(credential.user.uid, createUserData());
 
     await this.router.navigateByUrl('/dashboard');
   }

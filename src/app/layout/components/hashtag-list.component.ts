@@ -8,13 +8,13 @@ import { RouterLink } from '@angular/router';
   template: `
     <div class="flex justify-center gap-4 flex-wrap">
       @for (hashtag of hashtags(); track hashtag) {
-        <button routerLink="/hashtags/{{ hashtag }}" class="btn sm secondary rounded-full">
+        <button [routerLink]="['hashtags', hashtag]" class="btn sm secondary">
           {{ hashtag }}
         </button>
       }
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HashtagListComponent {
   hashtags = input.required<string[]>();

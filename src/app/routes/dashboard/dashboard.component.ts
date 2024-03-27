@@ -32,5 +32,4 @@ export default class DashboardComponent {
     const fn = () => import('../../layout/modals/logout.component').then(c => c.LogoutComponent); 
     this.modal.openLazy(fn);
   }
-
 }
