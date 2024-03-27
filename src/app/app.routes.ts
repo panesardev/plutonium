@@ -14,6 +14,11 @@ export const routes: Routes = [
     title: TitleResolver,
   },
   {
+    path: 'about',
+    loadComponent: () => import('./routes/about/about.component'),
+    title: TitleResolver,
+  },
+  {
     path: 'articles',
     loadComponent: () => import('./routes/articles/articles.component'),
     title: TitleResolver,

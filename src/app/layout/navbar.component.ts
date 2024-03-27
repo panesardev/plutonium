@@ -46,7 +46,7 @@ import { BRAND } from '../app.constants';
     </nav>
   </header>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
   private modal = inject(ModalService);

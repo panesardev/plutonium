@@ -14,24 +14,18 @@ import { UserService } from '../../services/user.service';
     <div class="flex justify-center">
       @if (user$ | async; as user) {
         @if (isArticleSaved$ | async) {
-          <button class="btn red md:w-full" (click)="removeArticle()">
-            Remove saved
-          </button>
+          <button class="btn red md:w-full" (click)="removeArticle()">Remove saved</button>
         }
         @else {
-          <button class="btn primary md:w-full" (click)="saveArticle()">
-            Save Article
-          </button>
+          <button class="btn primary md:w-full" (click)="saveArticle()">Save Article</button>
         }
       }
       @else {
-        <button class="btn primary md:w-full" (click)="onLogin.emit()">
-          Login to save
-        </button>
+        <button class="btn primary md:w-full" (click)="onLogin.emit()">Login to save</button>
       }
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SaveButtonComponent {
   private auth = inject(AuthService);

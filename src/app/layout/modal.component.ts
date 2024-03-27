@@ -12,6 +12,6 @@ export class ModalComponent extends Modal {
   container = viewChild('container', { read: ViewContainerRef });
 
   setContainer = effect(() => 
-    this.modal.setContainer(this.container()),
+    this.modal.setContainer(this.container())
   );
 }
