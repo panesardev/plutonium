@@ -1,5 +1,7 @@
 /
 
+/about
+
 /articles
 
 /articles/deploy-docker-image-on-heroku
