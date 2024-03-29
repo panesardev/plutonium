@@ -6,6 +6,7 @@ import { AuthData } from '../../types/auth.interface';
 import { Modal } from '../../types/modal.class';
 import { AuthFormComponent } from '../components/auth-form.component';
 import { BaseModalComponent } from './base.modal.component';
+import { FallbackImageDirective } from '../../utilities/fallback.image.directive';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ import { BaseModalComponent } from './base.modal.component';
   imports: [
     BaseModalComponent,
     AuthFormComponent,
+    FallbackImageDirective,
     RouterLink,
     AsyncPipe,
   ],
@@ -37,7 +39,7 @@ import { BaseModalComponent } from './base.modal.component';
 
       <div class="grid">
         <button class="btn border-[1px] border-slate-300 hover:bg-slate-50 transition-colors" (click)="googleLogin()">
-          <img src="/assets/svg/google.svg" alt="google">
+          <img class="w-6 h-6" src="/assets/svg/google.svg" alt="google">
           <span>Continue with Google</span>  
         </button>
       </div>

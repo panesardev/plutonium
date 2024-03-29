@@ -30,8 +30,7 @@
   .input {
     @apply grid gap-2;
     input, textarea, select {
-      outline: none;
-      @apply border-[1px] border-slate-300 rounded px-4 py-3;
+      @apply border-[1px] border-slate-300 rounded px-4 py-3 outline-0;
     }
   }
   
@@ -46,45 +45,26 @@
   }
 
   .max-width {
-    max-width: 1920px;
+    @apply max-w-[1920px];
   }
   
   .markdown {
-    min-width: 0;
+    @apply min-w-0;
 
     h2 {
-      color: theme('colors.primary');
-      font-weight: bold;
-      // text-3xl
-      font-size: 1.875rem/* 30px */;
-      line-height: 2.25rem/* 36px */;
-
-      margin-bottom: 1.5rem;
+      @apply font-bold text-primary text-2xl md:text-3xl mt-12 mb-6;
     }
     
     p {
-      margin-bottom: 1.5rem;
-      // text-lg
-      font-size: 1.125rem/* 18px */;
-      line-height: 1.75rem/* 28px */;
-    }
-    
-    img {
-      width: 100%;
-      height: auto;
+      @apply mb-6 leading-7;
     }
     
     pre {
-      @apply p-4 md:p-8 mb-12 rounded;
-      max-width: 100%;
-      position: relative;
-      overflow: auto;
-      background-color: theme('colors.neutral');
-      box-shadow: 0 0 25px #155f7506;
+      @apply relative overflow-auto text-sm md:text-base bg-neutral max-w-full p-4 md:p-8 mb-6 rounded custom-shadow;
     }
     
     code {
-      font-family: "Roboto Mono", monospace;
+      font-family: "Fira Code", monospace;
     }    
   }
 }
