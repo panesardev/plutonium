@@ -12,7 +12,7 @@ import { AsyncPipe } from '@angular/common';
     AsyncPipe,
   ],
   template: `
-    <app-base-modal heading="Are you sure?">
+    <app-base-modal heading="Are you sure?" width="max-w-sm">
       @if (user$ | async; as user) {
         <div class="flex items-center gap-3 bg-secondary text-primary rounded mb-6 px-4 py-2 cursor-pointer" routerLink="/dashboard" (click)="modal.close()">
           <img [src]="user.photoURL" alt="user" class="rounded-full w-8 h-8" fallbackImage="/assets/img/user.png">
