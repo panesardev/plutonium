@@ -19,7 +19,7 @@ import { NgOptimizedImage } from '@angular/common';
       @for (article of articles(); track article.slug) {
         <div class="bg-neutral rounded-lg custom-shadow">
           <a routerLink="/articles/{{ article.slug }}">
-            <img ngSrc="/content/{{ article.slug }}/img/cover.png" class="rounded-lg" [alt]="article.title" width="400" height="225">
+            <img ngSrc="/content/{{ article.slug }}/img/cover.png" class="rounded-lg" [alt]="article.title" width="400" height="225" [priority]="$index === 0">
           </a>
           <div class="p-4 md:p-6">
             <h1 class="text-lg font-bold mb-2" routerLink="/articles/{{ article.slug }}">{{ article.title }}</h1>

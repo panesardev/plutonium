@@ -12,7 +12,7 @@ export const HashtagResolver: ResolveFn<Article[]> = (route: ActivatedRouteSnaps
   const content = inject(ContentService);
   const title = inject(Title);
   return content.findByHashtag(hashtag).pipe(
-    tap(hashtag => title.setTitle(`${hashtag} - ${BRAND}`)),
+    tap(() => title.setTitle(`${hashtag.charAt(0).toUpperCase() + hashtag.slice(1)} - ${BRAND}`)),
   );
 }
 
