@@ -11,6 +11,7 @@ import { ContentService } from '../../../services/content.service';
 import { ModalService } from '../../../services/modal.service';
 import { Article, slugify, Toc } from '../../../types/article.interface';
 import { FallbackImageDirective } from '../../../utilities/fallback.image.directive';
+import { CommentBoxComponent } from '../../../layout/deferred/comment-box.component';
 
 export const ArticleResolver: ResolveFn<Article> = (route: ActivatedRouteSnapshot) => {
   const slug = route.paramMap.get('slug');
@@ -31,6 +32,7 @@ export const ArticleResolver: ResolveFn<Article> = (route: ActivatedRouteSnapsho
     MarkdownComponent,
     RouterLink,
     SaveButtonComponent,
+    CommentBoxComponent,
   ],
   templateUrl: './article.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -55,7 +57,6 @@ export default class ArticleComponent {
         text: headings.item(i).innerText,
       });
     }
-    // fix expression has changed after it was checked
     setTimeout(() => this.tableOfContents.set(list), 0);
   });
 

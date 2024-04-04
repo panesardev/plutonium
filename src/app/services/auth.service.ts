@@ -5,9 +5,12 @@ import { Router } from '@angular/router';
 import { Observable, map, of, switchMap } from 'rxjs';
 import { AuthData, OAuthProviderName, getAuthProvider } from '../types/auth.interface';
 import { User, UserData, createUserData } from '../types/user.interface';
+import { HttpClient } from '@angular/common/http';
+import { API_URL } from '../app.constants';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  private http = inject(HttpClient);
   private auth = inject(Auth);
   private firestore = inject(Firestore);
   private router = inject(Router);
@@ -21,6 +24,11 @@ export class AuthService {
       }
       else return of(null);
     }),
+  );
+
+  readonly isAdmin$ = this.user$.pipe(
+    switchMap(user => this.http.get<{ isAdmin: boolean }>(`${API_URL}/auth/is-admin/${user.email}`)),
+    map(response => response.isAdmin),
   );
   
   async createAccount({ email, password, displayName }: AuthData): Promise<void> {
