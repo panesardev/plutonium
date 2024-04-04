@@ -2076,6 +2076,13 @@
   dependencies:
     call-bind "^1.0.7"
 
+"@ngrx/signals@^17.1.1":
+  version "17.1.1"
+  resolved "https://registry.yarnpkg.com/@ngrx/signals/-/signals-17.1.1.tgz#d838e483c75c521bda3252e4a3b94f2ae3d3598d"
+  integrity sha512-9Rlw7u8LxkyS+HMZe7DzUkV1p/2IL5tDa1ZHhX8Ldilx4HoOHvISdzCagCpXMoXDLZGEaWOA/n/BcQQxsjytEg==
+  dependencies:
+    tslib "^2.3.0"
+
 "@ngtools/webpack@17.3.0":
   version "17.3.0"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-17.3.0.tgz#91e6168304739350fb6f3b9877d29e4a382cadb2"

@@ -13,13 +13,6 @@ import { AsyncPipe } from '@angular/common';
   ],
   template: `
     <app-base-modal heading="Are you sure?" width="max-w-sm">
-      @if (user$ | async; as user) {
-        <div class="flex items-center gap-3 bg-secondary text-primary rounded mb-6 px-4 py-2 cursor-pointer" routerLink="/dashboard" (click)="modal.close()">
-          <img [src]="user.photoURL" alt="user" class="rounded-full w-8 h-8" fallbackImage="/assets/img/user.png">
-          <span>Logged in as {{ user.displayName }}</span>
-        </div>
-      }
-
       <p class="mb-6">You will be logged out!</p>
 
       <div class="grid">
@@ -31,8 +24,6 @@ import { AsyncPipe } from '@angular/common';
 })
 export class LogoutComponent extends Modal {
   private auth = inject(AuthService);
-
-  user$ = this.auth.user$;
 
   logout() {
     this.auth.logout();

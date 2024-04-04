@@ -22,7 +22,7 @@ export class AuthService {
       else return of(null);
     }),
   );
-
+  
   async createAccount({ email, password, displayName }: AuthData): Promise<void> {
     const credential = await createUserWithEmailAndPassword(this.auth, email, password);
     await Promise.all([

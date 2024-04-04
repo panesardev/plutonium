@@ -6,6 +6,7 @@ import { ArticleListComponent } from '../../layout/components/article-list.compo
 import { AuthService } from '../../services/auth.service';
 import { ModalService } from '../../services/modal.service';
 import { UserService } from '../../services/user.service';
+import { FallbackImageDirective } from '../../utilities/fallback.image.directive';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +15,7 @@ import { UserService } from '../../services/user.service';
     AsyncPipe,
     RouterLink,
     ArticleListComponent,
+    FallbackImageDirective,
   ],
   templateUrl: './dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -54,25 +54,35 @@ export class LoginComponent extends Modal {
 
   error = signal<string>(null);
 
-  submitAction(authData: AuthData) {
-    const { displayName, email, password, type } = authData;
-    switch (type) {
-      case 'LOGIN': {
-        this.auth.login({ email, password }).catch(e => this.error.set(e.message));
-        break;
+  async submitAction(authData: AuthData) {
+    try {
+      const { displayName, email, password, type } = authData;
+      switch (type) {
+        case 'LOGIN': {
+          await this.auth.login({ email, password });
+          break;
+        }
+        case 'CREATE_ACCOUNT': {
+          await this.auth.createAccount({ email, password, displayName });
+          break;
+        }
+        case 'RESET_PASSWORD': {
+          await this.auth.resetPassword({ email });
+          break;
+        }
       }
-      case 'CREATE_ACCOUNT': {
-        this.auth.createAccount({ email, password, displayName }).catch(e => this.error.set(e.message));
-        break;
-      }
-      case 'RESET_PASSWORD': {
-        this.auth.resetPassword({ email }).catch(e => this.error.set(e.message));
-        break;
-      }
+      this.modal.close();
+    } catch (e) {
+      this.error.set(e.message);
     }
   }
 
-  googleLogin() {
-    this.auth.oAuthLogin('google').catch(e => this.error.set(e.message));
+  async googleLogin() {
+    try { 
+      await this.auth.oAuthLogin('google');
+      this.modal.close();
+    } catch (e) {
+      this.error.set(e.message);
+    }
   }
 }

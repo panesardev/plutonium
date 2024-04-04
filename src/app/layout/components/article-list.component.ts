@@ -4,8 +4,6 @@ import { Article } from '../../types/article.interface';
 import { HashtagListComponent } from './hashtag-list.component';
 import { NgOptimizedImage } from '@angular/common';
 
-// md:grid-cols-[repeat(auto-fit,minmax(250px,350px))]
-
 @Component({
   selector: 'app-article-list',
   standalone: true,

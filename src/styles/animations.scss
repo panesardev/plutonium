@@ -19,32 +19,35 @@ section {
 }
 
 .modal-open {
-  animation: modal-open 200ms ease-in-out;
-  transform: translateY(0%);
+  animation: modal-open 200ms ease;
+  transform: scale(1);
+  opacity: 1;
 }
 
 @keyframes modal-open {
   from {
-    transform: translateY(25px);
+    transform: scale(.9);
+    opacity: 0;
   }
   to {
-    transform: translateY(0%);
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
 .modal-close {
-  animation: modal-close 200ms ease-in-out;
-  transform: translateY(25px);
+  animation: modal-close 200ms ease;
+  transform: scale(.9);
   opacity: 0;
 }
 
 @keyframes modal-close {
   from {
-    transform: translateY(0%);
+    transform: scale(1);
     opacity: 1;
   }
   to {
-    transform: translateY(15px);
+    transform: scale(.9);
     opacity: 0;
   }
 }
