@@ -36,9 +36,7 @@ import { CommentListComponent } from '../components/comment-list.component';
           <p>You must be logged in to post a comment!</p>
         </div>
       }
-      <div>
-        <app-comment-list [comments]="comments$ | async" [allowDelete]="isAdmin$ | async" (onDelete)="deleteComment($event)"/>
-      </div>
+      <app-comment-list [comments]="comments$ | async" [allowDelete]="isAdmin$ | async" (onDelete)="deleteComment($event)"/>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
