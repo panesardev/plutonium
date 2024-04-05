@@ -28,6 +28,7 @@ export default class DashboardComponent {
   view$ = combineLatest({
     user: this.auth.user$,
     articles: this.userService.getArticles(),
+    isAdmin: this.auth.isAdmin$,
   });
 
   openLogout() {

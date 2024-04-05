@@ -27,8 +27,14 @@ export class AuthService {
   );
 
   readonly isAdmin$ = this.user$.pipe(
-    switchMap(user => this.http.get<{ isAdmin: boolean }>(`${API_URL}/auth/is-admin/${user.email}`)),
-    map(response => response.isAdmin),
+    switchMap(user => {
+      if (user) {
+        return this.http.get<{ isAdmin: boolean }>(`${API_URL}/auth/is-admin/${user.email}`).pipe(
+          map(response => response.isAdmin),
+        ) as Observable<boolean>;
+      }
+      else return of(false);
+    }),
   );
   
   async createAccount({ email, password, displayName }: AuthData): Promise<void> {
