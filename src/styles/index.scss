@@ -5,6 +5,7 @@
 @import './components.scss';
 @import './animations.scss';  
 @import './icons.scss';
+@import './syntax.scss';
 
 body {
   font-family: "Inter", sans-serif;
@@ -22,6 +23,7 @@ img {
 /* width */
 ::-webkit-scrollbar {
   width: 4px;
+  height: 4px;
 }
 
 /* Track */
