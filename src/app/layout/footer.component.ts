@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ModalService } from '../services/modal.service';
+import { ModalService } from '../features/modals/services/modal.service';
 
 @Component({
   selector: 'app-footer',
@@ -25,7 +25,7 @@ export class FooterComponent {
   private modal = inject(ModalService);
 
   openLogin() {
-    const fn = () => import('./modals/login.component').then(c => c.LoginComponent); 
+    const fn = () => import('../features/modals/login.component').then(c => c.LoginComponent); 
     this.modal.openLazy(fn);
   }
 }

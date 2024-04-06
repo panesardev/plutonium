@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FeaturedArticleComponent } from '../../layout/components/featured-article.component';
-import { ContentService } from '../../services/content.service';
+import { ContentService } from '../../shared/services/content.service';
 import { AsyncPipe } from '@angular/common';
 import { combineLatest } from 'rxjs';
 

@@ -6,7 +6,7 @@ import { Observable, map, of, switchMap } from 'rxjs';
 import { AuthData, OAuthProviderName, getAuthProvider } from '../types/auth.interface';
 import { User, UserData, createUserData } from '../types/user.interface';
 import { HttpClient } from '@angular/common/http';
-import { API_URL } from '../app.constants';
+import { API_URL } from '../../app.constants';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NavUserComponent } from './deferred/nav-user.component';
-import { ModalService } from '../services/modal.service';
-import { NavComponent } from './modals/nav.component';
-import { SearchComponent } from './modals/search.component';
+import { ModalService } from '../features/modals/services/modal.service';
+import { NavComponent } from '../features/modals/nav.component';
+import { SearchComponent } from '../features/modals/search.component';
 import { BRAND } from '../app.constants';
 
 @Component({
@@ -54,12 +54,12 @@ export class NavbarComponent {
   brand = BRAND;
   
   openLogout() {
-    const fn = () => import('./modals/logout.component').then(c => c.LogoutComponent); 
+    const fn = () => import('../features/modals/logout.component').then(c => c.LogoutComponent); 
     this.modal.openLazy(fn);
   }
 
   openLogin() {
-    const fn = () => import('./modals/login.component').then(c => c.LoginComponent); 
+    const fn = () => import('../features/modals/login.component').then(c => c.LoginComponent); 
     this.modal.openLazy(fn);
   }
 

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, output, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { AuthData, FormType } from '../../types/auth.interface';
+import { AuthData, FormType } from '../../shared/types/auth.interface';
 
 @Component({
   selector: 'app-auth-form',

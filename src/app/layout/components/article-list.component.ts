@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Article } from '../../types/article.interface';
+import { Article } from '../../shared/types/article.interface';
 import { HashtagListComponent } from './hashtag-list.component';
 import { NgOptimizedImage } from '@angular/common';
 

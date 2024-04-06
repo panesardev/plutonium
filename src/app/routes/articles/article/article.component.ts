@@ -8,10 +8,10 @@ import { BRAND } from '../../../app.constants';
 import { CommentBoxComponent } from '../../../features/comments/comment-box.component';
 import { HashtagListComponent } from '../../../layout/components/hashtag-list.component';
 import { SaveButtonComponent } from '../../../layout/deferred/save-button.component';
-import { ContentService } from '../../../services/content.service';
-import { ModalService } from '../../../services/modal.service';
-import { Article, slugify, Toc } from '../../../types/article.interface';
-import { FallbackImageDirective } from '../../../utilities/fallback.image.directive';
+import { ContentService } from '../../../shared/services/content.service';
+import { ModalService } from '../../../features/modals/services/modal.service';
+import { Article, slugify, Toc } from '../../../shared/types/article.interface';
+import { FallbackImageDirective } from '../../../shared/utilities/fallback.image.directive';
 
 export const ArticleResolver: ResolveFn<Article> = (route: ActivatedRouteSnapshot) => {
   const slug = route.paramMap.get('slug');
@@ -68,6 +68,6 @@ export default class ArticleComponent {
   }
 
   openLogin() {
-    this.modal.openLazy(() => import('../../../layout/modals/login.component').then(c => c.LoginComponent));
+    this.modal.openLazy(() => import('../../../features/modals/login.component').then(c => c.LoginComponent));
   }
 }

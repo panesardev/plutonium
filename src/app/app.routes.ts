@@ -4,8 +4,8 @@ import { ArticlesResolver } from './routes/articles/articles.component';
 import { HashtagResolver } from './routes/hashtags/hashtag/hashtag.component';
 import { HashtagsResolver } from './routes/hashtags/hashtags.component';
 import IndexComponent from './routes/index/index.component';
-import { AuthGuard } from './utilities/auth.guard';
-import { TitleResolver } from './utilities/title.resolver';
+import { AuthGuard } from './shared/utilities/auth.guard';
+import { TitleResolver } from './shared/utilities/title.resolver';
 
 export const routes: Routes = [
   {

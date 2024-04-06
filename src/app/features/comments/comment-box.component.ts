@@ -1,9 +1,9 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, inject, input, output, signal } from '@angular/core';
 import { firstValueFrom, Observable } from 'rxjs';
-import { AuthService } from '../../services/auth.service';
-import { CommentService } from './comment.service';
-import { Comment, createComment } from '../../types/comment.interface';
+import { AuthService } from '../../shared/services/auth.service';
+import { CommentService } from './services/comment.service';
+import { Comment, createComment } from './types/comment.interface';
 import { AddCommentComponent } from './add-comment.component';
 import { CommentListComponent } from './comment-list.component';
 
@@ -28,7 +28,7 @@ import { CommentListComponent } from './comment-list.component';
           <app-add-comment (onAdd)="add($event)"/>
         }
         @else {
-          <div class="bg-base-100 text-slate-600 rounded mb-4 p-4 md:p-6">
+          <div class="bg-slate-100 text-slate-600 rounded mb-4 p-4 md:p-6">
             <p class="text-center mb-4">You must be logged in to post a comment!</p>
             <button class="btn primary mx-auto px-8" (click)="onLogin.emit()">Login</button>
           </div>

@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewContainerRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './layout/footer.component';
-import { ModalComponent } from './layout/modal.component';
 import { NavbarComponent } from './layout/navbar.component';
+import { ModalService } from './features/modals/services/modal.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,6 @@ import { NavbarComponent } from './layout/navbar.component';
     RouterOutlet,
     NavbarComponent,
     FooterComponent,
-    ModalComponent,
   ],
   template: `
     <main>
@@ -25,11 +24,15 @@ import { NavbarComponent } from './layout/navbar.component';
         <app-footer/>
       </div>
     </main>
-    <app-modal/>
     <div class="fixed inset-0 z-[-10] bg-gradient-to-b from-transparent to-base-300 from-20%"></div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
+  private container = inject(ViewContainerRef);
+  private modal = inject(ModalService);
 
+  constructor() {
+    this.modal.setContainer(this.container);
+  }
 }
