@@ -16,7 +16,7 @@ import { FallbackImageDirective } from '../../shared/utilities/fallback.image.di
   ],
   template: `
     <div class="grid md:grid-cols-[2fr_3fr] gap-6 md:gap-8">
-      <div class="bg-neutral rounded-2xl p-4 custom-shadow" routerLink="/articles/{{ article().slug }}">
+      <div class="cursor-pointer" routerLink="/articles/{{ article().slug }}">
         <img ngSrc="/content/{{ article().slug }}/img/cover_800x450.webp" class="rounded-lg" [alt]="article().title" width="800" height="450" priority>
       </div>
       <div class="md:pt-4">

@@ -3,7 +3,6 @@ import { RouterLink } from '@angular/router';
 import { FeaturedArticleComponent } from '../../layout/components/featured-article.component';
 import { ContentService } from '../../shared/services/content.service';
 import { AsyncPipe } from '@angular/common';
-import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-index',
@@ -19,8 +18,5 @@ import { combineLatest } from 'rxjs';
 export default class IndexComponent {
   private content = inject(ContentService);
 
-  view$ = combineLatest({
-    featured: this.content.getFeatured(),
-  });
-
+  featured$ = this.content.getFeatured();
 }

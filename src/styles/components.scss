@@ -29,8 +29,8 @@
 
   .input {
     @apply grid gap-2;
-    input, textarea, select {
-      @apply border-[1px] border-slate-300 rounded px-4 py-3 outline-0;
+    input, textarea {
+      @apply bg-slate-100/80 rounded px-4 py-3 outline-0;
     }
   }
   
@@ -88,7 +88,7 @@
     background-position: 50%;
     transform: scale(10,10);
     opacity: 0;
-    transition: transform 400ms, opacity 1s;
+    transition: transform 300ms, opacity 1s;
   }
 
   .ripple:active:after {

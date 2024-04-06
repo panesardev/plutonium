@@ -38,6 +38,9 @@ export class AuthService {
   );
   
   async createAccount({ email, password, displayName }: AuthData): Promise<void> {
+    if (!email || !password || !displayName) {
+      throw Error('insufficient information provided');
+    }
     const credential = await createUserWithEmailAndPassword(this.auth, email, password);
     await Promise.all([
       updateProfile(credential.user, { displayName }), 
@@ -47,6 +50,9 @@ export class AuthService {
   }
 
   async login({ email, password }: AuthData): Promise<void> {
+    if (!email || !password) {
+      throw Error('email and password required');
+    }
     await signInWithEmailAndPassword(this.auth, email, password);
     await this.router.navigateByUrl('/dashboard');
   }
@@ -62,6 +68,9 @@ export class AuthService {
   }
 
   async resetPassword({ email }: AuthData): Promise<void> {
+    if (!email) {
+      throw Error('email required');
+    }
     await sendPasswordResetEmail(this.auth, email);
   }
 

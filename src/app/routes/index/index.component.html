@@ -1,18 +1,16 @@
-@if (view$ | async; as view) {
-  <section>
-    <div class="max-w-3xl mx-auto mb-32 px-6 md:px-8">
-      <h1 class="heading capitalize mb-4">reactivity focused coding tutorials</h1>
-      <p class="text-xl text-center mb-8">Learn reactive and declarative programming with rxjs</p>
-      <button class="btn primary mx-auto" routerLink="/articles">
-        <span>See some articles</span>
-        <i class="arrow-right"></i>
-      </button>
-    </div>
-  
+<section>
+  <div class="max-w-3xl mx-auto mb-32 px-6 md:px-8">
+    <h1 class="heading capitalize mb-4">reactivity focused coding tutorials</h1>
+    <p class="text-xl text-center mb-8">Learn reactive and declarative programming with rxjs</p>
+    <button class="btn primary mx-auto" routerLink="/articles">
+      <span>See some articles</span>
+      <i class="arrow-right"></i>
+    </button>
+  </div>
+
+  @if (featured$ | async; as article) {
     <div class="max-w-6xl mx-auto px-6 md:px-8">
-      @if (view.featured; as article) {
-        <app-featured-article [article]="article"/>
-      }
+      <app-featured-article [article]="article"/>
     </div>
-  </section>
-}
+  }
+</section>
