@@ -87,9 +87,9 @@
         </div>
       </div>
       
-      <div class="max-w-xl mx-auto">
+      <div class="max-w-2xl mx-auto">
         @defer (on viewport) {
-          <app-comment-box [slug]="article.slug"/>
+          <app-comment-box [slug]="article.slug" (onLogin)="openLogin()"/>
         }
         @placeholder {
           <div class="flex justify-center items-center gap-3 bg-blue-100 text-blue-500 rounded mb-4 px-4 py-3">

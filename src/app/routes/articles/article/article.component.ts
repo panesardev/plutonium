@@ -5,13 +5,13 @@ import { ActivatedRouteSnapshot, ResolveFn, RouterLink } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
 import { tap } from 'rxjs';
 import { BRAND } from '../../../app.constants';
+import { CommentBoxComponent } from '../../../features/comments/comment-box.component';
 import { HashtagListComponent } from '../../../layout/components/hashtag-list.component';
 import { SaveButtonComponent } from '../../../layout/deferred/save-button.component';
 import { ContentService } from '../../../services/content.service';
 import { ModalService } from '../../../services/modal.service';
 import { Article, slugify, Toc } from '../../../types/article.interface';
 import { FallbackImageDirective } from '../../../utilities/fallback.image.directive';
-import { CommentBoxComponent } from '../../../layout/deferred/comment-box.component';
 
 export const ArticleResolver: ResolveFn<Article> = (route: ActivatedRouteSnapshot) => {
   const slug = route.paramMap.get('slug');

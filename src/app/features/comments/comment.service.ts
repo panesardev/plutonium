@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, query, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Comment } from '../types/comment.interface';
+import { Comment } from '../../types/comment.interface';
 
 @Injectable({ providedIn: 'root' })
 export class CommentService {

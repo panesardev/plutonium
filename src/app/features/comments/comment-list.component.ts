@@ -6,9 +6,9 @@ import { Comment } from '../../types/comment.interface';
   standalone: true,
   imports: [],
   template: `
-    <div class="grid gap-2">
+    <div class="grid gap-6">
       @for (comment of comments(); track comment.id) {
-        <div class="bg-neutral grid grid-cols-[2rem_1fr] gap-4 md:gap-6 p-6 rounded-lg">
+        <div class="grid grid-cols-[2rem_1fr] gap-4 md:gap-6 [&:not(:last-child)]:pb-6 [&:not(:last-child)]:border-b-[1px] border-b-slate-300">
           <div>
             <img class="w-8 h-8 rounded-full" [src]="comment.photoURL" [alt]="comment.displayName">
           </div>
