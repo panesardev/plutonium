@@ -4,7 +4,7 @@ slug: deploy-docker-image-on-heroku
 description: Docker takes away repetitive tasks and is used throughout the development lifecycle for fast development
 hashtags: [docker, heroku]
 date: 2021-06-30T23:23:56-04:00
-createdAt: Jun 30, 2021
+createdAt: Jun 30, 2023
 source: https://gist.github.com/panesarpbx8/1c931316cdb4cc266487d5e10ca6f134
 authorName: Sukhpreet Singh
 authorImage: https://lh3.googleusercontent.com/a-/AOh14Gh75b7CK1JPwLcKqE8a-zJjwaEVGUreGuWl2nYZbw=s96-c

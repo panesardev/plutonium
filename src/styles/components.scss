@@ -72,7 +72,21 @@
     
     code {
       font-family: "Fira Code", monospace;
-    }    
+    }   
+    
+    .alert-info {
+      @apply bg-emerald-100/75 text-emerald-700 border-l-2 border-emerald-500 flex items-center gap-4 px-4 py-3 md:px-6 md:py-5 mb-6;
+      img {
+        @apply w-6 h-6;
+      }
+    }
+    
+    .alert-warning {
+      @apply bg-red-100/75 text-red-700 border-l-2 border-red-500 flex items-center gap-4 px-4 py-3 md:px-6 md:py-5 mb-6;
+      img {
+        @apply w-6 h-6;
+      }
+    }
   }
   
   .ripple {

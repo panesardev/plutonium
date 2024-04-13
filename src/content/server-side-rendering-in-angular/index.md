@@ -4,7 +4,7 @@ slug: server-side-rendering-in-angular
 description: SEO and quick initial page loading with server-side rendering in angular
 hashtags: [angular, ssr]
 date: 2021-06-26T23:23:56-04:00
-createdAt: Jun 06, 2021
+createdAt: Aug 06, 2022
 source: https://github.com/panesarpbx8/express-typescript-setup
 authorName: Sukhpreet Singh
 authorImage: https://lh3.googleusercontent.com/a-/AOh14Gh75b7CK1JPwLcKqE8a-zJjwaEVGUreGuWl2nYZbw=s96-c
