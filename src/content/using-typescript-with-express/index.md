@@ -4,7 +4,7 @@ slug: using-typescript-with-express
 description: Create solid typescript express starter boilerplate to kickstart your projects
 hashtags: [typescript, express]
 date: 2021-07-06T23:23:56-04:00
-createdAt: Jul 06, 2023
+createdAt: Jul 06, 2022
 source: https://github.com/panesarpbx8/express-typescript-setup
 authorName: Sukhpreet Singh
 authorImage: https://lh3.googleusercontent.com/a-/AOh14Gh75b7CK1JPwLcKqE8a-zJjwaEVGUreGuWl2nYZbw=s96-c
