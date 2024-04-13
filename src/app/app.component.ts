@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, ViewContainerRef } from '@a
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './layout/footer.component';
 import { NavbarComponent } from './layout/navbar.component';
-import { ModalService } from './features/modals/services/modal.service';
+import { ModalService } from './services/modal.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,7 @@ import { ModalService } from './features/modals/services/modal.service';
   ],
   template: `
     <main>
+      <div class="scroll-watcher"></div>
       <div class="fixed top-0 left-0 right-0 z-10 select-none">
         <app-navbar/>
       </div>

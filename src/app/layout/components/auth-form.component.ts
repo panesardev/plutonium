@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, output, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { AuthData, FormType } from '../../shared/types/auth.interface';
+import { AuthData, FormType } from '../../types/auth.interface';
 
 @Component({
   selector: 'app-auth-form',
@@ -10,23 +10,25 @@ import { AuthData, FormType } from '../../shared/types/auth.interface';
   ],
   template: `
     <form [formGroup]="authForm" (ngSubmit)="submitAction()">
-      @if (isCreateAccountForm()) {
-        <div class="input mb-3">
-          <span>enter name</span>
-          <input type="text" formControlName="displayName" placeholder="John Wick">
+      <div class="grid gap-4 mb-6">
+        @if (isCreateAccountForm()) {
+          <div class="input">
+            <label>enter name</label>
+            <input type="text" formControlName="displayName" placeholder="John Wick">
+          </div>
+        }
+        <div class="input">
+          <label>enter email</label>
+          <input type="email" formControlName="email" placeholder="john.wick@example.com">
         </div>
-      }
-      <div class="input mb-3">
-        <span>enter email</span>
-        <input type="email" formControlName="email" placeholder="john.wick@example.com">
+        @if (!isResetPasswordForm()) {
+          <div class="input">
+            <label>enter password</label>
+            <input type="password" formControlName="password" placeholder="type here">
+          </div>
+        }
       </div>
-      @if (!isResetPasswordForm()) {
-        <div class="input mb-3">
-          <span>enter password</span>
-          <input type="password" formControlName="password" placeholder="type here">
-        </div>
-      }
-      <div class="text-center mb-6">
+      <div class="text-center text-sm mb-6">
         @if (!isLoginForm()) {
           <span class="text-primary hover:underline cursor-pointer" (click)="setFormType('LOGIN')">Login</span>
         }

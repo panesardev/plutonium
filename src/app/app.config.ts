@@ -1,10 +1,13 @@
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PreloadAllModules, provideRouter, withComponentInputBinding, withInMemoryScrolling, withPreloading } from '@angular/router';
-import { routes } from './app.routes';
-import { provideFirebase } from './providers/firebase.provider';
 import { provideMarkdown } from 'ngx-markdown';
+import { FIREBASE_CONFIG } from './app.constants';
+import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +21,11 @@ export const appConfig: ApplicationConfig = {
     ), 
     provideClientHydration(),
     provideHttpClient(withFetch()),
-    provideFirebase(),
     provideMarkdown(),
+    importProvidersFrom(
+      provideFirebaseApp(() => initializeApp(FIREBASE_CONFIG)),
+      provideFirestore(() => getFirestore()),
+      provideAuth(() => getAuth()),
+    ),
   ],
 };

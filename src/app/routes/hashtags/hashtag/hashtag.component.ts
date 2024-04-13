@@ -4,8 +4,8 @@ import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
 import { tap } from 'rxjs';
 import { BRAND } from '../../../app.constants';
 import { ArticleListComponent } from '../../../layout/components/article-list.component';
-import { ContentService } from '../../../shared/services/content.service';
-import { Article } from '../../../shared/types/article.interface';
+import { ContentService } from '../../../services/content.service';
+import { Article } from '../../../types/article.interface';
 
 export const HashtagResolver: ResolveFn<Article[]> = (route: ActivatedRouteSnapshot) => {
   const hashtag = route.paramMap.get('hashtag');

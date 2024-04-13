@@ -1,5 +1,5 @@
 import frontmatter from 'front-matter';
-import { DOMAIN } from '../../app.constants';
+import { DOMAIN } from '../app.constants';
 
 export interface Article {
   title: string;

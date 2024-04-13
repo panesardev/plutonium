@@ -3,10 +3,10 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { ArticleListComponent } from '../../layout/components/article-list.component';
-import { AuthService } from '../../shared/services/auth.service';
-import { ModalService } from '../../features/modals/services/modal.service';
-import { UserService } from '../../shared/services/user.service';
-import { FallbackImageDirective } from '../../shared/utilities/fallback.image.directive';
+import { AuthService } from '../../services/auth.service';
+import { ModalService } from '../../services/modal.service';
+import { UserService } from '../../services/user.service';
+import { FallbackImageDirective } from '../../utilities/fallback.image.directive';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,7 +32,7 @@ export default class DashboardComponent {
   });
 
   openLogout() {
-    const fn = () => import('../../features/modals/logout.component').then(c => c.LogoutComponent); 
+    const fn = () => import('../../layout/modals/logout.component').then(c => c.LogoutComponent); 
     this.modal.openLazy(fn);
   }
 }

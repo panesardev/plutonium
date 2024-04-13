@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { Observable, map, take, zip } from "rxjs";
-import { FEATURED_SLUG, SLUGS } from '../../app.constants';
+import { FEATURED_SLUG, SLUGS } from '../app.constants';
 import { Article, createArticle, searchArticle, sortArticles } from "../types/article.interface";
 
 @Injectable({ providedIn: 'root' })

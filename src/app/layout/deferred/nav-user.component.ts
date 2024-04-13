@@ -1,8 +1,8 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '../../shared/services/auth.service';
-import { FallbackImageDirective } from '../../shared/utilities/fallback.image.directive';
+import { AuthService } from '../../services/auth.service';
+import { FallbackImageDirective } from '../../utilities/fallback.image.directive';
 
 @Component({
   selector: 'app-nav-user',

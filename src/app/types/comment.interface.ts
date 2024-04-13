@@ -1,3 +1,5 @@
+import { AbstractControl, ValidatorFn } from "@angular/forms";
+
 export interface Comment {
   id?: string;
   text: string;
@@ -15,4 +17,11 @@ export function createComment(comment: Partial<Comment>): Comment {
     photoURL: comment.photoURL,
     text: comment.text,
   };
+}
+
+export function emptyValidator(): ValidatorFn {
+  return (control: AbstractControl) => {
+    const isEmpty = /^\s*$/.test(control.value);
+    return isEmpty ? control.value : null ;
+  }
 }

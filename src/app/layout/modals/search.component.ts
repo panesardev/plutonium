@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs';
-import { ContentService } from '../../shared/services/content.service';
-import { Modal } from './types/modal.class';
+import { ContentService } from '../../services/content.service';
+import { Modal } from '../../types/modal.class';
 import { BaseModalComponent } from './base.modal.component';
 
 @Component({
