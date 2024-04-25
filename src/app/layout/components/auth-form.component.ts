@@ -12,20 +12,20 @@ import { AuthData, FormType } from '../../types/auth.interface';
     <form [formGroup]="authForm" (ngSubmit)="submitAction()">
       <div class="grid gap-4 mb-6">
         @if (isCreateAccountForm()) {
-          <div class="input">
+          <fieldset>
             <label>enter name</label>
-            <input type="text" formControlName="displayName" placeholder="John Wick">
-          </div>
+            <input type="text" name="displayName" formControlName="displayName" placeholder="John Wick">
+          </fieldset>
         }
-        <div class="input">
+        <fieldset>
           <label>enter email</label>
-          <input type="email" formControlName="email" placeholder="john.wick@example.com">
-        </div>
+          <input type="email" name="email" formControlName="email" placeholder="john.wick@example.com">
+        </fieldset>
         @if (!isResetPasswordForm()) {
-          <div class="input">
+          <fieldset>
             <label>enter password</label>
-            <input type="password" formControlName="password" placeholder="type here">
-          </div>
+            <input type="password" name="password" formControlName="password" placeholder="type here">
+          </fieldset>
         }
       </div>
       <div class="text-center text-sm mb-6">
@@ -71,8 +71,8 @@ export class AuthFormComponent {
   
   heading = computed(() => {
     return this.isResetPasswordForm() ? 'Reset password' : 
-    this.isCreateAccountForm() ? 'Create new account' : 
-    this.isLoginForm() ? 'Login' : null;
+      this.isCreateAccountForm() ? 'Create new account' : 
+      this.isLoginForm() ? 'Login' : null;
   });
 
   submitAction() {

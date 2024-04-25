@@ -14,6 +14,23 @@ export class ContentService {
     }).pipe(take(1));
   }
 
+  getArticles(): Observable<Article[]> {
+    return zip(SLUGS.map(slug => this.findBySlug(slug))).pipe(
+      map(articles => sortArticles(articles)),
+    );
+  }
+
+  getFeatured(): Observable<Article> {
+    return this.findBySlug(FEATURED_SLUG);
+  }
+
+  getHashtags(): Observable<string[]> {
+    return this.getArticles().pipe(
+      map(articles => [].concat(...articles.map(a => a.hashtags)) as string[]),
+      map(hashtags => Array.from(new Set(hashtags)).sort()),
+    );
+  }
+
   findBySlug(slug: string): Observable<Article> {
     return this.fetchContent(slug).pipe(
       map(content => createArticle(content, slug)),
@@ -35,23 +52,6 @@ export class ContentService {
   search(text: string): Observable<Article[]> {
     return this.getArticles().pipe(
       map(articles => articles.filter(a => searchArticle(text, a))),
-    );
-  }
-  
-  getArticles(): Observable<Article[]> {
-    return zip(SLUGS.map(slug => this.findBySlug(slug))).pipe(
-      map(articles => sortArticles(articles)),
-    );
-  }
-
-  getFeatured(): Observable<Article> {
-    return this.findBySlug(FEATURED_SLUG);
-  }
-
-  getHashtags(): Observable<string[]> {
-    return this.getArticles().pipe(
-      map(articles => [].concat(...articles.map(a => a.hashtags)) as string[]),
-      map(hashtags => Array.from(new Set(hashtags)).sort()),
     );
   }
 }

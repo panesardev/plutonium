@@ -18,10 +18,10 @@ import { BaseModalComponent } from './base.modal.component';
   ],
   template: `
     <app-base-modal heading="Search articles" width="max-w-2xl">
-      <div class="input mb-4">
-        <span>enter title</span>
+      <fieldset class="mb-4">
+        <label>enter title</label>
         <input type="text" [formControl]="textControl" placeholder="type here" autocomplete="off">
-      </div>
+      </fieldset>
 
       @if (text$ | async; as text) {
         <p class="text-center mb-4">Displaying results for "{{ text }}"</p>

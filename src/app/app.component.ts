@@ -30,10 +30,11 @@ import { ModalService } from './services/modal.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  private container = inject(ViewContainerRef);
-  private modal = inject(ModalService);
 
   constructor() {
-    this.modal.setContainer(this.container);
+    const container = inject(ViewContainerRef);
+    const modal = inject(ModalService);
+
+    modal.setContainer(container);
   }
 }

@@ -21,19 +21,6 @@ img {
   @apply bg-base-300 text-primary;  
 }
 
-/* width */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: transparent; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background-color: theme('colors.slate.300'); 
-  border-radius: 100px;
+  display: none;
 }

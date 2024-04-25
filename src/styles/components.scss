@@ -8,7 +8,7 @@
   }
 
   .btn {
-    @apply ripple flex justify-center items-center hover:opacity-95 rounded-full gap-3 py-3 px-8 select-none transition-opacity;
+    @apply flex justify-center items-center hover:opacity-95 rounded-full gap-3 py-3 px-8 select-none transition-opacity;
   }
   
   .btn.sm {
@@ -31,10 +31,10 @@
     @apply bg-slate-200 text-slate-400;
   }
 
-  .input {
+  fieldset {
     @apply grid gap-2;
     label {
-      @apply text-sm;
+      @apply capitalize;
     }
     input, textarea {
       @apply bg-slate-100/80 rounded px-4 py-3 outline-0;
@@ -89,35 +89,6 @@
     }
   }
   
-  .ripple {
-    position: relative;
-    overflow: hidden;
-    transform: translate3d(0, 0, 0);
-  }
-
-  .ripple:after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
-    background-repeat: no-repeat;
-    background-position: 50%;
-    transform: scale(10,10);
-    opacity: 0;
-    transition: transform 300ms, opacity 1s;
-  }
-
-  .ripple:active:after {
-    transform: scale(0,0);
-    opacity: .2;
-    transition: 0s;
-  }
-
   .scroll-watcher {
     @apply bg-primary fixed top-0 z-50 w-full h-[1px] opacity-50 rounded-full; 
     scale: 0 1;
