@@ -1,12 +1,12 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { AuthData } from '../../types/auth.interface';
-import { Modal } from '../../types/modal.class';
-import { AuthFormComponent } from '../components/auth-form.component';
-import { BaseModalComponent } from './base.modal.component';
-import { FallbackImageDirective } from '../../utilities/fallback.image.directive';
+import { Modal } from '../modal.interface';
+import { BaseModalComponent } from '../base.modal.component';
+import { FallbackImageDirective } from '../../../utilities/fallback.image.directive';
+import { AuthFormComponent } from '../../../domains/auth/components/auth-form.component';
+import { AuthService } from '../../../domains/auth/auth.service';
+import { AuthData } from '../../../domains/auth/auth.interface';
 
 @Component({
   selector: 'app-login',

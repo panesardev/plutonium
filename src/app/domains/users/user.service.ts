@@ -1,21 +1,19 @@
 import { inject, Injectable } from "@angular/core";
-import { AuthService } from "./auth.service";
-import { catchError, firstValueFrom, map, Observable, of, switchMap, zip } from "rxjs";
-import { ContentService } from "./content.service";
-import { Article } from "../types/article.interface";
+import { catchError, firstValueFrom, map, of, switchMap, zip } from "rxjs";
+import { Article } from "../articles/article.interface";
+import { ArticleService } from "../articles/article.service";
+import { AuthService } from "../auth/auth.service";
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
   private auth = inject(AuthService);
-  private content = inject(ContentService);
+  private articleService = inject(ArticleService);
   
-  getArticles(): Observable<Article[]> {
-    return this.auth.user$.pipe(
-      map(user => user.slugs.map(s => this.content.findBySlug(s))),
-      switchMap(list => list.length && zip(list)),
-      catchError(() => of([] as Article[])),
-    );
-  }
+  articles$ = this.auth.user$.pipe(
+    map(user => user.slugs.map(s => this.articleService.findBySlug(s))),
+    switchMap(list => list.length && zip(list)),
+    catchError(() => of([] as Article[])),
+  );
 
   async saveArticle(slug: string) {
     const user = await firstValueFrom(this.auth.user$);

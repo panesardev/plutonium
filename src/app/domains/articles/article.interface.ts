@@ -1,5 +1,5 @@
 import frontmatter from 'front-matter';
-import { DOMAIN } from '../app.constants';
+import { BASE_URL } from '../../app.constants';
 
 export interface Article {
   title: string;
@@ -27,7 +27,7 @@ export function createArticle(content: string, slug: string): Article {
     ...output.attributes,
     markdown: output.body,
     coverUrl: `/content/${slug}/img/cover.png`,
-    url: `${DOMAIN}/articles/${slug}`,
+    url: `${BASE_URL}/articles/${slug}`,
   };
 }
 

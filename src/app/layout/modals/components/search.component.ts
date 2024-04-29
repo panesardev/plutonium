@@ -3,9 +3,9 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs';
-import { ContentService } from '../../services/content.service';
-import { Modal } from '../../types/modal.class';
-import { BaseModalComponent } from './base.modal.component';
+import { Modal } from '../modal.interface';
+import { BaseModalComponent } from '../base.modal.component';
+import { ArticleService } from '../../../domains/articles/article.service';
 
 @Component({
   selector: 'app-search',
@@ -44,7 +44,7 @@ import { BaseModalComponent } from './base.modal.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent extends Modal {
-  private content = inject(ContentService);
+  private articleService = inject(ArticleService);
 
   textControl = new FormControl('');
 
@@ -55,6 +55,6 @@ export class SearchComponent extends Modal {
   );
 
   articles$ = this.text$.pipe(
-    switchMap(text => this.content.search(text)),
+    switchMap(text => this.articleService.search(text)),
   );
 }

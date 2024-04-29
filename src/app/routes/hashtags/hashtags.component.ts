@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { ResolveFn } from '@angular/router';
-import { HashtagListComponent } from '../../layout/components/hashtag-list.component';
-import { ContentService } from '../../services/content.service';
+import { ArticleService } from '../../domains/articles/article.service';
+import { HashtagListComponent } from '../../domains/hashtags/components/hashtag-list.component';
 
 export const HashtagsResolver: ResolveFn<string[]> = () => {
-  const content = inject(ContentService);
-  return content.getHashtags();
+  const articleService = inject(ArticleService);
+  return articleService.hashtags$;
 }
 
 @Component({

@@ -5,19 +5,19 @@ import { ActivatedRouteSnapshot, ResolveFn, RouterLink } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
 import { tap } from 'rxjs';
 import { BRAND } from '../../../app.constants';
-import { CommentBoxComponent } from '../../../layout/deferred/comment-box.component';
-import { HashtagListComponent } from '../../../layout/components/hashtag-list.component';
-import { SaveButtonComponent } from '../../../layout/deferred/save-button.component';
-import { ContentService } from '../../../services/content.service';
-import { ModalService } from '../../../services/modal.service';
-import { Article, slugify, Toc } from '../../../types/article.interface';
+import { ModalService } from '../../../layout/modals/modal.service';
 import { FallbackImageDirective } from '../../../utilities/fallback.image.directive';
+import { Article, slugify, Toc } from '../../../domains/articles/article.interface';
+import { ArticleService } from '../../../domains/articles/article.service';
+import { HashtagListComponent } from '../../../domains/hashtags/components/hashtag-list.component';
+import { SaveButtonComponent } from '../../../domains/users/components/save-button.component';
+import { CommentBoxComponent } from '../../../domains/comments/components/comment-box.component';
 
 export const ArticleResolver: ResolveFn<Article> = (route: ActivatedRouteSnapshot) => {
   const slug = route.paramMap.get('slug');
-  const content = inject(ContentService);
+  const articleService = inject(ArticleService);
   const title = inject(Title);
-  return content.findBySlug(slug).pipe(
+  return articleService.findBySlug(slug).pipe(
     tap(article => title.setTitle(`${article.title} - ${BRAND}`)),
   );
 }
@@ -68,6 +68,6 @@ export default class ArticleComponent {
   }
 
   openLogin() {
-    this.modal.openLazy(() => import('../../../layout/modals/login.component').then(c => c.LoginComponent));
+    this.modal.openLazy(() => import('../../../layout/modals/components/login.component').then(c => c.LoginComponent));
   }
 }

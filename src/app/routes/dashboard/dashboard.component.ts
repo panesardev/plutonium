@@ -2,11 +2,11 @@ import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { combineLatest } from 'rxjs';
-import { ArticleListComponent } from '../../layout/components/article-list.component';
-import { AuthService } from '../../services/auth.service';
-import { ModalService } from '../../services/modal.service';
-import { UserService } from '../../services/user.service';
+import { ModalService } from '../../layout/modals/modal.service';
 import { FallbackImageDirective } from '../../utilities/fallback.image.directive';
+import { ArticleListComponent } from '../../domains/articles/components/article-list.component';
+import { AuthService } from '../../domains/auth/auth.service';
+import { UserService } from '../../domains/users/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,12 +27,12 @@ export default class DashboardComponent {
 
   view$ = combineLatest({
     user: this.auth.user$,
-    articles: this.userService.getArticles(),
+    articles: this.userService.articles$,
     isAdmin: this.auth.isAdmin$,
   });
 
   openLogout() {
-    const fn = () => import('../../layout/modals/logout.component').then(c => c.LogoutComponent); 
+    const fn = () => import('../../layout/modals/components/logout.component').then(c => c.LogoutComponent); 
     this.modal.openLazy(fn);
   }
 }

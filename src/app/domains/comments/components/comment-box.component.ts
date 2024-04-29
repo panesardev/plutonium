@@ -2,9 +2,9 @@ import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, inject, input, output, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { firstValueFrom, Observable } from 'rxjs';
-import { AuthService } from '../../services/auth.service';
-import { CommentService } from '../../services/comment.service';
-import { Comment, createComment, emptyValidator } from '../../types/comment.interface';
+import { AuthService } from '../../auth/auth.service';
+import { CommentService } from '../comment.service';
+import { Comment, createComment, emptyValidator } from '../comment.interface';
 
 @Component({
   selector: 'app-comment-box',

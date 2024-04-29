@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { Article } from '../../types/article.interface';
-import { ArticleListComponent } from '../../layout/components/article-list.component';
 import { ResolveFn } from '@angular/router';
-import { ContentService } from '../../services/content.service';
+import { Article } from '../../domains/articles/article.interface';
+import { ArticleListComponent } from '../../domains/articles/components/article-list.component';
+import { ArticleService } from '../../domains/articles/article.service';
 
 export const ArticlesResolver: ResolveFn<Article[]> = () => {
-  const content = inject(ContentService);
-  return content.getArticles();
+  const articleService = inject(ArticleService);
+  return articleService.articles$;
 }
 
 @Component({
@@ -21,6 +21,5 @@ export const ArticlesResolver: ResolveFn<Article[]> = () => {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class ArticlesComponent {
-
   articles = input.required<Article[]>();
 }

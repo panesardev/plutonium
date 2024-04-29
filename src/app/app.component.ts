@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, ViewContainerRef } from '@a
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './layout/footer.component';
 import { NavbarComponent } from './layout/navbar.component';
-import { ModalService } from './services/modal.service';
+import { ModalService } from './layout/modals/modal.service';
 
 @Component({
   selector: 'app-root',

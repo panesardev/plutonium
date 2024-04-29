@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { FeaturedArticleComponent } from '../../layout/components/featured-article.component';
-import { ContentService } from '../../services/content.service';
 import { AsyncPipe } from '@angular/common';
+import { FeaturedArticleComponent } from '../../domains/articles/components/featured-article.component';
+import { ArticleService } from '../../domains/articles/article.service';
 
 @Component({
   selector: 'app-index',
@@ -16,7 +16,7 @@ import { AsyncPipe } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class IndexComponent {
-  private content = inject(ContentService);
+  private articleService = inject(ArticleService);
 
-  featured$ = this.content.getFeatured();
+  featured$ = this.articleService.featured$;
 }

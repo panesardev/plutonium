@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { BaseModalComponent } from './base.modal.component';
+import { BaseModalComponent } from '../base.modal.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Modal } from '../../types/modal.class';
-import { BRAND } from '../../app.constants';
+import { Modal } from '../modal.interface';
+import { BRAND } from '../../../app.constants';
 
 @Component({
   selector: 'app-nav',

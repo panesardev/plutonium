@@ -3,15 +3,15 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
 import { tap } from 'rxjs';
 import { BRAND } from '../../../app.constants';
-import { ArticleListComponent } from '../../../layout/components/article-list.component';
-import { ContentService } from '../../../services/content.service';
-import { Article } from '../../../types/article.interface';
+import { ArticleService } from '../../../domains/articles/article.service';
+import { Article } from '../../../domains/articles/article.interface';
+import { ArticleListComponent } from '../../../domains/articles/components/article-list.component';
 
 export const HashtagResolver: ResolveFn<Article[]> = (route: ActivatedRouteSnapshot) => {
   const hashtag = route.paramMap.get('hashtag');
-  const content = inject(ContentService);
+  const articleService = inject(ArticleService);
   const title = inject(Title);
-  return content.findByHashtag(hashtag).pipe(
+  return articleService.findByHashtag(hashtag).pipe(
     tap(() => title.setTitle(`${hashtag.charAt(0).toUpperCase() + hashtag.slice(1)} - ${BRAND}`)),
   );
 }
