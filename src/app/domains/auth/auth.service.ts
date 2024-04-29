@@ -36,6 +36,10 @@ export class AuthService {
       else return of(false);
     }),
   );
+
+  readonly isAuthenticated$ = this.user$.pipe(
+    map(user => !!user),
+  );
   
   async createAccount({ email, password, displayName }: AuthData): Promise<void> {
     if (!email || !password || !displayName) {
