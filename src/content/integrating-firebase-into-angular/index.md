@@ -3,12 +3,12 @@ title: Integrating Firebase Into Angular
 slug: integrating-firebase-into-angular
 description: How to integrate firebase into Angular 17 using @angular/fire
 hashtags: [angular, firebase]
-date: 2021-07-15T23:23:56-04:00
 createdAt: Jan 15, 2024
 source: https://github.com/panesarpbx8/ngx-firestarter
 authorName: Sukhpreet Singh
 authorImage: https://lh3.googleusercontent.com/a-/AOh14Gh75b7CK1JPwLcKqE8a-zJjwaEVGUreGuWl2nYZbw=s96-c
-authorLink: https://panesarpbx8.vercel.app
+authorLink: https://panesar.dev
+published: true
 ---
 
 ## Getting started

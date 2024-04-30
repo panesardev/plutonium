@@ -3,12 +3,12 @@ title: Simple Redux pattern in Angular
 slug: simple-redux-pattern-in-angular
 description: State management solution that follows redux pattern for Angular
 hashtags: [angular, redux, rxjs]
-date: 2021-07-11T23:23:56-04:00
 createdAt: Feb 11, 2023
 source: https://github.com/panesarpbx8/angular-redux
 authorName: Sukhpreet Singh
 authorImage: https://lh3.googleusercontent.com/a-/AOh14Gh75b7CK1JPwLcKqE8a-zJjwaEVGUreGuWl2nYZbw=s96-c
 authorLink: https://panesarpbx8.vercel.app
+published: true
 ---
 
 ## Getting started

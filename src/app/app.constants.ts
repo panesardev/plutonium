@@ -23,6 +23,7 @@ export const SLUGS = [
   'using-rxjs-with-react',
   'using-typescript-with-express',
   'deploy-angular-universal-to-vercel',
+  'signals-rxjs-state-management',
 ];
 
 export const FEATURED_SLUG = SLUGS[1];

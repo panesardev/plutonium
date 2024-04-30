@@ -10,6 +10,7 @@ export interface Article {
   authorName: string;
   authorImage: string;
   authorLink: string;
+  published: boolean;
   slug: string;
   markdown: string;
   coverUrl: string;

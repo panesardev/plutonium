@@ -8,11 +8,12 @@ source: https://github.com/panesarpbx8/univercel
 authorName: Sukhpreet Singh
 authorImage: https://lh3.googleusercontent.com/a-/AOh14Gh75b7CK1JPwLcKqE8a-zJjwaEVGUreGuWl2nYZbw=s96-c
 authorLink: https://panesarpbx8.vercel.app
+published: true
 ---
 
 ## Getting started
 
-Create new angular 16 app with standalone apis, use `--minimal` to skip routing.
+Create new angular 16 app with standalone apis, use --minimal to skip routing.
 
 ```bash
 $ ng new angular-vercel --minimal --routing --standalone --style=scss

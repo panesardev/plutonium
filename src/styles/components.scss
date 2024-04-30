@@ -37,7 +37,7 @@
       @apply capitalize;
     }
     input, textarea {
-      @apply bg-slate-100/80 rounded px-4 py-3 outline-0;
+      @apply border-[1px] border-slate-400/50 rounded px-4 py-3 outline-0;
     }
   }
   

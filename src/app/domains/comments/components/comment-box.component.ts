@@ -24,11 +24,11 @@ import { Comment, createComment, emptyValidator } from '../comment.interface';
             </div>
           }
           <form [formGroup]="commentForm" (submit)="addComment()">
-            <div class="input mb-6">
-              <div class="flex flex-col md:flex-row justify-center items-center gap-4">
+            <div class="flex flex-col md:flex-row items-center w-full gap-4">
+              <fieldset class="w-full">
                 <textarea class="w-full" formControlName="text" placeholder="Write a comment here"></textarea>
-                <button class="btn {{ commentForm.invalid ? 'disabled' : 'primary' }}" type="submit" [disabled]="commentForm.invalid">Post</button>
-              </div>
+              </fieldset>
+              <button class="btn {{ commentForm.invalid ? 'disabled' : 'primary' }}" type="submit" [disabled]="commentForm.invalid">Post</button>
             </div>
           </form>
         }

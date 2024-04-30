@@ -3,12 +3,12 @@ title: Simplified Http Services with Typescript
 slug: simplified-http-services-with-typescript
 description: Creating a http service that can be extended by angular services to provide crud operations
 hashtags: [angular, typescript]
-date: 2021-06-24T23:23:56-04:00
 createdAt: Jun 24, 2021
 source: https://gist.github.com/panesarpbx8/44b8569e2b6f00aac6a5eb810e019989
 authorName: Sukhpreet Singh
 authorImage: https://lh3.googleusercontent.com/a-/AOh14Gh75b7CK1JPwLcKqE8a-zJjwaEVGUreGuWl2nYZbw=s96-c
 authorLink: https://panesarpbx8.vercel.app
+published: true
 ---
 
 ## Create a generic class

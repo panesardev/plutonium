@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { Observable, map, take, zip } from "rxjs";
+import { Observable, map, take, tap, zip } from "rxjs";
 import { FEATURED_SLUG, SLUGS } from '../../app.constants';
 import { Article, createArticle, searchArticle, sortArticles } from "./article.interface";
 
@@ -10,6 +10,7 @@ export class ArticleService {
 
   articles$ = zip(SLUGS.map(slug => this.findBySlug(slug))).pipe(
     map(articles => sortArticles(articles)),
+    map(articles => articles.filter(a => a.published)),
   );
 
   featured$ = this.articles$.pipe(

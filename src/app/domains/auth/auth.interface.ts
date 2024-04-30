@@ -11,7 +11,7 @@ export type FormType = 'LOGIN' | 'CREATE_ACCOUNT' | 'RESET_PASSWORD';
 
 export type OAuthProviderName = 'google' | 'github';
 
-export const getAuthProvider = (name: OAuthProviderName) => {
+export function getAuthProvider(name: OAuthProviderName) {
   switch (name) {
     case 'google': return new GoogleAuthProvider();
     case 'github': return new GithubAuthProvider();
