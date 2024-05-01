@@ -1,14 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { ResolveFn } from '@angular/router';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Article } from '../../domains/articles/article.interface';
 import { ArticleListComponent } from '../../domains/articles/components/article-list.component';
-import { ArticleService } from '../../domains/articles/article.service';
-
-export const ArticlesResolver: ResolveFn<Article[]> = () => {
-  const articleService = inject(ArticleService);
-  return articleService.articles$;
-}
 
 @Component({
   selector: 'app-articles',

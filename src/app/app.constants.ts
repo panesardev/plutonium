@@ -26,7 +26,7 @@ export const SLUGS = [
   'signals-rxjs-state-management',
 ];
 
-export const FEATURED_SLUG = SLUGS[1];
+export const FEATURED_SLUG = 'signals-rxjs-state-management';
 
 export const SOCIAL = {
   instagram: 'https://www.instagram.com/panesar.dev/',

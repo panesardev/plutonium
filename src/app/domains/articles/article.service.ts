@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { Observable, map, take, tap, zip } from "rxjs";
+import { Observable, map, take, zip } from "rxjs";
 import { FEATURED_SLUG, SLUGS } from '../../app.constants';
-import { Article, createArticle, searchArticle, sortArticles } from "./article.interface";
+import { Article, createArticle, sortArticles } from "./article.interface";
 
 @Injectable({ providedIn: 'root' })
 export class ArticleService {
@@ -43,7 +43,12 @@ export class ArticleService {
 
   search(text: string): Observable<Article[]> {
     return this.articles$.pipe(
-      map(articles => articles.filter(a => searchArticle(text, a))),
+      map(articles => articles.filter(article => {
+        const searchIn = [article.title, article.description, ...article.hashtags];
+        return text ? searchIn.some(v => v.includes(text)) : false;
+      })),
     );
   }
 }
+
+

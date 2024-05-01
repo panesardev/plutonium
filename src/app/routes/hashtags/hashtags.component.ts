@@ -1,12 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { ResolveFn } from '@angular/router';
-import { ArticleService } from '../../domains/articles/article.service';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { HashtagListComponent } from '../../domains/hashtags/components/hashtag-list.component';
-
-export const HashtagsResolver: ResolveFn<string[]> = () => {
-  const articleService = inject(ArticleService);
-  return articleService.hashtags$;
-}
 
 @Component({
   selector: 'app-hashtags',

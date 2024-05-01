@@ -1,11 +1,9 @@
 import { Routes } from '@angular/router';
-import { ArticleResolver } from './routes/articles/article/article.component';
-import { ArticlesResolver } from './routes/articles/articles.component';
-import { HashtagResolver } from './routes/hashtags/hashtag/hashtag.component';
-import { HashtagsResolver } from './routes/hashtags/hashtags.component';
+import { ArticleResolver, ArticlesResolver } from './domains/articles/article.resolver';
+import { AuthGuard } from './domains/auth/auth.guard';
+import { HashtagResolver, HashtagsResolver } from './domains/hashtags/hashtag.resolver';
 import IndexComponent from './routes/index/index.component';
 import { TitleResolver } from './utilities/title.resolver';
-import { AuthGuard } from './domains/auth/auth.guard';
 
 export const routes: Routes = [
   {

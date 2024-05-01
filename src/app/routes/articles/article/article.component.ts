@@ -1,26 +1,13 @@
 import { DOCUMENT, NgOptimizedImage } from '@angular/common';
 import { afterRender, ChangeDetectionStrategy, Component, ElementRef, inject, input, signal, viewChild } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRouteSnapshot, ResolveFn, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
-import { tap } from 'rxjs';
-import { BRAND } from '../../../app.constants';
-import { ModalService } from '../../../layout/modals/modal.service';
-import { FallbackImageDirective } from '../../../utilities/fallback.image.directive';
 import { Article, slugify, Toc } from '../../../domains/articles/article.interface';
-import { ArticleService } from '../../../domains/articles/article.service';
+import { CommentBoxComponent } from '../../../domains/comments/components/comment-box.component';
 import { HashtagListComponent } from '../../../domains/hashtags/components/hashtag-list.component';
 import { SaveButtonComponent } from '../../../domains/users/components/save-button.component';
-import { CommentBoxComponent } from '../../../domains/comments/components/comment-box.component';
-
-export const ArticleResolver: ResolveFn<Article> = (route: ActivatedRouteSnapshot) => {
-  const slug = route.paramMap.get('slug');
-  const articleService = inject(ArticleService);
-  const title = inject(Title);
-  return articleService.findBySlug(slug).pipe(
-    tap(article => title.setTitle(`${article.title} - ${BRAND}`)),
-  );
-}
+import { ModalService } from '../../../layout/modals/modal.service';
+import { FallbackImageDirective } from '../../../utilities/fallback.image.directive';
 
 @Component({
   selector: 'app-article',

@@ -17,7 +17,7 @@ import { FallbackImageDirective } from '../../../utilities/fallback.image.direct
   template: `
     <div class="grid md:grid-cols-[2fr_3fr] gap-6 md:gap-8">
       <div class="cursor-pointer" routerLink="/articles/{{ article().slug }}">
-        <img ngSrc="/content/{{ article().slug }}/img/cover_800x450.webp" class="rounded-lg" [alt]="article().title" width="800" height="450" priority>
+        <img ngSrc="/content/{{ article().slug }}/img/cover.png" class="rounded-lg" [alt]="article().title" width="800" height="450" priority>
       </div>
       <div class="md:pt-4">
         <h1 class="font-bold text-2xl md:text-3xl text-gradient bg-gradient-to-br from-primary to-teal-500 mb-2 pb-2">

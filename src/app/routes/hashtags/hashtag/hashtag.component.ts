@@ -1,20 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
-import { tap } from 'rxjs';
-import { BRAND } from '../../../app.constants';
-import { ArticleService } from '../../../domains/articles/article.service';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Article } from '../../../domains/articles/article.interface';
 import { ArticleListComponent } from '../../../domains/articles/components/article-list.component';
-
-export const HashtagResolver: ResolveFn<Article[]> = (route: ActivatedRouteSnapshot) => {
-  const hashtag = route.paramMap.get('hashtag');
-  const articleService = inject(ArticleService);
-  const title = inject(Title);
-  return articleService.findByHashtag(hashtag).pipe(
-    tap(() => title.setTitle(`${hashtag.charAt(0).toUpperCase() + hashtag.slice(1)} - ${BRAND}`)),
-  );
-}
 
 @Component({
   selector: 'app-hashtag',

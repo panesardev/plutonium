@@ -32,11 +32,6 @@ export function createArticle(content: string, slug: string): Article {
   };
 }
 
-export function searchArticle(text: string, article: Article) {
-  const searchIn = [article.title, article.description, ...article.hashtags];
-  return text ? searchIn.some(v => v.includes(text)) : false;
-}
-
 export function sortArticles(articles: Article[]) {
   return articles.sort((a, b) =>
     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
