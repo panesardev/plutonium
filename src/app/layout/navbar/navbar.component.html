@@ -1,0 +1,48 @@
+<header class="bg-white/80 backdrop-filter backdrop-blur-lg fixed top-0 left-0 right-0 z-10 h-16 md:h-20 px-6 lg:px-8">
+  <nav class="flex lg:grid lg:grid-cols-3 justify-between items-center h-full gap-4 lg:gap-6">
+    <div class="flex items-center gap-6">
+      <div class="block lg:hidden" (click)="openPanel()">
+        <svg class="w-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M18,5H1c-.55,0-1-.45-1-1s.45-1,1-1H18c.55,0,1,.45,1,1s-.45,1-1,1Zm1,15c0-.55-.45-1-1-1H1c-.55,0-1,.45-1,1s.45,1,1,1H18c.55,0,1-.45,1-1Zm5-8c0-.55-.45-1-1-1H6c-.55,0-1,.45-1,1s.45,1,1,1H23c.55,0,1-.45,1-1Z"/></svg>
+      </div>
+      <div class="block lg:hidden" (click)="openSearchModal()">
+        <svg class="w-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M23.707,22.293l-5.969-5.969a10.016,10.016,0,1,0-1.414,1.414l5.969,5.969a1,1,0,0,0,1.414-1.414ZM10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18Z"/></svg>
+      </div>
+      <a routerLink="/" class="hidden lg:block text-primary inter-tight text-2xl lg:text-3xl hover:no-underline">{{ brand }}</a>
+    </div>
+    <div class="hidden lg:block">
+      <div class="bg-secondary hover:bg-tertiary text-primary w-full px-5 py-2 rounded-full transition-colors cursor-pointer" (click)="openSearchModal()">
+        <span>Search articles</span>
+      </div>
+    </div>
+    <div class="flex justify-end items-center gap-4 lg:gap-6">
+      <div class="hidden lg:flex items-center gap-3">
+        <a routerLink="/articles" routerLinkActive="bg-secondary" class="text-primary px-4 py-1 rounded-full hover:no-underline">Articles</a>
+        <a routerLink="/hashtags" routerLinkActive="bg-secondary" class="text-primary px-4 py-1 rounded-full hover:no-underline">Hashtags</a>
+      </div>
+      @defer {
+        <user-button />
+      }
+      @placeholder { 
+        <user-button-placeholder />
+      }
+      @error {
+        <user-button-placeholder /> 
+      }
+    </div>
+  </nav>
+</header>
+
+<div class="{{ panel() ? 'panel-overlay-open' : 'panel-overlay-close' }} fixed inset-0 z-[18] bg-slate-950/50"></div>
+<div class="{{ panel() ? 'panel-open' : 'panel-close' }} block lg:hidden fixed inset-0 z-[19]" #panelRef (click)="closePanelFromOutside($event)">
+  <div class="fixed top-0 bottom-0 left-0 z-20 bg-white w-[300px] px-6 py-8">
+    <div class="pb-8">
+      <a routerLink="/" class="text-primary inter-tight text-4xl hover:no-underline" (click)="closePanel()">{{ brand }}</a>
+    </div>
+    <div class="grid gap-2" (click)="closePanel()">
+      <a routerLink="/articles" routerLinkActive="bg-secondary" class="text-primary px-6 py-3 rounded-full hover:no-underline">Articles</a>
+      <a routerLink="/hashtags" routerLinkActive="bg-secondary" class="text-primary px-6 py-3 rounded-full hover:no-underline">Hashtags</a>
+      <a routerLink="/dashboard" routerLinkActive="bg-secondary" class="text-primary px-6 py-3 rounded-full hover:no-underline">Dashboard</a>
+      <a routerLink="/about" routerLinkActive="bg-secondary" class="text-primary px-6 py-3 rounded-full hover:no-underline">About</a>
+    </div>
+  </div>
+</div>

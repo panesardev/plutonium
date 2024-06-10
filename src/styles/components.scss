@@ -1,0 +1,13 @@
+@layer components {
+  h1.heading {
+    @apply inter-tight font-bold bg-gradient-to-br from-primary to-teal-500 text-5xl md:text-6xl lg:text-7xl text-center text-transparent bg-clip-text select-none pb-3;
+  }
+
+  button {
+    @apply bg-primary text-secondary flex justify-center items-center rounded-full gap-3 py-3 px-8 select-none outline-none transition-opacity;
+    &:hover {
+      @apply opacity-90;
+    }
+  }
+
+}
