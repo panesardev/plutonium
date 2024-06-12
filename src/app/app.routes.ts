@@ -3,6 +3,8 @@ import { articleTitleResolver, findArticleBySlug, getArticles } from './domains/
 import { findArticlesByHashtag, getHashtags, hashtagTitleResolver } from './domains/hashtags/hashtag.resolver';
 import IndexComponent from './pages/index/index.component';
 import { titleResolver } from './shared/resolvers/title.resolver';
+import { authGuard } from './auth/auth.guard';
+import { AuthService } from './auth/auth.service';
 
 export const routes: Routes = [
   {
@@ -36,6 +38,8 @@ export const routes: Routes = [
     path: 'dashboard',
     loadComponent: () => import('./pages/dashboard/dashboard.component'),
     title: titleResolver,
+    canActivate: [authGuard],
+    providers: [AuthService],
   },
   {
     path: 'hashtags',

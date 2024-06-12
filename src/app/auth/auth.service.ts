@@ -1,22 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { User, createUserWithEmailAndPassword, getAdditionalUserInfo, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { User, createUserWithEmailAndPassword, getAdditionalUserInfo, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { doc, getFirestore, setDoc } from 'firebase/firestore';
 import { authState } from 'rxfire/auth';
 import { docData as doc$ } from 'rxfire/firestore';
 import { Observable, map, of, switchMap } from 'rxjs';
 import { API_URL } from '../app.constants';
 import { AdminResponse, AuthUser, AuthUserData, OAuthProviderName } from './auth.interface';
 import { createAuthUserData, getAuthProvider } from "./auth.utilities";
-import { AUTH, FIRESTORE } from '../app.config';
 
 @Injectable()
 export class AuthService {
   private http = inject(HttpClient);
-  private auth = inject(AUTH);
-  private firestore = inject(FIRESTORE);
   private router = inject(Router);
+  private auth = getAuth();
+  private firestore = getFirestore();
 
   user$: Observable<AuthUser> = authState(this.auth).pipe(
     switchMap((user: User) => {

@@ -12,7 +12,7 @@ import { AuthService } from '../../../auth/auth.service';
 @Component({
   selector: 'app-comment-box',
   standalone: true,
-  providers: [AuthService],
+  providers: [AuthService, CommentService],
   imports: [
     AsyncPipe,
     ReactiveFormsModule,

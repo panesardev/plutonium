@@ -49,6 +49,7 @@
             "ssr": {
               "entry": "server.ts"
             },
+            "namedChunks": true,
             "allowedCommonJsDependencies": ["*"]
           },
           "configurations": {
@@ -78,9 +79,6 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "production": {
-              "buildTarget": "plutonium:build:production"
-            },
             "development": {
               "buildTarget": "plutonium:build:development"
             }

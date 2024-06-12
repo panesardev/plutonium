@@ -1,13 +1,12 @@
-import { Injectable, inject } from "@angular/core";
-import { addDoc, collection, deleteDoc, doc, query, where } from "firebase/firestore";
+import { Injectable } from "@angular/core";
+import { addDoc, collection, deleteDoc, doc, getFirestore, query, where } from "firebase/firestore";
 import { collectionData as collection$ } from 'rxfire/firestore';
 import { Observable } from "rxjs";
-import { FIRESTORE } from "../../app.config";
 import { Comment } from "./comment.interface";
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class CommentService {
-  private firestore = inject(FIRESTORE);
+  private firestore = getFirestore();
   private ref = collection(this.firestore, 'comments');
 
   findAll(slug: string): Observable<Comment[]> {

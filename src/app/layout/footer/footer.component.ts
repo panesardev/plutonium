@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { SOCIAL } from '../../app.constants';
 
 @Component({
   selector: 'footer',
@@ -11,5 +12,5 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-
+  social = SOCIAL;
 }

@@ -12,7 +12,7 @@ import { MarkdownComponent, provideMarkdown } from 'ngx-markdown';
   ],
   template: `
     <div class="prose max-w-none">
-      <markdown [data]="markdown()"/>
+      <markdown [data]="markdown()" />
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
