@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
-import { computedAsync } from '../../../shared/computed-async';
 import { ErrorImageDirective } from '../../../shared/error-image.directive';
 
 @Component({
@@ -38,5 +37,5 @@ export class UserButtonPlaceholderComponent {}
 export class UserButtonComponent {
   private auth = inject(AuthService);
 
-  user = computedAsync(this.auth.user$);
+  user = this.auth.user;
 }

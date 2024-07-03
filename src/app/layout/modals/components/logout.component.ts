@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
-import { computedAsync } from '../../../shared/computed-async';
 import { ErrorImageDirective } from '../../../shared/error-image.directive';
 import { Modal, ModalComponent } from '../modal.component';
 
@@ -35,7 +34,7 @@ export class LogoutComponent extends Modal {
   private auth = inject(AuthService);
   private router = inject(Router);
 
-  user = computedAsync(this.auth.user$);
+  user = this.auth.user;
 
   async logout() {
     await this.auth.logout();

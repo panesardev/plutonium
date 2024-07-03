@@ -4,7 +4,7 @@ import { distinctUntilChanged, map, switchMap } from 'rxjs';
 import { ArticleService } from '../../../domains/articles/article.service';
 import { Modal, ModalComponent } from '../modal.component';
 import { RouterLink } from '@angular/router';
-import { computedAsync } from '../../../shared/computed-async';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'search',
@@ -66,7 +66,7 @@ export class SearchComponent extends Modal {
     ),
   );
 
-  text = computedAsync(this.text$);
-  articles = computedAsync(this.articles$);
+  text = toSignal(this.text$);
+  articles = toSignal(this.articles$);
 
 }

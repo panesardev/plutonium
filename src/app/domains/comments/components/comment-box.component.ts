@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { firstValueFrom, map, switchMap } from 'rxjs';
 import { AuthService } from '../../../auth/auth.service';
-import { computedAsync } from '../../../shared/computed-async';
 import { Comment, CommentFormValue } from '../comment.interface';
 import { CommentService } from '../comment.service';
 import { createComment } from '../comment.utilities';
@@ -52,9 +52,9 @@ export class CommentBoxComponent {
 
   slug$ = this.route.params.pipe(map(params => params['slug']));
   
-  user = computedAsync(this.auth.user$);
-  isAdmin = computedAsync(this.auth.isAdmin$);
-  comments = computedAsync(
+  user = this.auth.user;
+  isAdmin = this.auth.isAdmin;
+  comments = toSignal(
     this.slug$.pipe(
       switchMap(slug => this.commentService.findAll(slug)),
     ),

@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { createUserWithEmailAndPassword, getAdditionalUserInfo, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { doc, getFirestore, setDoc } from 'firebase/firestore';
 import { user as userChanges } from 'rxfire/auth';
 import { docData as docChanges } from 'rxfire/firestore';
-import { type Observable, map, of, switchMap } from 'rxjs';
+import { combineLatest, map, of, switchMap, type Observable } from 'rxjs';
 import { API_URL } from '../app.constants';
-import { AdditionalUserData, AdminResponse, AuthUser, OAuthProviderName } from './auth.interface';
-import { createUserData, getAuthProvider } from "./auth.utilities";
+import { AdditionalUserData, AdminResponse, AuthState, AuthUser, OAuthProviderName } from './auth.interface';
+import { createUserData, getAuthProvider, initialState } from "./auth.utilities";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -15,28 +15,33 @@ export class AuthService {
   private auth = getAuth();
   private firestore = getFirestore();
 
-  user$ = userChanges(this.auth).pipe(
+  private state = signal<AuthState>(initialState);
+
+  stateChanges$: Observable<AuthState> = userChanges(this.auth).pipe(
     switchMap(user => {
       if (user) {
-        return docChanges(doc(this.firestore, `users/${user.uid}`)).pipe(
-          map(data => ({ ...user, ...data })),
-        ) as Observable<AuthUser>;
+        return combineLatest({
+          user: docChanges(doc(this.firestore, `users/${user.uid}`)).pipe(
+            map(data => ({ ...user, ...data })),
+          ) as Observable<AuthUser>,
+          isAdmin: this.http.get<AdminResponse>(`${API_URL}/auth/is-admin/${user.email}`).pipe(
+            map(response => response.isAdmin),
+          ),
+        })
       }
-      else return of(null);
+      else return of(initialState);
     }),
   );
 
-  isAdmin$ = userChanges(this.auth).pipe(
-    switchMap(user => {
-      if (user) {
-        const URL = `${API_URL}/auth/is-admin/${user.email}`;
-        return this.http.get<AdminResponse>(URL).pipe(
-          map(response => response.isAdmin),
-        );
-      }
-      else return of(false);
-    }),
-  );
+  user = computed(() => this.state().user);
+  isAdmin = computed(() => this.state().isAdmin);
+
+  constructor() {
+    this.stateChanges$.subscribe({
+      next: next => this.state.update(v => ({ ...v, ...next })),
+      error: () => this.state.set(initialState),
+    });
+  }
 
   async createAccount(email: string, password: string, displayName: string): Promise<string> {
     const credential = await createUserWithEmailAndPassword(this.auth, email, password);

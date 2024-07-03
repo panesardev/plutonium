@@ -11,4 +11,9 @@ export interface AdminResponse {
   isAdmin: boolean;
 }
 
+export interface AuthState {
+  user: AuthUser;
+  isAdmin: boolean;
+}
+
 export type OAuthProviderName = 'GOOGLE' | 'GITHUB';

@@ -1,5 +1,10 @@
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
-import { AdditionalUserData, OAuthProviderName } from "./auth.interface";
+import { AdditionalUserData, AuthState, OAuthProviderName } from "./auth.interface";
+
+export const initialState: AuthState = {
+  user: null,
+  isAdmin: false,
+};
 
 export function createUserData(): AdditionalUserData {
   return {

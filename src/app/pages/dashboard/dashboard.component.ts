@@ -1,12 +1,11 @@
-import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { map, switchMap, zip } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { ArticleService } from '../../domains/articles/article.service';
 import { ArticleListComponent } from '../../domains/articles/components/article-list.component';
 import { ModalService } from '../../layout/modals/modal.service';
 import { ProfileCardComponent } from './components/profile-card.component';
-import { computedAsync } from '../../shared/computed-async';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,8 +22,8 @@ export default class DashboardComponent {
   private auth = inject(AuthService);
   private articleService = inject(ArticleService);
 
-  user = computedAsync(this.auth.user$);
-  articles = computedAsync(this.auth.user$.pipe(
+  user = this.auth.user;
+  articles = toSignal(toObservable(this.user).pipe(
     map(user => user.slugs),
     map(slugs => slugs.map(s => this.articleService.findBySlug(s))),
     switchMap(arr => zip(arr)),
