@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { map } from 'rxjs';
+import { catchError, map, of } from 'rxjs';
 import { AuthService } from '../../../auth/auth.service';
 import { computedAsync } from '../../../shared/computed-async';
 
@@ -46,6 +46,7 @@ export class SaveButtonComponent {
   user = computedAsync(this.auth.user$);
   isArticleSaved = computedAsync(this.auth.user$.pipe(
     map(user => user.slugs.includes(this.slug())),
+    catchError(() => of(false)),
   ));
   
   async saveArticle(slug: string) {
