@@ -1,6 +1,6 @@
 .panel-open {
   transform: translateX(0%);
-  animation: panel-open 500ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  animation: panel-open 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 @keyframes panel-open {
@@ -14,7 +14,7 @@
 
 .panel-close {
   transform: translateX(-100%);
-  animation: panel-close 650ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  animation: panel-close 450ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 @keyframes panel-close {
@@ -27,7 +27,7 @@
 }
 
 .panel-overlay-open {
-  animation: panel-overlay-open 500ms ease;
+  animation: panel-overlay-open 300ms ease;
   opacity: 1;
   display: block;
 }
@@ -44,7 +44,7 @@
 }
 
 .panel-overlay-close {
-  animation: panel-overlay-close 650ms ease;
+  animation: panel-overlay-close 450ms ease;
   opacity: 0;
   display: none;
 }

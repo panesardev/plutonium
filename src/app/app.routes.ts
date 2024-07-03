@@ -1,61 +1,43 @@
 import { Routes } from '@angular/router';
-import { articleTitleResolver, findArticleBySlug, getArticles } from './domains/articles/article.resolver';
-import { findArticlesByHashtag, getHashtags, hashtagTitleResolver } from './domains/hashtags/hashtag.resolver';
 import IndexComponent from './pages/index/index.component';
-import { titleResolver } from './shared/resolvers/title.resolver';
-import { authGuard } from './auth/auth.guard';
-import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
+import { TitleResolver } from './shared/title.resolver';
 
 export const routes: Routes = [
   {
     path: '',
     component: IndexComponent,
-    title: titleResolver,
+    title: TitleResolver,
   },
   {
     path: 'about',
     loadComponent: () => import('./pages/about/about.component'),
-    title: titleResolver,
+    title: TitleResolver,
   },
   {
-    path: 'auth',
-    loadComponent: () => import('./auth/pages/auth.component'),
-    title: titleResolver,
+    path: 'login',
+    loadComponent: () => import('./pages/login/login.component'),
+    title: TitleResolver,
   },
   {
     path: 'articles',
-    loadComponent: () => import('./domains/articles/pages/articles/articles.component'),
-    title: titleResolver,
-    resolve: { articles: getArticles },
-  },
-  {
-    path: 'articles/:slug',
-    loadComponent: () => import('./domains/articles/pages/article/article.component'),
-    title: articleTitleResolver,
-    resolve: { article: findArticleBySlug },
+    loadChildren: () => import('./domains/articles/articles.routes'),
+    title: TitleResolver,
   },
   {
     path: 'dashboard',
     loadComponent: () => import('./pages/dashboard/dashboard.component'),
-    title: titleResolver,
-    canActivate: [authGuard],
-    providers: [AuthService],
+    title: TitleResolver,
+    canActivate: [AuthGuard],
   },
   {
     path: 'hashtags',
-    loadComponent: () => import('./domains/hashtags/pages/hashtags/hashtags.component'),
-    title: titleResolver,
-    resolve: { hashtags: getHashtags },
-  },
-  {
-    path: 'hashtags/:hashtag',
-    loadComponent: () => import('./domains/hashtags/pages/hashtag/hashtag.component'),
-    title: hashtagTitleResolver,
-    resolve: { articles: findArticlesByHashtag },
+    loadChildren: () => import('./domains/hashtags/hashtags.routes'),
+    title: TitleResolver,
   },
   {
     path: '**',
     loadComponent: () => import('./pages/not-found/not-found.component'),
-    title: titleResolver,
+    title: TitleResolver,
   },
 ];

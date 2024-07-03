@@ -3,7 +3,7 @@ import { ArticleListComponent } from '../../components/article-list.component';
 import { Article } from '../../article.interface';
 
 @Component({
-  selector: 'articles',
+  selector: 'app-articles',
   standalone: true,
   imports: [
     ArticleListComponent,

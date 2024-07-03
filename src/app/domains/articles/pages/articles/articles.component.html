@@ -1,1 +1,9 @@
-<p>articles works!</p>
+@if (articles(); as articles) {
+  <section class="px-6 lg:px-8">
+    <h1 class="heading mb-8 md:mb-12">Articles</h1>
+
+    <div class="max-w-6xl mx-auto">
+      <app-article-list [articles]="articles"/>
+    </div>
+  </section>
+}

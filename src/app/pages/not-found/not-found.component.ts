@@ -1,13 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'not-found',
+  selector: 'app-not-found',
   standalone: true,
-  imports: [],
   templateUrl: './not-found.component.html',
-  styles: ``,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class NotFoundComponent {
+export default class NotFoundComponent {}
 
-}

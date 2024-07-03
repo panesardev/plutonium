@@ -1,8 +1,8 @@
 import type { User } from 'firebase/auth';
 
-export interface AuthUser extends User, AuthUserData {}
+export interface AuthUser extends User, AdditionalUserData {}
 
-export interface AuthUserData {
+export interface AdditionalUserData {
   slugs: string[];
   created: string;
 }
@@ -11,4 +11,4 @@ export interface AdminResponse {
   isAdmin: boolean;
 }
 
-export type OAuthProviderName = 'google' | 'github';
+export type OAuthProviderName = 'GOOGLE' | 'GITHUB';

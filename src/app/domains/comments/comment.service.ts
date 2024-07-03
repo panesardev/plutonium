@@ -1,17 +1,17 @@
 import { Injectable } from "@angular/core";
 import { addDoc, collection, deleteDoc, doc, getFirestore, query, where } from "firebase/firestore";
-import { collectionData as collection$ } from 'rxfire/firestore';
+import { collectionData as collectionChanges } from 'rxfire/firestore';
 import { Observable } from "rxjs";
 import { Comment } from "./comment.interface";
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CommentService {
   private firestore = getFirestore();
   private ref = collection(this.firestore, 'comments');
 
   findAll(slug: string): Observable<Comment[]> {
     const q = query(this.ref, where('slug', '==', slug));
-    return collection$(q, { idField: 'id' }) as Observable<Comment[]>;
+    return collectionChanges(q, { idField: 'id' }) as Observable<Comment[]>;
   }
 
   async add(comment: Comment): Promise<void> {

@@ -1,39 +1,38 @@
-import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
-import { AuthService } from '../../../auth/auth.service';
-import { firstValueFrom, map } from 'rxjs';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { map } from 'rxjs';
+import { AuthService } from '../../../auth/auth.service';
+import { computedAsync } from '../../../shared/computed-async';
 
 @Component({
-  selector: 'save-button-placeholder',
+  selector: 'app-save-button-placeholder',
   standalone: true,
   imports: [RouterLink],
   template: `
-    <button class="md:w-full" routerLink="/auth">Login to save</button>
+    <button routerLink="/login">Login to save</button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SaveButtonPlaceholderComponent {}
 
 @Component({
-  selector: 'save-button',
+  selector: 'app-save-button',
   standalone: true,
   imports: [
-    AsyncPipe,
-    SaveButtonPlaceholderComponent,
+    RouterLink,
   ],
   template: `
     <div class="flex justify-center">
-      @if (user$ | async; as user) {
-        @if (isArticleSaved$ | async) {
-          <button class="red md:w-full" (click)="removeArticle(slug())">Remove saved</button>
+      @if (user(); as user) {
+        @if (isArticleSaved()) {
+          <button class="bg-red-500 text-red-50" (click)="removeArticle(slug())">Remove saved</button>
         }
         @else {
-          <button class="md:w-full" (click)="saveArticle(slug())">Save Article</button>
+          <button (click)="saveArticle(slug())">Save Article</button>
         }
       }
       @else {
-        <save-button-placeholder />
+        <button routerLink="/login">Login to save</button>
       }
     </div>
   `,
@@ -43,23 +42,19 @@ export class SaveButtonComponent {
   private auth = inject(AuthService);
 
   slug = input.required<string>();
-  onLogin = output<void>();
 
-  user$ = this.auth.user$;
-
-  isArticleSaved$ = this.user$.pipe(
+  user = computedAsync(this.auth.user$);
+  isArticleSaved = computedAsync(this.auth.user$.pipe(
     map(user => user.slugs.includes(this.slug())),
-  );
+  ));
   
   async saveArticle(slug: string) {
-    const user = await firstValueFrom(this.auth.user$);
-    const slugs = [...user.slugs, slug];
-    await this.auth.setUser(user.uid, { created: user.created, slugs });
+    const slugs = [...this.user().slugs, slug];
+    await this.auth.setUser(this.user().uid, { created: this.user().created, slugs });
   }
 
   async removeArticle(slug: string) {
-    const user = await firstValueFrom(this.auth.user$);
-    const slugs = user.slugs.filter(s => s != slug);
-    await this.auth.setUser(user.uid, { created: user.created, slugs });
+    const slugs = this.user().slugs.filter(s => s != slug);
+    await this.auth.setUser(this.user().uid, { created: this.user().created, slugs });
   }
 }

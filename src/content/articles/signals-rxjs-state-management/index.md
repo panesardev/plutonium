@@ -15,7 +15,7 @@ published: true
 
 Showcasing my new state management solution to uses signals and rxjs together to create a Store that can be injected and used from anywhere. Main idea is to inject store in all parts of application to select slice of AppState or the global state and to dispatch actions as well, therefore components do not need to worry about which specific service to inject to fetch content.
 
-![diagram](/content/signals-rxjs-state-management/img/diagram.png)
+![diagram](/articles/signals-rxjs-state-management/img/diagram.png)
 
 ## Getting started
 

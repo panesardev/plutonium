@@ -4,14 +4,13 @@ import { ModalService } from './modal.service';
 export class Modal {
   cdr = inject(ChangeDetectorRef);
   modal = inject(ModalService);
-
+  
   cd = setTimeout(() => this.cdr.detectChanges());
 }
 
 @Component({
-  selector: 'modal',
+  selector: 'app-modal',
   standalone: true,
-  imports: [],
   template: `
     <div class="{{ modal.isOpen() ? 'modal-overlay-open' : 'modal-overlay-close' }} fixed inset-0 z-[100] bg-slate-950/60"></div>
     <div class="{{ modal.isOpen() ? 'modal-open' : 'modal-close' }} fixed z-[101] inset-0 px-3 md:px-10 py-8 select-none" #modalRef (click)="close($event)">

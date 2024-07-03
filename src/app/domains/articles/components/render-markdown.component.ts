@@ -1,22 +1,22 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MarkdownComponent, provideMarkdown } from 'ngx-markdown';
 
+import '../../../../../node_modules/prismjs/prism.js';
+import '../../../../../node_modules/prismjs/components/prism-typescript.min.js';
+
 @Component({
-  selector: 'render-markdown',
+  selector: 'app-render-markdown',
   standalone: true,
+  providers: [provideMarkdown()],
   imports: [
     MarkdownComponent,
   ],
-  providers: [
-    provideMarkdown(),
-  ],
   template: `
-    <div class="prose max-w-none">
-      <markdown [data]="markdown()" />
-    </div>
+    <markdown class="markdown" [data]="markdown()"/>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RenderMarkdownComponent {
   markdown = input.required<string>();
 }
+

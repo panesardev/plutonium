@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { UserButtonComponent, UserButtonPlaceholderComponent } from './components/user-button.component';
-import { BRAND } from '../../app.constants';
 import { ModalService } from '../modals/modal.service';
 
 @Component({
-  selector: 'navbar',
+  selector: 'app-navbar',
   standalone: true,
   imports: [
     RouterLink,
@@ -20,18 +19,8 @@ import { ModalService } from '../modals/modal.service';
 export class NavbarComponent {
   private modal = inject(ModalService);
 
-  panelRef = viewChild.required<ElementRef>('panelRef');
-  
+  panelRef = viewChild<ElementRef>('panelRef');
   panel = signal(false);
-  brand = BRAND;
-
-  openPanel() {
-    this.panel.set(true);
-  }
-
-  closePanel() {
-    this.panel.set(false);
-  }
 
   closePanelFromOutside(event: MouseEvent) {
     if (event.target === this.panelRef().nativeElement) {
@@ -39,7 +28,7 @@ export class NavbarComponent {
     }
   }
 
-  openSearchModal() {
+  openSearch() {
     const fn = () => import('../modals/components/search.component').then(c => c.SearchComponent);
     this.modal.open(fn);
   }

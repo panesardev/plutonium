@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-hashtags',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink,
+  ],
   templateUrl: './hashtags.component.html',
-  styles: ``,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class HashtagsComponent {
-
+  hashtags = input.required<string[]>();
 }

@@ -1,7 +1,18 @@
-@if (user$ | async; as user) {
-  <section>
+@if (user(); as user) {
+  <section class="px-6 md:px-8">
+    <h1 class="heading mb-8 md:mb-12">Dashboard</h1>
 
-    <button (click)="openLogout()">Logout</button>
-  
+    <div class="max-w-xl mx-auto mb-12">
+      <app-profile-card [user]="user" (logout)="openLogout()"/>
+    </div>
+
+    @if (articles(); as articles) {
+      <div>
+        <h1 class="text-primary font-bold text-center text-3xl mb-8" style="font-family: 'Inter Tight';">Saved Articles</h1>
+        <div class="max-w-6xl mx-auto">
+          <app-article-list [articles]="articles"/>
+        </div>
+      </div>
+    }
   </section>
 }

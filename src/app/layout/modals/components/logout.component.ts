@@ -1,21 +1,22 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
-import { AsyncPipe } from '@angular/common';
+import { computedAsync } from '../../../shared/computed-async';
+import { ErrorImageDirective } from '../../../shared/error-image.directive';
 import { Modal, ModalComponent } from '../modal.component';
 
 @Component({
-  selector: 'logout',
+  selector: 'app-logout',
   standalone: true,
   imports: [
-    AsyncPipe,
     ModalComponent,
+    ErrorImageDirective,
   ],
-  providers: [AuthService],
   template: `
-    <modal heading="Are you sure?">
-      @if (user$ | async; as user) {
+    <app-modal heading="Are you sure?">
+      @if (user(); as user) {
         <div class="bg-secondary text-primary flex items-center rounded-md gap-3 mb-4 px-4 py-3 cursor-pointer" routerLink="/dashboard" (click)="modal.close()">
-          <img [src]="user.photoURL" alt="user" class="rounded-full w-8 h-8" fallbackImage="/assets/img/user.png">
+        <img [src]="user.photoURL" onError="/icons/user.png" [alt]="user.displayName" class="rounded-full w-8 h-8">
           <span>Logged in as {{ user.displayName }}</span>
         </div>
       }
@@ -26,17 +27,19 @@ import { Modal, ModalComponent } from '../modal.component';
         <button class="bg-secondary text-primary" (click)="modal.close()">Back</button>
         <button (click)="logout()">Logout</button>
       </div>
-    </modal>
+    </app-modal>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogoutComponent extends Modal {
   private auth = inject(AuthService);
+  private router = inject(Router);
 
-  user$ = this.auth.user$;
+  user = computedAsync(this.auth.user$);
 
   async logout() {
     await this.auth.logout();
+    await this.router.navigate(['/']);
     this.modal.close();
   }
 }

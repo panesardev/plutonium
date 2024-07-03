@@ -174,7 +174,7 @@ GET http://localhost:3000
 GET http://localhost:3000/bob-marley
 ```
 
-![testing typescript express api](/content/using-typescript-with-express/img/test.png)
+![testing typescript express api](/articles/using-typescript-with-express/img/test.png)
 
 ## Scripts
 

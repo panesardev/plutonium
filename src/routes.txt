@@ -1,9 +1,3 @@
-/
-
-/about
-
-/articles
-
 /articles/deploy-docker-image-on-heroku
 /articles/integrating-firebase-into-angular
 /articles/server-side-rendering-in-angular
@@ -13,8 +7,6 @@
 /articles/using-typescript-with-express
 /articles/deploy-angular-universal-to-vercel
 /articles/signals-rxjs-state-management
-
-/hashtags
 
 /hashtags/angular
 /hashtags/rxjs
@@ -27,5 +19,4 @@
 /hashtags/react
 /hashtags/heroku
 /hashtags/docker
-
-/not-found
+/hashtags/signals

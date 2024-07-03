@@ -19,7 +19,7 @@ The idea behind using redux pattern is to create a predictable one way data flow
 $ ng new angular-redux
 ```
 
-![redux pattern visualized](/content/simple-redux-pattern-in-angular/img/reduxflow.png)
+![redux pattern visualized](/articles/simple-redux-pattern-in-angular/img/reduxflow.png)
 
 ## State model
 

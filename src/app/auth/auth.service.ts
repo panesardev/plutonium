@@ -1,26 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { User, createUserWithEmailAndPassword, getAdditionalUserInfo, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAdditionalUserInfo, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { doc, getFirestore, setDoc } from 'firebase/firestore';
-import { authState } from 'rxfire/auth';
-import { docData as doc$ } from 'rxfire/firestore';
-import { Observable, map, of, switchMap } from 'rxjs';
+import { user as userChanges } from 'rxfire/auth';
+import { docData as docChanges } from 'rxfire/firestore';
+import { type Observable, map, of, switchMap } from 'rxjs';
 import { API_URL } from '../app.constants';
-import { AdminResponse, AuthUser, AuthUserData, OAuthProviderName } from './auth.interface';
-import { createAuthUserData, getAuthProvider } from "./auth.utilities";
+import { AdditionalUserData, AdminResponse, AuthUser, OAuthProviderName } from './auth.interface';
+import { createUserData, getAuthProvider } from "./auth.utilities";
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private http = inject(HttpClient);
-  private router = inject(Router);
   private auth = getAuth();
   private firestore = getFirestore();
 
-  user$: Observable<AuthUser> = authState(this.auth).pipe(
-    switchMap((user: User) => {
+  user$ = userChanges(this.auth).pipe(
+    switchMap(user => {
       if (user) {
-        return doc$(doc(this.firestore, `users/${user.uid}`)).pipe(
+        return docChanges(doc(this.firestore, `users/${user.uid}`)).pipe(
           map(data => ({ ...user, ...data })),
         ) as Observable<AuthUser>;
       }
@@ -28,7 +26,7 @@ export class AuthService {
     }),
   );
 
-  isAdmin$: Observable<boolean> = authState(this.auth).pipe(
+  isAdmin$ = userChanges(this.auth).pipe(
     switchMap(user => {
       if (user) {
         const URL = `${API_URL}/auth/is-admin/${user.email}`;
@@ -40,28 +38,28 @@ export class AuthService {
     }),
   );
 
-  async createAccount(email: string, password: string, displayName: string): Promise<void> {
+  async createAccount(email: string, password: string, displayName: string): Promise<string> {
     const credential = await createUserWithEmailAndPassword(this.auth, email, password);
     await Promise.all([
       updateProfile(credential.user, { displayName }), 
-      this.setUser(credential.user.uid, createAuthUserData()),
+      this.setUser(credential.user.uid, createUserData()),
     ]);
-    await this.router.navigate(['/dashboard']);
+    return credential.user.displayName;
   }
 
-  async login(email: string, password: string): Promise<void> {
-    await signInWithEmailAndPassword(this.auth, email, password);
-    await this.router.navigate(['/dashboard']);
+  async login(email: string, password: string): Promise<string> {
+    const credential = await signInWithEmailAndPassword(this.auth, email, password);
+    return credential.user.displayName;
   }
 
-  async oAuthLogin(providerName: OAuthProviderName): Promise<void> {
+  async socialLogin(providerName: OAuthProviderName): Promise<string> {
     const provider = getAuthProvider(providerName);
     const credential = await signInWithPopup(this.auth, provider);
 
     if (getAdditionalUserInfo(credential).isNewUser)
-      await this.setUser(credential.user.uid, createAuthUserData());
+      await this.setUser(credential.user.uid, createUserData());
 
-    await this.router.navigate(['/dashboard']);
+    return credential.user.displayName;
   }
 
   async resetPassword(email: string): Promise<void> {
@@ -70,10 +68,9 @@ export class AuthService {
 
   async logout(): Promise<void> {
     await signOut(this.auth);
-    await this.router.navigate(['/']);
   }
   
-  async setUser(uid: string, data: AuthUserData): Promise<void> {
+  async setUser(uid: string, data: AdditionalUserData): Promise<void> {
     await setDoc(doc(this.firestore, `users/${uid}`), data);
   }
 }

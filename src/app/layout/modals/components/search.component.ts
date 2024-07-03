@@ -1,19 +1,43 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { distinctUntilChanged, map, switchMap } from 'rxjs';
 import { ArticleService } from '../../../domains/articles/article.service';
 import { Modal, ModalComponent } from '../modal.component';
+import { RouterLink } from '@angular/router';
+import { computedAsync } from '../../../shared/computed-async';
 
 @Component({
   selector: 'search',
   standalone: true,
   imports: [
+    RouterLink,
     ModalComponent,
+    ReactiveFormsModule,
   ],
   template: `
-    <modal heading="Search" width="max-w-2xl">
+    <app-modal heading="Search" width="max-w-2xl">
+      <fieldset class="mb-4">
+        <label>enter title</label>
+        <input type="text" [formControl]="textControl" placeholder="type here" autocomplete="off">
+      </fieldset>
+
+      @if (text(); as text) {
+        <p class="text-center mb-4">Displaying results for "{{ text }}"</p>
+      }
       
-    </modal>
+      <div class="h-96 overflow-y-scroll">
+        @for (article of articles(); track article.slug) {
+          <div [routerLink]="['articles', article.slug]" (click)="modal.close()"
+            class="border-[1px] border-slate-300 hover:bg-base-100 px-4 md:px-6 py-3 md:py-4 mb-2 rounded cursor-pointer">
+            <p class="font-bold text-lg text-primary">{{ article.title }}</p>
+            <p>{{ article.description }}</p>
+          </div>
+        }
+        @empty {
+          <p class="text-center mb-4">Empty list!</p>
+        }
+      </div>
+    </app-modal>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -41,5 +65,8 @@ export class SearchComponent extends Modal {
       )
     ),
   );
+
+  text = computedAsync(this.text$);
+  articles = computedAsync(this.articles$);
 
 }

@@ -15,7 +15,7 @@ import { CommentForm, CommentFormValue } from '../comment.interface';
         <textarea class="w-full" formControlName="text" placeholder="Write a comment here"></textarea>
       </fieldset>
       <div class="flex justify-center w-full">
-        <button class="{{ form.invalid ? 'disabled' : 'primary' }} px-6 py-2" type="submit" [disabled]="form.invalid">Post</button>
+        <button class="{{ form.invalid ? 'bg-slate-200 text-slate-500' : '' }} px-6 py-2" type="submit" [disabled]="form.invalid">Post</button>
       </div>
     </form>
   `,

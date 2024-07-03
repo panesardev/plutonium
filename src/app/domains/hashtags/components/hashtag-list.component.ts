@@ -1,17 +1,21 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-hashtag-list',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink,
+  ],
   template: `
-    <p>
-      hashtag-list works!
-    </p>
+    <div class="flex justify-center gap-4 flex-wrap">
+      @for (hashtag of hashtags(); track hashtag) {
+        <a routerLink="/hashtags/{{ hashtag }}" class="text-primary hover:underline">#{{ hashtag }}</a>
+      }
+    </div>
   `,
-  styles: ``,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HashtagListComponent {
-
+  hashtags = input.required<string[]>();
 }

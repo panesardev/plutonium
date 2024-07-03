@@ -1,1 +1,9 @@
-<p>hashtag works!</p>
+@if (articles(); as articles) {
+  <section class="px-6 md:px-8">
+    <h1 class="heading capitalize mb-8 md:mb-12">{{ hashtag() }}</h1>
+  
+    <div class="max-w-6xl mx-auto">
+      <app-article-list [articles]="articles"/>
+    </div>
+  </section>  
+}

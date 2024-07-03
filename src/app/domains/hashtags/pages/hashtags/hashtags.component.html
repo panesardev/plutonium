@@ -1,1 +1,11 @@
-<p>hashtags works!</p>
+@if (hashtags()) {
+  <section class="px-6 md:px-8">
+    <h1 class="heading mb-12 md:mb-20">Hashtags</h1>
+  
+    <div class="flex justify-center flex-wrap max-w-2xl text-xl gap-8 mx-auto">
+      @for (hashtag of hashtags(); track hashtag) {
+        <a routerLink="/hashtags/{{ hashtag }}" class="text-primary hover:underline">#{{ hashtag }}</a>
+      }
+    </div>
+  </section>
+}

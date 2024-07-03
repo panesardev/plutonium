@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SOCIAL } from '../../app.constants';
 
 @Component({
-  selector: 'about',
+  selector: 'app-about',
   standalone: true,
   imports: [],
   templateUrl: './about.component.html',

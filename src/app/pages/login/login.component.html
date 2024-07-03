@@ -1,0 +1,44 @@
+<section class="px-6 md:px-8">
+  <h1 class="heading mb-8 md:mb-12">Log into Plutonium</h1>
+  
+  <div class="grid md:grid-cols-2 max-w-4xl gap-6 md:gap-10 mx-auto">
+    <div class="bg-white rounded-lg p-6 md:p-10">
+      @switch (type()) {
+        @case ('LOGIN') {
+          <app-login-form (success)="openSuccess($event)" (error)="openError($event)"/>
+        }
+        @case ('CREATE_ACCOUNT') {
+          <app-create-account-form (success)="openSuccess($event)" (error)="openError($event)"/>
+        }
+        @case ('RESET_PASSWORD') {
+          <app-reset-password-form (success)="openSuccess($event)" (error)="openError($event)"/>
+        }
+      }
+      <div class="pt-6">
+        @switch (type()) {
+          @case ('LOGIN') {
+            <div class="flex justify-center items-center gap-6">
+              <a (click)="setType('CREATE_ACCOUNT')" class="text-orange-500 hover:underline cursor-pointer">New account</a>
+              <a (click)="setType('RESET_PASSWORD')" class="text-orange-500 hover:underline cursor-pointer">Forget password</a>
+            </div>
+          }
+          @case ('CREATE_ACCOUNT') {
+            <div class="flex justify-center items-center gap-6">
+              <a (click)="setType('LOGIN')" class="text-orange-500 hover:underline cursor-pointer">Login instead</a>
+              <a (click)="setType('RESET_PASSWORD')" class="text-orange-500 hover:underline cursor-pointer">Forget password</a>
+            </div>
+          }
+          @case ('RESET_PASSWORD') {
+            <div class="flex justify-center items-center gap-6">
+              <a (click)="setType('LOGIN')" class="text-orange-500 hover:underline cursor-pointer">Login instead</a>
+              <a (click)="setType('CREATE_ACCOUNT')" class="text-orange-500 hover:underline cursor-pointer">New account</a>
+            </div>
+          }
+        }
+      </div>
+    </div>
+    <div class="bg-white rounded-lg h-fit p-6 md:p-10">
+      <app-social-login (success)="openSuccess($event)" (error)="openError($event)"/>
+    </div>
+  </div>
+</section>

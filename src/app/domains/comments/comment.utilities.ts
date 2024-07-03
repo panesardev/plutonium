@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn } from "@angular/forms";
+import type { AbstractControl, ValidatorFn } from "@angular/forms";
 import { Comment } from "./comment.interface";
 
 export function createComment(comment: Partial<Comment>): Comment {

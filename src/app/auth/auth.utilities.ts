@@ -1,7 +1,7 @@
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
-import { AuthUserData, OAuthProviderName } from "./auth.interface";
+import { AdditionalUserData, OAuthProviderName } from "./auth.interface";
 
-export function createAuthUserData(): AuthUserData {
+export function createUserData(): AdditionalUserData {
   return {
     created: new Date().toDateString().slice(3),
     slugs: [],
@@ -10,8 +10,7 @@ export function createAuthUserData(): AuthUserData {
 
 export function getAuthProvider(name: OAuthProviderName) {
   switch (name) {
-    case 'google': return new GoogleAuthProvider();
-    case 'github': return new GithubAuthProvider();
-    default: throw Error('Auth provider not supported');
+    case 'GOOGLE': return new GoogleAuthProvider();
+    case 'GITHUB': return new GithubAuthProvider();
   }
 }

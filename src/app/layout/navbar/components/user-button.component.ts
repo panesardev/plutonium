@@ -1,40 +1,36 @@
-import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
-import { FallbackImageDirective } from '../../../shared/directives/fallback.image.directive';
+import { computedAsync } from '../../../shared/computed-async';
+import { ErrorImageDirective } from '../../../shared/error-image.directive';
 
 @Component({
-  selector: 'user-button-placeholder',
+  selector: 'app-user-button-placeholder',
   standalone: true,
   imports: [RouterLink],
   template: `
-    <button class="px-4 py-1" routerLink="/auth">Login</button>
+    <button class="px-4 py-1" routerLink="/login">Login</button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserButtonPlaceholderComponent {}
 
 @Component({
-  selector: 'user-button',
+  selector: 'app-user-button',
   standalone: true,
-  providers: [
-    AuthService,
-  ],
   imports: [
-    AsyncPipe,
-    FallbackImageDirective,
+    ErrorImageDirective,
     RouterLink,
     UserButtonPlaceholderComponent,
   ],
   template: `
-    @if (user$ | async; as user) {
+    @if (user(); as user) {
       <a routerLink="/dashboard">
-        <img [src]="user.photoURL" class="w-8 rounded-full" fallbackImage="/icons/user.png" [alt]="user.displayName">
+        <img [src]="user.photoURL" onError="/icons/user.png" class="w-8 rounded-full" [alt]="user.displayName">
       </a>
     }
     @else {
-      <user-button-placeholder />
+      <button class="px-4 py-1" routerLink="/login">Login</button>
     } 
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,5 +38,5 @@ export class UserButtonPlaceholderComponent {}
 export class UserButtonComponent {
   private auth = inject(AuthService);
 
-  user$ = this.auth.user$;
+  user = computedAsync(this.auth.user$);
 }

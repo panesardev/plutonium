@@ -23,11 +23,11 @@ $ ng new ngx-firestarter --style=scss
 
 Create a new firebase project from their [console](https://console.firebase.google.com) and do as follow.
 
-![Creating firebase project](/content/integrating-firebase-into-angular/img/firebase.gif)
+![Creating firebase project](/articles/integrating-firebase-into-angular/img/firebase.gif)
 
 After creating firebase project, register a new web app and copy the firebase config.
 
-![Creating new web app](/content/integrating-firebase-into-angular/img/webapp.gif)
+![Creating new web app](/articles/integrating-firebase-into-angular/img/webapp.gif)
 
 ## Installing firebase
 
@@ -98,11 +98,6 @@ export const routes: Routes = [
 ## Using firestore
 
 Inject Firestore from @angular/fire/firestore packages using inject() function. you can create a reference for todos collection in firestore using collection function and get observable steam for todos collection using collectionData function.
-
-<div class="alert-info">
-  <img src="/assets/icons/info.png">
-  <div>You can use AsyncPipe to unwrap todos$ observable in html template</div>
-</div>
 
 ```ts
 "src/app/todos/todos.component.ts"
