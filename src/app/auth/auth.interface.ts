@@ -1,5 +1,10 @@
 import type { User } from 'firebase/auth';
 
+export interface AuthState {
+  user: AuthUser;
+  isAdmin: boolean;
+}
+
 export interface AuthUser extends User, AdditionalUserData {}
 
 export interface AdditionalUserData {
@@ -8,11 +13,6 @@ export interface AdditionalUserData {
 }
 
 export interface AdminResponse {
-  isAdmin: boolean;
-}
-
-export interface AuthState {
-  user: AuthUser;
   isAdmin: boolean;
 }
 

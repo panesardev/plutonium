@@ -1,12 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, input, viewChild } from '@angular/core';
-import { ModalService } from './modal.service';
-
-export class Modal {
-  cdr = inject(ChangeDetectorRef);
-  modal = inject(ModalService);
-  
-  cd = setTimeout(() => this.cdr.detectChanges());
-}
+import { ChangeDetectionStrategy, Component, ElementRef, input, viewChild } from '@angular/core';
+import { Modal } from './modal.class';
 
 @Component({
   selector: 'app-modal',

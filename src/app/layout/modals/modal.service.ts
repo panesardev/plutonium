@@ -1,5 +1,5 @@
 import { Injectable, ViewContainerRef, signal } from '@angular/core';
-import { Modal } from './modal.component';
+import { Modal } from './modal.class';
 
 export interface ModalInput {
   name: string;

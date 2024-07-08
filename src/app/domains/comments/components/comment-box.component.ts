@@ -52,14 +52,11 @@ export class CommentBoxComponent {
 
   slug$ = this.route.params.pipe(map(params => params['slug']));
   
-  user = this.auth.user;
-  isAdmin = this.auth.isAdmin;
-  comments = toSignal(
-    this.slug$.pipe(
-      switchMap(slug => this.commentService.findAll(slug)),
-    ),
-  );
-  
+  user = toSignal(this.auth.user$);
+  isAdmin = toSignal(this.auth.isAdmin$);
+  comments = toSignal(this.slug$.pipe(
+    switchMap(slug => this.commentService.findAll(slug)),
+  ));
   error = signal<string>(null);
 
   async addComment(value: CommentFormValue) {

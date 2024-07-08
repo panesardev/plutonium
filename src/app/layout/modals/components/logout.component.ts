@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
 import { ErrorImageDirective } from '../../../shared/error-image.directive';
-import { Modal, ModalComponent } from '../modal.component';
+import { Modal } from '../modal.class';
+import { ModalComponent } from '../modal.component';
 
 @Component({
   selector: 'app-logout',
@@ -34,7 +36,7 @@ export class LogoutComponent extends Modal {
   private auth = inject(AuthService);
   private router = inject(Router);
 
-  user = this.auth.user;
+  user = toSignal(this.auth.user$);
 
   async logout() {
     await this.auth.logout();

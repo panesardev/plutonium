@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { Observable, map, switchMap, tap, zip } from "rxjs";
+import { Observable, map, switchMap, zip } from "rxjs";
 import { FEATURED_ARTICLE_SLUG } from '../../app.constants';
 import { Article } from "./article.interface";
 import { createArticle, sortArticles } from "./article.utilities";

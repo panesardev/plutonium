@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { distinctUntilChanged, map, switchMap } from 'rxjs';
 import { ArticleService } from '../../../domains/articles/article.service';
-import { Modal, ModalComponent } from '../modal.component';
-import { RouterLink } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Modal } from '../modal.class';
+import { ModalComponent } from '../modal.component';
 
 @Component({
   selector: 'search',

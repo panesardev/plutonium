@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import IndexComponent from './pages/index/index.component';
 import { AuthGuard } from './auth/auth.guard';
+import IndexComponent from './pages/index/index.component';
 import { TitleResolver } from './shared/title.resolver';
 
 export const routes: Routes = [
@@ -12,11 +12,6 @@ export const routes: Routes = [
   {
     path: 'about',
     loadComponent: () => import('./pages/about/about.component'),
-    title: TitleResolver,
-  },
-  {
-    path: 'login',
-    loadComponent: () => import('./pages/login/login.component'),
     title: TitleResolver,
   },
   {
@@ -33,6 +28,11 @@ export const routes: Routes = [
   {
     path: 'hashtags',
     loadChildren: () => import('./domains/hashtags/hashtags.routes'),
+    title: TitleResolver,
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login.component'),
     title: TitleResolver,
   },
   {

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
 import { ErrorImageDirective } from '../../../shared/error-image.directive';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-user-button-placeholder',
@@ -20,7 +21,6 @@ export class UserButtonPlaceholderComponent {}
   imports: [
     ErrorImageDirective,
     RouterLink,
-    UserButtonPlaceholderComponent,
   ],
   template: `
     @if (user(); as user) {
@@ -37,5 +37,5 @@ export class UserButtonPlaceholderComponent {}
 export class UserButtonComponent {
   private auth = inject(AuthService);
 
-  user = this.auth.user;
+  user = toSignal(this.auth.user$);
 }

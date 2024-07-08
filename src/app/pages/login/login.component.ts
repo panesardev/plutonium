@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalService } from '../../layout/modals/modal.service';
-import { CreateAccountFormComponent } from './components/create-account-form.component';
-import { LoginFormComponent } from './components/login-form.component';
-import { ResetPasswordFormComponent } from './components/reset-password-form.component';
-import { SocialLoginComponent } from './components/social-login.component';
+import { CreateAccountFormComponent } from '../../auth/components/create-account-form.component';
+import { LoginFormComponent } from '../../auth/components/login-form.component';
+import { ResetPasswordFormComponent } from '../../auth/components/reset-password-form.component';
+import { SocialLoginComponent } from '../../auth/components/social-login.component';
 
 type AuthFormType = 'LOGIN' | 'CREATE_ACCOUNT' | 'RESET_PASSWORD';
 

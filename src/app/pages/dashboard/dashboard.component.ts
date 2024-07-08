@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { map, switchMap, zip } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { ArticleService } from '../../domains/articles/article.service';
@@ -22,8 +22,8 @@ export default class DashboardComponent {
   private auth = inject(AuthService);
   private articleService = inject(ArticleService);
 
-  user = this.auth.user;
-  articles = toSignal(toObservable(this.user).pipe(
+  user = toSignal(this.auth.user$);
+  articles = toSignal(this.auth.user$.pipe(
     map(user => user.slugs),
     map(slugs => slugs.map(s => this.articleService.findBySlug(s))),
     switchMap(arr => zip(arr)),

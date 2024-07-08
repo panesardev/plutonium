@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Modal, ModalComponent } from '../modal.component';
+import { ModalComponent } from '../modal.component';
+import { Modal } from '../modal.class';
 
 @Component({
   selector: 'app-success',
