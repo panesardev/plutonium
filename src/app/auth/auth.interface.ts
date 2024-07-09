@@ -1,10 +1,5 @@
 import type { User } from 'firebase/auth';
 
-export interface AuthState {
-  user: AuthUser;
-  isAdmin: boolean;
-}
-
 export interface AuthUser extends User, AdditionalUserData {}
 
 export interface AdditionalUserData {
