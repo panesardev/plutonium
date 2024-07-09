@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { derivedAsync } from 'ngxtension/derived-async';
 import { AuthService } from '../../../auth/auth.service';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-save-button-placeholder',
@@ -42,8 +42,9 @@ export class SaveButtonComponent {
 
   slug = input.required<string>();
 
-  user = toSignal(this.auth.user$);
-  isArticleSaved = computed(() => this.user() && this.user().slugs.includes(this.slug()));
+  user = derivedAsync(() => this.auth.user$);
+  
+  isArticleSaved = derivedAsync(() => this.user() && this.user().slugs.includes(this.slug()));
   
   async saveArticle(slug: string) {
     const slugs = [...this.user().slugs, slug];

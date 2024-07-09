@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { firstValueFrom, map, switchMap } from 'rxjs';
+import { RouterLink } from '@angular/router';
+import { derivedAsync } from 'ngxtension/derived-async';
 import { AuthService } from '../../../auth/auth.service';
 import { Comment, CommentFormValue } from '../comment.interface';
 import { CommentService } from '../comment.service';
@@ -46,22 +45,20 @@ import { CommentListComponent } from './comment-list.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommentBoxComponent {
-  private route = inject(ActivatedRoute);
   private auth = inject(AuthService);
   private commentService = inject(CommentService);
 
-  slug$ = this.route.params.pipe(map(params => params['slug']));
+  slug = input.required<string>();
   
-  user = toSignal(this.auth.user$);
-  isAdmin = toSignal(this.auth.isAdmin$);
-  comments = toSignal(this.slug$.pipe(
-    switchMap(slug => this.commentService.findAll(slug)),
-  ));
+  user = derivedAsync(() => this.auth.user$);
+  isAdmin = derivedAsync(() => this.auth.isAdmin$);
+  comments = derivedAsync(() => this.commentService.findAll(this.slug()));
+  
   error = signal<string>(null);
 
   async addComment(value: CommentFormValue) {
     const comment = createComment({ 
-      slug: await firstValueFrom(this.slug$),
+      slug: this.slug(),
       displayName: this.user().displayName,
       photoURL: this.user().photoURL,
       text: value.text,

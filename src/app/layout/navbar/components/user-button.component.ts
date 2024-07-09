@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { derivedAsync } from 'ngxtension/derived-async';
 import { AuthService } from '../../../auth/auth.service';
 import { ErrorImageDirective } from '../../../shared/error-image.directive';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-user-button-placeholder',
@@ -37,5 +37,5 @@ export class UserButtonPlaceholderComponent {}
 export class UserButtonComponent {
   private auth = inject(AuthService);
 
-  user = toSignal(this.auth.user$);
+  user = derivedAsync(() => this.auth.user$);
 }

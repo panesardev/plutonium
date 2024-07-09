@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { derivedAsync } from 'ngxtension/derived-async';
 import { distinctUntilChanged, map, switchMap } from 'rxjs';
 import { ArticleService } from '../../../domains/articles/article.service';
 import { Modal } from '../modal.class';
@@ -22,8 +22,8 @@ import { ModalComponent } from '../modal.component';
         <input type="text" [formControl]="textControl" placeholder="type here" autocomplete="off">
       </fieldset>
 
-      @if (text(); as text) {
-        <p class="text-center mb-4">Displaying results for "{{ text }}"</p>
+      @if (text()) {
+        <p class="text-center mb-4">Displaying results for "{{ text()}}"</p>
       }
       
       <div class="h-96 overflow-y-scroll">
@@ -67,7 +67,7 @@ export class SearchComponent extends Modal {
     ),
   );
 
-  text = toSignal(this.text$);
-  articles = toSignal(this.articles$);
+  text = derivedAsync(() => this.text$);
+  articles = derivedAsync(() => this.articles$);
 
 }

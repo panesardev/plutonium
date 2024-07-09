@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
+import { derivedAsync } from 'ngxtension/derived-async';
 import { AuthService } from '../../../auth/auth.service';
 import { ErrorImageDirective } from '../../../shared/error-image.directive';
 import { Modal } from '../modal.class';
@@ -36,7 +36,7 @@ export class LogoutComponent extends Modal {
   private auth = inject(AuthService);
   private router = inject(Router);
 
-  user = toSignal(this.auth.user$);
+  user = derivedAsync(() => this.auth.user$);
 
   async logout() {
     await this.auth.logout();

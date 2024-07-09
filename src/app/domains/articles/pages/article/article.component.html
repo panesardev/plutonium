@@ -43,7 +43,7 @@
       
       <div class="max-w-2xl mx-auto">
         @defer (on viewport) {
-          <app-comment-box />
+          <app-comment-box [slug]="article.slug"/>
         }
         @placeholder {
           <div class="flex justify-center">

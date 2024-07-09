@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
+import { mapArray } from 'ngxtension/map-array';
 import { Observable, map, switchMap, zip } from "rxjs";
 import { FEATURED_ARTICLE_SLUG } from '../../app.constants';
 import { Article } from "./article.interface";
@@ -14,8 +15,8 @@ export class ArticleService {
   );
 
   articles$ = this.slugs$.pipe(
-    map(slugs => slugs.map(s => this.findBySlug(s))),
-    switchMap(arr => zip(arr)),
+    mapArray(slug => this.findBySlug(slug)),
+    switchMap(array => zip(array)),
     map(articles => articles.filter(a => a.published)),
     map(articles => sortArticles(articles)),
   );

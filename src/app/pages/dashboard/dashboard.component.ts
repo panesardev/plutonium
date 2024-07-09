@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { derivedAsync } from 'ngxtension/derived-async';
+import { mapArray } from 'ngxtension/map-array';
 import { map, switchMap, zip } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { ArticleService } from '../../domains/articles/article.service';
@@ -22,12 +23,15 @@ export default class DashboardComponent {
   private auth = inject(AuthService);
   private articleService = inject(ArticleService);
 
-  user = toSignal(this.auth.user$);
-  articles = toSignal(this.auth.user$.pipe(
-    map(user => user.slugs),
-    map(slugs => slugs.map(s => this.articleService.findBySlug(s))),
-    switchMap(arr => zip(arr)),
-  ));
+  user = derivedAsync(() => this.auth.user$);
+  
+  articles = derivedAsync(() => 
+    this.auth.user$.pipe(
+      map(user => user.slugs),
+      mapArray(slug => this.articleService.findBySlug(slug)),
+      switchMap(array => zip(array)),
+    ),
+  );
 
   openLogout() {
     const fn = () => import('../../layout/modals/components/logout.component').then(c => c.LogoutComponent);
