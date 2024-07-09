@@ -3,8 +3,8 @@ import { derivedAsync } from 'ngxtension/derived-async';
 import { mapArray } from 'ngxtension/map-array';
 import { map, switchMap, zip } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
-import { ArticleService } from '../../domains/articles/article.service';
-import { ArticleListComponent } from '../../domains/articles/components/article-list.component';
+import { ArticleService } from '../../domain/articles/article.service';
+import { ArticleListComponent } from '../../domain/articles/components/article-list.component';
 import { ModalService } from '../../layout/modals/modal.service';
 import { ProfileCardComponent } from './components/profile-card.component';
 

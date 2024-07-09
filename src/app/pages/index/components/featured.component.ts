@@ -1,7 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Article } from '../../../domains/articles/article.interface';
+import { Article } from '../../../domain/articles/article.interface';
 import { ErrorImageDirective } from '../../../shared/error-image.directive';
 
 @Component({

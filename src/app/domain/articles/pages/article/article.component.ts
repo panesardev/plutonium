@@ -1,8 +1,8 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ErrorImageDirective } from '../../../../shared/error-image.directive';
-import { HashtagListComponent } from '../../../../domains/hashtags/components/hashtag-list.component';
-import { CommentBoxComponent } from '../../../../domains/comments/components/comment-box.component';
+import { HashtagListComponent } from '../../../../domain/hashtags/components/hashtag-list.component';
+import { CommentBoxComponent } from '../../../../domain/comments/components/comment-box.component';
 import { ArticleHeaderComponent } from '../../components/article-header.component';
 import { RenderMarkdownComponent } from '../../components/render-markdown.component';
 import { SaveButtonComponent, SaveButtonPlaceholderComponent } from '../../components/save-button.component';

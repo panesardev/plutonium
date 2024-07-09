@@ -63,11 +63,14 @@ export class CommentBoxComponent {
       photoURL: this.user().photoURL,
       text: value.text,
     });
-    this.commentService.add(comment).catch(e => this.error.set(e.message));
+
+    await this.commentService.add(comment)
+      .catch(e => this.error.set(e.message));
   }
 
   async deleteComment(comment: Comment) {
-    this.commentService.delete(comment).catch(e => this.error.set(e.message));
+    await this.commentService.delete(comment)
+      .catch(e => this.error.set(e.message));
   }
 }
 

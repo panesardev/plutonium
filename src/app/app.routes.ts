@@ -16,7 +16,7 @@ export const routes: Routes = [
   },
   {
     path: 'articles',
-    loadChildren: () => import('./domains/articles/articles.routes'),
+    loadChildren: () => import('./domain/articles/articles.routes'),
     title: TitleResolver,
   },
   {
@@ -27,7 +27,7 @@ export const routes: Routes = [
   },
   {
     path: 'hashtags',
-    loadChildren: () => import('./domains/hashtags/hashtags.routes'),
+    loadChildren: () => import('./domain/hashtags/hashtags.routes'),
     title: TitleResolver,
   },
   {
