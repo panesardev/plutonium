@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { createUserWithEmailAndPassword, getAdditionalUserInfo, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
-import { doc, getFirestore, setDoc } from 'firebase/firestore';
+import { createUserWithEmailAndPassword, getAdditionalUserInfo, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 import { user as userChanges } from 'rxfire/auth';
 import { docData as docChanges } from 'rxfire/firestore';
 import { map, of, switchMap, type Observable } from 'rxjs';
+import { Auth, Firestore } from '../app.config';
 import { API_URL } from '../app.constants';
 import { AdditionalUserData, AdminResponse, AuthUser, OAuthProviderName } from './auth.interface';
 import { createUserData, getAuthProvider } from "./auth.utilities";
@@ -12,8 +13,8 @@ import { createUserData, getAuthProvider } from "./auth.utilities";
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private http = inject(HttpClient);
-  private auth = getAuth();
-  private firestore = getFirestore();
+  private auth = inject(Auth);
+  private firestore = inject(Firestore);
 
   user$: Observable<AuthUser> = userChanges(this.auth).pipe(
     switchMap(user => {
