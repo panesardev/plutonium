@@ -6,13 +6,11 @@
       <app-profile-card [user]="user" (logout)="openLogout()"/>
     </div>
 
-    @if (articles(); as articles) {
-      <div>
-        <h1 class="text-primary font-bold text-center text-3xl mb-8" style="font-family: 'Inter Tight';">Saved Articles</h1>
-        <div class="max-w-6xl mx-auto">
-          <app-article-list [articles]="articles"/>
-        </div>
+    <div>
+      <h1 class="text-primary font-bold text-center text-3xl mb-8" style="font-family: 'Inter Tight';">Saved Articles</h1>
+      <div class="max-w-6xl mx-auto">
+        <app-article-list [articles]="articles()"/>
       </div>
-    }
+    </div>
   </section>
 }
