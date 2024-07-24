@@ -4,7 +4,7 @@ export const API_URL = 'https://plutonium-api.vercel.app';
 
 export const FIREBASE_CONFIG = { 
   apiKey: "AIzaSyAhtPk6Z8cs3-pODGzi06ntNstJJhUghWo",
-  authDomain: "plutonium-dev.firebaseapp.com",
+  authdomains: "plutonium-dev.firebaseapp.com",
   projectId: "plutonium-dev",
   storageBucket: "plutonium-dev.appspot.com",
   messagingSenderId: "646715865874",

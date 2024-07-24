@@ -1,24 +1,30 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { derivedAsync } from 'ngxtension/derived-async';
 import { AuthService } from '../../../auth/auth.service';
+import { ModalService } from '../../../layout/modals/modal.service';
 
 @Component({
   selector: 'app-save-button-placeholder',
   standalone: true,
-  imports: [RouterLink],
   template: `
-    <button routerLink="/login">Login to save</button>
+    <button (click)="openLogin()">Login to save</button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SaveButtonPlaceholderComponent {}
+export class SaveButtonPlaceholderComponent {
+  private modal = inject(ModalService);
+
+  openLogin() {
+    const fn = () => import('../../../layout/modals/components/login.component').then(c => c.LoginComponent);
+    this.modal.open(fn); 
+  }
+}
 
 @Component({
   selector: 'app-save-button',
   standalone: true,
   imports: [
-    RouterLink,
+    SaveButtonPlaceholderComponent,
   ],
   template: `
     <div class="flex justify-center">
@@ -31,7 +37,7 @@ export class SaveButtonPlaceholderComponent {}
         }
       }
       @else {
-        <button routerLink="/login">Login to save</button>
+        <app-save-button-placeholder />
       }
     </div>
   `,

@@ -3,7 +3,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { derivedAsync } from 'ngxtension/derived-async';
 import { distinctUntilChanged, map, switchMap } from 'rxjs';
-import { ArticleService } from '../../../domain/articles/article.service';
+import { ArticleService } from '../../../domains/articles/article.service';
 import { Modal } from '../modal.class';
 import { ModalComponent } from '../modal.component';
 

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { UserButtonComponent, UserButtonPlaceholderComponent } from './components/user-button.component';
 import { ModalService } from '../modals/modal.service';
+import { UserButtonComponent, UserButtonPlaceholderComponent } from './components/user-button.component';
 
 @Component({
   selector: 'app-navbar',
@@ -30,6 +30,11 @@ export class NavbarComponent {
 
   openSearch() {
     const fn = () => import('../modals/components/search.component').then(c => c.SearchComponent);
+    this.modal.open(fn);
+  }
+
+  openLogin() {
+    const fn = () => import('../modals/components/login.component').then(c => c.LoginComponent);
     this.modal.open(fn);
   }
 }

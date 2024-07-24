@@ -209,7 +209,7 @@ Auto-detected Project Settings (Angular):
 🔍  Inspect: https://vercel.com/[name]/angular-vercel/72TnZdRH82ozigY544VWXWCRPgJz [1s]
 ✅  Production: https://angular-vercel-gamma-rosy.vercel.app [2m]
 📝  Deployed to production. Run `vercel --prod` to overwrite later (https://vercel.link/2F).
-💡  To change the domain or build command, go to https://vercel.com/[name]/angular-vercel/settings
+💡  To change the domains or build command, go to https://vercel.com/[name]/angular-vercel/settings
 
 ```
 

@@ -3,17 +3,24 @@ import { RouterLink } from '@angular/router';
 import { derivedAsync } from 'ngxtension/derived-async';
 import { AuthService } from '../../../auth/auth.service';
 import { ErrorImageDirective } from '../../../shared/error-image.directive';
+import { ModalService } from '../../modals/modal.service';
 
 @Component({
   selector: 'app-user-button-placeholder',
   standalone: true,
-  imports: [RouterLink],
   template: `
-    <button class="px-4 py-1" routerLink="/login">Login</button>
+    <button class="px-4 py-1" (click)="openLogin()">Login</button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserButtonPlaceholderComponent {}
+export class UserButtonPlaceholderComponent {
+  private modal = inject(ModalService);
+
+  openLogin() {
+    const fn = () => import('../../modals/components/login.component').then(c => c.LoginComponent);
+    this.modal.open(fn); 
+  }
+}
 
 @Component({
   selector: 'app-user-button',
@@ -21,6 +28,7 @@ export class UserButtonPlaceholderComponent {}
   imports: [
     ErrorImageDirective,
     RouterLink,
+    UserButtonPlaceholderComponent,
   ],
   template: `
     @if (user(); as user) {
@@ -29,7 +37,7 @@ export class UserButtonPlaceholderComponent {}
       </a>
     }
     @else {
-      <button class="px-4 py-1" routerLink="/login">Login</button>
+      <app-user-button-placeholder />
     } 
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
