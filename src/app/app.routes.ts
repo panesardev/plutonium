@@ -31,11 +31,6 @@ export const routes: Routes = [
     title: TitleResolver,
   },
   {
-    path: 'login',
-    loadComponent: () => import('./pages/login/login.component'),
-    title: TitleResolver,
-  },
-  {
     path: '**',
     loadComponent: () => import('./pages/not-found/not-found.component'),
     title: TitleResolver,
