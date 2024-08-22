@@ -4,7 +4,7 @@ import { Directive, ElementRef, HostListener, inject, input } from "@angular/cor
   selector: 'img[onError]',
   standalone: true,
 })
-export class ErrorImageDirective {
+export class ImageErrorDirective {
   private hostRef = inject(ElementRef);
 
   onError = input.required<string>();

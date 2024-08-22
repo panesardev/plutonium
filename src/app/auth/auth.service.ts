@@ -4,7 +4,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import { user as userChanges } from 'rxfire/auth';
 import { docData as docChanges } from 'rxfire/firestore';
 import { map, Observable, of, switchMap } from 'rxjs';
-import { Auth, Firestore } from '../app.firebase';
+import { Auth, Firestore } from '../app.config';
 import { AdditionalUserData, AuthUser, Credentials, OAuthProviderName } from './auth.interface';
 import { createUserData, getAuthProvider } from './auth.utilities';
 
