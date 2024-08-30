@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import IndexComponent from './pages/index/index.component';
+import { IndexComponent } from './pages/index/index.component';
 import { TitleResolver } from './shared/resolvers/title.resolver';
 import { AuthGuard } from './auth/auth.guard';
 

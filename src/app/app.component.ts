@@ -18,10 +18,8 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     <main>
       <router-outlet/>
     </main>
-    @defer {
-      <app-footer class="select-none"/>
-      <app-render-modal/>
-    }
+    <app-footer class="select-none"/>
+    <app-render-modal/>
   `,
 })
 export class AppComponent {}

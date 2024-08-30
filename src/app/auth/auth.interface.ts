@@ -6,7 +6,7 @@ export interface AdditionalUserData {
   created: string;
 }
 
-export type OAuthProviderName = 'google' | 'github';
+export type AuthProviderName = 'google' | 'github';
 
 export interface Credentials {
   email?: string;

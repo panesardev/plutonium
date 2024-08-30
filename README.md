@@ -1,12 +1,13 @@
 # Minimal Angular project starter template
 
 ✅ Opinionated naming and architecture\
-✅ Minimalistic project structure\
 ✅ Enabled Angular server-side rendering\
-✅ Customizable Modals with lazy loading\
-✅ Customizable TitleResolver for pages\
 ✅ Customizable Firebase AuthService\
-✅ Authentication with additional user data
+✅ Authentication with additional user data\
+✅ Extendable domain service for firestore collections\
+✅ Server compatible local storage service\
+✅ Customizable Modals with lazy loading\
+✅ Customizable TitleResolver for pages
 
 ## Scripts
 start ssr application
@@ -26,7 +27,7 @@ $ yarn build
 
 ## Rename this project
 
-replace "ngx-starter" to "your project name" in these files:
+replace "ngx-starter" to "your-project-name" in these files:
 - angular.json
 - package.json
 - src/app/app.constants.ts
@@ -37,7 +38,7 @@ replace "ngx-starter" to "your project name" in these files:
 Make sure to set your own git repo origin after cloning this repo.
 
 ```bash
-$ git remote set-url origin "your-repo.git"
+$ git remote set-url origin "your-repo-url.git"
 ```
 
 ## No testing frameworks

@@ -1,5 +1,5 @@
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
-import { AdditionalUserData, OAuthProviderName } from "./auth.interface";
+import { AdditionalUserData, AuthProviderName } from "./auth.interface";
 
 export function createUserData(): AdditionalUserData {
   return {
@@ -7,7 +7,7 @@ export function createUserData(): AdditionalUserData {
   };
 }
 
-export function getAuthProvider(name: OAuthProviderName) {
+export function getAuthProvider(name: AuthProviderName) {
   switch (name) {
     case 'google': return new GoogleAuthProvider();
     case 'github': return new GithubAuthProvider();

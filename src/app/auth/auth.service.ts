@@ -1,11 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { createUserWithEmailAndPassword, getAdditionalUserInfo, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
-import { user as userChanges } from 'rxfire/auth';
-import { docData as docChanges } from 'rxfire/firestore';
+import { Auth, authState, createUserWithEmailAndPassword, getAdditionalUserInfo, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from '@angular/fire/auth';
+import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
 import { map, Observable, of, switchMap } from 'rxjs';
-import { Auth, Firestore } from '../app.config';
-import { AdditionalUserData, AuthUser, Credentials, OAuthProviderName } from './auth.interface';
+import { AdditionalUserData, AuthProviderName, AuthUser, Credentials } from './auth.interface';
 import { createUserData, getAuthProvider } from './auth.utilities';
 
 @Injectable({ providedIn: 'root' })
@@ -13,10 +10,10 @@ export class AuthService {
   private auth = inject(Auth);
   private firestore = inject(Firestore);
 
-  user$: Observable<AuthUser> = userChanges(this.auth).pipe(
+  user$: Observable<AuthUser> = authState(this.auth).pipe(
     switchMap(user => {
       if (user) {
-        return docChanges(doc(this.firestore, `users/${user.uid}`)).pipe(
+        return docData(doc(this.firestore, `users/${user.uid}`)).pipe(
           map((data: AdditionalUserData) => ({ ...user, ...data })),
         ) as Observable<AuthUser>;
       }
@@ -36,7 +33,7 @@ export class AuthService {
     await signInWithEmailAndPassword(this.auth, email, password);
   }
 
-  async oAuthLogin(providerName: OAuthProviderName): Promise<void> {
+  async oAuthLogin(providerName: AuthProviderName): Promise<void> {
     const provider = getAuthProvider(providerName);
     const credential = await signInWithPopup(this.auth, provider);
 
