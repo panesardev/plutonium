@@ -10,18 +10,14 @@
 ✅ Customizable TitleResolver for pages
 
 ## Scripts
-start ssr application
 ```
+"start ssr application"
 $ yarn start
-```
 
-start dev server
-```
+"start dev server"
 $ yarn dev 
-```
 
-build application
-```
+"build application"
 $ yarn build
 ```
 
