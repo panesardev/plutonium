@@ -1,25 +1,14 @@
-# Minimal Angular project starter template
+# Angular SSR Project Starter Template
 
 ✅ Opinionated naming and architecture\
 ✅ Enabled Angular server-side rendering\
 ✅ Customizable Firebase AuthService\
 ✅ Authentication with additional user data\
 ✅ Extendable domain service for firestore collections\
+✅ Tailwindcss for styling\
 ✅ Server compatible local storage service\
 ✅ Customizable Modals with lazy loading\
 ✅ Customizable TitleResolver for pages
-
-## Scripts
-```
-"start ssr application"
-$ yarn start
-
-"start dev server"
-$ yarn dev 
-
-"build application"
-$ yarn build
-```
 
 ## Rename this project
 
