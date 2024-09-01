@@ -1,6 +1,6 @@
 # Angular Firebase Project Starter Template
 
-✅ Opinionated naming and architecture\
+✅ Opinionated naming and structure\
 ✅ Enabled Angular server-side rendering\
 ✅ Customizable Firebase AuthService\
 ✅ Authentication with additional user data\
