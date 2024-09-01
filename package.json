@@ -8,9 +8,9 @@
     "url": "https://panesar.dev"
   },
   "keywords": [
-    "Angular",
-    "Firebase",
-    "Tailwind"
+    "angular",
+    "firebase",
+    "tailwind"
   ],
   "scripts": {
     "start": "node dist/ngx-starter/server/server.mjs",

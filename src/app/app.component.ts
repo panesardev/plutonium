@@ -15,11 +15,16 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
   ],
   template: `
     <app-navbar class="select-none"/>
+    
     <main>
       <router-outlet/>
     </main>
+    
     <app-footer class="select-none"/>
-    <app-render-modal/>
+
+    @defer {
+      <app-render-modal/>
+    }
   `,
 })
 export class AppComponent {}
