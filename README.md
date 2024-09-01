@@ -1,4 +1,4 @@
-# Angular SSR Project Starter Template
+# Angular Firebase Project Starter Template
 
 ✅ Opinionated naming and architecture\
 ✅ Enabled Angular server-side rendering\
