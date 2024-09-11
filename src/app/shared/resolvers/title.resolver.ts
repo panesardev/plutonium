@@ -1,5 +1,5 @@
 import { ActivatedRouteSnapshot, ResolveFn } from "@angular/router";
-import { BRAND } from "../../app.constants";
+import { BRAND } from "@app/app.constants";
 
 export const TitleResolver: ResolveFn<string> = (route: ActivatedRouteSnapshot) => {
   const path = route.routeConfig.path;
