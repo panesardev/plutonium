@@ -1,0 +1,97 @@
+code[class*="language-"],
+pre[class*="language-"] {
+  background: #ffffff;
+  color: #2f3642;
+  /* The following properties are standard, please leave them as they are */
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+  /* The following properties are also standard */
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+code[class*="language-"]::-moz-selection,
+code[class*="language-"] ::-moz-selection,
+pre[class*="language-"]::-moz-selection,
+pre[class*="language-"] ::-moz-selection {
+  background: #eb64b927;
+  color: inherit;
+}
+
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection,
+pre[class*="language-"]::selection,
+pre[class*="language-"] ::selection {
+  background: #eb64b927;
+  color: inherit;
+}
+
+/* Properties specific to code blocks */
+pre[class*="language-"] {
+  overflow: auto; /* this is standard */
+}
+
+.token.comment,
+.token.prolog,
+.token.cdata {
+  color: #91889b;
+}
+
+.token.punctuation {
+  color: #7b6995;
+}
+
+.token.builtin,
+.token.constant,
+.token.boolean {
+  color: #ffad61;
+}
+
+.token.number {
+  color: #b381c5;
+}
+
+.token.important,
+.token.atrule,
+.token.property,
+.token.keyword {
+  color: #328894;
+}
+
+.token.doctype,
+.token.operator,
+.token.inserted,
+.token.tag,
+.token.class-name,
+.token.symbol {
+  color: #437d6f;
+}
+
+.token.attr-name,
+.token.function,
+.token.deleted,
+.token.selector {
+  color: #eb64b9;
+}
+
+.token.attr-value,
+.token.regex,
+.token.char,
+.token.string {
+  color: #29a586;
+}
+
+.token.entity,
+.token.url,
+.token.variable {
+  color: #ffffff;
+}

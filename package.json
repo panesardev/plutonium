@@ -1,5 +1,5 @@
 {
-  "name": "ngx-starter",
+  "name": "plutonium",
   "description": "Angular Firebase application",
   "version": "1.0.0",
   "author": {
@@ -13,8 +13,8 @@
     "tailwind"
   ],
   "scripts": {
-    "start": "node dist/ngx-starter/server/server.mjs",
-    "dev": "ng serve",
+    "start": "node dist/plutonium/server/server.mjs",
+    "dev": "ng serve --host 0.0.0.0",
     "build": "ng build"
   },
   "private": true,

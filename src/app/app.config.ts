@@ -11,6 +11,7 @@ import { routes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
+    provideClientHydration(),
     provideRouter(
       routes,
       withPreloading(PreloadAllModules),
@@ -19,7 +20,6 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'enabled',
       }),
     ), 
-    provideClientHydration(),
     provideHttpClient(withFetch()),
     provideFirebaseApp(() => initializeApp(FIREBASE_CONFIG)),
     provideAuth(() => getAuth()),
