@@ -1,21 +1,21 @@
-import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { AuthService } from '@auth/auth.service';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { BRAND } from '@app/app.constants';
+import { UserButtonComponent } from './components/user-button.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [
-    AsyncPipe,
+    RouterLink,
+    RouterLinkActive,
+    UserButtonComponent,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
-  private auth = inject(AuthService);
-
-  isAuthenticated$ = this.auth.isAuthenticated$;
-
-  panel = signal(false);
+  drawer = signal(false);
+  brand = BRAND;
 }

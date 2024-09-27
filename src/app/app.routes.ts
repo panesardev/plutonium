@@ -10,6 +10,11 @@ export const routes: Routes = [
     title: TitleResolver,
   },
   {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.routes'),
+    title: TitleResolver,
+  },
+  {
     path: 'dashboard',
     loadComponent: () => import('./pages/dashboard/dashboard.component'),
     title: TitleResolver,

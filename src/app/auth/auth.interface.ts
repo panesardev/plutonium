@@ -4,6 +4,7 @@ export interface AuthUser extends User, AdditionalUserData {}
 
 export interface AdditionalUserData {
   created: string;
+  articles: string[];
 }
 
 export type AuthProviderName = 'google' | 'github';

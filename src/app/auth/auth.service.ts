@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Auth, authState, createUserWithEmailAndPassword, getAdditionalUserInfo, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from '@angular/fire/auth';
 import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
-import { catchError, map, Observable, of, switchMap } from 'rxjs';
+import { map, of, switchMap } from 'rxjs';
 import { AdditionalUserData, AuthProviderName, AuthUser, Credentials } from './auth.interface';
 import { createUserData, getAuthProvider } from './auth.utilities';
 
@@ -10,17 +10,19 @@ export class AuthService {
   private auth = inject(Auth);
   private firestore = inject(Firestore);
 
-  user$: Observable<AuthUser> = authState(this.auth).pipe(
-    switchMap(user => 
-      docData(doc(this.firestore, `users/${user.uid}`)).pipe(
-        map((data: AdditionalUserData) => ({ ...user, ...data })),
-      ),
-    ),
-    catchError(e => of(null)),
+  isAuthenticated$ = authState(this.auth).pipe(
+    map(user => !!user),
   );
 
-  isAuthenticated$: Observable<boolean> = authState(this.auth).pipe(
-    map(user => !!user),
+  user$ = authState(this.auth).pipe(
+    switchMap(user => {
+      if (user) {
+        return docData(doc(this.firestore, `users/${user.uid}`)).pipe(
+          map(data => ({ ...user, ...data }) as AuthUser),
+        );
+      }
+      return of(null);
+    }),
   );
 
   async createAccount({ email, password, displayName }: Credentials): Promise<void> {
@@ -35,7 +37,7 @@ export class AuthService {
     await signInWithEmailAndPassword(this.auth, email, password);
   }
 
-  async oAuthLogin(providerName: AuthProviderName): Promise<void> {
+  async loginWithProvider(providerName: AuthProviderName): Promise<void> {
     const provider = getAuthProvider(providerName);
     const credential = await signInWithPopup(this.auth, provider);
 

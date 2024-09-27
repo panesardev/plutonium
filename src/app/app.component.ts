@@ -14,14 +14,19 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     RenderModalComponent,
   ],
   template: `
+    <div class="scroll-watcher"></div>
+
+    <div class="fixed inset-0 z-[-10] bg-gradient-to-b from-transparent to-secondary-2 from-20%"></div>
+
     <app-navbar class="select-none"/>
     
-    <main>
+    <main class="mt-32 px-6 lg:px-8">
       <router-outlet/>
     </main>
     
-    <app-footer class="select-none"/>
-
+    @defer {
+      <app-footer class="select-none"/>
+    }
     @defer {
       <app-render-modal/>
     }

@@ -1,13 +1,17 @@
 @layer components {
   .heading {
-    @apply text-primary-900 text-4xl md:text-5xl font-bold font-heading;
+    @apply font-bold font-heading bg-gradient-to-br from-primary to-teal-500 text-5xl md:text-6xl lg:text-7xl text-center text-transparent bg-clip-text select-none pb-3; 
   }
 
   button {
-    @apply bg-white text-primary-950 text-sm rounded-md px-8 py-3;
+    @apply bg-surface text-primary text-sm flex justify-center items-center rounded-full px-8 py-3;
 
     &.btn-primary {
-      @apply bg-primary-900 hover:bg-primary-900/90 text-primary-50;
+      @apply bg-primary hover:bg-primary/95 text-surface;
+    }
+
+    &.btn-danger {
+      @apply bg-red-500 hover:bg-red-500/95 text-surface;
     }
   }
 
@@ -19,32 +23,32 @@
     }
 
     input, textarea {
-      @apply hover:bg-primary-50 text-primary-800 border-primary-200 border-[.1rem] text-sm rounded-md px-4 py-3 placeholder:text-primary-200 outline-none;
+      @apply hover:bg-secondary-1/50 text-primary border-primary/20 border-2 placeholder:text-slate-700/50 text-sm rounded-md px-4 py-3 outline-none;
     }
   }
 
   .card {
-    @apply bg-white rounded-2xl custom-shadow p-6 md:p-8;
+    @apply bg-surface rounded-xl p-6 md:p-8;
   }
 
   .alert {
     @apply text-sm rounded-full max-w-fit px-4 py-2; 
 
     &.alert-primary {
-      @apply bg-primary-100 text-primary-800;
+      @apply bg-secondary-1 text-primary;
     }
 
     &.alert-info {
-      @apply bg-emerald-100/75 text-emerald-800;
+      @apply bg-emerald-100/50 text-emerald-500;
     }
 
-    &.alert-error {
-      @apply bg-red-100/75 text-red-800;
+    &.alert-danger {
+      @apply bg-red-100/50 text-red-500;
     }
   }
   
   .scroll-watcher {
-    @apply bg-primary-500 fixed top-0 z-50 w-full h-[1px] opacity-50 rounded-full; 
+    @apply bg-primary fixed top-0 z-50 w-full h-[1px] opacity-50 rounded-full; 
     scale: 0 1;
     animation: scroll-animation linear;
     animation-timeline: scroll();
@@ -52,13 +56,13 @@
 
   .markdown {
     h2 {
-      @apply text-primary-500 font-bold text-2xl md:text-3xl mt-12 mb-6 px-6 md:px-0;
+      @apply text-primary font-bold text-2xl md:text-3xl mt-12 mb-6 px-6 md:px-0;
     }
     p {
       @apply text-lg leading-8 mb-6 px-6 md:px-0;
     }
     pre {
-      @apply relative overflow-auto text-sm md:text-base bg-white p-6 md:p-8 mb-6 rounded-md;
+      @apply relative overflow-auto text-sm md:text-base bg-surface p-6 md:p-8 mb-6 rounded-md;
     }
     code {
       font-family: "Fira Code", monospace;

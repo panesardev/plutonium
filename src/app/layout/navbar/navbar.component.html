@@ -1,62 +1,63 @@
-<header class="max-app-width mx-auto">
-  <nav class="flex lg:grid lg:grid-cols-[1fr_600px_1fr] justify-between items-center gap-6 p-6 lg:px-8">
-    <div>
-      <a routerLink="/" class="text-primary-900 text-3xl md:text-4xl font-heading font-bold">FlyAirlines</a>
+<!-- desktop -->
+<header class="hidden lg:block max-app-width mx-auto bg-white fixed top-0 left-0 right-0 z-10">
+  <nav class="flex justify-between items-center h-full gap-6 px-8 py-6">
+    <div class="flex items-center gap-10">
+      <a routerLink="/" class="text-primary text-3xl">{{ brand }}</a>
+      <div class="bg-secondary-1 hover:bg-secondary-2 text-primary text-sm rounded-full cursor-pointer w-96 px-6 py-3">Search articles</div>
     </div>
-    <div class="block lg:hidden">
-      <button class="btn-primary rounded-full px-6" (click)="panel.set(true)">
-        <svg class="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512"><rect y="11" width="24" height="2" rx="1"/><rect y="4" width="24" height="2" rx="1"/><rect y="18" width="24" height="2" rx="1"/></svg>
-      </button>
-    </div>
-    <div class="hidden lg:flex justify-center items-center gap-6">
-      <a class="hover:underline hover:text-primary-800" routerLinkActive="text-primary-800" routerLink="/airplanes">Airplanes</a>
-      <a class="hover:underline hover:text-primary-800" routerLinkActive="text-primary-800" routerLink="/destinations">Destinations</a>
-      <a class="hover:underline hover:text-primary-800" routerLinkActive="text-primary-800" routerLink="/popular-flights">Popular flights</a>
-      <a class="hover:underline hover:text-primary-800" routerLinkActive="text-primary-800" routerLink="/discounts">Discounts</a>
-    </div>
-    <div class="hidden lg:flex justify-end items-center gap-6">
-      <button class="btn-primary rounded-full" routerLink="/bookings/new-booking">Book new Flight</button>
-      @if (isAuthenticated$ | async) {
-        <button class="btn-primary rounded-full px-6" routerLink="/users/profile">
-          <svg class="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,12A6,6,0,1,0,6,6,6.006,6.006,0,0,0,12,12ZM12,2A4,4,0,1,1,8,6,4,4,0,0,1,12,2Z"/><path d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z"/></svg>
-        </button>
+    <div class="flex justify-end items-center gap-8">
+      <div class="flex gap-4">
+        <a class="text-primary rounded-full px-4 py-1" routerLink="/articles" routerLinkActive="bg-secondary-1">Articles</a>
+        <a class="text-primary rounded-full px-4 py-1" routerLink="/hashtags" routerLinkActive="bg-secondary-1">Hashtags</a>
+      </div>
+      @defer {
+        <app-user-button />
       }
-      @else {
-        <button class="btn-primary rounded-full px-6" routerLink="/auth/login">
-          <svg class="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,12A6,6,0,1,0,6,6,6.006,6.006,0,0,0,12,12ZM12,2A4,4,0,1,1,8,6,4,4,0,0,1,12,2Z"/><path d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z"/></svg>
-        </button>
+      @placeholder {
+        <button class="btn-primary" routerLink="/auth/login">Login</button>
       }
     </div>
   </nav>
 </header>
 
-<div class="block lg:hidden">
-  <div class="{{ panel() ? 'panel-overlay-open' : 'panel-overlay-close' }} bg-slate-950/50 fixed inset-0 z-[9]"></div>
+<!-- mobile -->
+<header class="block lg:hidden max-app-width mx-auto bg-white fixed top-0 left-0 right-0 z-10">
+  <nav class="flex justify-between items-center gap-6 p-6">
+    <button class="bg-secondary-1 text-primary px-3" routerLink="/">
+      <span class="font-bold w-5 h-5">Pu</span>
+    </button>
+    <div class="bg-secondary-1 hover:bg-secondary-2 text-primary text-sm rounded-full cursor-pointer w-96 px-6 py-3">Search articles</div>
+    <button class="bg-secondary-1 text-primary px-3" (click)="drawer.set(true)">
+      <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect y="11" width="24" height="2" rx="1"/><rect y="4" width="24" height="2" rx="1"/><rect y="18" width="24" height="2" rx="1"/></svg>
+    </button>
+  </nav>
+</header>
 
-  <div class="{{ panel() ? 'panel-open' : 'panel-close' }} bg-white fixed top-0 bottom-0 right-0 z-10 w-80 p-6">
-    <div class="flex items-center justify-end gap-6 mb-8">
-      @if (isAuthenticated$ | async) {
-        <button class="btn-circle" routerLink="/users/profile" (click)="panel.set(false)">
-          <svg class="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,12A6,6,0,1,0,6,6,6.006,6.006,0,0,0,12,12ZM12,2A4,4,0,1,1,8,6,4,4,0,0,1,12,2Z"/><path d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z"/></svg>
-        </button>
-      }
-      @else {
-        <button class="btn-circle" routerLink="/auth/login" (click)="panel.set(false)">
-          <svg class="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,12A6,6,0,1,0,6,6,6.006,6.006,0,0,0,12,12ZM12,2A4,4,0,1,1,8,6,4,4,0,0,1,12,2Z"/><path d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z"/></svg>
-        </button>
-      }
-      <button class="btn-circle" (click)="panel.set(false)">
-        <svg class="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18,6h0a1,1,0,0,0-1.414,0L12,10.586,7.414,6A1,1,0,0,0,6,6H6A1,1,0,0,0,6,7.414L10.586,12,6,16.586A1,1,0,0,0,6,18H6a1,1,0,0,0,1.414,0L12,13.414,16.586,18A1,1,0,0,0,18,18h0a1,1,0,0,0,0-1.414L13.414,12,18,7.414A1,1,0,0,0,18,6Z"/></svg>
+<!-- mobile drawer -->
+<div class="block lg:hidden">
+  <div class="{{ drawer() ? 'panel-overlay-open' : 'panel-overlay-close' }} bg-slate-950/50 fixed inset-0 z-10" (click)="drawer.set(false)"></div>
+
+  <div class="{{ drawer() ? 'panel-open' : 'panel-close' }} bg-white fixed top-0 bottom-0 right-0 z-20 w-80 p-6">
+    <div class="flex items-center justify-between gap-6 mb-8">
+      <div>
+        <a class="text-primary text-3xl">{{ brand }}</a>
+      </div>
+      <button class="bg-secondary-1 text-primary px-3" (click)="drawer.set(false)">
+        <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M18,6h0a1,1,0,0,0-1.414,0L12,10.586,7.414,6A1,1,0,0,0,6,6H6A1,1,0,0,0,6,7.414L10.586,12,6,16.586A1,1,0,0,0,6,18H6a1,1,0,0,0,1.414,0L12,13.414,16.586,18A1,1,0,0,0,18,18h0a1,1,0,0,0,0-1.414L13.414,12,18,7.414A1,1,0,0,0,18,6Z"/></svg>
       </button>
     </div>
   
     <div class="text-lg flex flex-col gap-2 mb-8">
-      <a class="rounded-lg px-6 py-3 hover:text-primary-800" routerLinkActive="bg-primary-50 text-primary-800" routerLink="/airplanes" (click)="panel.set(false)">Airplanes</a>
-      <a class="rounded-lg px-6 py-3 hover:text-primary-800" routerLinkActive="bg-primary-50 text-primary-800" routerLink="/destinations" (click)="panel.set(false)">Destinations</a>
-      <a class="rounded-lg px-6 py-3 hover:text-primary-800" routerLinkActive="bg-primary-50 text-primary-800" routerLink="/popular-flights" (click)="panel.set(false)">Popular flights</a>
-      <a class="rounded-lg px-6 py-3 hover:text-primary-800" routerLinkActive="bg-primary-50 text-primary-800" routerLink="/discounts" (click)="panel.set(false)">Discounts</a>
+      <a class="text-primary rounded-full px-4 py-2" routerLink="/articles" routerLinkActive="bg-secondary-1" (click)="drawer.set(false)">Articles</a>
+      <a class="text-primary rounded-full px-4 py-2" routerLink="/hashtags" routerLinkActive="bg-secondary-1" (click)="drawer.set(false)">Hashtags</a>
+      <a class="text-primary rounded-full px-4 py-2" routerLink="/about" routerLinkActive="bg-secondary-1" (click)="drawer.set(false)">About</a>
     </div>
   
-    <button class="btn btn-primary w-full px-8" routerLink="/bookings/new-booking" (click)="panel.set(false)">Book new Flight</button>
+    @defer {
+      <app-user-button (click)="drawer.set(false)"/>
+    }
+    @placeholder {
+      <button class="btn-primary" routerLink="/auth/login" (click)="drawer.set(false)">Login</button>
+    }
   </div>
 </div>

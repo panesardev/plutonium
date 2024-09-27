@@ -1,5 +1,5 @@
 import { Injectable, ViewContainerRef, signal } from '@angular/core';
-import { Modal } from './modal.component';
+import { Modal } from './modal.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {
@@ -11,13 +11,7 @@ export class ModalService {
     this.container = container;
   }
 
-  open(modal: typeof Modal) {
-    this.container.clear();
-    this.container.createComponent(modal);
-    this.isOpen.set(true);
-  }
-
-  async openLazy(modal: () => Promise<typeof Modal>) {
+  async open(modal: () => Promise<typeof Modal>) {
     this.container.clear();
     this.container.createComponent(await modal());
     this.isOpen.set(true);

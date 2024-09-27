@@ -1,1 +1,23 @@
-<p>dashboard works!</p>
+@if (user$ | async; as user) {
+  <section>
+    <h1 class="heading mb-8 md:mb-12">Dashboard</h1>
+  
+    <div class="max-w-xl mx-auto">
+      <div class="card grid md:grid-cols-2 gap-4">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <img class="rounded-full w-8" [src]="user.photoURL" [alt]="user.displayName">
+            <span class="text-primary text-xl">{{ user.displayName }}</span>
+          </div>
+          <div class="grid gap-2">
+            <span>Email: {{ user.email }}</span>
+            <span>Joined: {{ user.created }}</span>
+          </div>
+        </div>
+        <div class="flex justify-end h-fit">
+          <button class="btn-danger" (click)="openLogout()">Logout</button>
+        </div>
+      </div>
+    </div>
+  </section>
+}
