@@ -20,7 +20,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 
     <app-navbar class="select-none"/>
     
-    <main class="mt-32 px-6 lg:px-8">
+    <main class="mt-28 md:mt-32 px-6 lg:px-8">
       <router-outlet/>
     </main>
     

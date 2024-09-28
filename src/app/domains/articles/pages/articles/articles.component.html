@@ -1,0 +1,9 @@
+@if (articles(); as articles) {
+  <section>
+    <h1 class="heading mb-8 md:mb-12">Articles</h1>
+
+    <div class="max-w-6xl mx-auto">
+      <app-article-list [articles]="articles"/>
+    </div>
+  </section>
+}

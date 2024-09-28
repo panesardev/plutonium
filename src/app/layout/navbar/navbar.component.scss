@@ -1,3 +1,7 @@
+.navbar-shadow {
+  box-shadow: 0 0 5px #134e4a2f;
+}
+
 .panel-open {
   transform: translateX(0%);
   animation: panel-open 300ms cubic-bezier(0.25, 0.8, 0.25, 1);

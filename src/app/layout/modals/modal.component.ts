@@ -7,7 +7,7 @@ import { Modal } from './modal.interface';
   imports: [],
   template: `
     <div class="{{ modal.isOpen() ? 'modal-overlay-open' : 'modal-overlay-close' }} fixed inset-0 z-[100] bg-slate-950/60"></div>
-    <div class="{{ modal.isOpen() ? 'modal-open' : 'modal-close' }} fixed z-[101] inset-0 px-3 md:px-10 py-8 select-none" #modalRef (click)="close($event)">
+    <div class="{{ modal.isOpen() ? 'modal-open' : 'modal-close' }} fixed z-[101] inset-0 px-3 py-8 select-none" #modalRef (click)="close($event)">
       <div class="bg-white rounded-xl p-6 md:p-8 mx-auto {{ width() }}">
         <div class="flex justify-between items-center gap-6 mb-6">
           <h1 class="text-primary font-bold text-xl">{{ heading() }}</h1>
