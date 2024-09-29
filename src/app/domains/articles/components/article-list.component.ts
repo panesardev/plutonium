@@ -17,11 +17,11 @@ import { HashtagListComponent } from '@domains/hashtags/components/hashtag-list.
   template: `
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 justify-center gap-6 md:gap-8 lg:gap-10">
       @for (article of articles(); track article.slug) {
-        <div class="bg-surface h-fit rounded-xl">
+        <div class="bg-surface rounded-xl custom-shadow h-fit">
           <a routerLink="/articles/{{ article.slug }}">
             <img ngSrc="/articles/{{ article.slug }}/img/cover.webp" onError="/articles/{{ article.slug }}/img/cover.png" class="rounded-xl" [alt]="article.title" priority="{{ $index === 0 ? true : false }}" width="384" height="216">
           </a>
-          <div class="p-6">
+          <div class="p-6 pb-8">
             <h1 class="text-primary text-xl font-bold mb-2">{{ article.title }}</h1>
             <p class="mb-4">{{ article.description }}</p>
             <div class="inline-block mb-6">

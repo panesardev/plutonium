@@ -1,6 +1,6 @@
 @layer components {
   .heading {
-    @apply font-bold font-heading bg-gradient-to-br from-primary to-teal-500 text-transparent bg-clip-text text-5xl md:text-6xl lg:text-7xl md:text-center select-none pb-3; 
+    @apply font-bold font-heading bg-gradient-to-br from-primary/90 to-teal-500 text-transparent bg-clip-text text-5xl md:text-6xl lg:text-7xl md:text-center select-none pb-3; 
   }
 
   button {
@@ -38,12 +38,12 @@
       @apply bg-secondary-1 text-primary;
     }
 
-    &.alert-info {
-      @apply bg-emerald-100/50 text-emerald-500;
+    &.alert-success {
+      @apply bg-emerald-100/75 text-emerald-600;
     }
 
     &.alert-danger {
-      @apply bg-red-100/50 text-red-500;
+      @apply bg-red-100/75 text-red-500;
     }
   }
 
@@ -63,7 +63,7 @@
       @apply text-lg leading-8 mb-6;
     }
     pre {
-      @apply relative overflow-auto text-sm md:text-base bg-surface rounded-xl mb-6 p-6 md:p-8;
+      @apply relative overflow-auto text-sm md:text-base bg-surface rounded-xl custom-shadow mb-6 p-6 md:p-8;
     }
     code {
       font-family: "Fira Code", monospace;

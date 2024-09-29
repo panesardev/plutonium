@@ -19,17 +19,20 @@ import { AsyncPipe } from '@angular/common';
   template: `
     <app-modal heading="Search articles" width="max-w-2xl">
       <fieldset class="mb-4">
-        <input class="rounded-full" type="text" [formControl]="textControl" placeholder="start typing" autocomplete="off">
+        <input type="text" [formControl]="textControl" placeholder="start typing" autocomplete="off">
       </fieldset>
 
       @if (text$ | async; as text) {
         <p class="text-center mb-4">Displaying results for "{{ text }}"</p>
       }
+      @else {
+        <p class="text-center mb-4">Start typing to search</p>
+      }
       
       <div class="h-96 overflow-y-scroll">
         @for (article of articles$ | async; track article.slug) {
           <div [routerLink]="['articles', article.slug]" (click)="modal.close()"
-            class="border-[1px] border-slate-300 hover:bg-base-100 px-4 md:px-6 py-3 md:py-4 mb-2 rounded cursor-pointer">
+            class="bg-secondary-1/75 hover:bg-secondary-2 border-2 border-secondary-2 px-4 md:px-6 py-3 md:py-4 mb-2 rounded-md cursor-pointer">
             <p class="font-bold text-lg text-primary">{{ article.title }}</p>
             <p>{{ article.description }}</p>
           </div>
