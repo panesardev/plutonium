@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideRouter(
       routes,
-      withPreloading(PreloadAllModules),
+      // withPreloading(PreloadAllModules),
       withComponentInputBinding(),
       withInMemoryScrolling({
         scrollPositionRestoration: 'enabled',
