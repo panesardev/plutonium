@@ -10,7 +10,7 @@ export const TitleResolver: ResolveFn<string> = (route: ActivatedRouteSnapshot) 
   }
   
   if (path === '**') {
-    title = '404 Page not found';
+    title = 'Page not found';
   }
   
   return `${title} | ${BRAND}`;

@@ -52,7 +52,9 @@
             },
             "ssr": {
               "entry": "server.ts"
-            }
+            },
+            "namedChunks": true,
+            "allowedCommonJsDependencies": ["*"]
           },
           "configurations": {
             "production": {
