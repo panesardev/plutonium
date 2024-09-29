@@ -1,20 +1,20 @@
-import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostListener, inject } from '@angular/core';
 
 @Directive({
   standalone: true,
   selector: '[navbar-shadow]',
 })
 export class NavbarShadowDirective {
-  constructor(private element: ElementRef, private renderer: Renderer2) {}
+  private element = inject(ElementRef);
 
-  @HostListener('window:scroll', ['$event'])
+  @HostListener('window:scroll')
   onScroll() {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
     if (scrollTop > 0) {
-      this.renderer.addClass(this.element.nativeElement, 'navbar-shadow');
+      this.element.nativeElement.classList.add('navbar-shadow');
     } else {
-      this.renderer.removeClass(this.element.nativeElement, 'navbar-shadow');
+      this.element.nativeElement.classList.remove('navbar-shadow');
     }
   }
 }

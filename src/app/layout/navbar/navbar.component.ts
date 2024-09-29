@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { BRAND } from '@app/app.constants';
-import { UserButtonComponent } from './components/user-button.component';
 import { ModalService } from '@layout/modals/modal.service';
+import { UserButtonComponent } from './components/user-button.component';
 import { NavbarShadowDirective } from './directives/navbar-shadow.directive';
 
 @Component({

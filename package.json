@@ -1,6 +1,6 @@
 {
   "name": "plutonium",
-  "description": "Angular Firebase application",
+  "description": "Reactivity Focused Coding Tutorials",
   "version": "1.0.0",
   "author": {
     "name": "Sukhpreet Singh",
@@ -10,6 +10,7 @@
   "keywords": [
     "angular",
     "firebase",
+    "markdown",
     "tailwind"
   ],
   "scripts": {

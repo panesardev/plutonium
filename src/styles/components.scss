@@ -4,7 +4,7 @@
   }
 
   button {
-    @apply bg-surface text-primary text-sm flex justify-center items-center rounded-full px-8 py-3;
+    @apply bg-surface text-primary text-sm flex justify-center items-center rounded-full gap-3 px-8 py-3;
 
     &.btn-primary {
       @apply bg-primary hover:bg-primary/95 text-surface;
@@ -48,10 +48,11 @@
   }
   
   .scroll-watcher {
-    @apply bg-primary fixed top-0 z-50 w-full h-[1px] opacity-50 rounded-full; 
+    @apply bg-primary fixed top-0 z-50 w-full h-[1px] opacity-75; 
     scale: 0 1;
     animation: scroll-animation linear;
     animation-timeline: scroll();
+    transform-origin: left;
   }
 
   .markdown {
