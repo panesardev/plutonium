@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
-import { Article } from "../articles/article.interface";
-import { ArticleService } from "../articles/article.service";
+import { Article } from "@domains/articles/article.interface";
+import { ArticleService } from "@domains/articles/article.service";
 
 @Injectable({ providedIn: 'root' })
 export class HashtagService {
