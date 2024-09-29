@@ -4,7 +4,7 @@
   }
 
   button {
-    @apply bg-surface text-primary text-sm flex justify-center items-center rounded-full gap-3 px-8 py-3;
+    @apply bg-surface text-primary text-sm flex justify-center items-center rounded-full select-none gap-3 px-8 py-3;
 
     &.btn-primary {
       @apply bg-primary hover:bg-primary/95 text-surface;
@@ -28,7 +28,7 @@
   }
 
   .card {
-    @apply bg-surface rounded-xl p-6 md:p-8;
+    @apply bg-surface rounded-xl custom-shadow p-6 md:p-8;
   }
 
   .alert {
@@ -46,7 +46,7 @@
       @apply bg-red-100/50 text-red-500;
     }
   }
-  
+
   .scroll-watcher {
     @apply bg-primary fixed top-0 z-50 w-full h-[1px] opacity-75; 
     scale: 0 1;

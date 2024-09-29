@@ -27,10 +27,9 @@ export class AuthService {
 
   async createAccount({ email, password, displayName }: Credentials): Promise<void> {
     const credential = await createUserWithEmailAndPassword(this.auth, email, password);
-    await Promise.all([
-      updateProfile(credential.user, { displayName }), 
-      this.setUserDoc(credential.user.uid, createUserData()),
-    ]);
+
+    await updateProfile(credential.user, { displayName }), 
+    await this.setUserDoc(credential.user.uid, createUserData());
   }
 
   async login({ email, password }: Credentials): Promise<void> {

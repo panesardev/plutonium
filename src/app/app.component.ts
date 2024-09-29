@@ -16,7 +16,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
   template: `
     <div class="scroll-watcher"></div>
 
-    <div class="fixed inset-0 z-[-10] bg-gradient-to-b from-transparent to-secondary-2 from-20%"></div>
+    <div class="fixed top-0 right-0 left-0 h-[110vh] z-[-10] bg-gradient-to-b from-transparent to-secondary-2 from-10%"></div>
 
     <app-navbar class="select-none"/>
     

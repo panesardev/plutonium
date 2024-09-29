@@ -6,6 +6,7 @@ import { ArticleListComponent } from '@domains/articles/components/article-list.
 import { ModalService } from '@layout/modals/modal.service';
 import { map, switchMap, zip } from 'rxjs';
 import ArticleComponent from "../../domains/articles/pages/articles/article/article.component";
+import { ImageErrorDirective } from '@shared/directives/image-error.directive';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,8 @@ import ArticleComponent from "../../domains/articles/pages/articles/article/arti
   imports: [
     AsyncPipe,
     ArticleListComponent,
-    ArticleComponent
+    ArticleComponent,
+    ImageErrorDirective,
 ],
   templateUrl: './dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
