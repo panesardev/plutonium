@@ -11,11 +11,11 @@ import { CommentForm, CommentFormValue } from '../comment.interface';
   ],
   template: `
     <form [formGroup]="form" (submit)="submit()">
-      <fieldset class="w-full mb-3">
+      <fieldset class="w-full mb-4">
         <textarea class="w-full" formControlName="text" placeholder="Write a comment here"></textarea>
       </fieldset>
-      <div class="flex justify-center w-full">
-        <button class="{{ form.invalid ? 'bg-slate-200 text-slate-500' : '' }} px-6 py-2" type="submit" [disabled]="form.invalid">Post</button>
+      <div class="flex justify-end">
+        <button class="btn-primary" [disabled]="form.invalid">Post comment</button>
       </div>
     </form>
   `,

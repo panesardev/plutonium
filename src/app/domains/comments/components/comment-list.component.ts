@@ -9,18 +9,16 @@ import { ImageErrorDirective } from '@shared/directives/image-error.directive';
     ImageErrorDirective,
   ],
   template: `
-    <div class="grid gap-6">
+    <div class="grid gap-4">
       @for (comment of comments(); track comment.id) {
-        <div class="bg-neutral grid grid-cols-[2rem_1fr] rounded gap-4 md:gap-6 p-4 md:p-6">
+        <div class="card grid grid-cols-[2rem_1fr] gap-4 md:gap-6 p-4 md:p-6">
+          <img class="rounded-full size-8" [src]="comment.photoURL" onError="/icons/user.png" [alt]="comment.displayName">
           <div>
-            <img class="w-8 h-8 rounded-full" [src]="comment.photoURL" onError="/icons/user.png" [alt]="comment.displayName">
-          </div>
-          <div>
-            <h1 class="flex justify-between gap-4 mb-1">
-              <span>{{ comment.displayName }}</span>
+            <h1 class="flex justify-between items-center gap-4 mb-1">
+              <span class="font-bold">{{ comment.displayName }}</span>
               <span class="text-xs text-slate-400">{{ parseDate(comment.created) }}</span>
             </h1>
-            <p class="text-slate-600 mb-4">{{ comment.text }}</p>
+            <p class="mb-1">{{ comment.text }}</p>
           </div>
         </div>
       }
