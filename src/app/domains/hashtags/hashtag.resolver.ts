@@ -1,6 +1,6 @@
 import { inject } from "@angular/core";
 import { ActivatedRouteSnapshot, ResolveFn } from "@angular/router";
-import { Article } from "@domains/articles/article.interface";
+import { Article } from "@app/domains/articles/article.interface";
 import { HashtagService } from "./hashtag.service";
 import { BRAND } from "@app/app.constants";
 

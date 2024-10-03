@@ -1,5 +1,5 @@
 import { Routes } from "@angular/router";
-import { TitleResolver } from "@shared/resolvers/title.resolver";
+import { TitleResolver } from "@app/shared/resolvers/title.resolver";
 
 const routes: Routes = [
   {

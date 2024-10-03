@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Article } from '../article.interface';
-import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
-import { ImageErrorDirective } from '@shared/directives/image-error.directive';
-import { HashtagListComponent } from '@domains/hashtags/components/hashtag-list.component';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { HashtagListComponent } from '@app/domains/hashtags/components/hashtag-list.component';
+import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
+import { Article } from '../article.interface';
 
 @Component({
   selector: 'app-article-list',
@@ -11,7 +11,7 @@ import { HashtagListComponent } from '@domains/hashtags/components/hashtag-list.
   imports: [
     RouterLink,
     NgOptimizedImage,
-    ImageErrorDirective,
+    FallbackImageDirective,
     HashtagListComponent,
   ],
   template: `
@@ -19,9 +19,9 @@ import { HashtagListComponent } from '@domains/hashtags/components/hashtag-list.
       @for (article of articles(); track article.slug) {
         <div class="bg-surface rounded-xl custom-shadow h-fit">
           <a routerLink="/articles/{{ article.slug }}">
-            <img ngSrc="/articles/{{ article.slug }}/img/cover.webp" onError="/articles/{{ article.slug }}/img/cover.png" class="rounded-xl" [alt]="article.title" priority="{{ $index === 0 ? true : false }}" width="384" height="216">
+            <img ngSrc="/articles/{{ article.slug }}/img/cover.webp" fallback="/articles/{{ article.slug }}/img/cover.png" class="rounded-xl" [alt]="article.title" priority="{{ $index === 0 ? true : false }}" width="384" height="216">
           </a>
-          <div class="p-6 pb-8">
+          <div class="pt-4 px-6 pb-8">
             <h1 class="text-primary text-xl font-bold mb-2">{{ article.title }}</h1>
             <p class="mb-4">{{ article.description }}</p>
             <div class="inline-block mb-6">

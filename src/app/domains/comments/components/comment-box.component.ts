@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angu
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { AuthService } from '../../../auth/auth.service';
+import { AuthService } from '@app/auth/auth.service';
 import { CommentFormValue } from '../comment.interface';
 import { CommentService } from '../comment.service';
 import { createComment } from '../comment.utilities';

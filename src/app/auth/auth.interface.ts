@@ -1,4 +1,4 @@
-import type { User } from 'firebase/auth';
+import type { User } from '@angular/fire/auth';
 
 export interface AuthUser extends User, AdditionalUserData {}
 

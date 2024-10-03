@@ -1,4 +1,4 @@
-import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider } from "@angular/fire/auth";
 import { AdditionalUserData, AuthProviderName } from "./auth.interface";
 
 export function createUserData(): AdditionalUserData {

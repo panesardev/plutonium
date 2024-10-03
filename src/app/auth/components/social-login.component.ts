@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthProviderName } from '@auth/auth.interface';
-import { AuthService } from '@auth/auth.service';
+import { AuthService } from '../auth.service';
+import { AuthProviderName } from '../auth.interface';
 
 @Component({
   selector: 'app-social-login',

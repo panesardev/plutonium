@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Credentials } from '@auth/auth.interface';
-import { AuthService } from '@auth/auth.service';
+import { Credentials } from '@app/auth/auth.interface';
+import { AuthService } from '@app/auth/auth.service';
 
 @Component({
   selector: 'reset-password',

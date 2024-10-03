@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FeaturedComponent } from './components/featured.component';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ArticleService } from '@domains/articles/article.service';
+import { ArticleService } from '@app/domains/articles/article.service';
 
 @Component({
   selector: 'app-index',

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { SOCIAL } from '../../app.constants';
+import { SOCIAL } from '@app/app.constants';
 
 @Component({
   selector: 'app-about',

@@ -1,13 +1,13 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '@auth/auth.service';
-import { ArticleService } from '@domains/articles/article.service';
-import { HashtagListComponent } from '@domains/hashtags/components/hashtag-list.component';
-import { ModalService } from '@layout/modals/modal.service';
-import { ImageErrorDirective } from '@shared/directives/image-error.directive';
+import { AuthService } from '@app/auth/auth.service';
+import { ArticleService } from '@app/domains/articles/article.service';
+import { HashtagListComponent } from '@app/domains/hashtags/components/hashtag-list.component';
+import { ModalService } from '@app/layout/modals/modal.service';
 import { map, startWith, switchMap, zip } from 'rxjs';
 import { ProfileCardComponent } from './components/profile-card.component';
+import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +15,7 @@ import { ProfileCardComponent } from './components/profile-card.component';
   imports: [
     AsyncPipe,
     RouterLink,
-    ImageErrorDirective,
+    FallbackImageDirective,
     ProfileCardComponent,
     HashtagListComponent,
 ],
@@ -36,7 +36,7 @@ export default class DashboardComponent {
   );
 
   async openLogout() {
-    const fn = () => import('@layout/modals/components/logout.component').then(c => c.LogoutComponent);
+    const fn = () => import('@app/layout/modals/components/logout.component').then(c => c.LogoutComponent);
     await this.modal.open(fn);
   }
 }

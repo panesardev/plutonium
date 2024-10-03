@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { ArticleListComponent } from '@domains/articles/components/article-list.component';
-import { Article } from '@domains/articles/article.interface';
+import { ArticleListComponent } from '@app/domains/articles/components/article-list.component';
+import { Article } from '@app/domains/articles/article.interface';
 
 @Component({
   selector: 'app-hashtag',

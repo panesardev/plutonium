@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '@auth/auth.service';
+import { AuthService } from '@app/auth/auth.service';
 import { firstValueFrom, map } from 'rxjs';
 
 @Component({

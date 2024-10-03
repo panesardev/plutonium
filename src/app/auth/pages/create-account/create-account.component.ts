@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { Credentials } from '@auth/auth.interface';
-import { AuthService } from '@auth/auth.service';
-import { SocialLoginComponent } from '@auth/components/social-login.component';
+import { Credentials } from '@app/auth/auth.interface';
+import { AuthService } from '@app/auth/auth.service';
+import { SocialLoginComponent } from '@app/auth/components/social-login.component';
 
 @Component({
   selector: 'create-account',

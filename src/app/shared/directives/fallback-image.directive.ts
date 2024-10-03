@@ -1,16 +1,16 @@
 import { Directive, ElementRef, HostListener, inject, input } from "@angular/core";
 
 @Directive({
-  selector: 'img[onError]',
+  selector: 'img[fallback]',
   standalone: true,
 })
-export class ImageErrorDirective {
+export class FallbackImageDirective {
   private hostRef = inject(ElementRef);
 
-  onError = input.required<string>();
+  fallback = input.required<string>();
 
   @HostListener('error')
-  errored() {
-    this.hostRef.nativeElement.src = this.onError();
+  setFallbackImage() {
+    this.hostRef.nativeElement.src = this.fallback();
   }
 }

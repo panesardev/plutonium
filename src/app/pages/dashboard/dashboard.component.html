@@ -9,10 +9,10 @@
     @if (articles$ | async; as articles) {
       <p class="md:text-center mb-8">Access your saved articles here.</p>
       @for (article of articles; track article.slug) {
-        <div class="bg-surface rounded-xl custom-shadow cursor-pointer grid md:grid-cols-[1fr_2fr] max-w-2xl gap-6 mx-auto mb-4 p-6" routerLink="/articles/{{ article.slug }}">
-          <img class="rounded-md" src="/articles/{{ article.slug }}/img/cover.webp" [alt]="article.title">
+        <div class="bg-surface rounded-xl custom-shadow cursor-pointer grid md:grid-cols-[1fr_2fr] max-w-2xl gap-6 mx-auto mb-4 p-6">
+          <img class="rounded-md" src="/articles/{{ article.slug }}/img/cover.webp" [alt]="article.title" routerLink="/articles/{{ article.slug }}">
           <div>
-            <h1 class="text-primary text-xl font-bold mb-2">{{ article.title }}</h1>
+            <h1 class="text-primary text-xl font-bold mb-2" routerLink="/articles/{{ article.slug }}">{{ article.title }}</h1>
             <p class="mb-4">{{ article.description }}</p>
             <div class="inline-block">
               <app-hashtag-list [hashtags]="article.hashtags"/>

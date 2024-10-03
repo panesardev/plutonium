@@ -1,5 +1,5 @@
 import frontmatter from 'front-matter';
-import { BASE_URL } from '../../app.constants';
+import { BASE_URL } from '@app/app.constants';
 import { Article } from './article.interface';
 
 export function createArticle(markdown: string, slug: string): Article {

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { distinctUntilChanged, map, switchMap } from 'rxjs';
-import { ArticleService } from '../../../domains/articles/article.service';
+import { ArticleService } from '@app/domains/articles/article.service';
 import { Modal } from '../modal.interface';
 import { ModalComponent } from '../modal.component';
 import { AsyncPipe } from '@angular/common';
@@ -31,8 +31,7 @@ import { AsyncPipe } from '@angular/common';
       
       <div class="h-96 overflow-y-scroll">
         @for (article of articles$ | async; track article.slug) {
-          <div [routerLink]="['articles', article.slug]" (click)="modal.close()"
-            class="bg-secondary-1/75 hover:bg-secondary-2 border-2 border-secondary-2 px-4 md:px-6 py-3 md:py-4 mb-2 rounded-md cursor-pointer">
+          <div [routerLink]="['articles', article.slug]" (click)="modal.close()" class="bg-secondary-1/75 hover:bg-secondary-2 border-2 border-secondary-2 px-4 md:px-6 py-3 md:py-4 mb-2 rounded-md cursor-pointer">
             <p class="font-bold text-lg text-primary">{{ article.title }}</p>
             <p>{{ article.description }}</p>
           </div>
