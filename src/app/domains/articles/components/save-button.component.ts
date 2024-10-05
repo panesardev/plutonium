@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '@app/auth/auth.service';
-import { firstValueFrom, map } from 'rxjs';
+import { filter, firstValueFrom, map } from 'rxjs';
 
 @Component({
   selector: 'app-save-button',
@@ -34,21 +34,29 @@ export class SaveButtonComponent {
   slug = input.required<string>();
 
   user$ = this.auth.user$;
-  isArticleSaved$ = this.user$.pipe(
-    map(user => user.articles && user.articles.includes(this.slug())),
+
+  isArticleSaved$ = this.auth.user$.pipe(
+    filter(user => !!user.articles),
+    map(user => user.articles.includes(this.slug())),
   );
 
   async saveArticle() {
     const user = await firstValueFrom(this.user$);
-    console.log(user);
-    
     const articles = [...user.articles, this.slug()];
-    await this.auth.setUserDoc(user.uid, { created: user.created, articles });
+
+    await this.auth.setUserDoc(user.uid, { 
+      articles,
+      created: user.created, 
+    });
   }
 
   async removeArticle() {
     const user = await firstValueFrom(this.user$);
     const articles = user.articles.filter(slug => slug != this.slug());
-    await this.auth.setUserDoc(user.uid, { created: user.created, articles });
+
+    await this.auth.setUserDoc(user.uid, { 
+      articles,
+      created: user.created, 
+    });
   }
 }

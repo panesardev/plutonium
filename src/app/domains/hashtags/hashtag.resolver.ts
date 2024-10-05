@@ -10,8 +10,8 @@ export const GetHashtagsResolver: ResolveFn<string[]> = () => {
 }
 
 export const FindArticlesByHashtagResolver: ResolveFn<Article[]> = (route: ActivatedRouteSnapshot) => {
-  const hashtag = route.paramMap.get('hashtag');
   const hashtagService = inject(HashtagService);
+  const hashtag = route.paramMap.get('hashtag');
   return hashtagService.findByHashtag(hashtag);
 }
 

@@ -1,4 +1,4 @@
-@if (hashtags()) {
+@if (hashtags(); as hashtags) {
   <section>
     <h1 class="heading mb-8 md:mb-12">Hashtags</h1>
     
@@ -6,7 +6,7 @@
 
     <div class="card text-lg max-w-3xl mx-auto">
       <div class="flex justify-center gap-4 md:gap-6 flex-wrap">
-        @for (hashtag of hashtags(); track hashtag) {
+        @for (hashtag of hashtags; track hashtag) {
           <a routerLink="/hashtags/{{ hashtag }}" class="bg-secondary-1 hover:bg-secondary-2 text-primary text-sm md:text-lg capitalize rounded-full px-4 md:px-6 py-2">{{ hashtag }}</a>
         }
       </div>
