@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
   template: `
     <div class="flex justify-center gap-3 flex-wrap">
       @for (hashtag of hashtags(); track hashtag) {
-        <a routerLink="/hashtags/{{ hashtag }}" class="bg-secondary-1 hover:bg-secondary-2 text-primary text-sm capitalize rounded-full px-3 py-1">{{ hashtag }}</a>
+        <a routerLink="/hashtags/{{ hashtag }}" class="bg-secondary-1 hover:bg-secondary-2 text-primary text-sm capitalize rounded-full px-3 py-1">#{{ hashtag }}</a>
       }
     </div>
   `,

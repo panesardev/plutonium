@@ -36,7 +36,7 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
           </div>
         </div>
         <div class="flex justify-end items-center h-fit gap-6">
-          <button class="btn-danger" (click)="logout.emit()">Logout</button>
+          <button class="btn-danger px-6 py-2" (click)="logout.emit()">Logout</button>
         </div>
       </div>
     }

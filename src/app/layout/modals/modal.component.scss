@@ -6,7 +6,7 @@
 
 @keyframes modal-open {
   from {
-    transform: translateY(30px);
+    transform: translateY(-30px);
     opacity: 0;
   }
   to {
@@ -17,7 +17,7 @@
 
 .modal-close {
   animation: modal-close 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
-  transform: translateY(50px);
+  transform: translateY(-50px);
   opacity: 0;
 }
 
@@ -27,7 +27,7 @@
     opacity: 1;
   }
   to {
-    transform: translateY(50px);
+    transform: translateY(-50px);
     opacity: 0;
   }
 }

@@ -3,11 +3,10 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '@app/auth/auth.service';
 import { ArticleService } from '@app/domains/articles/article.service';
-import { HashtagListComponent } from '@app/domains/hashtags/components/hashtag-list.component';
+import { ArticleListComponent } from '@app/domains/articles/components/article-list.component';
 import { ModalService } from '@app/layout/modals/modal.service';
 import { map, startWith, switchMap, zip } from 'rxjs';
 import { ProfileCardComponent } from './components/profile-card.component';
-import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,9 +14,8 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
   imports: [
     AsyncPipe,
     RouterLink,
-    FallbackImageDirective,
     ProfileCardComponent,
-    HashtagListComponent,
+    ArticleListComponent,
 ],
   templateUrl: './dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,7 +29,7 @@ export default class DashboardComponent {
 
   articles$ = this.user$.pipe(
     map(user => user.articles.map(s => this.articleService.findBySlug(s))),
-    switchMap(list => zip(list)),
+    switchMap(array => zip(array)),
     startWith([]),
   );
 

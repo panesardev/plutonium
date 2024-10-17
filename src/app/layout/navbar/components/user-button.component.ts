@@ -21,7 +21,7 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
     }
     @else {
       <button class="btn-primary w-full" routerLink="/auth/login">Login</button>
-    } 
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

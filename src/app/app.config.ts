@@ -19,7 +19,7 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({
         scrollPositionRestoration: 'enabled',
       }),
-    ), 
+    ),
     provideHttpClient(withFetch()),
     provideFirebaseApp(() => initializeApp(FIREBASE_CONFIG)),
     provideAuth(() => getAuth()),
