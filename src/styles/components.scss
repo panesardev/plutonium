@@ -62,12 +62,15 @@
     p {
       @apply text-lg leading-8 mb-6;
     }
+    img {
+      @apply rounded-xl;
+    }
     pre {
       @apply relative overflow-auto text-sm md:text-base bg-surface rounded-xl custom-shadow mb-6 p-6 md:p-8;
     }
     code {
       font-family: "Fira Code", monospace;
-    }   
+    }
   }
 }
 
