@@ -36,7 +36,7 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
             </div>
             <div class="grid md:flex items-center gap-2">
               <div class="alert alert-primary">Created at {{ getLocaleDate(user.metadata.creationTime) }}</div>
-              <div class="alert alert-success">Using {{ user.providerData[0].providerId }} login</div>
+              <div class="alert alert-success">{{ user.providerData[0].providerId }} provider</div>
             </div>
           </div>
         </div>
