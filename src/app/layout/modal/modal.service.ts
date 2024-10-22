@@ -5,7 +5,7 @@ import { Modal } from './modal.interface';
 export class ModalService {
   private container: ViewContainerRef;
   
-  isOpen = signal(false);
+  opened = signal(false);
 
   setContainer(container: ViewContainerRef): void {
     this.container = container;
@@ -14,11 +14,11 @@ export class ModalService {
   async open(modal: () => Promise<typeof Modal>) {
     this.container.clear();
     this.container.createComponent(await modal());
-    this.isOpen.set(true);
+    this.opened.set(true);
   }
 
   close(): void {
     setTimeout(() => this.container.clear(), 300);
-    this.isOpen.set(false);
+    this.opened.set(false);
   }
 }

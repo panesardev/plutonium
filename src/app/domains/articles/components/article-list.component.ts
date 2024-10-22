@@ -15,7 +15,7 @@ import { Article } from '../article.interface';
     HashtagListComponent,
   ],
   template: `
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 justify-center gap-6 md:gap-8 lg:gap-10">
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(280px,350px))] justify-center gap-6 md:gap-8 lg:gap-10">
       @for (article of articles(); track article.slug) {
         <div class="bg-surface rounded-xl custom-shadow h-fit">
           <a routerLink="/articles/{{ article.slug }}">

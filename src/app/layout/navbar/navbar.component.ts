@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, signal, viewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { BRAND } from '@app/app.constants';
-import { ModalService } from '@app/layout/modals/modal.service';
+import { ModalService } from '@app/layout/modal/modal.service';
 import { UserButtonComponent } from './components/user-button.component';
 
 @Component({
@@ -24,7 +24,7 @@ export class NavbarComponent {
   BRAND = BRAND;
   
   async openSearch() {
-    const fn = () => import('../modals/components/search.component').then(c => c.SearchComponent);
+    const fn = () => import('./components/search-modal.component').then(c => c.SearchModalComponent);
     await this.modal.open(fn);
   }
   

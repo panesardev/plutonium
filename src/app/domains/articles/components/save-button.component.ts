@@ -44,19 +44,13 @@ export class SaveButtonComponent {
     const user = await firstValueFrom(this.user$);
     const articles = [...user.articles, this.slug()];
 
-    await this.auth.setUserDoc(user.uid, { 
-      articles,
-      created: user.created, 
-    });
+    await this.auth.setUserDoc(user.uid, { articles });
   }
 
   async removeArticle() {
     const user = await firstValueFrom(this.user$);
     const articles = user.articles.filter(slug => slug != this.slug());
 
-    await this.auth.setUserDoc(user.uid, { 
-      articles,
-      created: user.created, 
-    });
+    await this.auth.setUserDoc(user.uid, { articles });
   }
 }

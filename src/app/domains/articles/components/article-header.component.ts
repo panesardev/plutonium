@@ -16,7 +16,7 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
       <div itemprop="datePublished">Posted on {{ article().createdAt }}</div>
       <div class="hidden md:block select-none">•</div>
       <div>
-        <a class="text-primary hover:underline" [href]="article().source" target="_blank">source</a>
+        <a class="text-primary underline" [href]="article().source" target="_blank">source</a>
       </div>
     </div>
   `,

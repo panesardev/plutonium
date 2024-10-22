@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '@app/auth/auth.service';
 import { ArticleService } from '@app/domains/articles/article.service';
 import { ArticleListComponent } from '@app/domains/articles/components/article-list.component';
-import { ModalService } from '@app/layout/modals/modal.service';
+import { ModalService } from '@app/layout/modal/modal.service';
 import { map, startWith, switchMap, zip } from 'rxjs';
 import { ProfileCardComponent } from './components/profile-card.component';
 
@@ -16,7 +16,7 @@ import { ProfileCardComponent } from './components/profile-card.component';
     RouterLink,
     ProfileCardComponent,
     ArticleListComponent,
-],
+  ],
   templateUrl: './dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -34,7 +34,7 @@ export default class DashboardComponent {
   );
 
   async openLogout() {
-    const fn = () => import('@app/layout/modals/components/logout.component').then(c => c.LogoutComponent);
+    const fn = () => import('./components/logout-modal.component').then(c => c.LogoutModalComponent);
     await this.modal.open(fn);
   }
 }

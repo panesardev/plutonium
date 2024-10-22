@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Auth, authState, createUserWithEmailAndPassword, getAdditionalUserInfo, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from '@angular/fire/auth';
 import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
 import { map, of, switchMap } from 'rxjs';
-import { AdditionalUserData, AuthProviderName, AuthUser, Credentials } from './auth.interface';
+import { AdditionalUserData, AuthProviderName, User, Credentials } from './auth.interface';
 import { createUserData, getAuthProvider } from './auth.utilities';
 
 @Injectable({ providedIn: 'root' })
@@ -18,7 +18,7 @@ export class AuthService {
     switchMap(user => {
       if (user) {
         return docData(doc(this.firestore, `users/${user.uid}`)).pipe(
-          map(data => ({ ...user, ...data }) as AuthUser),
+          map(data => ({ ...user, ...data }) as User),
         );
       }
       return of(null);

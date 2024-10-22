@@ -5,9 +5,9 @@ import { Modal } from './modal.interface';
   selector: 'app-modal',
   standalone: true,
   template: `
-    <div class="{{ modal.isOpen() ? 'modal-overlay-open' : 'modal-overlay-close' }} bg-slate-300/50 backdrop-blur-md custom-shadow fixed top-0 right-0 left-0 bottom-0 z-[100]"></div>
-    <div class="{{ modal.isOpen() ? 'modal-open' : 'modal-close' }} fixed z-[101] inset-0 px-3 py-6 select-none" #modalRef (click)="close($event)">
-      <div class="{{ width() }} bg-white rounded-xl p-6 md:p-8 mx-auto">
+    <div class="{{ modal.opened() ? 'modal-overlay-open' : 'modal-overlay-close' }} bg-slate-300/50 backdrop-blur-md custom-shadow fixed top-0 right-0 left-0 bottom-0 z-[100]"></div>
+    <div class="{{ modal.opened() ? 'modal-open' : 'modal-close' }} fixed z-[101] inset-0 px-3 py-6 select-none" #modalRef (click)="close($event)">
+      <div class="{{ width() }} bg-white rounded-xl p-6 pb-8 md:p-8 mx-auto">
         <div class="flex justify-between items-center gap-6 mb-6">
           <h1 class="text-primary font-bold text-xl">{{ heading() }}</h1>
           <button class="bg-red-100/50 text-red-500 p-2" (click)="modal.close()">

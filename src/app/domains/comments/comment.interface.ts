@@ -9,10 +9,6 @@ export interface Comment {
   slug: string;
 }
 
-export interface CommentForm {
-  text: FormControl<string>;
-}
-
 export interface CommentFormValue {
-  text?: string;
+  text: string;
 }

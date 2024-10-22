@@ -3,7 +3,6 @@ import { AdditionalUserData, AuthProviderName } from "./auth.interface";
 
 export function createUserData(): AdditionalUserData {
   return {
-    created: new Date().toDateString(),
     articles: [],
   };
 }

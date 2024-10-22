@@ -1,17 +1,17 @@
 import { Routes } from "@angular/router";
-import { FindArticlesByHashtagResolver, GetHashtagsResolver, HashtagTitleResolver } from "./hashtag.resolver";
+import { FindArticlesByHashtag, GetHashtags, HashtagTitle } from "./hashtag.resolver";
 
 export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./pages/hashtags/hashtags.component'),
-    resolve: { hashtags: GetHashtagsResolver },
+    resolve: { hashtags: GetHashtags },
   },
   {
     path: ':hashtag',
     loadComponent: () => import('./pages/hashtags/hashtag/hashtag.component'),
-    title: HashtagTitleResolver,
-    resolve: { articles: FindArticlesByHashtagResolver },
+    title: HashtagTitle,
+    resolve: { articles: FindArticlesByHashtag },
   }
 ];
 

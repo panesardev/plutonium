@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { emptyValidator } from '../comment.utilities';
-import { CommentForm, CommentFormValue } from '../comment.interface';
+import { CommentFormValue } from '../comment.interface';
 
 @Component({
   selector: 'app-comment-form',
@@ -15,7 +15,7 @@ import { CommentForm, CommentFormValue } from '../comment.interface';
         <textarea class="w-full" formControlName="text" placeholder="Write a comment here"></textarea>
       </fieldset>
       <div class="flex justify-end">
-        <button class="btn-primary" [disabled]="form.invalid">Post comment</button>
+        <button class="btn-primary" type="submit" [disabled]="form.invalid">Post comment</button>
       </div>
     </form>
   `,
@@ -24,14 +24,12 @@ import { CommentForm, CommentFormValue } from '../comment.interface';
 export class CommentFormComponent {
   onSubmit = output<CommentFormValue>();
 
-  form = new FormGroup<CommentForm>({
+  form = new FormGroup({
     text: new FormControl('', [Validators.required, emptyValidator()]),
   });
   
   submit() {
-    if (this.form.valid) {
-      this.onSubmit.emit(this.form.value);
-      this.form.reset();
-    }
+    this.onSubmit.emit(this.form.getRawValue());
+    this.form.reset();
   }
 }

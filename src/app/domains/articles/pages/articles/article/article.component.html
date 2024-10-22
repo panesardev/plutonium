@@ -33,7 +33,7 @@
         <app-article-header [article]="article"/>
       </div>
 
-      <div class="max-w-4xl mx-auto mb-20">
+      <div class="max-w-4xl mx-auto mb-10">
         <div>
           <img class="mb-10 rounded-xl" ngSrc="/articles/{{ article.slug }}/img/cover.png" [fallback]="'/articles/'+article.slug+'/img/cover.webp'" priority [alt]="article.title" width="1200" height="675">
         </div>
@@ -44,6 +44,15 @@
           <button class="btn-primary" routerLink="/auth/login">Login</button>
         }
         <app-render-markdown [markdown]="article.markdown"/>
+      </div>
+
+      <div class="mb-10">
+        @defer {
+          <app-save-button [slug]="article.slug"/>
+        }
+        @placeholder {
+          <button class="btn-primary" routerLink="/auth/login">Login</button>
+        }
       </div>
       
       <div class="max-w-2xl mx-auto">

@@ -2,12 +2,12 @@ import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/auth/auth.service';
-import { ModalComponent } from '../modal.component';
-import { Modal } from '../modal.interface';
+import { ModalComponent } from '@app/layout/modal/modal.component';
+import { Modal } from '@app/layout/modal/modal.interface';
 import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
 
 @Component({
-  selector: 'app-logout',
+  selector: 'app-logout-modal',
   standalone: true,
   imports: [
     AsyncPipe,
@@ -33,7 +33,7 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LogoutComponent extends Modal {
+export class LogoutModalComponent extends Modal {
   private auth = inject(AuthService);
   private router = inject(Router);
 

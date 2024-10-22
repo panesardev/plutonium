@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './layout/footer/footer.component';
-import { RenderModalComponent } from './layout/modals/render-modal.component';
+import { RenderModalComponent } from './layout/modal/render-modal.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 
 @Component({
@@ -18,17 +18,17 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 
     <div class="fixed top-0 right-0 left-0 h-[110vh] z-[-10] bg-gradient-to-b from-transparent to-secondary-2 from-10%"></div>
 
-    <app-navbar class="select-none"/>
+    <app-navbar class="select-none" />
     
     <main class="mt-28 md:mt-32 px-6 lg:px-8">
       <router-outlet/>
     </main>
     
     @defer {
-      <app-footer class="select-none"/>
+      <app-footer class="select-none" />
     }
     @defer {
-      <app-render-modal/>
+      <app-render-modal />
     }
   `,
 })

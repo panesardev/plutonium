@@ -6,6 +6,10 @@
 @import './components.scss';
 @import './utilities.scss';
 
+html {
+  scroll-behavior: smooth;
+}
+
 img {
   user-select: none;
   width: 100%;
