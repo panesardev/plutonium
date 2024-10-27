@@ -1,24 +1,21 @@
-import { Injectable, ViewContainerRef, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Modal } from './modal.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {
-  private container: ViewContainerRef;
   
-  opened = signal(false);
+  active = signal<Modal>(null);
+  opened = signal<boolean>(false);
 
-  setContainer(container: ViewContainerRef): void {
-    this.container = container;
-  }
-
-  async open(modal: () => Promise<typeof Modal>) {
-    this.container.clear();
-    this.container.createComponent(await modal());
+  async open(fn: () => Promise<any>, inputs?: {}): Promise<void> {
+    const component = await fn();
+    this.active.set({ component, inputs });
     this.opened.set(true);
   }
 
-  close(): void {
-    setTimeout(() => this.container.clear(), 300);
+  close() {
+    setTimeout(() => this.active.set(null), 300);
     this.opened.set(false);
   }
+
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './layout/footer/footer.component';
-import { RenderModalComponent } from './layout/modal/render-modal.component';
+import { ModalComponent } from './layout/modal/modal.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 
 @Component({
@@ -11,7 +11,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     RouterOutlet,
     NavbarComponent,
     FooterComponent,
-    RenderModalComponent,
+    ModalComponent,
   ],
   template: `
     <div class="scroll-watcher"></div>
@@ -28,7 +28,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
       <app-footer class="select-none" />
     }
     @defer {
-      <app-render-modal />
+      <app-modal />
     }
   `,
 })

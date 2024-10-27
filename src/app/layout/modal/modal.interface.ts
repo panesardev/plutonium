@@ -1,6 +1,4 @@
-import { inject } from "@angular/core";
-import { ModalService } from "./modal.service";
-
-export class Modal {
-  modal = inject(ModalService);
+export interface Modal {
+  component: any;
+  inputs: any;
 }
