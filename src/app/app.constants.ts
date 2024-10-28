@@ -15,8 +15,8 @@ export const FIREBASE_CONFIG = {
 export const FEATURED_ARTICLE_SLUG = 'signals-rxjs-state-management';
 
 export const SOCIAL = {
-  instagram: 'https://www.instagram.com/panesar.dev/',
-  github: 'https://github.com/panesardev/plutonium',
-  youtube: 'https://www.youtube.com/@SukhpreetSingh-yz5kz/videos',
-  twitter: 'https://twitter.com/panesardev',
+  INSTAGRAM: 'https://www.instagram.com/panesar.dev/',
+  GITHUB: 'https://github.com/panesardev/plutonium',
+  YOUTUBE: 'https://www.youtube.com/@SukhpreetSingh-yz5kz/videos',
+  TWITTER: 'https://twitter.com/panesardev',
 };

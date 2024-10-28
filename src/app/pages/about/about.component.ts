@@ -8,5 +8,5 @@ import { SOCIAL } from '@app/app.constants';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AboutComponent {
-  social = SOCIAL;
+  SOCIAL = SOCIAL;
 }

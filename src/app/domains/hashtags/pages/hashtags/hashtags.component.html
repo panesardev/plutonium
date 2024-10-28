@@ -5,7 +5,7 @@
     <p class="md:text-center text-lg mb-8">Select tags below to find content related to that tag.</p>
 
     <div class="card text-lg max-w-3xl mx-auto">
-      <div class="flex justify-center gap-4 md:gap-6 flex-wrap">
+      <div class="flex justify-center gap-4 flex-wrap">
         @for (hashtag of hashtags; track hashtag) {
           <a routerLink="/hashtags/{{ hashtag }}" class="bg-secondary-1 hover:bg-secondary-2 text-primary text-sm md:text-base capitalize rounded-full px-4 md:px-6 py-2">#{{ hashtag }}</a>
         }
