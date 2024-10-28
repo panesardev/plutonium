@@ -1,16 +1,19 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BRAND } from '@app/app.constants';
 import { AuthService } from '@app/auth/auth.service';
 import { ModalService } from '@app/layout/modal/modal.service';
 import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
 
 @Component({
-  selector: 'app-logout-modal',
+  selector: 'app-delete-modal',
   standalone: true,
   imports: [
     AsyncPipe,
     FallbackImageDirective,
+    ReactiveFormsModule,
   ],
   template: `
     <div class="bg-white rounded-xl max-w-sm mx-auto p-6 pb-8 md:p-8">
@@ -28,23 +31,37 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
         </div>
       }
 
-      <p class="mb-6">You will be logged out!</p>
+      <p class="mb-6">Type "{{ phrase }}" to permanently delete your account from {{ BRAND }}</p>
 
-      <button class="btn-danger w-full" (click)="logout()">Logout</button>
+      <fieldset class="mb-6">
+        <input class="{{ error() ? 'border-red-500' : '' }}" type="text" name="confirm" [formControl]="confirmControl">
+      </fieldset>
+
+      <button class="btn-danger w-full" (click)="deleteAccount()">Delete account</button>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LogoutModalComponent {
+export class DeleteModalComponent {
   private auth = inject(AuthService);
   private router = inject(Router);
   readonly modal = inject(ModalService);
 
-  user$ = this.auth.user$;
+  confirmControl = new FormControl('', Validators.required);
 
-  async logout() {
-    await this.auth.logout();
-    await this.router.navigateByUrl('/');
-    this.modal.close();
+  user$ = this.auth.user$;
+  error = signal(false);
+  BRAND = BRAND;
+  phrase = 'Delete my account';
+
+  async deleteAccount() {
+    if (this.confirmControl.value === this.phrase) {
+      await this.auth.deleteAccount();
+      await this.router.navigateByUrl('/');
+      this.modal.close();
+    }
+    else {
+      this.error.set(true);
+    }
   }
 }

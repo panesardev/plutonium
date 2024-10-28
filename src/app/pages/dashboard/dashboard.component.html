@@ -1,24 +1,37 @@
 @if (user$ | async; as user) {
-  <section>
+  <section class="select-none">
     <h1 class="heading mb-8 md:mb-12">Dashboard</h1>
 
-    <app-profile-card [user]="user" (logout)="openLogout()"/>
+    <div class="max-w-2xl mx-auto mb-12">
+      <app-profile-card [user]="user" (logout)="openLogout()"/>
+    </div>
 
-    <h1 class="text-primary md:text-center font-bold text-3xl mb-2">Saved Articles</h1>
+    <h1 class="text-primary md:text-center font-bold text-3xl mb-2">Saved articles</h1>
 
     @if (articles$ | async; as articles) {
-      <p class="md:text-center mb-8">Access your saved articles here.</p>
-      @if (articles.length) {
-        <div class="max-w-6xl mx-auto">
-          <app-article-list [articles]="articles"/>
-        </div>
-      }
-      @else {
-        <div class="card max-w-2xl mx-auto">
-          <p class="mb-4">You do not have saved articles yet.</p>
-          <a class="text-primary hover:underline" routerLink="/articles">See articles</a>
-        </div>
-      }
+      <div class="mb-12">
+        <p class="md:text-center mb-8">Access your saved articles here</p>
+        @if (articles.length) {
+          <div class="max-w-6xl mx-auto">
+            <app-article-list [articles]="articles"/>
+          </div>
+        }
+        @else {
+          <div class="card max-w-2xl mx-auto">
+            <p class="mb-4">You do not have saved articles yet.</p>
+            <a class="text-primary hover:underline" routerLink="/articles">See articles</a>
+          </div>
+        }
+      </div>
     }
+    
+    <h1 class="text-red-500 md:text-center font-bold text-3xl mb-6">Danger zone!</h1>
+
+    <div class="card max-w-md mx-auto mb-12">
+      <p class="mb-6">Your account will be deleted and all of your saved will be lost!</p>
+
+      <button class="btn-danger ml-auto px-6 py-2" (click)="openDelete()">Delete my account</button>
+    </div>
+
   </section>
 }

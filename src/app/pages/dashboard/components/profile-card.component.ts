@@ -12,7 +12,7 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
   ],
   template: `
     @if (user(); as user) {
-      <div class="card grid md:grid-cols-[1fr_auto] custom-shadow select-none max-w-2xl gap-6 md:gap-4 mx-auto mb-12">
+      <div class="card grid md:grid-cols-[1fr_auto] gap-6 md:gap-4">
         <div>
           <div class="flex items-center gap-3 mb-6">
             <img class="rounded-full w-8" [src]="user.photoURL" [alt]="user.displayName" fallback="/icons/user.png">

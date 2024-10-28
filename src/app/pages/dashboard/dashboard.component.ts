@@ -37,4 +37,9 @@ export default class DashboardComponent {
     const fn = () => import('./components/logout-modal.component').then(c => c.LogoutModalComponent);
     await this.modal.open(fn);
   }
+  
+  async openDelete() {
+    const fn = () => import('./components/delete-modal.component').then(c => c.DeleteModalComponent);
+    await this.modal.open(fn);
+  }
 }

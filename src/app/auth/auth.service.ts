@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth, authState, createUserWithEmailAndPassword, getAdditionalUserInfo, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from '@angular/fire/auth';
-import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
-import { map, of, switchMap } from 'rxjs';
+import { Auth, authState, createUserWithEmailAndPassword, deleteUser, getAdditionalUserInfo, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from '@angular/fire/auth';
+import { deleteDoc, doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
+import { firstValueFrom, map, of, switchMap } from 'rxjs';
 import { AdditionalUserData, AuthProviderName, User, Credentials } from './auth.interface';
 import { createUserData, getAuthProvider } from './auth.utilities';
 
@@ -51,6 +51,13 @@ export class AuthService {
 
   async logout(): Promise<void> {
     await signOut(this.auth);
+  }
+
+  async deleteAccount(): Promise<void> {
+    const user = this.auth.currentUser;
+    
+    await deleteUser(user);
+    await deleteDoc(doc(this.firestore, `users/${user.uid}`));
   }
   
   async setUserDoc(uid: string, data: AdditionalUserData): Promise<void> {

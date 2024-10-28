@@ -10,7 +10,7 @@ module.exports = {
         'secondary-1': '#e1f9f8',
         'secondary-2': '#cff7f3',
         'surface': '#ffffff',
-        'text': '#134e4a',
+        'text': '#1e293b',
       },
     },
   },

@@ -1,5 +1,5 @@
 import { NgComponentOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, inject, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ModalService } from './modal.service';
 
 @Component({

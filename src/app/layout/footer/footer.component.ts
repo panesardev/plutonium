@@ -8,8 +8,7 @@ import { RouterLink } from '@angular/router';
     RouterLink,
   ],
   templateUrl: './footer.component.html',
-  styles: ``,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
 
