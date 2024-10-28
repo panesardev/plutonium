@@ -52,8 +52,5 @@
     "firebase",
     "markdown",
     "tailwind"
-  ],
-  "engines": {
-    "node": ">=16.0.0"
-  }
+  ]
 }
