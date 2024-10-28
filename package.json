@@ -7,12 +7,6 @@
     "email": "panesar.pb08@gmail.com",
     "url": "https://panesar.dev"
   },
-  "keywords": [
-    "angular",
-    "firebase",
-    "markdown",
-    "tailwind"
-  ],
   "scripts": {
     "start": "node dist/plutonium/server/server.mjs",
     "dev": "ng serve --host 0.0.0.0",
@@ -52,5 +46,14 @@
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "~5.4.5"
+  },
+  "keywords": [
+    "angular",
+    "firebase",
+    "markdown",
+    "tailwind"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
