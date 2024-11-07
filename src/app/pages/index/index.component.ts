@@ -3,6 +3,7 @@ import { FeaturedComponent } from './components/featured.component';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ArticleService } from '@app/domains/articles/article.service';
+import { FEATURED_ARTICLE_SLUG } from '@app/app.constants';
 
 @Component({
   selector: 'app-index',
@@ -18,5 +19,5 @@ import { ArticleService } from '@app/domains/articles/article.service';
 export class IndexComponent {
   private articleService = inject(ArticleService);
 
-  featured$ = this.articleService.featured$;
+  featured$ = this.articleService.findBySlug(FEATURED_ARTICLE_SLUG);
 }

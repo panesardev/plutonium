@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { Auth, authState, createUserWithEmailAndPassword, deleteUser, getAdditionalUserInfo, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from '@angular/fire/auth';
 import { deleteDoc, doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
-import { firstValueFrom, map, of, switchMap } from 'rxjs';
-import { AdditionalUserData, AuthProviderName, User, Credentials } from './auth.interface';
-import { createUserData, getAuthProvider } from './auth.utilities';
+import { map, of, switchMap } from 'rxjs';
+import { AdditionalUserData, AuthProviderName, Credentials, User } from './auth.interface';
+import { createUserData, getAuthProvider } from './auth.utils';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

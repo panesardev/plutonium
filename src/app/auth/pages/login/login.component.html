@@ -1,41 +1,43 @@
-<section class="max-w-md mx-auto select-none">
+<section class="max-w-3xl mx-auto select-none">
   <h1 class="heading mb-8">Login</h1>
 
-  <div class="card">
+  <div class="card md:p-10">
     @if (error()) {
       <p class="alert alert-danger cursor-pointer mb-6" (click)="error.set(null)">{{ error() }}</p>
     }
 
-    <form class="mb-6" [formGroup]="form" (submit)="submit()">
-      <fieldset class="mb-4">
-        <label>
-          <span>Email address <span class="text-red-500">*</span></span>
-        </label>
-        <input type="email" name="email" formControlName="email" placeholder="john.wick@example.com">
-      </fieldset>
-      
-      <fieldset class="mb-2">
-        <label>
-          <span>Password <span class="text-red-500">*</span></span>
-          <span class="text-xs text-slate-400">min 6 characters</span>
-        </label>
-        <input type="password" name="password" formControlName="password" placeholder="enter your password">
-      </fieldset>
+    <div class="grid md:grid-cols-2 gap-6 md:gap-10">
+      <form [formGroup]="form" (submit)="submit()">
+        <fieldset class="mb-4">
+          <label>
+            <span>Email address <span class="text-red-500">*</span></span>
+          </label>
+          <input type="email" name="email" formControlName="email" placeholder="john.wick@example.com">
+        </fieldset>
+        
+        <fieldset class="mb-2">
+          <label>
+            <span>Password <span class="text-red-500">*</span></span>
+            <span class="text-xs text-slate-400">min 6 characters</span>
+          </label>
+          <input type="password" name="password" formControlName="password" placeholder="enter your password">
+        </fieldset>
+    
+        <p class="text-right text-sm mb-6">
+          <a class="text-primary hover:underline" routerLink="/auth/reset-password">Forgot password?</a>
+        </p>
+    
+        <button class="btn-primary w-full mb-6">Login</button>
+        
+        <p class="text-center text-sm">Don't have an account? <a class="text-primary hover:underline" routerLink="/auth/create-account">sign up</a></p>
+      </form>
   
-      <p class="text-right text-sm mb-6">
-        <a class="text-primary hover:underline" routerLink="/auth/reset-password">Forgot password?</a>
-      </p>
-  
-      <button class="btn-primary w-full">Login</button>
-    </form>
-
-    <div class="mb-6">
-      <app-social-login (error)="error.set($event)"/>
+      <div class="mb-6">
+        <p class="text-sm mb-2">Log in with social services</p>
+        <app-social-login (error)="error.set($event)"/>
+      </div>  
     </div>
 
-    <p class="text-center text-sm">
-      Don't have an account? <a class="text-primary hover:underline" routerLink="/auth/create-account">sign up</a>
-    </p>
   </div>
 
 </section>

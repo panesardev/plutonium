@@ -1,5 +1,5 @@
 import { NgComponentOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 import { ModalService } from './modal.service';
 
 @Component({
@@ -21,4 +21,15 @@ import { ModalService } from './modal.service';
 })
 export class ModalComponent {
   readonly modal = inject(ModalService);
+
+  ref = effect(() => {
+    const onEsc = ({ key }) => key === 'Escape' && this.modal.close();
+
+    if (this.modal.active()) {
+      document.addEventListener('keyup', onEsc, true);
+    }
+    else {
+      document.removeEventListener('keyup', onEsc, true);
+    }
+  });
 }

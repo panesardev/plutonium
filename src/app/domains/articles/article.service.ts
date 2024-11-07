@@ -1,26 +1,20 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { Observable, map, switchMap, zip } from "rxjs";
-import { FEATURED_ARTICLE_SLUG } from '../../app.constants';
 import { Article } from "./article.interface";
-import { createArticle, sortArticles } from "./article.utilities";
+import { createArticle, sortArticles } from "./article.utils";
 
 @Injectable({ providedIn: 'root' })
 export class ArticleService {
   private http = inject(HttpClient);
 
-  slugs$ = this.http.get('/articles/slugs.txt', { responseType: 'text' }).pipe(
+  private slugs$ = this.http.get('/articles/slugs.txt', { responseType: 'text' }).pipe(
     map(file => file.replaceAll('\r', '').split('\n')),
   );
 
   articles$ = this.slugs$.pipe(
-    map(slugs => slugs.map(s => this.findBySlug(s))),
-    switchMap(array => zip(array)),
-    map(articles => articles.filter(a => a.published)),
-    map(articles => sortArticles(articles)),
+    switchMap(slugs => this.findBySlugs(slugs)),
   );
-
-  featured$ = this.findBySlug(FEATURED_ARTICLE_SLUG);
 
   findBySlug(slug: string): Observable<Article> {
     return this.http.get(`/articles/${slug}/index.md`, { responseType: 'text' }).pipe(
@@ -28,9 +22,10 @@ export class ArticleService {
     );
   }
 
-  findRecent(count: number): Observable<Article[]> {
-    return this.articles$.pipe(
-      map(articles => articles.slice(0, count)),
+  findBySlugs(slugs: string[]): Observable<Article[]> {
+    return zip(slugs.map(slug => this.findBySlug(slug))).pipe(
+      map(articles => articles.filter(a => a.published)),
+      map(articles => sortArticles(articles)),
     );
   }
 }

@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { User } from '@app/auth/auth.interface';
 import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
@@ -8,7 +7,6 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
   standalone: true,
   imports: [
     FallbackImageDirective,
-    JsonPipe,
   ],
   template: `
     @if (user(); as user) {

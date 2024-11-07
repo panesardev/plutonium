@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { emptyValidator } from '../comment.utilities';
+import { emptyValidator } from '../comment.utils';
 import { CommentFormValue } from '../comment.interface';
 
 @Component({

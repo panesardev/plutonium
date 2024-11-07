@@ -17,7 +17,3 @@ export function sortArticles(articles: Article[]) {
     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   );
 }
-
-export function slugify(text: string) {
-  return text.toLowerCase().replaceAll(' ', '-');
-}

@@ -5,7 +5,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { AuthService } from '@app/auth/auth.service';
 import { CommentFormValue } from '../comment.interface';
 import { CommentService } from '../comment.service';
-import { createComment } from '../comment.utilities';
+import { createComment } from '../comment.utils';
 import { CommentFormComponent } from './comment-form.component';
 import { CommentListComponent } from './comment-list.component';
 import { AsyncPipe } from '@angular/common';

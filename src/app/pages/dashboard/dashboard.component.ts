@@ -5,7 +5,7 @@ import { AuthService } from '@app/auth/auth.service';
 import { ArticleService } from '@app/domains/articles/article.service';
 import { ArticleListComponent } from '@app/domains/articles/components/article-list.component';
 import { ModalService } from '@app/layout/modal/modal.service';
-import { map, startWith, switchMap, zip } from 'rxjs';
+import { startWith, switchMap } from 'rxjs';
 import { ProfileCardComponent } from './components/profile-card.component';
 
 @Component({
@@ -28,8 +28,7 @@ export default class DashboardComponent {
   user$ = this.auth.user$;
 
   articles$ = this.user$.pipe(
-    map(user => user.articles.map(s => this.articleService.findBySlug(s))),
-    switchMap(array => zip(array)),
+    switchMap(user => this.articleService.findBySlugs(user.articles)),
     startWith([]),
   );
 

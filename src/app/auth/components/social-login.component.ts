@@ -29,6 +29,6 @@ export class SocialLoginComponent {
   async login(name: AuthProviderName) {
     await this.auth.loginWithProvider(name)
       .then(() => this.router.navigateByUrl('/dashboard'))
-      .catch(e => this.error.emit(e.message));
+      .catch(e => this.error.emit(e.message.slice(9)));
   }
 }

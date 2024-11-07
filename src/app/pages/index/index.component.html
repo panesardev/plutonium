@@ -10,9 +10,9 @@
     </button>
   </div>
 
-  @if (featured$ | async; as featured) {
+  @if (featured$ | async; as article) {
     <div class="max-w-4xl mx-auto">
-      <app-featured [article]="featured"/>
+      <app-featured [article]="article"/>
     </div>
   }
 </section>
