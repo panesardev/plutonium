@@ -10,7 +10,7 @@ export const routes: Routes = [
     title: TitleResolver,
   },
   {
-    path: 'auth',
+    path: '',
     loadChildren: () => import('./auth/auth.routes'),
     title: TitleResolver,
   },

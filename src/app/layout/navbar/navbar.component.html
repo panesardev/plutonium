@@ -14,7 +14,7 @@
         <app-user-button />
       }
       @placeholder {
-        <button class="btn-primary" routerLink="/auth/login">Login</button>
+        <button class="btn-primary" routerLink="/login">Login</button>
       }
     </div>
   </div>
@@ -48,7 +48,7 @@
     <div class="flex flex-col gap-2 mb-8">
       <a class="text-primary rounded-full px-6 py-3" routerLink="/articles" routerLinkActive="bg-secondary-1" (click)="drawer.set(false)">Articles</a>
       <a class="text-primary rounded-full px-6 py-3" routerLink="/hashtags" routerLinkActive="bg-secondary-1" (click)="drawer.set(false)">Hashtags</a>
-      <a class="text-primary rounded-full px-6 py-3" routerLink="/auth/login" routerLinkActive="bg-secondary-1" (click)="drawer.set(false)">Login</a>
+      <a class="text-primary rounded-full px-6 py-3" routerLink="/login" routerLinkActive="bg-secondary-1" (click)="drawer.set(false)">Login</a>
       <a class="text-primary rounded-full px-6 py-3" routerLink="/about" routerLinkActive="bg-secondary-1" (click)="drawer.set(false)">About</a>
     </div>
   
@@ -56,7 +56,7 @@
       <app-user-button (click)="drawer.set(false)"/>
     }
     @placeholder {
-      <button class="btn-primary" routerLink="/auth/login" (click)="drawer.set(false)">Login</button>
+      <button class="btn-primary" routerLink="/login" (click)="drawer.set(false)">Login</button>
     }
   </div>
 </div>

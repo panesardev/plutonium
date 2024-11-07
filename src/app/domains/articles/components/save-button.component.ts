@@ -22,7 +22,7 @@ import { filter, firstValueFrom, map } from 'rxjs';
         }
       }
       @else {
-        <button class="btn-primary" routerLink="/auth/login">Login</button>
+        <button class="btn-primary" routerLink="/login">Login</button>
       }
     </div>
   `,

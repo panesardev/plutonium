@@ -37,7 +37,7 @@ import { firstValueFrom, switchMap } from 'rxjs';
       @else {
         <div>
           <p class="text-center mb-4">You must be logged in to post a comment!</p>
-          <button class="mx-auto px-8" routerLink="/auth/login">Login</button>
+          <button class="mx-auto px-8" routerLink="/login">Login</button>
         </div>
       }
     </div>

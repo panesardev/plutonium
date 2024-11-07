@@ -7,7 +7,7 @@ import { AuthProviderName } from '../auth.interface';
   selector: 'app-social-login',
   standalone: true,
   template: `
-    <div class="grid gap-3">
+    <div class="grid gap-4">
       <button class="bg-secondary-1 hover:bg-secondary-2" (click)="login('google')">
         <img class="w-5" src="/icons/google.png" alt="google">
         <span>Continue with Google</span>
