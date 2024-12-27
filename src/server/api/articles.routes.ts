@@ -29,7 +29,7 @@ router.get('/', async (request, response) => {
 });
 
 router.get('/slugs', async (request, response) => {
-  const slugs = await fetch(`${BASE_URL}/articles/slugs.txt`).then(res => res.text()).then(slugs => slugs.split(''));
+  const slugs = await fetch(`${BASE_URL}/articles/slugs.txt`).then(res => res.text()).then(slugs => slugs.split('\n'));
   response.json(slugs);
 });
 
