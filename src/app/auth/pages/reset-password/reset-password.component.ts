@@ -1,35 +1,31 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Credentials } from '@app/auth/auth.interface';
 import { AuthService } from '@app/auth/auth.service';
 
+export interface ResetPasswordFormValue {
+  email: string;
+}
+
 @Component({
-    selector: 'reset-password',
-    imports: [
-        ReactiveFormsModule,
-        RouterLink,
-    ],
-    templateUrl: './reset-password.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-reset-password',
+  imports: [
+    RouterLink,
+    ReactiveFormsModule,
+  ],
+  templateUrl: './reset-password.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ResetPasswordComponent {
   private auth = inject(AuthService);
 
   form = new FormGroup({
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
   });
 
   error = signal<string>(null);
-
-  async submit() {
-    if (this.form.valid) {
-      const credentials: Credentials = {
-        email: this.form.value.email,
-      };
-
-      await this.auth.resetPassword(credentials)
-        .catch(e => this.error.set(e.message));
-    }
+  
+  async submit(value: ResetPasswordFormValue) {
+    await this.auth.resetPassword(value).catch(e => this.error.set(e.message));
   }
 }

@@ -3,21 +3,21 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '@app/auth/auth.service';
 import { ArticleService } from '@app/domains/articles/article.service';
-import { ArticleListComponent } from '@app/domains/articles/components/article-list.component';
+import ArticleListComponent from '@app/domains/articles/components/article-list.component';
 import { ModalService } from '@app/layout/modal/modal.service';
 import { startWith, switchMap } from 'rxjs';
 import { ProfileCardComponent } from './components/profile-card.component';
 
 @Component({
-    selector: 'app-dashboard',
-    imports: [
-        AsyncPipe,
-        RouterLink,
-        ProfileCardComponent,
-        ArticleListComponent,
-    ],
-    templateUrl: './dashboard.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-dashboard',
+  imports: [
+    AsyncPipe,
+    RouterLink,
+    ProfileCardComponent,
+    ArticleListComponent,
+  ],
+  templateUrl: './dashboard.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class DashboardComponent {
   private auth = inject(AuthService);

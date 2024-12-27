@@ -5,12 +5,12 @@ import { AuthService } from '@app/auth/auth.service';
 import { filter, firstValueFrom, map } from 'rxjs';
 
 @Component({
-    selector: 'app-save-button',
-    imports: [
-        RouterLink,
-        AsyncPipe,
-    ],
-    template: `
+  selector: 'app-save-button',
+  imports: [
+    RouterLink,
+    AsyncPipe,
+  ],
+  template: `
     <div class="flex justify-center">
       @if (user$ | async) {
         @if (isArticleSaved$ | async) {
@@ -25,9 +25,9 @@ import { filter, firstValueFrom, map } from 'rxjs';
       }
     </div>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SaveButtonComponent {
+export default class SaveButtonComponent {
   private auth = inject(AuthService);
 
   slug = input.required<string>();

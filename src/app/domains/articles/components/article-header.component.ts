@@ -1,14 +1,16 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Article } from '../article.interface';
-import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
+import { ImageErrorDirective } from '@app/shared/directives/image-error.directive';
 
 @Component({
-    selector: 'app-article-header',
-    imports: [FallbackImageDirective],
-    template: `
+  selector: 'app-article-header',
+  imports: [
+    ImageErrorDirective,
+  ],
+  template: `
     <div class="flex flex-col md:flex-row md:items-center justify-center gap-4 md:gap-5">
       <div class="flex items-center gap-3 md:gap-4">
-        <img [src]="article().authorImage" class="w-8 rounded-full" fallback="/icons/user.png" [alt]="article().authorName">
+        <img [src]="article().authorImage" class="w-8 rounded-full" error="/icons/user.png" [alt]="article().authorName">
         <span>By <a class="text-primary hover:underline" target="_blank" rel="noopener" rel="noreferrer" itemprop="author" [name]="article().authorName" [href]="article().authorLink">{{ article().authorName }}</a></span>
       </div>
       <div class="hidden md:block select-none">•</div>
@@ -19,8 +21,8 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
       </div>
     </div>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticleHeaderComponent {
+export default class ArticleHeaderComponent {
   article = input.required<Article>();
 }

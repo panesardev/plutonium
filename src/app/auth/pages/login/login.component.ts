@@ -1,42 +1,36 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { Credentials } from '@app/auth/auth.interface';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '@app/auth/auth.service';
-import { SocialLoginComponent } from '@app/auth/components/social-login.component';
+import { LoginWithProviderComponent } from '@app/auth/components/login-with-provider.component';
+
+export interface LoginFormValue {
+  email: string;
+  password: string;
+}
 
 @Component({
-    selector: 'login',
-    imports: [
-        SocialLoginComponent,
-        ReactiveFormsModule,
-        RouterLink,
-    ],
-    templateUrl: './login.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-login',
+  imports: [
+    RouterLink,
+    ReactiveFormsModule,
+    LoginWithProviderComponent,
+  ],
+  templateUrl: './login.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class LoginComponent {
   private auth = inject(AuthService);
-  private router = inject(Router);
 
   form = new FormGroup({
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
   });
 
   error = signal<string>(null);
 
-  async submit() {
-    if (this.form.valid) {
-      const credentials: Credentials = {
-        email: this.form.value.email,
-        password: this.form.value.password,
-      };
-      
-      await this.auth.login(credentials)
-        .then(() => this.router.navigate(['/dashboard']))
-        .catch(e => this.error.set(e.message));
-    }
+  async submit(value: LoginFormValue) {
+    await this.auth.login(value).catch(e => this.error.set(e.message));
   }
 
 }

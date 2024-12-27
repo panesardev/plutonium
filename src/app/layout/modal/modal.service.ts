@@ -1,5 +1,9 @@
 import { Injectable, signal } from '@angular/core';
-import { Modal } from './modal.interface';
+
+export interface Modal {
+  component: any;
+  inputs: any;
+}
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {

@@ -8,23 +8,26 @@ const emptyValidator: ValidatorFn = (control: AbstractControl) => {
 }
 
 @Component({
-    selector: 'app-comment-form',
-    imports: [
-        ReactiveFormsModule,
-    ],
-    template: `
+  selector: 'app-comment-form',
+  imports: [
+    ReactiveFormsModule,
+  ],
+  template: `
     <form [formGroup]="form" (submit)="submit()">
-      <fieldset class="w-full mb-4">
-        <textarea class="w-full" formControlName="text" placeholder="Write a comment here"></textarea>
-      </fieldset>
+      <div class="input-field mb-4">
+        <textarea id="text" class="peer" formControlName="text" placeholder="" rows="1"></textarea>
+        <label for="text" class="peer-focus:text-primary peer-focus:top-1 peer-focus:left-2.5 peer-focus:scale-75 peer-focus:-translate-y-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+          <span>Write a comment</span>
+        </label>
+      </div>
       <div class="flex justify-end">
         <button class="btn-primary" type="submit" [disabled]="form.invalid">Post comment</button>
       </div>
     </form>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommentFormComponent {
+export default class CommentFormComponent {
   onSubmit = output<CommentFormValue>();
 
   form = new FormGroup({

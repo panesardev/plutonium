@@ -25,7 +25,7 @@
           "options": {
             "outputPath": "dist/plutonium",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "browser": "src/index.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -45,31 +45,21 @@
               "src/styles/index.scss"
             ],
             "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": {
-              "discoverRoutes": true,
-              "routesFile": "src/routes.txt"
-            },
+            "server": "src/index.server.ts",
+            "outputMode": "server",
             "ssr": {
-              "entry": "server.ts"
+              "entry": "src/server/server.ts"
             },
-            "namedChunks": true,
-            "allowedCommonJsDependencies": ["*"]
+            "allowedCommonJsDependencies": ["*"],
+            "stylePreprocessorOptions": {
+              "sass": {
+                "silenceDeprecations": ["import"]
+              }
+            },
+            "namedChunks": true
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
               "outputHashing": "all"
             },
             "development": {

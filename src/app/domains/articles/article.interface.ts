@@ -10,8 +10,6 @@ export interface Article {
   published: boolean;
   slug: string;
   markdown: string;
-  coverUrl: string;
-  url: string;
 }
 
 export interface Toc {

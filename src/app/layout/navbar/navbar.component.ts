@@ -5,15 +5,15 @@ import { ModalService } from '@app/layout/modal/modal.service';
 import { UserButtonComponent } from './components/user-button.component';
 
 @Component({
-    selector: 'app-navbar',
-    imports: [
-        RouterLink,
-        RouterLinkActive,
-        UserButtonComponent,
-    ],
-    templateUrl: './navbar.component.html',
-    styleUrl: './navbar.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-navbar',
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    UserButtonComponent,
+  ],
+  templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
   private modal = inject(ModalService);

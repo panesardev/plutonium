@@ -4,38 +4,43 @@
   }
 
   button {
-    @apply bg-surface text-primary text-sm flex justify-center items-center rounded-full select-none gap-3 px-8 py-3;
+    @apply bg-white text-primary text-sm flex justify-center items-center rounded-full select-none gap-3 px-8 py-3;
 
     &.btn-primary {
-      @apply bg-primary hover:bg-primary/95 text-surface;
+      @apply bg-primary hover:bg-primary-hover text-white;
+    }
+    
+    &.btn-secondary {
+      @apply bg-secondary hover:bg-secondary-hover text-primary;
     }
 
     &.btn-danger {
-      @apply bg-red-500 hover:bg-red-500/95 text-surface;
+      @apply bg-red-500 hover:bg-red-500/95 text-white;
     }
   }
 
-  fieldset {
-    @apply grid gap-1;
-
-    label {
-      @apply text-sm flex justify-between items-center;
-    }
+  .input-field {
+    @apply relative;
 
     input, textarea {
-      @apply hover:bg-secondary-1/50 text-primary border-primary/20 border-2 placeholder:text-slate-700/50 text-sm rounded-md px-4 py-3 outline-none;
+      @apply focus:border-primary border-[1px] border-slate-300 block w-full appearance-none focus:outline-none focus:ring-0 rounded-md px-4 py-3;
+      box-shadow: 0 0 #0000,0 0 #0000,0 1px 2px 0 rgba(18,18,23,0.05);
+    }
+
+    label {
+      @apply bg-white text-slate-500 absolute transform -translate-y-4 scale-75 top-1 left-2.5 px-2 z-10 origin-[0] duration-200 cursor-text;
     }
   }
-
+  
   .card {
-    @apply bg-surface rounded-xl custom-shadow p-6 md:p-8;
+    @apply bg-white rounded-2xl secondary-shadow p-6 md:p-8;
   }
 
   .alert {
-    @apply text-sm rounded-full max-w-fit px-4 py-2; 
+    @apply text-sm rounded-full w-fit px-4 py-2; 
 
     &.alert-primary {
-      @apply bg-secondary-1 text-primary;
+      @apply bg-secondary text-primary;
     }
 
     &.alert-success {
@@ -47,12 +52,8 @@
     }
   }
 
-  .scroll-watcher {
-    @apply bg-primary fixed top-0 z-50 w-full h-[1px] opacity-75; 
-    scale: 0 1;
-    animation: scroll-animation linear;
-    animation-timeline: scroll();
-    transform-origin: left;
+  .background-overlay {
+    @apply fixed top-0 right-0 left-0 h-[110vh] z-[-10] bg-gradient-to-b from-transparent to-secondary-hover from-10%;
   }
 
   .markdown {
@@ -66,11 +67,18 @@
       @apply rounded-xl;
     }
     pre {
-      @apply relative overflow-auto text-sm md:text-base bg-surface rounded-xl custom-shadow mb-6 p-6 md:p-8;
+      @apply relative overflow-auto text-sm md:text-base bg-white rounded-xl secondary-shadow mb-6 p-6 md:p-8;
     }
     code {
       font-family: "Fira Code", monospace;
     }
+  }
+
+  .scroll-watcher {
+    @apply bg-primary fixed top-0 z-50 w-full h-[1px] opacity-75 origin-left; 
+    scale: 0 1;
+    animation: scroll-animation linear;
+    animation-timeline: scroll();
   }
 }
 

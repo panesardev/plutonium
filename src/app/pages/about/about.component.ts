@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { SOCIAL } from '@app/app.constants';
+import { BRAND, SOCIAL } from '@app/app.constants';
 
 @Component({
   selector: 'app-about',
@@ -8,5 +8,6 @@ import { SOCIAL } from '@app/app.constants';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AboutComponent {
+  BRAND = BRAND;
   SOCIAL = SOCIAL;
 }

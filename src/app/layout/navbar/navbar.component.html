@@ -3,12 +3,12 @@
   <div class="flex justify-between items-center h-full gap-6 px-8 py-6">
     <div class="flex items-center gap-10">
       <a routerLink="/" class="font-bold bg-gradient-to-br from-primary/90 to-teal-500 text-transparent bg-clip-text text-3xl">{{ BRAND }}</a>
-      <div class="bg-secondary-1 hover:bg-secondary-2 text-primary text-sm rounded-full cursor-pointer lg:w-80 xl:w-96 px-6 py-3" (click)="openSearch()">Search articles</div>
+      <div class="bg-secondary hover:bg-secondary-hover text-primary text-sm rounded-full cursor-pointer lg:w-80 xl:w-96 px-6 py-3" (click)="openSearch()">Search articles</div>
     </div>
     <div class="flex justify-end items-center gap-8">
       <div class="flex gap-4">
-        <a class="text-primary rounded-full px-4 py-1" routerLink="/articles" routerLinkActive="bg-secondary-1">Articles</a>
-        <a class="text-primary rounded-full px-4 py-1" routerLink="/hashtags" routerLinkActive="bg-secondary-1">Hashtags</a>
+        <a class="text-primary rounded-full px-4 py-1" routerLink="/articles" routerLinkActive="bg-secondary">Articles</a>
+        <a class="text-primary rounded-full px-4 py-1" routerLink="/hashtags" routerLinkActive="bg-secondary">Hashtags</a>
       </div>
       @defer {
         <app-user-button />
@@ -24,8 +24,8 @@
 <nav class="block lg:hidden max-app-width mx-auto bg-white fixed top-0 left-0 right-0 z-10">
   <div class="flex justify-between items-center gap-4 p-6">
     <img class="size-11" src="/icons/plutonium.png" alt="icon" routerLink="/">
-    <div class="bg-secondary-1 hover:bg-secondary-2 text-primary text-sm rounded-full cursor-pointer w-full px-6 py-3" (click)="openSearch()">Search articles</div>
-    <button class="bg-secondary-1 text-primary p-[.875rem]" (click)="drawer.set(true)" aria-label="menu">
+    <div class="bg-secondary hover:bg-secondary-hover text-primary text-sm rounded-full cursor-pointer w-full px-6 py-3" (click)="openSearch()">Search articles</div>
+    <button class="btn-secondary p-[.875rem]" (click)="drawer.set(true)" aria-label="menu">
       <svg class="size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect y="11" width="24" height="2" rx="1"/><rect y="4" width="24" height="2" rx="1"/><rect y="18" width="24" height="2" rx="1"/></svg>
     </button>
   </div>
@@ -35,21 +35,21 @@
 <div class="block lg:hidden">
   <div class="{{ drawer() ? 'panel-overlay-open' : 'panel-overlay-close' }} bg-slate-300/50 backdrop-blur-md fixed inset-0 z-10" (click)="drawer.set(false)"></div>
 
-  <div class="{{ drawer() ? 'panel-open' : 'panel-close' }} bg-white custom-shadow fixed top-0 bottom-0 right-0 z-20 w-72 p-6">
+  <div class="{{ drawer() ? 'panel-open' : 'panel-close' }} bg-white secondary-shadow fixed top-0 bottom-0 right-0 z-20 w-72 p-6">
     <div class="flex items-center justify-between gap-6 mb-8">
       <div>
         <a class="font-bold bg-gradient-to-br from-primary/90 to-teal-500 text-transparent bg-clip-text text-3xl" routerLink="/" (click)="drawer.set(false)">{{ BRAND }}</a>
       </div>
-      <button class="bg-secondary-1 text-primary px-3" (click)="drawer.set(false)" aria-label="close">
+      <button class="btn-secondary px-3" (click)="drawer.set(false)" aria-label="close">
         <svg class="size-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M18,6h0a1,1,0,0,0-1.414,0L12,10.586,7.414,6A1,1,0,0,0,6,6H6A1,1,0,0,0,6,7.414L10.586,12,6,16.586A1,1,0,0,0,6,18H6a1,1,0,0,0,1.414,0L12,13.414,16.586,18A1,1,0,0,0,18,18h0a1,1,0,0,0,0-1.414L13.414,12,18,7.414A1,1,0,0,0,18,6Z"/></svg>
       </button>
     </div>
   
     <div class="flex flex-col gap-2 mb-8">
-      <a class="text-primary rounded-full px-6 py-3" routerLink="/articles" routerLinkActive="bg-secondary-1" (click)="drawer.set(false)">Articles</a>
-      <a class="text-primary rounded-full px-6 py-3" routerLink="/hashtags" routerLinkActive="bg-secondary-1" (click)="drawer.set(false)">Hashtags</a>
-      <a class="text-primary rounded-full px-6 py-3" routerLink="/login" routerLinkActive="bg-secondary-1" (click)="drawer.set(false)">Login</a>
-      <a class="text-primary rounded-full px-6 py-3" routerLink="/about" routerLinkActive="bg-secondary-1" (click)="drawer.set(false)">About</a>
+      <a class="text-primary rounded-full px-6 py-3" routerLink="/articles" routerLinkActive="bg-secondary" (click)="drawer.set(false)">Articles</a>
+      <a class="text-primary rounded-full px-6 py-3" routerLink="/hashtags" routerLinkActive="bg-secondary" (click)="drawer.set(false)">Hashtags</a>
+      <a class="text-primary rounded-full px-6 py-3" routerLink="/login" routerLinkActive="bg-secondary" (click)="drawer.set(false)">Login</a>
+      <a class="text-primary rounded-full px-6 py-3" routerLink="/about" routerLinkActive="bg-secondary" (click)="drawer.set(false)">About</a>
     </div>
   
     @defer {

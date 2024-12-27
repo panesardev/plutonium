@@ -6,10 +6,4 @@ export interface AdditionalUserData {
   articles: string[];
 }
 
-export type AuthProviderName = 'google' | 'github';
-
-export interface Credentials {
-  email?: string;
-  password?: string;
-  displayName?: string;
-}
+export type AuthFormType = 'login' | 'create-account' | 'reset-password';

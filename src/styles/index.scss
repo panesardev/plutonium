@@ -2,19 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './syntax.scss';
-@import './components.scss';
-@import './utilities.scss';
+@import 'components.scss';
+@import 'utilities.scss';
+@import 'syntax.scss';
 
+:root {
+  --primary: #156b75;
+  --primary-hover: #15646c;
+  --secondary: #e1f9f8;
+  --secondary-hover: #cff7f3;
+}
 
 html {
   scroll-behavior: smooth;
-}
-
-img {
-  user-select: none;
-  width: 100%;
-  height: auto;
 }
 
 section {
@@ -32,6 +32,7 @@ section {
     opacity: 1;
   }
 }
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 ::-webkit-scrollbar {
   display: none;

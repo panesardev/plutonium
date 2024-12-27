@@ -1,56 +1,48 @@
-<section class="max-w-3xl mx-auto select-none">
-  <h1 class="heading mb-8">Create account</h1>
+<section class="select-none">
+  <h1 class="heading mb-8">Sign up for an account</h1>
 
-  <div class="card md:p-10">
+  <div class="card grid gap-6 max-w-sm mx-auto">
     @if (error()) {
-      <p class="alert alert-danger cursor-pointer mb-6" (click)="error.set(null)">{{ error() }}</p>
+      <p class="alert alert-danger w-full cursor-pointer mb-1" (click)="error.set(null)">{{ error() }}</p>
     }
-    
-    <div class="grid md:grid-cols-[6fr_1px_5fr] gap-6 md:gap-10">
-      <form [formGroup]="form" (submit)="submit()">
-        <h1 class="text-lg mb-4">Sign up with email</h1>
-        
-        <fieldset class="mb-4">
-          <label>
-            <span>Full name <span class="text-red-500">*</span></span>
-          </label>
-          <input type="text" name="displayName" formControlName="displayName" placeholder="John Wick">
-        </fieldset>
-        
-        <fieldset class="mb-4">
-          <label>
-            <span>Email address <span class="text-red-500">*</span></span>
-          </label>
-          <input type="email" name="email" formControlName="email" placeholder="john.wick@example.com">
-        </fieldset>
-        
-        <fieldset class="mb-2">
-          <label>
-            <span>Password <span class="text-red-500">*</span></span>
-            <span class="text-xs text-slate-400">min 6 characters</span>
-          </label>
-          <input type="password" name="password" formControlName="password" placeholder="enter your password">
-        </fieldset>
-    
-        <p class="text-right text-sm mb-6">
-          <a class="text-primary hover:underline" routerLink="/reset-password">Forgot password?</a>
-        </p>
-    
-        <button class="btn-primary w-full mb-6">Create my account</button>
   
-        <p class="text-center text-sm">Already have an account? <a class="text-primary hover:underline" routerLink="/login">login</a></p>
-      </form>
-
-      <div class="hidden md:block text-center border-[1px] border-primary/20"></div>
-  
-      <div class="mb-6">
-        <div class="hidden md:block text-lg mb-4">Sign up with social</div>
-        <div class="block md:hidden border-[1px] border-primary/20 mb-6"></div>
-
-        <app-social-login (error)="error.set($event)"/>
+    <form class="grid gap-4" [formGroup]="form" (submit)="submit(form.getRawValue())">
+      <div class="input-field">
+        <input type="text" name="name" formControlName="displayName" id="name" class="peer" placeholder=" " />
+        <label for="name" class="peer-focus:text-primary peer-focus:top-1 peer-focus:left-2.5 peer-focus:scale-75 peer-focus:-translate-y-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+          <span>Full name</span>
+        </label>
       </div>
+
+      <div class="input-field">
+        <input type="email" name="email" formControlName="email" id="email" class="peer" placeholder=" " />
+        <label for="email" class="peer-focus:text-primary peer-focus:top-1 peer-focus:left-2.5 peer-focus:scale-75 peer-focus:-translate-y-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+          <span>Email address</span>
+        </label>
+      </div>
+      
+      <div class="input-field">
+        <input type="password" name="password" formControlName="password" id="password" class="peer" placeholder=" " />
+        <label for="password" class="peer-focus:text-primary peer-focus:top-1 peer-focus:left-2.5 peer-focus:scale-75 peer-focus:-translate-y-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+          <span>Password</span>
+        </label>
+      </div>
+
+      <p class="text-right text-sm mb-2">
+        <a class="text-primary hover:underline cursor-pointer" routerLink="/reset-password">Forget password?</a>
+      </p>
+    
+      <button class="btn-primary" type="submit" [disabled]="form.invalid">Create my account</button>
+
+      <p class="text-center text-sm">Already have an account? <a class="text-primary hover:underline cursor-pointer" routerLink="/login">Login instead</a></p>
+    </form>
+
+    <div class="text-slate-600 text-sm grid grid-cols-[1fr_auto_1fr] items-center gap-2">
+      <span class="h-fit border-[1px] border-slate-200"></span>
+      <span>OR</span>
+      <span class="h-fit border-[1px] border-slate-200"></span>
     </div>
-
+    
+    <app-login-with-provider (error)="error.set($event)" />
   </div>
-
 </section>

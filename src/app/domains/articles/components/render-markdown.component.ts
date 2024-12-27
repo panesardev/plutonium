@@ -5,16 +5,18 @@ import '../../../../../node_modules/prismjs/prism.js';
 import '../../../../../node_modules/prismjs/components/prism-typescript.min.js';
 
 @Component({
-    selector: 'app-render-markdown',
-    providers: [provideMarkdown()],
-    imports: [
-        MarkdownComponent,
-    ],
-    template: `
+  selector: 'app-render-markdown',
+  providers: [
+    provideMarkdown(),
+  ],
+  imports: [
+    MarkdownComponent,
+  ],
+  template: `
     <markdown class="markdown" [data]="markdown()"/>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RenderMarkdownComponent {
+export default class RenderMarkdownComponent {
   markdown = input.required<string>();
 }

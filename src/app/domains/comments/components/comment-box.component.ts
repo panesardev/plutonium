@@ -7,19 +7,19 @@ import { AuthService } from '@app/auth/auth.service';
 import { firstValueFrom, switchMap } from 'rxjs';
 import { CommentFormValue } from '../comment.interface';
 import { CommentService } from '../comment.service';
-import { CommentFormComponent } from './comment-form.component';
-import { CommentListComponent } from './comment-list.component';
+import CommentFormComponent from './comment-form.component';
+import CommentListComponent from './comment-list.component';
 
 @Component({
-    selector: 'app-comment-box',
-    imports: [
-        ReactiveFormsModule,
-        CommentListComponent,
-        CommentFormComponent,
-        RouterLink,
-        AsyncPipe,
-    ],
-    template: `
+  selector: 'app-comment-box',
+  imports: [
+    ReactiveFormsModule,
+    CommentListComponent,
+    CommentFormComponent,
+    RouterLink,
+    AsyncPipe,
+  ],
+  template: `
     <div class="card mb-4">
       <h1 class="font-bold text-2xl text-center text-primary mb-8">Comments</h1>
 
@@ -42,9 +42,9 @@ import { CommentListComponent } from './comment-list.component';
 
     <app-comment-list [comments]="comments$ | async" />
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommentBoxComponent {
+export default class CommentBoxComponent {
   private auth = inject(AuthService);
   private commentService = inject(CommentService);
 

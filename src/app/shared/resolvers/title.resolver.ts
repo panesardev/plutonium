@@ -1,6 +1,6 @@
 import { ActivatedRouteSnapshot, ResolveFn } from "@angular/router";
 
-export const TitleResolver: ResolveFn<string> = (route: ActivatedRouteSnapshot) => {
+export const titleResolver: ResolveFn<string> = (route: ActivatedRouteSnapshot) => {
   const path = route.routeConfig.path;
   let title = 'Home';
 

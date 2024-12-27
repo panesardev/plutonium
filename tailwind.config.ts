@@ -7,10 +7,9 @@ module.exports = {
     extend: {
       colors: {
         'primary': '#156b75',
-        'secondary-1': '#e1f9f8',
-        'secondary-2': '#cff7f3',
-        'surface': '#ffffff',
-        'text': '#1e293b',
+        'primary-hover': '#15646c',
+        'secondary': '#e1f9f8',
+        'secondary-hover': '#cff7f3',
       },
     },
   },

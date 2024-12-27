@@ -2,29 +2,32 @@
   <section>
     <article itemscope itemtype="http://schema.org/Article">
       <meta itemprop="datePublished" [content]="article.createdAt">
-      <meta itemprop="image" [content]="article.coverUrl">
+      <meta itemprop="image" content="/articles/{{ article.slug }}/img/cover.png">
       <meta itemprop="publisher" content="plutoniumx.vercel.app">
+
       <meta name="title" [content]="article.title">
       <meta name="description" [content]="article.description">
       <meta name="author-name" [content]="article.authorName">
       <meta name="author-image" [content]="article.authorImage">
       <meta name="author-link" [content]="article.authorLink">
+
       <meta property="og:type" content="website">
-      <meta property="og:url" [content]="article.url">
+      <meta property="og:url" content="{{ BASE_URL }}/articles/{{ article.slug }}">
       <meta property="og:title" [content]="article.title">
       <meta property="og:description" [content]="article.description">
-      <meta property="og:image" [content]="article.coverUrl">
+      <meta property="og:image" content="/articles/{{ article.slug }}/img/cover.png">
+      
       <meta name="twitter:card" content="summary">
       <meta name="twitter:title" [content]="article.title">
       <meta name="twitter:text:title" [content]="article.title">
       <meta name="twitter:description" [content]="article.description">
-      <meta name="twitter:image" [content]="article.coverUrl">
-      <meta name="twitter:url" [content]="article.url">
+      <meta name="twitter:image" content="/articles/{{ article.slug }}/img/cover.png">
+      <meta name="twitter:url" content="{{ BASE_URL }}/articles/{{ article.slug }}">
       
       <div class="mb-12">
         <h1 class="heading mb-8 md:mb-12 max-w-5xl mx-auto">{{ article.title }}</h1>
 
-        <div class="bg-surface rounded-full custom-shadow w-fit mx-auto p-3">
+        <div class="bg-white rounded-full secondary-shadow w-fit mx-auto p-3">
           <app-hashtag-list class="text-xl" [hashtags]="article.hashtags"/>
         </div>
         
@@ -35,7 +38,7 @@
 
       <div class="max-w-4xl mx-auto mb-10">
         <div>
-          <img class="mb-10 rounded-xl" ngSrc="/articles/{{ article.slug }}/img/cover.png" [fallback]="'/articles/'+article.slug+'/img/cover.webp'" priority [alt]="article.title" width="1200" height="675">
+          <img class="mb-10 rounded-xl" ngSrc="/articles/{{ article.slug }}/img/cover.png" [error]="'/articles/'+article.slug+'/img/cover.webp'" priority [alt]="article.title" width="1200" height="675">
         </div>
         @defer {
           <app-save-button [slug]="article.slug"/>

@@ -1,43 +1,38 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { Credentials } from '@app/auth/auth.interface';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '@app/auth/auth.service';
-import { SocialLoginComponent } from '@app/auth/components/social-login.component';
+import { LoginWithProviderComponent } from '@app/auth/components/login-with-provider.component';
+
+export interface CreateAccountFormValue {
+  displayName: string;
+  email: string;
+  password: string;
+}
 
 @Component({
-    selector: 'create-account',
-    imports: [
-        RouterLink,
-        ReactiveFormsModule,
-        SocialLoginComponent,
-    ],
-    templateUrl: './create-account.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-create-account',
+  imports: [
+    RouterLink,
+    ReactiveFormsModule,
+    LoginWithProviderComponent,
+  ],
+  templateUrl: './create-account.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class CreateAccountComponent {
   private auth = inject(AuthService);
-  private router = inject(Router);
-  
+
   form = new FormGroup({
-    displayName: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    displayName: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
   });
 
   error = signal<string>(null);
-
-  async submit() {
-    if (this.form.valid) {
-      const credentials: Credentials = {
-        displayName: this.form.value.displayName,
-        email: this.form.value.email,
-        password: this.form.value.password,
-      };
-
-      await this.auth.createAccount(credentials)
-        .then(() => this.router.navigate(['/dashboard']))
-        .catch(e => this.error.set(e.message));
-    }
+  
+  async submit(value: CreateAccountFormValue) {
+    await this.auth.createAccount(value).catch(e => this.error.set(e.message));
   }
+
 }

@@ -1,17 +1,17 @@
 import { Routes } from "@angular/router";
-import { ArticleTitle, FindArticleBySlug, GetArticles } from "./article.resolver";
+import { articleTitle, findArticleBySlug, getArticles } from "./article.resolver";
 
 export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./pages/articles/articles.component'),
-    resolve: { articles: GetArticles },
+    resolve: { articles: getArticles },
   },
   {
     path: ':slug',
     loadComponent: () => import('./pages/articles/article/article.component'),
-    title: ArticleTitle,
-    resolve: { article: FindArticleBySlug },
+    title: articleTitle,
+    resolve: { article: findArticleBySlug },
   }
 ];
 

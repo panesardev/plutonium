@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { User } from '@app/auth/auth.interface';
-import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
+import { ImageErrorDirective } from '@app/shared/directives/image-error.directive';
 
 @Component({
-    selector: 'app-profile-card',
-    imports: [
-        FallbackImageDirective,
-    ],
-    template: `
+  selector: 'app-profile-card',
+  imports: [
+    ImageErrorDirective,
+  ],
+  template: `
     @if (user(); as user) {
       <div class="card grid md:grid-cols-[1fr_auto] gap-6 md:gap-4">
         <div>
           <div class="flex items-center gap-3 mb-6">
-            <img class="rounded-full w-8" [src]="user.photoURL" [alt]="user.displayName" fallback="/icons/user.png">
+            <img class="rounded-full w-8" [src]="user.photoURL" [alt]="user.displayName" error="/icons/user.png">
             <span class="text-primary font-heading text-2xl">{{ user.displayName }}</span>
           </div>
           <div class="grid gap-2">
@@ -43,7 +43,7 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
       </div>
     }
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileCardComponent {
   user = input.required<User>();
