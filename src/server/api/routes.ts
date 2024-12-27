@@ -8,7 +8,7 @@ router.get('/', async (request, response) => {
   const slugs = readdirSync('./dist/plutonium/browser/articles').filter(filename => filename !== 'index.html');
 
   const articles = await Promise.all([
-    ...slugs.map(slug => fetch(`/articles/${slug}/index.md`).then(res => res.json())),
+    ...slugs.map(slug => fetch(`/articles/${slug}/index.md`).then(res => res.text())),
   ]);
 
   response.json(articles);
