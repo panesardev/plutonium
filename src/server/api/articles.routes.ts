@@ -6,11 +6,11 @@ import { Article } from "@app/domains/articles/article.interface";
 const router = Router();
 
 router.get('/', (request, response) => {
-  const slugs = readdirSync('src/content/articles');
+  const slugs = readdirSync('./dist/plutonium/browser/articles').filter(filename => filename !== 'index.html');
 
   const articles: Article[] = slugs
     .map(slug => {
-      const markdown = readFileSync(`src/content/articles/${slug}/index.md`).toString();
+      const markdown = readFileSync(`./dist/plutonium/browser/articles/${slug}/index.md`).toString();
       const output = frontmatter<Article>(markdown);
 
       return {
@@ -27,14 +27,14 @@ router.get('/', (request, response) => {
 });
 
 router.get('/slugs', (request, response) => {
-  const slugs = readdirSync('src/content/articles');
+  const slugs = readdirSync('./dist/plutonium/browser/articles').filter(filename => filename !== 'index.html');
   response.json(slugs);
 });
 
 router.get('/:slug', (request, response) => {
   try {
     const slug = request.params.slug;
-    const markdown = readFileSync(`src/content/articles/${slug}/index.md`).toString();
+    const markdown = readFileSync(`./dist/plutonium/browser/articles/${slug}/index.md`).toString();
     const output = frontmatter<Article>(markdown);
   
     const article: Article = {
