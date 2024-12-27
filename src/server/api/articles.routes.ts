@@ -1,13 +1,12 @@
-import { Router } from "express";
-import { readdirSync, readFileSync } from 'fs';
-import frontmatter from 'front-matter';
-import { Article } from "@app/domains/articles/article.interface";
 import { BASE_URL } from "@app/app.constants";
+import { Article } from "@app/domains/articles/article.interface";
+import { Router } from "express";
+import frontmatter from 'front-matter';
 
 const router = Router();
 
 router.get('/', async (request, response) => {
-  const slugs = readdirSync('./dist/plutonium/browser/articles').filter(filename => filename !== 'index.html');
+  const slugs = await fetch(`${BASE_URL}/articles/slugs.txt`).then(res => res.text()).then(slugs => slugs.split(''));
 
   const markdowns = await Promise.all([
     ...slugs.map(slug => fetch(`${BASE_URL}/articles/${slug}/index.md`).then(res => res.text()))
@@ -29,8 +28,8 @@ router.get('/', async (request, response) => {
   response.json(articles);
 });
 
-router.get('/slugs', (request, response) => {
-  const slugs = readdirSync('./dist/plutonium/browser/articles').filter(filename => filename !== 'index.html');
+router.get('/slugs', async (request, response) => {
+  const slugs = await fetch(`${BASE_URL}/articles/slugs.txt`).then(res => res.text()).then(slugs => slugs.split(''));
   response.json(slugs);
 });
 
@@ -57,3 +56,4 @@ router.get('/:slug', async (request, response) => {
 });
 
 export { router as articlesRoutes };
+
