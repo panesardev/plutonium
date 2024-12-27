@@ -1,6 +1,8 @@
+import { isDevMode } from "@angular/core";
+
 export const BRAND = 'Plutonium';
 
-export const BASE_URL = 'https://plutoniumx.vercel.app';
+export const BASE_URL = isDevMode() ? 'http://localhost:4200' : 'https://plutoniumx.vercel.app';
 
 export const FIREBASE_CONFIG = { 
   apiKey: "AIzaSyAhtPk6Z8cs3-pODGzi06ntNstJJhUghWo",

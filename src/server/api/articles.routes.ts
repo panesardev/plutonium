@@ -2,17 +2,20 @@ import { Router } from "express";
 import { readdirSync, readFileSync } from 'fs';
 import frontmatter from 'front-matter';
 import { Article } from "@app/domains/articles/article.interface";
+import { BASE_URL } from "@app/app.constants";
 
 const router = Router();
 
-router.get('/', (request, response) => {
-  const slugs = readdirSync('./src/content/articles');
+router.get('/', async (request, response) => {
+  const slugs = readdirSync('./dist/plutonium/browser/articles').filter(filename => filename !== 'index.html');
 
-  const articles: Article[] = slugs
-    .map(slug => {
-      const markdown = readFileSync(`./src/content/articles/${slug}/index.md`).toString();
+  const markdowns = await Promise.all([
+    ...slugs.map(slug => fetch(`${BASE_URL}/articles/${slug}/index.md`).then(res => res.text()))
+  ]);
+
+  const articles: Article[] = markdowns
+    .map(markdown => {
       const output = frontmatter<Article>(markdown);
-
       return {
         ...output.attributes,
         markdown: output.body,
@@ -27,14 +30,14 @@ router.get('/', (request, response) => {
 });
 
 router.get('/slugs', (request, response) => {
-  const slugs = readdirSync('./src/content/articles');
+  const slugs = readdirSync('./dist/plutonium/browser/articles').filter(filename => filename !== 'index.html');
   response.json(slugs);
 });
 
-router.get('/:slug', (request, response) => {
+router.get('/:slug', async (request, response) => {
   try {
     const slug = request.params.slug;
-    const markdown = readFileSync(`./src/content/articles/${slug}/index.md`).toString();
+    const markdown = await fetch(`${BASE_URL}/articles/${slug}/index.md`).then(res => res.text());
     const output = frontmatter<Article>(markdown);
   
     const article: Article = {
