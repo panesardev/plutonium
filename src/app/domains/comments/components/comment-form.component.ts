@@ -1,7 +1,11 @@
 import { ChangeDetectionStrategy, Component, output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { emptyValidator } from '../comment.utils';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { CommentFormValue } from '../comment.interface';
+
+const emptyValidator: ValidatorFn = (control: AbstractControl) => {
+  const isEmpty = /^\s*$/.test(control.value);
+  return isEmpty ? control.value : null;
+}
 
 @Component({
   selector: 'app-comment-form',
@@ -25,7 +29,7 @@ export class CommentFormComponent {
   onSubmit = output<CommentFormValue>();
 
   form = new FormGroup({
-    text: new FormControl('', [Validators.required, emptyValidator()]),
+    text: new FormControl('', [Validators.required, emptyValidator]),
   });
   
   submit() {

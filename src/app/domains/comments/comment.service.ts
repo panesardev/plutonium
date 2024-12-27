@@ -13,7 +13,8 @@ export class CommentService {
     return collectionData(q, { idField: 'id' }) as Observable<Comment[]>;
   }
 
-  async create(comment: Comment): Promise<void> {
+  async create(comment: Partial<Comment>): Promise<void> {
+    comment.created = new Date().toString();
     await addDoc(this.ref, comment);
   }
 }

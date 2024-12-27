@@ -1,15 +1,14 @@
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { toObservable } from '@angular/core/rxjs-interop';
 import { AuthService } from '@app/auth/auth.service';
+import { firstValueFrom, switchMap } from 'rxjs';
 import { CommentFormValue } from '../comment.interface';
 import { CommentService } from '../comment.service';
-import { createComment } from '../comment.utils';
 import { CommentFormComponent } from './comment-form.component';
 import { CommentListComponent } from './comment-list.component';
-import { AsyncPipe } from '@angular/common';
-import { firstValueFrom, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-comment-box',
@@ -62,15 +61,13 @@ export class CommentBoxComponent {
   async addComment(value: CommentFormValue) {
     const user = await firstValueFrom(this.user$);
 
-    const comment = createComment({ 
+    await this.commentService.create({ 
       slug: this.slug(),
       displayName: user.displayName,
       photoURL: user.photoURL,
       text: value.text,
-    });
-
-    await this.commentService.create(comment)
-      .catch(e => this.error.set(e.message));
+    })
+    .catch(e => this.error.set(e.message));
   }
 }
 

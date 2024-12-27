@@ -1,5 +1,3 @@
-import type { FormControl } from "@angular/forms";
-
 export interface Comment {
   id?: string;
   text: string;
