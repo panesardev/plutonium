@@ -6,7 +6,7 @@ import frontmatter from 'front-matter';
 const router = Router();
 
 router.get('/', async (request, response) => {
-  const slugs = await fetch(`${BASE_URL}/articles/slugs.txt`).then(res => res.text()).then(slugs => slugs.split(''));
+  const slugs = await fetch(`${BASE_URL}/articles/slugs.txt`).then(res => res.text()).then(slugs => slugs.split('\n'));
 
   const markdowns = await Promise.all([
     ...slugs.map(slug => fetch(`${BASE_URL}/articles/${slug}/index.md`).then(res => res.text()))
