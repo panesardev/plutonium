@@ -1,12 +1,13 @@
 import { Router } from "express";
 import { articlesRoutes } from "./articles.routes";
+import { readdirSync } from "fs";
 
 const router = Router();
 
 router.get('/', (request, response) => {
-  response.json({
-    message: 'hello world',
-  });
+  const files = readdirSync('./');
+
+  response.json(files);
 });
 
 router.use('/articles', articlesRoutes);
