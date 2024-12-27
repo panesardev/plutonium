@@ -7,13 +7,11 @@ import RenderMarkdownComponent from '@app/domains/articles/components/render-mar
 import SaveButtonComponent from '@app/domains/articles/components/save-button.component';
 import CommentBoxComponent from '@app/domains/comments/components/comment-box.component';
 import HashtagListComponent from '@app/domains/hashtags/components/hashtag-list.component';
-import { ImageErrorDirective } from '@app/shared/directives/image-error.directive';
 
 @Component({
   selector: 'app-article',
   imports: [
     NgOptimizedImage,
-    ImageErrorDirective,
     HashtagListComponent,
     CommentBoxComponent,
     ArticleHeaderComponent,

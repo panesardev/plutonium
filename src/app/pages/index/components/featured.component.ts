@@ -16,7 +16,7 @@ import { ImageErrorDirective } from '@app/shared/directives/image-error.directiv
   template: `
     @if (article$ | async; as article) {
       <div class="grid md:grid-cols-[2fr_3fr] gap-6 md:gap-8 cursor-pointer" routerLink="/articles/{{ article.slug }}">
-        <img ngSrc="/articles/{{ article.slug }}/img/cover.webp" class="rounded-xl" [alt]="article.title" width="691" height="388" priority>
+        <img ngSrc="/content/articles/{{ article.slug }}/img/cover.webp" class="rounded-xl" [alt]="article.title" width="691" height="388" priority>
         <div>
           <h1 class="font-bold text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-br from-primary to-teal-500 mb-2 pb-2">{{ article.title }}</h1>
           <p class="text-lg mb-2">{{ article.description }}</p>

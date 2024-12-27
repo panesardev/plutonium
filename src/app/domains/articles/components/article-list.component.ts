@@ -3,14 +3,12 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import HashtagListComponent from '@app/domains/hashtags/components/hashtag-list.component';
 import { Article } from '../article.interface';
-import { ImageErrorDirective } from '@app/shared/directives/image-error.directive';
 
 @Component({
   selector: 'app-article-list',
   imports: [
     RouterLink,
     NgOptimizedImage,
-    ImageErrorDirective,    
     HashtagListComponent,
   ],
   template: `
@@ -18,7 +16,7 @@ import { ImageErrorDirective } from '@app/shared/directives/image-error.directiv
       @for (article of articles(); track article.slug) {
         <div class="bg-white rounded-xl secondary-shadow h-fit">
           <a routerLink="/articles/{{ article.slug }}">
-            <img ngSrc="/articles/{{ article.slug }}/img/cover.webp" error="/articles/{{ article.slug }}/img/cover.png" class="rounded-xl" [alt]="article.title" priority="{{ $index === 0 ? true : false }}" width="384" height="216">
+            <img ngSrc="content/articles/{{ article.slug }}/img/cover.png" class="rounded-xl" [alt]="article.title" priority="{{ $index === 0 ? true : false }}" width="384" height="216">
           </a>
           <div class="pt-4 px-6 pb-8">
             <h1 class="text-primary text-xl font-bold mb-2">{{ article.title }}</h1>

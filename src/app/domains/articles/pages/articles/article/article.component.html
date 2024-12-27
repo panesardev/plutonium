@@ -38,7 +38,7 @@
 
       <div class="max-w-4xl mx-auto mb-10">
         <div>
-          <img class="mb-10 rounded-xl" ngSrc="/articles/{{ article.slug }}/img/cover.png" [error]="'/articles/'+article.slug+'/img/cover.webp'" priority [alt]="article.title" width="1200" height="675">
+          <img class="mb-10 rounded-xl" ngSrc="/content/articles/{{ article.slug }}/img/cover.png" priority [alt]="article.title" width="1200" height="675">
         </div>
         @defer {
           <app-save-button [slug]="article.slug"/>
