@@ -4,10 +4,14 @@ import { readdirSync } from "fs";
 
 const router = Router();
 
-router.get('/', (request, response) => {
-  const files = readdirSync('./dist/plutonium/browser/articles').filter(filename => filename !== 'index.html');
+router.get('/', async (request, response) => {
+  const slugs = readdirSync('./dist/plutonium/browser/articles').filter(filename => filename !== 'index.html');
 
-  response.json(files);
+  const articles = await Promise.all([
+    ...slugs.map(slug => fetch(`/articles/${slug}/index.md`).then(res => res.json())),
+  ]);
+
+  response.json(articles);
 });
 
 router.use('/articles', articlesRoutes);
