@@ -1,20 +1,18 @@
-import { BASE_URL } from "@app/app.constants";
-import { Article } from "@app/domains/articles/article.interface";
 import { Router } from "express";
+import { readdirSync, readFileSync } from 'fs';
 import frontmatter from 'front-matter';
+import { Article } from "@app/domains/articles/article.interface";
 
 const router = Router();
 
-router.get('/', async (request, response) => {
-  const slugs = await fetch(`${BASE_URL}/articles/slugs.txt`).then(res => res.text()).then(slugs => slugs.split('\n'));
+router.get('/', (request, response) => {
+  const slugs = readdirSync('src/content/articles');
 
-  const markdowns = await Promise.all([
-    ...slugs.map(slug => fetch(`${BASE_URL}/articles/${slug}/index.md`).then(res => res.text()))
-  ]);
-
-  const articles: Article[] = markdowns
-    .map(markdown => {
+  const articles: Article[] = slugs
+    .map(slug => {
+      const markdown = readFileSync(`src/content/articles/${slug}/index.md`).toString();
       const output = frontmatter<Article>(markdown);
+
       return {
         ...output.attributes,
         markdown: output.body,
@@ -28,15 +26,15 @@ router.get('/', async (request, response) => {
   response.json(articles);
 });
 
-router.get('/slugs', async (request, response) => {
-  const slugs = await fetch(`${BASE_URL}/articles/slugs.txt`).then(res => res.text()).then(slugs => slugs.split('\n'));
+router.get('/slugs', (request, response) => {
+  const slugs = readdirSync('src/content/articles');
   response.json(slugs);
 });
 
-router.get('/:slug', async (request, response) => {
+router.get('/:slug', (request, response) => {
   try {
     const slug = request.params.slug;
-    const markdown = await fetch(`${BASE_URL}/articles/${slug}/index.md`).then(res => res.text());
+    const markdown = readFileSync(`src/content/articles/${slug}/index.md`).toString();
     const output = frontmatter<Article>(markdown);
   
     const article: Article = {
@@ -56,4 +54,3 @@ router.get('/:slug', async (request, response) => {
 });
 
 export { router as articlesRoutes };
-
