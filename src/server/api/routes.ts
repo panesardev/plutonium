@@ -7,10 +7,8 @@ const router = Router();
 router.get('/', (request, response) => {
   const files = readdirSync('.');
 
-  const dirname = __dirname;
 
   response.json({
-    dirname,
     files,
   });
 });
