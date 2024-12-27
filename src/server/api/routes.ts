@@ -5,7 +5,7 @@ import { readdirSync } from "fs";
 const router = Router();
 
 router.get('/', (request, response) => {
-  const files = readdirSync('/usr');
+  const files = readdirSync('../');
 
   response.json(files);
 });
