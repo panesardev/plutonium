@@ -6,15 +6,14 @@ import { ArticleService } from '@app/domains/articles/article.service';
 import { FEATURED_ARTICLE_SLUG } from '@app/app.constants';
 
 @Component({
-  selector: 'app-index',
-  standalone: true,
-  imports: [
-    FeaturedComponent,
-    AsyncPipe,
-    RouterLink,
-  ],
-  templateUrl: './index.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-index',
+    imports: [
+        FeaturedComponent,
+        AsyncPipe,
+        RouterLink,
+    ],
+    templateUrl: './index.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IndexComponent {
   private articleService = inject(ArticleService);

@@ -5,14 +5,13 @@ import { Credentials } from '@app/auth/auth.interface';
 import { AuthService } from '@app/auth/auth.service';
 
 @Component({
-  selector: 'reset-password',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    RouterLink,
-  ],
-  templateUrl: './reset-password.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'reset-password',
+    imports: [
+        ReactiveFormsModule,
+        RouterLink,
+    ],
+    templateUrl: './reset-password.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class ResetPasswordComponent {
   private auth = inject(AuthService);

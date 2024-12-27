@@ -5,15 +5,14 @@ import { ModalComponent } from './layout/modal/modal.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    NavbarComponent,
-    FooterComponent,
-    ModalComponent,
-  ],
-  template: `
+    selector: 'app-root',
+    imports: [
+        RouterOutlet,
+        NavbarComponent,
+        FooterComponent,
+        ModalComponent,
+    ],
+    template: `
     <div class="scroll-watcher"></div>
 
     <div class="fixed top-0 right-0 left-0 h-[110vh] z-[-10] bg-gradient-to-b from-transparent to-secondary-2 from-10%"></div>
@@ -30,6 +29,6 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     @defer {
       <app-modal />
     }
-  `,
+  `
 })
 export class AppComponent {}

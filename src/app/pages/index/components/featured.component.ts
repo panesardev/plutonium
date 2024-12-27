@@ -5,14 +5,13 @@ import { Article } from '@app/domains/articles/article.interface';
 import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
 
 @Component({
-  selector: 'app-featured',
-  standalone: true,
-  imports: [
-    RouterLink,
-    NgOptimizedImage,
-    FallbackImageDirective,
-  ],
-  template: `
+    selector: 'app-featured',
+    imports: [
+        RouterLink,
+        NgOptimizedImage,
+        FallbackImageDirective,
+    ],
+    template: `
     <div class="grid md:grid-cols-[2fr_3fr] gap-6 md:gap-8 cursor-pointer" routerLink="/articles/{{ article().slug }}">
       <img ngSrc="/articles/{{ article().slug }}/img/cover.webp" class="rounded-xl" [alt]="article().title" width="691" height="388" priority>
       <div>
@@ -25,7 +24,7 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
       </div>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FeaturedComponent {
   article = input.required<Article>();

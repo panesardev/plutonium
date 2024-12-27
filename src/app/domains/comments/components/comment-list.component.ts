@@ -3,12 +3,11 @@ import { Comment } from '../comment.interface';
 import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
 
 @Component({
-  selector: 'app-comment-list',
-  standalone: true,
-  imports: [
-    FallbackImageDirective,
-  ],
-  template: `
+    selector: 'app-comment-list',
+    imports: [
+        FallbackImageDirective,
+    ],
+    template: `
     <div class="grid gap-4">
       @for (comment of comments(); track comment.id) {
         <div class="card grid grid-cols-[2rem_1fr] gap-4 md:gap-6 p-4 md:p-6">
@@ -29,7 +28,7 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
       }
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommentListComponent {
   comments = input.required<Comment[]>();

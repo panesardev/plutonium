@@ -6,13 +6,12 @@ import { ModalService } from '@app/layout/modal/modal.service';
 import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
 
 @Component({
-  selector: 'app-logout-modal',
-  standalone: true,
-  imports: [
-    AsyncPipe,
-    FallbackImageDirective,
-  ],
-  template: `
+    selector: 'app-logout-modal',
+    imports: [
+        AsyncPipe,
+        FallbackImageDirective,
+    ],
+    template: `
     <div class="bg-white rounded-xl max-w-sm mx-auto p-6 pb-8 md:p-8">
       <div class="flex justify-between items-center gap-6 mb-6">
         <h1 class="text-primary font-bold text-xl">Are you sure?</h1>
@@ -33,7 +32,7 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
       <button class="btn-danger w-full" (click)="logout()">Logout</button>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LogoutModalComponent {
   private auth = inject(AuthService);

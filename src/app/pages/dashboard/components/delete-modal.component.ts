@@ -8,14 +8,13 @@ import { ModalService } from '@app/layout/modal/modal.service';
 import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
 
 @Component({
-  selector: 'app-delete-modal',
-  standalone: true,
-  imports: [
-    AsyncPipe,
-    FallbackImageDirective,
-    ReactiveFormsModule,
-  ],
-  template: `
+    selector: 'app-delete-modal',
+    imports: [
+        AsyncPipe,
+        FallbackImageDirective,
+        ReactiveFormsModule,
+    ],
+    template: `
     <div class="bg-white rounded-xl max-w-sm mx-auto p-6 pb-8 md:p-8">
       <div class="flex justify-between items-center gap-6 mb-6">
         <h1 class="text-primary font-bold text-xl">Are you sure?</h1>
@@ -40,7 +39,7 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
       <button class="btn-danger w-full" (click)="deleteAccount()">Delete account</button>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DeleteModalComponent {
   private auth = inject(AuthService);

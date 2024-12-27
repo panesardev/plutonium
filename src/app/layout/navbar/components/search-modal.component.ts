@@ -7,14 +7,13 @@ import { ModalService } from '@app/layout/modal/modal.service';
 import { distinctUntilChanged, map, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-search-modal',
-  standalone: true,
-  imports: [
-    RouterLink,
-    AsyncPipe,
-    ReactiveFormsModule,
-  ],
-  template: `
+    selector: 'app-search-modal',
+    imports: [
+        RouterLink,
+        AsyncPipe,
+        ReactiveFormsModule,
+    ],
+    template: `
     <div class="bg-white rounded-xl max-w-2xl mx-auto p-6 pb-8 md:p-8">
       <div class="flex justify-between items-center gap-6 mb-6">
         <h1 class="text-primary font-bold text-xl">Search articles</h1>
@@ -47,7 +46,7 @@ import { distinctUntilChanged, map, switchMap } from 'rxjs';
       </div>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchModalComponent {
   private articleService = inject(ArticleService);

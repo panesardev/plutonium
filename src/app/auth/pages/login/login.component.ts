@@ -6,15 +6,14 @@ import { AuthService } from '@app/auth/auth.service';
 import { SocialLoginComponent } from '@app/auth/components/social-login.component';
 
 @Component({
-  selector: 'login',
-  standalone: true,
-  imports: [
-    SocialLoginComponent,
-    ReactiveFormsModule,
-    RouterLink,
-  ],
-  templateUrl: './login.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'login',
+    imports: [
+        SocialLoginComponent,
+        ReactiveFormsModule,
+        RouterLink,
+    ],
+    templateUrl: './login.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class LoginComponent {
   private auth = inject(AuthService);

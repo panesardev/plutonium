@@ -3,13 +3,12 @@ import { ArticleListComponent } from '@app/domains/articles/components/article-l
 import { Article } from '@app/domains/articles/article.interface';
 
 @Component({
-  selector: 'app-hashtag',
-  standalone: true,
-  imports: [
-    ArticleListComponent,
-  ],
-  templateUrl: './hashtag.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-hashtag',
+    imports: [
+        ArticleListComponent,
+    ],
+    templateUrl: './hashtag.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class HashtagComponent {
   hashtag = input.required<string>();

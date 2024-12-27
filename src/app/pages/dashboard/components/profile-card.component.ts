@@ -3,12 +3,11 @@ import { User } from '@app/auth/auth.interface';
 import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
 
 @Component({
-  selector: 'app-profile-card',
-  standalone: true,
-  imports: [
-    FallbackImageDirective,
-  ],
-  template: `
+    selector: 'app-profile-card',
+    imports: [
+        FallbackImageDirective,
+    ],
+    template: `
     @if (user(); as user) {
       <div class="card grid md:grid-cols-[1fr_auto] gap-6 md:gap-4">
         <div>
@@ -44,7 +43,7 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
       </div>
     }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileCardComponent {
   user = input.required<User>();

@@ -9,16 +9,15 @@ import { startWith, switchMap } from 'rxjs';
 import { ProfileCardComponent } from './components/profile-card.component';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [
-    AsyncPipe,
-    RouterLink,
-    ProfileCardComponent,
-    ArticleListComponent,
-  ],
-  templateUrl: './dashboard.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-dashboard',
+    imports: [
+        AsyncPipe,
+        RouterLink,
+        ProfileCardComponent,
+        ArticleListComponent,
+    ],
+    templateUrl: './dashboard.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class DashboardComponent {
   private auth = inject(AuthService);

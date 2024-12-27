@@ -9,19 +9,18 @@ import { HashtagListComponent } from '@app/domains/hashtags/components/hashtag-l
 import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
 
 @Component({
-  selector: 'app-article',
-  standalone: true,
-  imports: [
-    NgOptimizedImage,
-    FallbackImageDirective,
-    HashtagListComponent,
-    CommentBoxComponent,
-    ArticleHeaderComponent,
-    RenderMarkdownComponent,
-    SaveButtonComponent,
-  ],
-  templateUrl: './article.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-article',
+    imports: [
+        NgOptimizedImage,
+        FallbackImageDirective,
+        HashtagListComponent,
+        CommentBoxComponent,
+        ArticleHeaderComponent,
+        RenderMarkdownComponent,
+        SaveButtonComponent,
+    ],
+    templateUrl: './article.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class ArticleComponent {
   article = input.required<Article>();

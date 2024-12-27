@@ -5,14 +5,13 @@ import { AuthService } from '@app/auth/auth.service';
 import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
 
 @Component({
-  selector: 'app-user-button',
-  standalone: true,
-  imports: [
-    AsyncPipe,
-    FallbackImageDirective,
-    RouterLink,
-  ],
-  template: `
+    selector: 'app-user-button',
+    imports: [
+        AsyncPipe,
+        FallbackImageDirective,
+        RouterLink,
+    ],
+    template: `
     @if (user$ | async; as user) {
       <div class="flex items-center gap-3" routerLink="/dashboard">
         <button class="btn-primary w-full">Dashboard</button>
@@ -23,7 +22,7 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
       <button class="btn-primary w-full" routerLink="/login">Login</button>
     }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserButtonComponent {
   private auth = inject(AuthService);

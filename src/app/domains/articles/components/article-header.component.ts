@@ -3,10 +3,9 @@ import { Article } from '../article.interface';
 import { FallbackImageDirective } from '@app/shared/directives/fallback-image.directive';
 
 @Component({
-  selector: 'app-article-header',
-  standalone: true,
-  imports: [FallbackImageDirective],
-  template: `
+    selector: 'app-article-header',
+    imports: [FallbackImageDirective],
+    template: `
     <div class="flex flex-col md:flex-row md:items-center justify-center gap-4 md:gap-5">
       <div class="flex items-center gap-3 md:gap-4">
         <img [src]="article().authorImage" class="w-8 rounded-full" fallback="/icons/user.png" [alt]="article().authorName">
@@ -20,7 +19,7 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
       </div>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleHeaderComponent {
   article = input.required<Article>();

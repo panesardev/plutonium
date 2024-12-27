@@ -6,15 +6,14 @@ import { FallbackImageDirective } from '@app/shared/directives/fallback-image.di
 import { Article } from '../article.interface';
 
 @Component({
-  selector: 'app-article-list',
-  standalone: true,
-  imports: [
-    RouterLink,
-    NgOptimizedImage,
-    FallbackImageDirective,
-    HashtagListComponent,
-  ],
-  template: `
+    selector: 'app-article-list',
+    imports: [
+        RouterLink,
+        NgOptimizedImage,
+        FallbackImageDirective,
+        HashtagListComponent,
+    ],
+    template: `
     <div class="grid grid-cols-[repeat(auto-fit,minmax(280px,350px))] justify-center gap-6 md:gap-8 lg:gap-10">
       @for (article of articles(); track article.slug) {
         <div class="bg-surface rounded-xl custom-shadow h-fit">
@@ -33,7 +32,7 @@ import { Article } from '../article.interface';
       }
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleListComponent {
   articles = input.required<Article[]>();
