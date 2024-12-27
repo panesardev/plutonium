@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth, AuthProvider, authState, createUserWithEmailAndPassword, getAdditionalUserInfo, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from '@angular/fire/auth';
+import { Auth, User as FirebaseUser, AuthProvider, authState, createUserWithEmailAndPassword, getAdditionalUserInfo, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from '@angular/fire/auth';
 import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { map, of, switchMap } from 'rxjs';
+import { map, Observable, of, switchMap } from 'rxjs';
 import { AdditionalUserData, User } from './auth.interface';
 import { createUserData } from './auth.utils';
 import { CreateAccountFormValue } from './pages/create-account/create-account.component';
@@ -15,15 +15,15 @@ export class AuthService {
   private firestore = inject(Firestore);
   private router = inject(Router);
 
-  isAuthenticated$ = authState(this.auth).pipe(
+  isAuthenticated$: Observable<boolean> = authState(this.auth).pipe(
     map(user => !!user),
   );
 
-  user$ = authState(this.auth).pipe(
-    switchMap(user => {
+  user$: Observable<User> = authState(this.auth).pipe(
+    switchMap((user: FirebaseUser) => {
       if (user) {
         return docData(doc(this.firestore, `users/${user.uid}`)).pipe(
-          map(data => ({ ...user, ...data }) as User),
+          map((data: AdditionalUserData) => ({ ...user, ...data }) as User),
         );
       }
       return of(null);
