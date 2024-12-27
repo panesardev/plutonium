@@ -5,7 +5,7 @@ import { readdirSync } from "fs";
 const router = Router();
 
 router.get('/', (request, response) => {
-  const files = readdirSync('./dist/plutonium/browser/articles').filter(filename => filename !== 'index.html');
+  const files = readdirSync('./dist/plutonium/browser/articles');
 
   response.json(files);
 });
