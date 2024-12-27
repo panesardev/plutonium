@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node dist/plutonium/server/server.mjs",
     "dev": "ng serve --host 0.0.0.0",
-    "build": "ng build"
+    "build": "BUILD_MODE=true ng build"
   },
   "private": true,
   "dependencies": {
