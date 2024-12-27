@@ -10,7 +10,10 @@
   ],
   "functions": {
     "api/index.mjs": {
-      "includeFiles": "dist/plutonium/**"
+      "includeFiles": [
+        "dist/plutonium/**",
+        "src/content"
+      ]
     }
   }
 }
