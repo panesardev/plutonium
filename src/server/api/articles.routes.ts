@@ -8,12 +8,12 @@ const isBuildTime = process.env['BUILD_MODE'] === 'true';
 const router = Router();
 
 router.get('/', (request, response) => {
-  const slugs = readdirSync('src/content/articles');
-
+  
   const isBuildTime = process.env['BUILD_MODE'] === 'true';
 
   console.log('BUILD_MODE', isBuildTime);
-  
+
+  const slugs = readdirSync('src/content/articles');
 
   const articles: Article[] = slugs
     .map(slug => {
