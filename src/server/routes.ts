@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { articlesRoutes } from "./articles.routes";
+import { articlesRoutes } from "./articles/article.routes";
 import { readdirSync } from "fs";
 
 const router = Router();

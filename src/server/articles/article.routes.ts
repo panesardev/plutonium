@@ -1,23 +1,16 @@
-import { Router } from "express";
-import { readdirSync, readFileSync } from 'fs';
-import frontmatter from 'front-matter';
 import { Article } from "@app/domains/articles/article.interface";
-
-const isBuildTime = process.env['BUILD_MODE'] === 'true';
+import { Router } from "express";
+import frontmatter from 'front-matter';
+import { getMarkdown, getSlugs } from "./article.util";
 
 const router = Router();
 
 router.get('/', (request, response) => {
-  
-  const isBuildTime = process.env['BUILD_MODE'] === 'true';
-
-  console.log('BUILD_MODE', isBuildTime);
-
-  const slugs = readdirSync('src/content/articles');
+  const slugs = getSlugs();
 
   const articles: Article[] = slugs
     .map(slug => {
-      const markdown = readFileSync(`src/content/articles/${slug}/index.md`).toString();
+      const markdown = getMarkdown(slug);
       const output = frontmatter<Article>(markdown);
 
       return {
@@ -34,14 +27,14 @@ router.get('/', (request, response) => {
 });
 
 router.get('/slugs', (request, response) => {
-  const slugs = readdirSync('src/content/articles');
+  const slugs = getSlugs();
   response.json(slugs);
 });
 
 router.get('/:slug', (request, response) => {
   try {
     const slug = request.params.slug;
-    const markdown = readFileSync(`src/content/articles/${slug}/index.md`).toString();
+    const markdown = getMarkdown(slug);
     const output = frontmatter<Article>(markdown);
   
     const article: Article = {
@@ -61,3 +54,4 @@ router.get('/:slug', (request, response) => {
 });
 
 export { router as articlesRoutes };
+
