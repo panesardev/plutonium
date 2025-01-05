@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { getArticle, getArticles, getSlugs } from "./article.util";
+import { FEATURED_ARTICLE_SLUG } from "@app/app.constants";
 
 const router = Router();
 
@@ -11,6 +12,17 @@ router.get('/', (request, response) => {
   catch (e) {
     console.error(e);
     response.json([]);
+  }
+});
+
+router.get('/featured', (request, response) => {
+  try {
+    const article = getArticle(FEATURED_ARTICLE_SLUG);
+    response.json(article);
+  } 
+  catch (e) {
+    console.error(e);
+    response.json(null);
   }
 });
 
