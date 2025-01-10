@@ -36,7 +36,10 @@
                 "glob": "**/*",
                 "input": "src/public"
               },
-              "src/content"
+              {
+                "glob": "**/*",
+                "input": "src/content"
+              }
             ],
             "styles": [
               "src/styles/index.scss"

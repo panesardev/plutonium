@@ -64,7 +64,7 @@
       @apply text-lg leading-8 mb-6;
     }
     img {
-      @apply rounded-xl;
+      @apply rounded-xl w-full border-4 border-white secondary-shadow;
     }
     pre {
       @apply relative overflow-auto text-sm md:text-base bg-white rounded-xl secondary-shadow mb-6 p-6 md:p-8;

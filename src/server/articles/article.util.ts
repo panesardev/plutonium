@@ -4,7 +4,7 @@ import { readdirSync, readFileSync } from "fs";
 
 export function getPath(): string {
   const local = process.env['NODE_ENV'] === 'development' || process.env['BUILD_MODE'] === 'true';
-  return local ? 'src/content/articles' : './dist/plutonium/browser/content/articles';
+  return local ? 'src/content/articles' : './dist/plutonium/browser/articles';
 }
 
 export function getSlugs(): string[] {
