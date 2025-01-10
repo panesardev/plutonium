@@ -9,11 +9,8 @@ export function getPath(): string {
 
 export function getSlugs(): string[] {
   const files = readdirSync(getPath());
-  return files.filter(file => file !== 'index.html');
-}
-
-export function getMarkdown(slug: string): string {
-  return readFileSync(`${getPath()}/${slug}/index.md`).toString();
+  // filter any files but keep folders
+  return files.filter(filename => !filename.includes('.'));
 }
 
 export function getArticles(): Article[] {
@@ -24,7 +21,7 @@ export function getArticles(): Article[] {
 }
 
 export function getArticle(slug: string): Article {
-  const markdown = getMarkdown(slug);
+  const markdown = readFileSync(`${getPath()}/${slug}/index.md`).toString();
   const output = frontmatter<Article>(markdown);
 
   const article: Article = {

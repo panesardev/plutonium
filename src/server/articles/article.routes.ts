@@ -1,6 +1,6 @@
+import { FEATURED_ARTICLE_SLUG } from "@app/app.constants";
 import { Router } from "express";
 import { getArticle, getArticles, getSlugs } from "./article.util";
-import { FEATURED_ARTICLE_SLUG } from "@app/app.constants";
 
 const router = Router();
 
