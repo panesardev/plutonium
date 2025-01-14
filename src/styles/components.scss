@@ -53,7 +53,7 @@
   }
 
   .background-overlay {
-    @apply fixed top-0 right-0 left-0 h-[110vh] z-[-10] bg-gradient-to-b from-transparent to-secondary-hover from-10%;
+    @apply fixed top-0 right-0 left-0 h-[110vh] z-[-10] bg-gradient-to-b from-transparent via-secondary to-secondary-hover from-10%;
   }
 
   .markdown {

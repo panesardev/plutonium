@@ -1,7 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { BRAND } from '@app/app.constants';
 import { AuthService } from '@app/auth/auth.service';
 import { ModalService } from '@app/layout/modal/modal.service';
@@ -32,9 +31,12 @@ import { ImageErrorDirective } from '@app/shared/directives/image-error.directiv
 
       <p class="mb-6">Type "{{ phrase }}" to permanently delete your account from {{ BRAND }}</p>
 
-      <fieldset class="mb-6">
-        <input class="{{ error() ? 'border-red-500' : '' }}" type="text" name="confirm" [formControl]="confirmControl">
-      </fieldset>
+      <div class="input-field mb-6">
+        <input type="text" name="text" [formControl]="confirmControl" id="text" class="peer" placeholder=" " autocomplete="off"/>
+        <label for="text" class="peer-focus:text-primary peer-focus:top-1 peer-focus:left-2.5 peer-focus:scale-75 peer-focus:-translate-y-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+          <span>Type phrase here</span>
+        </label>
+      </div>
 
       <button class="btn-danger w-full" (click)="deleteAccount()">Delete account</button>
     </div>
@@ -48,17 +50,17 @@ export class DeleteModalComponent {
   confirmControl = new FormControl('', Validators.required);
 
   user$ = this.auth.user$;
-  error = signal(false);
+  
+  error = signal<string>(null);
+
   BRAND = BRAND;
   phrase = 'Delete my account';
 
   async deleteAccount() {
     if (this.confirmControl.value === this.phrase) {
-      await this.auth.deleteAccount();
-      this.modal.close();
-    }
-    else {
-      this.error.set(true);
+      await this.auth.deleteAccount()
+        .then(() => this.modal.close())
+        .catch(e => this.error.set(e.message));
     }
   }
 }

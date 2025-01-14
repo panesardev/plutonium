@@ -16,7 +16,7 @@ import { Article } from '../article.interface';
       @for (article of articles(); track article.slug) {
         <div class="bg-white rounded-xl secondary-shadow h-fit">
           <a routerLink="/articles/{{ article.slug }}">
-            <img ngSrc="/articles/{{ article.slug }}/img/cover.png" class="rounded-xl" [alt]="article.title" priority="{{ $index === 0 ? true : false }}" width="384" height="216">
+            <img ngSrc="/articles/{{ article.slug }}/img/cover.png" class="rounded-xl" [alt]="article.title" priority width="384" height="216">
           </a>
           <div class="pt-4 px-6 pb-8">
             <h1 class="text-primary text-xl font-bold mb-2">{{ article.title }}</h1>

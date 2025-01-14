@@ -9,7 +9,6 @@ export function getPath(): string {
 
 export function getSlugs(): string[] {
   const files = readdirSync(getPath());
-  // filter any files but keep folders
   return files.filter(filename => !filename.includes('.'));
 }
 

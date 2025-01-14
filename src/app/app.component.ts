@@ -13,6 +13,9 @@ import { FooterComponent } from './layout/footer/footer.component';
     ModalComponent,
   ],
   template: `
+    <div class="scroll-watcher"></div>
+    <div class="background-overlay"></div>
+    
     <app-navbar class="select-none" />
     
     <main class="mt-28 md:mt-32 px-6 lg:px-8">
