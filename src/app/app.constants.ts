@@ -14,6 +14,18 @@ export const FIREBASE_CONFIG = {
   measurementId: "G-93TF1DSJ0T"
 };
 
+export const SLUGS = [
+  'deploy-angular-universal-to-vercel',
+  'deploy-docker-image-on-heroku',
+  'integrating-firebase-into-angular',
+  'server-side-rendering-in-angular',
+  'signals-rxjs-state-management',
+  'simple-redux-pattern-in-angular',
+  'simplified-http-services-with-typescript',
+  'using-rxjs-with-react',
+  'using-typescript-with-express',
+];
+
 export const FEATURED_ARTICLE_SLUG = 'signals-rxjs-state-management';
 
 export const SOCIAL = {

@@ -1,21 +1,26 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { Observable, zip } from "rxjs";
+import { map, Observable, zip } from "rxjs";
 import { Article } from "./article.interface";
+import { createArticle, sortArticles } from "./article.utils";
+import { SLUGS } from "@app/app.constants";
 
 @Injectable({ providedIn: 'root' })
 export class ArticleService {
   private http = inject(HttpClient);
 
-  slugs$ = this.http.get<string[]>('/api/articles/slugs');
-
-  articles$ = this.http.get<Article[]>('/api/articles');
+  articles$ = this.findBySlugs(SLUGS);
 
   findBySlug(slug: string): Observable<Article> {
-    return this.http.get<Article>(`/api/articles/${slug}`);
+    return this.http.get(`/articles/${slug}/index.md`, { responseType: 'text' }).pipe(
+      map(content => createArticle(content)),
+    );
   }
 
   findBySlugs(slugs: string[]): Observable<Article[]> {
-    return zip(slugs.map(slug => this.findBySlug(slug)));
+    return zip(slugs.map(slug => this.findBySlug(slug))).pipe(
+      map(articles => articles.filter(a => a.published)),
+      map(articles => sortArticles(articles)),
+    );
   }
 }

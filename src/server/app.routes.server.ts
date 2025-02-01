@@ -1,17 +1,15 @@
 import { inject } from '@angular/core';
 import { RenderMode, ServerRoute } from '@angular/ssr';
 import { firstValueFrom } from 'rxjs';
-import { ArticleService } from '../app/domains/articles/article.service';
 import { HashtagService } from '../app/domains/hashtags/hashtag.service';
+import { SLUGS } from '@app/app.constants';
 
 export const serverRoutes: ServerRoute[] = [
   {
     path: 'articles/:slug',
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
-      const articleService = inject(ArticleService);
-      const slugs = await firstValueFrom(articleService.slugs$);
-      return slugs.map(slug => ({ slug }));
+      return SLUGS.map(slug => ({ slug }));
     },
   },
   { 

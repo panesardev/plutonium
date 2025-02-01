@@ -3,7 +3,6 @@ import compression from 'compression';
 import express from 'express';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { apiRoutes } from './routes';
 
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
@@ -12,8 +11,6 @@ const server = express();
 const engine = new AngularNodeAppEngine();
 
 server.use(compression());
-
-server.use('/api', apiRoutes);
 
 server.use(express.static(browserDistFolder, {
   maxAge: '1y',
