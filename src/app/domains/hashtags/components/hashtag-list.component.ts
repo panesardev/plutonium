@@ -15,6 +15,6 @@ import { RouterLink } from '@angular/router';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class HashtagListComponent {
+export class HashtagListComponent {
   hashtags = input.required<string[]>();
 }

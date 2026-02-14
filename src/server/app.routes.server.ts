@@ -1,25 +1,27 @@
 import { inject } from '@angular/core';
 import { RenderMode, ServerRoute } from '@angular/ssr';
-import { firstValueFrom } from 'rxjs';
-import { HashtagService } from '../app/domains/hashtags/hashtag.service';
 import { SLUGS } from '@app/app.constants';
+import { HashtagService } from '@app/domains/hashtags/hashtag.service';
+import { firstValueFrom } from 'rxjs';
 
-export const serverRoutes: ServerRoute[] = [
+export const routes: ServerRoute[] = [
   {
     path: 'articles/:slug',
     renderMode: RenderMode.Prerender,
-    async getPrerenderParams() {
-      return SLUGS.map(slug => ({ slug }));
-    },
+    getPrerenderParams: async () => SLUGS.map(slug => ({ slug })),
   },
   { 
     path: 'hashtags/:hashtag',
     renderMode: RenderMode.Prerender,
-    async getPrerenderParams() {
+    getPrerenderParams: async () => {
       const hashtagService = inject(HashtagService);
       const hashtags = await firstValueFrom(hashtagService.hashtags$);
       return hashtags.map(hashtag => ({ hashtag }));
-    }
+    },
+  },
+  {
+    path: 'dashboard',
+    renderMode: RenderMode.Server,
   },
   {
     path: '**',

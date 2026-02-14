@@ -1,6 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "cli": {
+    "packageManager": "yarn"
+  },
   "newProjectRoot": "projects",
   "projects": {
     "plutonium": {
@@ -8,12 +11,20 @@
       "schematics": {
         "@schematics/angular:component": {
           "inlineStyle": true,
-          "style": "scss",
+          "skipTests": true,
           "changeDetection": "OnPush",
-          "skipTests": true
+          "type": "component",
+          "addTypeToClassName": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true,
+          "type": "directive",
+          "addTypeToClassName": true
         },
         "@schematics/angular:service": {
-          "skipTests": true
+          "skipTests": true,
+          "type": "service",
+          "addTypeToClassName": true
         }
       },
       "root": "",
@@ -21,16 +32,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/plutonium",
-            "index": "src/index.html",
-            "browser": "src/index.ts",
-            "polyfills": [
-              "zone.js"
-            ],
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
+            "browser": "src/index.ts",
+            "outputMode": "server",
+            "server": "src/index.server.ts",
+            "ssr": {
+              "entry": "src/server/server.ts"
+            },
             "assets": [
               {
                 "glob": "**/*",
@@ -42,20 +52,15 @@
               }
             ],
             "styles": [
-              "src/styles/index.scss"
+              "node_modules/@ngxpert/hot-toast/src/styles/styles.css",
+              "src/styles/index.css"
             ],
-            "scripts": [],
-            "server": "src/index.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server/server.ts"
-            },
+            "scripts": [
+              "node_modules/clipboard/dist/clipboard.min.js",
+              "node_modules/prismjs/prism.js",
+              "node_modules/prismjs/components/prism-typescript.min.js"
+            ],
             "allowedCommonJsDependencies": ["*"],
-            "stylePreprocessorOptions": {
-              "sass": {
-                "silenceDeprecations": ["import"]
-              }
-            },
             "namedChunks": true
           },
           "configurations": {
@@ -71,7 +76,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "plutonium:build:production"
@@ -81,17 +86,8 @@
             }
           },
           "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "buildTarget": "plutonium:build"
-          }
         }
       }
     }
-  },
-  "cli": {
-    "analytics": false
   }
 }

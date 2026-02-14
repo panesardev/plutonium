@@ -3,17 +3,17 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '@app/auth/auth.service';
 import { ArticleService } from '@app/domains/articles/article.service';
-import ArticleListComponent from '@app/domains/articles/components/article-list.component';
+import { ArticleListComponent } from '@app/domains/articles/components/article-list.component';
 import { ModalService } from '@app/layout/modal/modal.service';
+import { ImageErrorDirective } from '@app/shared/directives/image-error.directive';
 import { startWith, switchMap } from 'rxjs';
-import { ProfileCardComponent } from './components/profile-card.component';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
     AsyncPipe,
+    ImageErrorDirective,
     RouterLink,
-    ProfileCardComponent,
     ArticleListComponent,
   ],
   templateUrl: './dashboard.component.html',
@@ -31,13 +31,17 @@ export default class DashboardComponent {
     startWith([]),
   );
 
-  async openLogout() {
-    const fn = () => import('./components/logout-modal.component').then(c => c.LogoutModalComponent);
+  getLocaleDate(dateString: string) {
+    return new Date(dateString).toLocaleDateString();
+  }
+
+  async openLogoutModal() {
+    const fn = () => import('../../auth/components/logout-modal.component').then(c => c.LogoutModalComponent);
     await this.modal.open(fn);
   }
   
-  async openDelete() {
-    const fn = () => import('./components/delete-modal.component').then(c => c.DeleteModalComponent);
+  async openDeleteModal() {
+    const fn = () => import('../../auth/components/delete-account-modal.component').then(c => c.DeleteAccountModalComponent);
     await this.modal.open(fn);
   }
 }

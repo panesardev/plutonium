@@ -7,9 +7,8 @@ export interface Modal {
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {
-  
-  active = signal<Modal>(null);
-  opened = signal<boolean>(false);
+  readonly active = signal<Modal>(null);
+  readonly opened = signal<boolean>(false);
 
   async open(componentFn: () => Promise<any>, inputs?: {}): Promise<void> {
     const component = await componentFn();
@@ -21,5 +20,4 @@ export class ModalService {
     setTimeout(() => this.active.set(null), 300);
     this.opened.set(false);
   }
-
 }

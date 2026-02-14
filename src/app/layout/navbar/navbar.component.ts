@@ -2,28 +2,32 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { BRAND } from '@app/app.constants';
 import { ModalService } from '@app/layout/modal/modal.service';
-import { UserButtonComponent } from './components/user-button.component';
+import { LoginButtonComponent } from '../../auth/components/login-button.component';
 
 @Component({
   selector: 'app-navbar',
   imports: [
     RouterLink,
     RouterLinkActive,
-    UserButtonComponent,
+    LoginButtonComponent,
   ],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss',
+  styleUrl: './navbar.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
   private modal = inject(ModalService);
 
-  drawer = signal(false);
-
+  panel = signal(false);
   BRAND = BRAND;
-  
-  async openSearch() {
+
+  async openSearchModal() {
     const fn = () => import('./components/search-modal.component').then(c => c.SearchModalComponent);
+    await this.modal.open(fn);
+  }
+
+  async openLoginModal() {
+    const fn = () => import('@app/auth/components/login-modal.component').then(c => c.LoginModalComponent);
     await this.modal.open(fn);
   }
   

@@ -1,34 +1,37 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { User } from '@app/auth/auth.interface';
 import { AuthService } from '@app/auth/auth.service';
-import { filter, firstValueFrom, map } from 'rxjs';
+import { ModalService } from '@app/layout/modal/modal.service';
+import { HotToastService } from '@ngxpert/hot-toast';
+import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'app-save-button',
   imports: [
-    RouterLink,
     AsyncPipe,
   ],
   template: `
     <div class="flex justify-center">
-      @if (user$ | async) {
+      @if (user$ | async; as user) {
         @if (isArticleSaved$ | async) {
-          <button class="btn-danger" (click)="removeArticle()">Remove saved</button>
+          <button class="btn-danger" (click)="removeArticle(user)">Remove from saved</button>
         }
         @else {
-          <button class="btn-primary" (click)="saveArticle()">Save Article</button>
+          <button class="btn-primary" (click)="saveArticle(user)">Save this Article</button>
         }
       }
       @else {
-        <button class="btn-primary" routerLink="/login">Login</button>
+        <button class="btn-primary" (click)="openLoginModal()">Save this Article</button>
       }
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SaveButtonComponent {
+export class SaveButtonComponent {
   private auth = inject(AuthService);
+  private modal = inject(ModalService);
+  private toast = inject(HotToastService);
 
   slug = input.required<string>();
 
@@ -39,17 +42,28 @@ export default class SaveButtonComponent {
     map(user => user.articles.includes(this.slug())),
   );
 
-  async saveArticle() {
-    const user = await firstValueFrom(this.user$);
-    const articles = [...user.articles, this.slug()];
-
-    await this.auth.setUserDoc(user.uid, { articles });
+  async saveArticle(user: User) {
+    try {
+      const articles = [...user.articles, this.slug()];
+      await this.auth.setUserDoc(user.uid, { articles });
+      this.toast.success('Article saved!', { duration: 1500 });
+    } catch (e) {
+      this.toast.error('Failed to save article!');
+    }
   }
 
-  async removeArticle() {
-    const user = await firstValueFrom(this.user$);
-    const articles = user.articles.filter(slug => slug != this.slug());
+  async removeArticle(user: User) {
+    try {
+      const articles = user.articles.filter(slug => slug != this.slug());
+      await this.auth.setUserDoc(user.uid, { articles });
+      this.toast.error('Article removed from saved!', { duration: 3000 });
+    } catch (e) {
+      this.toast.error('Failed to remove article!');
+    }
+  }
 
-    await this.auth.setUserDoc(user.uid, { articles });
+  async openLoginModal() {
+    const fn = () => import('@app/auth/components/login-modal.component').then(c => c.LoginModalComponent);
+    await this.modal.open(fn);
   }
 }

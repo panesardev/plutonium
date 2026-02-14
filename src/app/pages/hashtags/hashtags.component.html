@@ -7,7 +7,7 @@
     <div class="card text-lg max-w-3xl mx-auto">
       <div class="flex justify-center gap-4 flex-wrap">
         @for (hashtag of hashtags; track hashtag) {
-          <a routerLink="/hashtags/{{ hashtag }}" class="bg-secondary hover:bg-secondary-hover text-primary text-sm md:text-base capitalize rounded-full px-4 md:px-6 py-2">#{{ hashtag }}</a>
+          <a routerLink="/hashtags/{{ hashtag }}" class="bg-secondary hover:bg-secondary-hover text-primary text-sm md:text-base rounded-full px-4 md:px-6 py-2">#{{ hashtag }}</a>
         }
       </div>
     </div>

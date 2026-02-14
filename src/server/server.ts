@@ -1,16 +1,17 @@
 import { AngularNodeAppEngine, createNodeRequestHandler, isMainModule, writeResponseToNodeResponse } from '@angular/ssr/node';
-import compression from 'compression';
 import express from 'express';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 
-const serverDistFolder = dirname(fileURLToPath(import.meta.url));
-const browserDistFolder = resolve(serverDistFolder, '../browser');
+const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const server = express();
-const engine = new AngularNodeAppEngine();
+const angularApp = new AngularNodeAppEngine();
 
-server.use(compression());
+server.get('/api/{*splat}', (request, response) => {
+  response.json({
+    message: request.path,
+  });
+});
 
 server.use(express.static(browserDistFolder, {
   maxAge: '1y',
@@ -18,19 +19,19 @@ server.use(express.static(browserDistFolder, {
   redirect: false,
 }));
 
-server.use('/**', (request, response, next) => {
-  engine
+server.use((request, response, next) =>
+  angularApp
     .handle(request)
     .then(res => res ? writeResponseToNodeResponse(res, response) : next())
-    .catch(next);
-});
+    .catch(next),
+);
 
-if (isMainModule(import.meta.url)) {
-  const port = process.env['PORT'] || 4000;
-
-  server.listen(port, () => {
-    console.log(`Server listening on http://localhost:${port}`)
-  });
+if (isMainModule(import.meta.url) || process.env['pm_id']) {
+  const port = process.env['PORT'] || 4200;
+  
+  server.listen(port, () =>
+    console.log(`Server listening on http://localhost:${port}`),
+  );
 }
 
 export const reqHandler = createNodeRequestHandler(server);

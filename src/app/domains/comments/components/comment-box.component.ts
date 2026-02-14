@@ -2,13 +2,13 @@ import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { AuthService } from '@app/auth/auth.service';
 import { firstValueFrom, switchMap } from 'rxjs';
 import { CommentFormValue } from '../comment.interface';
 import { CommentService } from '../comment.service';
-import CommentFormComponent from './comment-form.component';
-import CommentListComponent from './comment-list.component';
+import { CommentFormComponent } from './comment-form.component';
+import { CommentListComponent } from './comment-list.component';
+import { ModalService } from '@app/layout/modal/modal.service';
 
 @Component({
   selector: 'app-comment-box',
@@ -16,7 +16,6 @@ import CommentListComponent from './comment-list.component';
     ReactiveFormsModule,
     CommentListComponent,
     CommentFormComponent,
-    RouterLink,
     AsyncPipe,
   ],
   template: `
@@ -35,7 +34,7 @@ import CommentListComponent from './comment-list.component';
       @else {
         <div>
           <p class="text-center mb-4">You must be logged in to post a comment!</p>
-          <button class="mx-auto px-8" routerLink="/login">Login</button>
+          <button class="btn-primary mx-auto" (click)="openLoginModal()">Login</button>
         </div>
       }
     </div>
@@ -44,13 +43,15 @@ import CommentListComponent from './comment-list.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CommentBoxComponent {
+export class CommentBoxComponent {
   private auth = inject(AuthService);
+  private modal = inject(ModalService);
   private commentService = inject(CommentService);
 
   slug = input.required<string>();
   
   user$ = this.auth.user$;
+
   comments$ = toObservable(this.slug).pipe(
     switchMap(slug => this.commentService.findAll(slug)),
   );
@@ -67,6 +68,11 @@ export default class CommentBoxComponent {
       text: value.text,
     })
     .catch(e => this.error.set(e.message));
+  }
+
+  async openLoginModal() {
+    const fn = () => import('@app/auth/components/login-modal.component').then(c => c.LoginModalComponent);
+    await this.modal.open(fn);
   }
 }
 

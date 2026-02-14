@@ -1,16 +1,11 @@
 import { Routes } from '@angular/router';
-import { titleResolver } from './shared/resolvers/title.resolver';
 import IndexComponent from './pages/index/index.component';
+import { titleResolver } from './shared/resolvers/title.resolver';
 
 export const routes: Routes = [
   {
     path: '',
     component: IndexComponent,
-    title: titleResolver,
-  },
-  {
-    path: '',
-    loadChildren: () => import('./auth/auth.routes'),
     title: titleResolver,
   },
   {
@@ -20,7 +15,7 @@ export const routes: Routes = [
   },
   {
     path: 'articles',
-    loadChildren: () => import('./domains/articles/article.routes'),
+    loadChildren: () => import('./pages/articles/articles.routes'),
     title: titleResolver,
   },
   {
@@ -30,7 +25,7 @@ export const routes: Routes = [
   },
   {
     path: 'hashtags',
-    loadChildren: () => import('./domains/hashtags/hashtag.routes'),
+    loadChildren: () => import('./pages/hashtags/hashtags.routes'),
     title: titleResolver,
   },
   {

@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MarkdownComponent, provideMarkdown } from 'ngx-markdown';
-
-import '../../../../../node_modules/prismjs/prism.js';
-import '../../../../../node_modules/prismjs/components/prism-typescript.min.js';
+import { ClipboardButtonComponent } from './clipboard-button.component';
 
 @Component({
   selector: 'app-render-markdown',
@@ -13,10 +11,12 @@ import '../../../../../node_modules/prismjs/components/prism-typescript.min.js';
     MarkdownComponent,
   ],
   template: `
-    <markdown class="markdown" [data]="markdown()"/>
+    <markdown class="markdown" [data]="markdown()" clipboard [clipboardButtonComponent]="clipboardButton"/>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class RenderMarkdownComponent {
+export class RenderMarkdownComponent {
   markdown = input.required<string>();
+
+  clipboardButton = ClipboardButtonComponent;
 }

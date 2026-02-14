@@ -1,7 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import HashtagListComponent from '@app/domains/hashtags/components/hashtag-list.component';
+import { HashtagListComponent } from '@app/domains/hashtags/components/hashtag-list.component';
 import { Article } from '../article.interface';
 
 @Component({
@@ -32,6 +32,6 @@ import { Article } from '../article.interface';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ArticleListComponent {
+export class ArticleListComponent {
   articles = input.required<Article[]>();
 }

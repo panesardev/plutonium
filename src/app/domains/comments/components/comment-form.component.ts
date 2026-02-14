@@ -15,19 +15,22 @@ const emptyValidator: ValidatorFn = (control: AbstractControl) => {
   template: `
     <form [formGroup]="form" (submit)="submit()">
       <div class="input-field mb-4">
-        <textarea id="text" class="peer" formControlName="text" placeholder="" rows="1"></textarea>
+        <textarea id="text" class="peer" formControlName="text" placeholder="" rows="2"></textarea>
         <label for="text" class="peer-focus:text-primary peer-focus:top-1 peer-focus:left-2.5 peer-focus:scale-75 peer-focus:-translate-y-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
           <span>Write a comment</span>
         </label>
       </div>
-      <div class="flex justify-end">
-        <button class="btn-primary" type="submit" [disabled]="form.invalid">Post comment</button>
+      <div class="flex justify-end items-center gap-8">
+        @if (form.controls.text.value) {
+          <a class="hover:text-red-500 hover:underline cursor-pointer" (click)="form.reset()">Cancel</a>
+        }
+        <button class="btn-primary" type="submit" [disabled]="form.invalid">Comment</button>
       </div>
     </form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CommentFormComponent {
+export class CommentFormComponent {
   onSubmit = output<CommentFormValue>();
 
   form = new FormGroup({

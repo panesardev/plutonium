@@ -1,0 +1,11 @@
+@utility max-app-width {
+  max-width: 1900px;
+}
+
+@utility secondary-shadow {
+  box-shadow: 0 0 25px #2355511e;
+}
+
+@utility error-shadow {
+  box-shadow: 0 0 25px #ff363640;
+}

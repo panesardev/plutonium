@@ -1,20 +1,23 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@import 'components.scss';
-@import 'utilities.scss';
-@import 'syntax.scss';
+@import './utilities.css';
+@import './components.css';
+@import './syntax.css';
 
-:root {
-  --primary: #156b75;
-  --primary-hover: #15646c;
-  --secondary: #e1f9f8;
-  --secondary-hover: #cff7f3;
+@theme {
+  --color-primary: #156b75;
+  --color-primary-hover: #15646c;
+  --color-secondary: #e1f9f8;
+  --color-secondary-hover: #cff7f3;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  @apply text-slate-800;
+  font-family: "Inter", sans-serif;
 }
 
 section {
@@ -43,3 +46,13 @@ html {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.hot-toast-checkmark-icon, .hot-toast-info-icon {
+  background-color: var(--color-primary) !important;
+}
+
+.hot-toast-bar-base {
+  border-radius: 100px !important;
+}
+
+

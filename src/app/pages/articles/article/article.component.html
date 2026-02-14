@@ -24,16 +24,24 @@
       <meta name="twitter:image" content="/articles/{{ article.slug }}/img/cover.png">
       <meta name="twitter:url" content="{{ BASE_URL }}/articles/{{ article.slug }}">
       
-      <div class="mb-12">
-        <h1 class="heading mb-8 md:mb-12 max-w-5xl mx-auto">{{ article.title }}</h1>
+      <h1 class="heading mb-8 max-w-5xl mx-auto">{{ article.title }}</h1>
 
-        <div class="bg-white rounded-full secondary-shadow w-fit mx-auto p-3">
-          <app-hashtag-list class="text-xl" [hashtags]="article.hashtags"/>
+      <div class="bg-white rounded-full secondary-shadow w-fit mx-auto p-3">
+        <app-hashtag-list class="text-xl" [hashtags]="article.hashtags"/>
+      </div>
+      
+      <p class="text-lg md:text-xl md:text-center my-6">{{ article.description }}</p>
+      
+      <!-- Article metadata -->
+      <div class="flex flex-row items-center md:justify-center flex-wrap gap-4 mb-12">
+        <div class="flex items-center gap-4">
+          <div class="bg-white secondary-shadow rounded-full flex items-center gap-3 p-2 pr-4">
+            <img [src]="article.authorImage" class="w-6 rounded-full" error="/icons/user.png" [alt]="article.authorName">
+            <a class="text-primary hover:underline" target="_blank" rel="noopener" rel="noreferrer" itemprop="author" [name]="article.authorName" [href]="article.authorLink">By {{ article.authorName }}</a>
+          </div>
         </div>
-        
-        <p class="text-lg md:text-xl md:text-center my-6">{{ article.description }}</p>
-        
-        <app-article-header [article]="article"/>
+        <div class="bg-white secondary-shadow rounded-full px-4 py-2 w-fit" itemprop="datePublished">Posted on {{ article.createdAt }}</div>
+        <a class="text-primary bg-white secondary-shadow rounded-full px-4 py-2 w-fit hover:underline" [href]="article.source" target="_blank">source</a>
       </div>
 
       <div class="max-w-4xl mx-auto mb-10">
@@ -46,10 +54,9 @@
         @placeholder {
           <button class="btn-primary" routerLink="/login">Login</button>
         }
-        <app-render-markdown [markdown]="article.markdown"/>
-      </div>
-
-      <div class="mb-10">
+        <div class="mb-10">
+          <app-render-markdown [markdown]="article.markdown"/>
+        </div>
         @defer {
           <app-save-button [slug]="article.slug"/>
         }
@@ -57,7 +64,7 @@
           <button class="btn-primary" routerLink="/login">Login</button>
         }
       </div>
-      
+
       <div class="max-w-2xl mx-auto">
         @defer (on viewport) {
           <app-comment-box [slug]="article.slug"/>

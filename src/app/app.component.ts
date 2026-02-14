@@ -31,5 +31,4 @@ import { FooterComponent } from './layout/footer/footer.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-}
+export class AppComponent {}

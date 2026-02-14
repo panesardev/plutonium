@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import ArticleListComponent from '@app/domains/articles/components/article-list.component';
+import { ArticleListComponent } from '@app/domains/articles/components/article-list.component';
 import { Article } from '@app/domains/articles/article.interface';
 
 @Component({

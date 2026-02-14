@@ -30,7 +30,7 @@ import { ImageErrorDirective } from '@app/shared/directives/image-error.directiv
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CommentListComponent {
+export class CommentListComponent {
   comments = input.required<Comment[]>();
   
   parseDate(str: string): string {
