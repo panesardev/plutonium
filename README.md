@@ -30,20 +30,11 @@ Plutonium is an educational platform focused on teaching developers how to build
 
 ## 🛠️ Tech Stack
 
-### Core Framework
 - **Angular** - Modern web application framework
-- **TypeScript** Type-safe development
-
-### Styling
-- **Tailwind CSS** - Utility-first CSS framework
-- **PostCSS** - CSS preprocessing
-
-### Deployment
+- **Tailwind** - Utility-first CSS framework
+- **Firebase** User authentication and database
+- **ngx-markdown** - Content and markdown management
 - **Vercel** - Hosting and continuous deployment
-
-### Development Tools
-- **Yarn** - Package manager
-- **VS Code** - Development environment configuration included
 
 ## 📝 Featured Articles
 
