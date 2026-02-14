@@ -22,7 +22,7 @@ import { filter, map } from 'rxjs';
         }
       }
       @else {
-        <button class="btn-primary" (click)="openLoginModal()">Save this Article</button>
+        <button class="btn-primary" (click)="openLoginModal()">Login to save</button>
       }
     </div>
   `,

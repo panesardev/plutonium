@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { HotToastService } from '@ngxpert/hot-toast';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-clipboard-button',
@@ -19,16 +18,11 @@ import { HotToastService } from '@ngxpert/hot-toast';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClipboardButtonComponent {
-  private toast = inject(HotToastService);
-
   clicked = signal(false);
 
   click() {
     const duration = 1000;
-
     this.clicked.set(true);
-    this.toast.success('Copied to clipboard!', { duration });
-
     setTimeout(() => this.clicked.set(false), duration);
   }
 }
