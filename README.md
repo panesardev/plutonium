@@ -45,28 +45,6 @@ Plutonium is an educational platform focused on teaching developers how to build
 - **Yarn** - Package manager
 - **VS Code** - Development environment configuration included
 
-## 📂 Project Structure
-
-```
-plutonium/
-├── src/                  # Source code
-├── .vscode/              # VS Code configuration
-├── angular.json          # Angular configuration
-├── package.json          # Dependencies and scripts
-├── tsconfig.json         # TypeScript configuration
-├── tsconfig.app.json     # App-specific TypeScript config
-├── .postcssrc.json       # PostCSS configuration
-└── yarn.lock             # Dependency lock file
-```
-
-## 🏗️ Getting Started
-
-### Prerequisites
-
-- Node.js (LTS version recommended)
-- Yarn package manager
-- Git
-
 ## 📝 Featured Articles
 
 ### State Management using RXJS and Signals
