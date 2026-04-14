@@ -1,15 +1,9 @@
-import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AuthService } from '@app/auth/auth.service';
 import { ModalService } from '@app/layout/modal/modal.service';
-import { ImageErrorDirective } from '@app/shared/directives/image-error.directive';
 
 @Component({
   selector: 'app-logout-modal',
-  imports: [
-    AsyncPipe,
-    ImageErrorDirective,
-  ],
   template: `
     <div class="bg-white rounded-2xl max-w-sm mx-auto p-6 pb-8 md:p-8 error-shadow">
       <div class="flex justify-between items-center gap-6 mb-6">
@@ -19,14 +13,9 @@ import { ImageErrorDirective } from '@app/shared/directives/image-error.directiv
         </button>
       </div>
 
-      @if (user$ | async; as user) {
-        <div class="bg-secondary text-primary flex items-center rounded-md gap-3 mb-4 px-4 py-3 cursor-pointer" routerLink="/dashboard" (click)="modal.close()">
-          <img [src]="user.photoURL" alt="user" class="rounded-full size-6" error="/icons/user.png">
-          <span>Logged in as {{ user.displayName }}</span>
-        </div>
-      }
-
-      <p class="mb-6">You will be logged out!</p>
+      <div class="bg-secondary rounded-xl px-5 py-3 mb-6">
+        <p>You will be logged out!</p>
+      </div>
 
       <button class="btn-danger w-full" (click)="logout()">Logout</button>
     </div>

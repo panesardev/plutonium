@@ -34,7 +34,7 @@ export class AuthService {
       const credential = await signInWithPopup(this.auth, provider);
   
       if (getAdditionalUserInfo(credential).isNewUser) {
-        await this.setUserDoc(credential.user.uid, { articles: [] });
+        await this.setUserDoc({ articles: [] });
   
         this.toast.success(`Welcome ${credential.user.displayName}`);
       }
@@ -48,7 +48,7 @@ export class AuthService {
   }
 
   async logout(): Promise<void> {
-    try { 
+    try {
       await signOut(this.auth);
       
       await this.router.navigateByUrl('/');
@@ -78,8 +78,9 @@ export class AuthService {
     }
   }
 
-  async setUserDoc(uid: string, docData: UserDoc): Promise<void> {
+  async setUserDoc(docData: UserDoc): Promise<void> {
     try { 
+      const uid = this.auth.currentUser;
       await setDoc(doc(this.firestore, `users/${uid}`), docData);
     } 
     catch (e) {

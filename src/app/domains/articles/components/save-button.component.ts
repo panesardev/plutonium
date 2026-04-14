@@ -45,7 +45,7 @@ export class SaveButtonComponent {
   async saveArticle(user: User) {
     try {
       const articles = [...user.articles, this.slug()];
-      await this.auth.setUserDoc(user.uid, { articles });
+      await this.auth.setUserDoc({ articles });
       this.toast.success('Article saved!', { duration: 1500 });
     } catch (e) {
       this.toast.error('Failed to save article!');
@@ -55,7 +55,7 @@ export class SaveButtonComponent {
   async removeArticle(user: User) {
     try {
       const articles = user.articles.filter(slug => slug != this.slug());
-      await this.auth.setUserDoc(user.uid, { articles });
+      await this.auth.setUserDoc({ articles });
       this.toast.error('Article removed from saved!', { duration: 3000 });
     } catch (e) {
       this.toast.error('Failed to remove article!');

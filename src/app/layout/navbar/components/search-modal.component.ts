@@ -1,17 +1,19 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, viewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ArticleService } from '@app/domains/articles/article.service';
 import { ModalService } from '@app/layout/modal/modal.service';
+import { AutoFocusDirective } from '@app/shared/directives/auto-focus.directive';
 import { distinctUntilChanged, map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-search-modal',
-  imports: [
+  imports: [  
     RouterLink,
     AsyncPipe,
     ReactiveFormsModule,
+    AutoFocusDirective,
   ],
   template: `
     <div class="bg-white rounded-xl max-w-2xl mx-auto p-6 pb-8 md:p-8">
@@ -22,25 +24,17 @@ import { distinctUntilChanged, map, switchMap } from 'rxjs';
         </button>
       </div>
 
-      <div class="input-field mb-4">
-        <input type="text" name="text" [formControl]="textControl" id="text" class="peer" placeholder=" " autocomplete="off"/>
-        <label for="text" class="peer-focus:text-primary peer-focus:top-1 peer-focus:left-2.5 peer-focus:scale-75 peer-focus:-translate-y-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
-          <span>Start typing</span>
-        </label>
-      </div>
+      <input appAutoFocus type="text" name="text" [formControl]="textControl" id="text" placeholder="Type here" autocomplete="off" autofocus
+        class="bg-secondary/80 hover:bg-secondary text-primary w-full px-5 py-3 rounded-full outline-none mb-4" />
 
-      @if (text$ | async; as text) {
-        <p class="text-center mb-4">Displaying results for "{{ text }}"</p>
-      }
-      @else {
-        <p class="text-center mb-4">Start typing to search</p>
-      }
-      
       <div class="h-96 overflow-y-scroll">
         @for (article of articles$ | async; track article.slug) {
-          <div routerLink="/articles/{{ article.slug }}" (click)="modal.close()" class="bg-secondary/75 hover:bg-secondary-hover border-[1px] border-secondary px-4 md:px-6 py-3 md:py-4 mb-2 rounded-md cursor-pointer">
-            <p class="font-bold text-base md:text-lg text-primary">{{ article.title }}</p>
-            <p class="text-sm md:text-base">{{ article.description }}</p>
+          <div routerLink="/articles/{{ article.slug }}" (click)="modal.close()" class="hover:bg-secondary/75 border-[1px] border-slate-300 flex items-center gap-4 md:gap-6 px-4 md:px-6 py-3 md:py-4 mb-2 rounded-xl cursor-pointer">
+            <img class="size-16 object-cover rounded-full" src="/articles/{{ article.slug }}/img/cover.png" alt="img">
+            <div>
+              <p class="font-bold text-base md:text-lg text-primary">{{ article.title }}</p>
+              <p class="text-sm md:text-base">{{ article.description }}</p>
+            </div>
           </div>
         }
         @empty {
@@ -54,6 +48,8 @@ import { distinctUntilChanged, map, switchMap } from 'rxjs';
 export class SearchModalComponent {
   private articleService = inject(ArticleService);
   readonly modal = inject(ModalService);
+
+  input = viewChild<ElementRef<HTMLInputElement>>('input');
 
   textControl = new FormControl<string>('');
 

@@ -5,10 +5,10 @@
 @import './syntax.css';
 
 @theme {
-  --color-primary: #156b75;
-  --color-primary-hover: #15646c;
-  --color-secondary: #e1f9f8;
-  --color-secondary-hover: #cff7f3;
+  --color-primary: hsl(186, 70%, 27%);
+  --color-primary-hover: hsl(186, 67%, 25%);
+  --color-secondary: hsl(178, 67%, 91%);
+  --color-secondary-hover: hsl(174, 71%, 88%);
 }
 
 html {
