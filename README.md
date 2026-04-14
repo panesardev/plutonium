@@ -14,11 +14,6 @@ A modern Angular-based platform dedicated to teaching reactive and declarative p
 
 Plutonium is an educational platform focused on teaching developers how to build reactive and declarative applications using Angular. The platform provides in-depth articles and tutorials covering modern Angular features, including:
 
-- **RxJS**: Reactive programming patterns and best practices
-- **Angular Signals**: The new reactivity primitive in Angular
-- **State Management**: Building robust state management solutions
-- **Declarative Programming**: Writing cleaner, more maintainable code
-
 ## 🚀 Features
 
 - **Article Library**: Comprehensive tutorials on reactive programming
@@ -43,26 +38,12 @@ Learn how to combine Angular's new Signals with RxJS to create an awesome state 
 
 [Read more →](https://plutoniumx.vercel.app/articles/signals-rxjs-state-management)
 
-## 🎯 Project Focus
-
-The project emphasizes:
-
-- **Reactive Programming**: Leveraging RxJS observables for asynchronous data flow
-- **Declarative Approach**: Writing code that describes what to do, not how to do it
-- **Angular Signals**: Exploring the new reactivity primitive introduced in Angular
-- **Best Practices**: Demonstrating modern patterns and architectural decisions
-- **Real-World Examples**: Practical implementations you can use in production
-
 ## 👨‍💻 Author
 
 **Sukhpreet Singh**
 
 - Website: [panesar.dev](https://panesar.dev)
 - GitHub: [@panesardev](https://github.com/panesardev)
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
 
 ## 🙏 Acknowledgments
 
