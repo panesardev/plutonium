@@ -80,7 +80,7 @@ export class AuthService {
 
   async setUserDoc(docData: UserDoc): Promise<void> {
     try { 
-      const uid = this.auth.currentUser;
+      const uid = this.auth.currentUser.uid;
       await setDoc(doc(this.firestore, `users/${uid}`), docData);
     } 
     catch (e) {
